@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lifeline - Register</title>
+  <!-- Updated CSS path -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="auth-container">
@@ -26,36 +28,7 @@
     <p>Already have an account? <a href="login.html">Log In</a></p>
   </div>
 
-  <script type="module">
-    import { supabase } from './supabaseClient.js';
-
-    const form = document.getElementById('register-form');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const fullName = document.getElementById('full_name').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const role = document.getElementById('role').value;
-
-      const { data, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-        options: {
-          data: {
-            full_name: fullName,
-            role: role
-          }
-        }
-      });
-
-      if (error) {
-        alert('Registration failed: ' + error.message);
-      } else {
-        alert('Registration successful! Please log in.');
-        window.location.href = 'login.html';
-      }
-    });
-  </script>
+  <!-- Link your new external auth script -->
+  <script type="module" src="js/auth.js"></script>
 </body>
 </html>
