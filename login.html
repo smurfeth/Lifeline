@@ -28,14 +28,18 @@
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      // Authenticate with Supabase
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
 
       if (error) {
         alert('Login failed: ' + error.message);
         return;
       }
 
-      // Check user role from profiles table
+      // Query the user's role from public.profiles
       const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('role')

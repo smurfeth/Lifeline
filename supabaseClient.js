@@ -1,16 +1,21 @@
 const SUPABASE_URL = 'https://bnytmuwgutotekaaylig.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_c5fAj53uud1ud8WFRY_fxg_WOvW2kI1';
+const SUPABASE_ANON_KEY = 'sb_publishable_c5fAj53uud1ud8WFRY_fxg_WOvW2kI1'; // Make sure this is the 'anon' 'public' key from Supabase
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// 1. Add 'export' here so other files can import it
+export const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Quick connection test
+// 2. Quick connection test
 async function testConnection() {
-  const { data, error } = await supabase.from('profiles').select('count', { count: 'exact', head: true });
-  
-  if (error) {
-    console.error('❌ Supabase connection failed:', error.message);
-  } else {
-    console.log('✅ Supabase connected successfully!');
+  try {
+    const { data, error } = await supabase.from('profiles').select('count', { count: 'exact', head: true });
+    
+    if (error) {
+      console.error('❌ Supabase connection failed:', error.message);
+    } else {
+      console.log('✅ Supabase connected successfully!');
+    }
+  } catch (err) {
+    console.error('❌ Unexpected connection error:', err);
   }
 }
 
