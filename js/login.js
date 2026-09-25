@@ -16,7 +16,7 @@ if (loginForm) {
       return;
     }
 
-    // Role-based redirect
+    // Role-based redirection
     if (role === 'admin') {
       window.location.href = 'dashboard.html';
     } else if (role === 'staff') {

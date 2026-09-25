@@ -1,6 +1,6 @@
 import { supabase } from './supabaseClient.js';
 
-// --- REGISTER SERVICE ---
+// For registration of users
 export async function registerUser({ email, password, fullName, role }) {
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -16,7 +16,7 @@ export async function registerUser({ email, password, fullName, role }) {
   return { data, error };
 }
 
-// --- LOGIN SERVICE ---
+// For login
 export async function loginUser({ email, password }) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
@@ -39,9 +39,9 @@ export async function loginUser({ email, password }) {
   return { data, role, error: profileError ? null : null };
 }
 
-// --- LOGOUT SERVICE ---
+// Logout service
 export async function logoutUser() {
   const { error } = await supabase.auth.signOut();
   window.location.href = 'login.html';
   return { error };
-}
+}``

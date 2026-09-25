@@ -1,7 +1,7 @@
 import { registerUser } from './auth.js';
 
 const registerForm = document.getElementById('register-form');
-
+//for users
 if (registerForm) {
   registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();

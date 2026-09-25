@@ -1,17 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Lifeline</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lifeline - Blood Donation System</title>
+  
+  <!-- CSS Stylesheets -->
+<link rel="stylesheet" href="css/globals.css" />
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h1>Lifeline — Your Blood. Their Hope</h1>
+  <div class="lofi-landing-page">
+    
+    <!-- Header / Navbar -->
+    <header class="public-header">
+      <div class="div">
+        <div class="icon">
+          <div class="text-wrapper">+</div>
+        </div>
+        <div class="text-wrapper-2">LIFELINE</div>
+        <div class="frame">
+          <div class="text-wrapper-3">WF-V1</div>
+        </div>
+      </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script type="module">
-    import { supabase } from './js/supabaseClient.js';
-    console.log('Supabase client loaded:', supabase);
-  </script>
+      <nav class="navbar">
+        <div class="text-wrapper-4">Home</div>
+        <div class="text-wrapper-5">How It Works</div>
+        <div class="text-wrapper-5">Donation Drives</div>
+        <div class="text-wrapper-5">Blood Facts</div>
+        <div class="text-wrapper-5">About Us</div>
+      </nav>
+
+      <div class="div">
+        <a href="login.html" class="text-wrapper-6" style="text-decoration: none; cursor: pointer;">Login</a>
+        <button class="button" onclick="window.location.href='register.html'">
+          <div class="text-wrapper-7">Register as Donor</div>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="frame-2">
+        <div class="div-wrapper">
+          <div class="text-wrapper-8">CRITICAL SYSTEM UPDATE</div>
+        </div>
+        <p class="p">Your Blood. Their Hope. Coordinated.</p>
+        <p class="text-wrapper-9">
+          Unified healthcare dispatch connecting voluntary blood donors directly to real-time regional hospital shortages.
+        </p>
+        <div class="frame-3">
+          <button class="button" onclick="window.location.href='register.html'">
+            <div class="text-wrapper-7">Register to Donate</div>
+          </button>
+          <button class="button-2">
+            <div class="text-wrapper-10">Check Shortages</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="image-placeholder-wrapper">
+        <div class="image-placeholder">
+          <div class="frame-4">
+            <div class="text-wrapper-11">[</div>
+            <div class="text-wrapper-8">HERO MASCOT WIREFRAME</div>
+            <div class="text-wrapper-11">]</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Ribbon -->
+    <section class="stats-ribbon">
+      <div class="frame-5">
+        <div class="text-wrapper-12">12,450</div>
+        <div class="text-wrapper-13">Active Regional Donors</div>
+      </div>
+      <div class="frame-5">
+        <div class="text-wrapper-12">37,200</div>
+        <div class="text-wrapper-13">Estimated Lives Impacted</div>
+      </div>
+      <div class="frame-5">
+        <div class="text-wrapper-12">18 Active</div>
+        <div class="text-wrapper-13">Municipal Dispatch Hubs</div>
+      </div>
+      <div class="frame-5">
+        <div class="text-wrapper-12">100%</div>
+        <div class="text-wrapper-13">Data Integrity &amp; Verification</div>
+      </div>
+    </section>
+
+    <!-- Blood Supply Reserve Section -->
+    <section class="div-2">
+      <div class="section-header">
+        <div class="text-wrapper-14">LIVE SYSTEM DISPATCH</div>
+        <div class="text-wrapper-15">Regional Blood Supply Reserve</div>
+        <p class="text-wrapper-16">
+          Updated in real time across municipal blood banks and clinical dispatch hubs. Voluntary donors of critical types are needed immediately.
+        </p>
+      </div>
+
+      <div class="frame-6">
+        <!-- O- -->
+        <div class="frame-7">
+          <div class="frame-8">
+            <div class="text-wrapper-17">O-</div>
+            <div class="frame-9"><div class="text-wrapper-18">CRITICAL</div></div>
+          </div>
+          <div class="text-wrapper-19">Universal RBC</div>
+          <div class="frame-10">
+            <div class="rectangle-wrapper"><div class="rectangle"></div></div>
+            <div class="text-wrapper-20">&lt; 15% Supply</div>
+          </div>
+          <button class="button-3"><div class="text-wrapper-10">Donate This</div></button>
+        </div>
+
+        <!-- O+ -->
+        <div class="frame-7">
+          <div class="frame-8">
+            <div class="text-wrapper-17">O+</div>
+            <div class="frame-11"><div class="text-wrapper-18">MODERATE</div></div>
+          </div>
+          <div class="text-wrapper-19">High Demand</div>
+          <div class="frame-10">
+            <div class="rectangle-wrapper"><div class="rectangle-2"></div></div>
+            <div class="text-wrapper-20">45% Supply</div>
+          </div>
+          <button class="button-3"><div class="text-wrapper-10">Donate This</div></button>
+        </div>
+
+        <!-- A+ -->
+        <div class="frame-7">
+          <div class="frame-8">
+            <div class="text-wrapper-17">A+</div>
+            <div class="frame-11"><div class="text-wrapper-18">OPTIMAL</div></div>
+          </div>
+          <div class="text-wrapper-19">Stable Use</div>
+          <div class="frame-10">
+            <div class="rectangle-wrapper"><div class="rectangle-3"></div></div>
+            <div class="text-wrapper-20">85% Supply</div>
+          </div>
+          <button class="button-3"><div class="text-wrapper-10">Donate This</div></button>
+        </div>
+
+        <!-- B- -->
+        <div class="frame-7">
+          <div class="frame-8">
+            <div class="text-wrapper-17">B-</div>
+            <div class="frame-9"><div class="text-wrapper-18">CRITICAL</div></div>
+          </div>
+          <div class="text-wrapper-19">Rare Type</div>
+          <div class="frame-10">
+            <div class="rectangle-wrapper"><div class="rectangle-4"></div></div>
+            <div class="text-wrapper-20">&lt; 20% Supply</div>
+          </div>
+          <button class="button-3"><div class="text-wrapper-10">Donate This</div></button>
+        </div>
+
+        <!-- AB- -->
+        <div class="frame-7">
+          <div class="frame-8">
+            <div class="text-wrapper-17">AB-</div>
+            <div class="frame-11"><div class="text-wrapper-18">MODERATE</div></div>
+          </div>
+          <div class="text-wrapper-19">Universal Plasma</div>
+          <div class="frame-10">
+            <div class="rectangle-wrapper"><div class="rectangle-5"></div></div>
+            <div class="text-wrapper-20">50% Supply</div>
+          </div>
+          <button class="button-3"><div class="text-wrapper-10">Donate This</div></button>
+        </div>
+
+        <!-- Platelets -->
+        <div class="frame-7">
+          <div class="frame-8">
+            <div class="text-wrapper-17">Platelets</div>
+            <div class="frame-9"><div class="text-wrapper-18">CRITICAL</div></div>
+          </div>
+          <div class="text-wrapper-19">5-Day Shelf Life</div>
+          <div class="frame-10">
+            <div class="rectangle-wrapper"><div class="rectangle-6"></div></div>
+            <div class="text-wrapper-20">12% Supply</div>
+          </div>
+          <button class="button-3"><div class="text-wrapper-10">Donate This</div></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+      <div class="section-header-2">
+        <div class="text-wrapper-21">STEP-BY-STEP PROCESS</div>
+        <div class="text-wrapper-22">How Lifeline Works</div>
+        <p class="text-wrapper-23">An end-to-end digital coordination ensuring safety, verification, and zero friction.</p>
+      </div>
+      <div class="frame-12">
+        <div class="frame-13">
+          <div class="text-wrapper-24">STEP 01</div>
+          <div class="text-wrapper-25">Verify &amp; Pre-Screen</div>
+          <p class="text-wrapper-26">Fill the basic clinical eligibility questions online in under 3 minutes.</p>
+        </div>
+        <div class="frame-13">
+          <div class="text-wrapper-24">STEP 02</div>
+          <div class="text-wrapper-25">Select Local Drive</div>
+          <p class="text-wrapper-26">Reserve a secure slot at any affiliated clinic, school drive, or mobile center.</p>
+        </div>
+        <div class="frame-13">
+          <div class="text-wrapper-24">STEP 03</div>
+          <div class="text-wrapper-25">Track Your Impact</div>
+          <p class="text-wrapper-26">Receive automated alerts once your donation has been processed and dispatched.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community Outreach / Donation Drives -->
+    <section class="div-2">
+      <div class="frame-14">
+        <div class="section-header-3">
+          <div class="text-wrapper-14">COMMUNITY OUTREACH</div>
+          <div class="text-wrapper-15">Active Donation Drives</div>
+          <p class="text-wrapper-16">Locate and register for active municipal campaigns near you.</p>
+        </div>
+        <p class="text-wrapper-27">Explore All Drives (18 Active) →</p>
+      </div>
+
+      <div class="frame-12">
+        <div class="frame-15">
+          <div class="frame-wrapper">
+            <div class="frame-4">
+              <div class="text-wrapper-11">[</div>
+              <div class="text-wrapper-8">DRIVE PLACEHOLDER</div>
+              <div class="text-wrapper-11">]</div>
+            </div>
+          </div>
+          <div class="frame-16">
+            <div class="text-wrapper-28">Metro Red Cross Station</div>
+            <div class="frame-17">
+              <p class="text-wrapper-29">📍 District 2 Health Complex</p>
+              <div class="text-wrapper-13">📅 Oct 24, 2024</div>
+            </div>
+            <button class="button-3"><div class="text-wrapper-10">Register for Drive</div></button>
+          </div>
+        </div>
+
+        <div class="frame-15">
+          <div class="frame-wrapper">
+            <div class="frame-4">
+              <div class="text-wrapper-11">[</div>
+              <div class="text-wrapper-8">DRIVE PLACEHOLDER</div>
+              <div class="text-wrapper-11">]</div>
+            </div>
+          </div>
+          <div class="frame-16">
+            <div class="text-wrapper-28">City Hall Community Drive</div>
+            <div class="frame-17">
+              <div class="text-wrapper-29">📍 Central Plaza Pavilion</div>
+              <div class="text-wrapper-13">📅 Oct 28, 2024</div>
+            </div>
+            <button class="button-3"><div class="text-wrapper-10">Register for Drive</div></button>
+          </div>
+        </div>
+
+        <div class="frame-15">
+          <div class="frame-wrapper">
+            <div class="frame-4">
+              <div class="text-wrapper-11">[</div>
+              <div class="text-wrapper-8">DRIVE PLACEHOLDER</div>
+              <div class="text-wrapper-11">]</div>
+            </div>
+          </div>
+          <div class="frame-16">
+            <div class="text-wrapper-28">Silliman Campus Lobby</div>
+            <div class="frame-17">
+              <div class="text-wrapper-29">📍 Silliman Health Services</div>
+              <div class="text-wrapper-13">📅 Nov 02, 2024</div>
+            </div>
+            <button class="button-3"><div class="text-wrapper-10">Register for Drive</div></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="frame-18">
+        <div class="frame-19">
+          <div class="frame-20">
+            <div class="icon-2"><div class="text-wrapper-30">+</div></div>
+            <div class="text-wrapper-25">LIFELINE</div>
+          </div>
+          <p class="text-wrapper-31">
+            Empowering donors, saving patients, and unifying healthcare logistics through modern clinical technology.
+          </p>
+          <p class="text-wrapper-32">Team High Blood: Almonia • Catadman • Umapas</p>
+        </div>
+
+        <div class="frame-21">
+          <div class="text-wrapper-33">Emergency Hotline</div>
+          <div class="text-wrapper-2">1-800-LIFE-BLOOD</div>
+          <div class="text-wrapper-13">Dispatch: (555) 019-2834</div>
+        </div>
+
+        <div class="frame-21">
+          <div class="text-wrapper-33">Quick Links</div>
+          <div class="text-wrapper-34">Active Donation Drives</div>
+          <div class="text-wrapper-34">Eligibility Criteria</div>
+          <div class="text-wrapper-34">Clinical Standards</div>
+        </div>
+      </div>
+
+      <div class="frame-22">
+        <p class="text-wrapper-35">© 2024 Lifeline Healthcare System. Designed by TEAM HIGH BLOOD. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module">
+  import { supabase } from './js/supabaseClient.js';
+  console.log('Supabase client loaded:', supabase);
+</script>
 </body>
 </html>
