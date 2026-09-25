@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Staff Dashboard — Lifeline</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f5f6f8;
+    margin: 0;
+    padding: 40px;
+    color: #222;
+  }
+  h1 {
+    margin-bottom: 4px;
+  }
+  p.subtitle {
+    color: #666;
+    margin-top: 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+    max-width: 900px;
+  }
+  .stat-card {
+    background: white;
+    border-radius: 10px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  .stat-card h2 {
+    font-size: 36px;
+    margin: 0;
+    color: #b00020;
+  }
+  .stat-card p {
+    margin: 8px 0 0;
+    color: #555;
+    font-size: 14px;
+  }
+  #status-msg {
+    margin-top: 20px;
+    color: #b00020;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+  <h1>Staff Dashboard</h1>
+  <p class="subtitle">Lifeline — Your Blood. Their Hope</p>
+  <div id="status-msg"></div>
+
+  <div class="grid">
+    <div class="stat-card">
+      <h2 id="totalDonations">–</h2>
+      <p>Total Donation Records</p>
+    </div>
+    <div class="stat-card">
+      <h2 id="pendingDonations">–</h2>
+      <p>Pending</p>
+    </div>
+    <div class="stat-card">
+      <h2 id="completedDonations">–</h2>
+      <p>Completed</p>
+    </div>
+    <div class="stat-card">
+      <h2 id="activeDrives">–</h2>
+      <p>Donation Drives</p>
+    </div>
+    <div class="stat-card">
+      <h2 id="hospitalsCount">–</h2>
+      <p>Registered Hospitals</p>
+    </div>
+  </div>
+
+<script>
+  // ---- CONFIG: your Supabase project ----
+  const SUPABASE_URL = "https://pqgyucykyffuwmsueqrm.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_owXAOpsDVUQ_92LYvawtyQ_JfdIVCwi";
+
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  const statusEl = document.getElementById('status-msg');
+
+  async function loadStats() {
+    try {
+      // NOTE: no login check is wired in yet since your login page
+      // isn't built. Once it is, add a role check here before loading
+      // data (see comment at the bottom of this file).
+
+      const { count: totalDonations, error: e1 } = await sb
+        .from('donation_records')
+        .select('*', { count: 'exact', head: true });
+
+      const { count: pendingDonations, error: e2 } = await sb
+        .from('donation_records')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'pending');
+
+      const { count: completedDonations, error: e3 } = await sb
+        .from('donation_records')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'completed');
+
+      const { count: activeDrives, error: e4 } = await sb
+        .from('donation_drives')
+        .select('*', { count: 'exact', head: true });
+
+      const { count: hospitalsCount, error: e5 } = await sb
+        .from('hospitals')
+        .select('*', { count: 'exact', head: true });
+
+      const firstError = e1 || e2 || e3 || e4 || e5;
+      if (firstError) {
+        statusEl.textContent = "Error loading stats: " + firstError.message;
+        console.error(firstError);
+        return;
+      }
+
+      document.getElementById('totalDonations').textContent = totalDonations ?? 0;
+      document.getElementById('pendingDonations').textContent = pendingDonations ?? 0;
+      document.getElementById('completedDonations').textContent = completedDonations ?? 0;
+      document.getElementById('activeDrives').textContent = activeDrives ?? 0;
+      document.getElementById('hospitalsCount').textContent = hospitalsCount ?? 0;
+
+    } catch (err) {
+      statusEl.textContent = "Unexpected error: " + err.message;
+      console.error(err);
+    }
+  }
+
+  loadStats();
+
+  // ---- TODO once login page exists ----
+  // const { data: { user } } = await supabase.auth.getUser();
+  // if (!user) { window.location.href = '/login.html'; return; }
+  // const { data: profile } = await sb
+  //   .from('profiles').select('role').eq('id', user.id).single();
+  // if (!['staff','admin'].includes(profile.role)) {
+  //   window.location.href = '/donor-dashboard.html';
+  //   return;
+  // }
+</script>
+
+</body>
+</html>
