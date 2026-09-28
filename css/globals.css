@@ -16,17 +16,17 @@ button:focus-visible {
 a {
   text-decoration: none;
 }
-/* @FONTWARNING[{"type": "restricted", "family": "Inter-Bold", "weight": "700", "style": "normal", "allowsCrossOrigin": false}] */
+/* @FONTWARNING[{"type": "restricted", "family": "Inter-Bold", "weight": "400", "style": "normal", "allowsCrossOrigin": false}] */
 
 @font-face {
   font-family: "Inter-Bold";
   src: local("Inter-Bold");
 }
-/* @FONTWARNING[{"type": "restricted", "family": "Inter-SemiBold", "weight": "600", "style": "normal", "allowsCrossOrigin": false}] */
+/* @FONTWARNING[{"type": "restricted", "family": "Montserrat-Bold", "weight": "700", "style": "normal", "allowsCrossOrigin": false}] */
 
 @font-face {
-  font-family: "Inter-SemiBold";
-  src: local("Inter-SemiBold");
+  font-family: "Montserrat-Bold";
+  src: local("Montserrat-Bold");
 }
 /* @FONTWARNING[{"type": "restricted", "family": "Inter-Regular", "weight": "400", "style": "normal", "allowsCrossOrigin": false}] */
 
@@ -34,15 +34,33 @@ a {
   font-family: "Inter-Regular";
   src: local("Inter-Regular");
 }
-/* @FONTWARNING[{"type": "restricted", "family": "Inter-Medium", "weight": "500", "style": "normal", "allowsCrossOrigin": false}] */
+/* @FONTWARNING[{"type": "restricted", "family": "Inter-Medium", "weight": "400", "style": "normal", "allowsCrossOrigin": false}] */
 
 @font-face {
   font-family: "Inter-Medium";
   src: local("Inter-Medium");
 }
-/* @FONTWARNING[{"type": "restricted", "family": "Inter-ExtraBold", "weight": "800", "style": "normal", "allowsCrossOrigin": false}] */
+/* @FONTWARNING[{"type": "restricted", "family": "Inter-SemiBold", "weight": "600", "style": "normal", "allowsCrossOrigin": false}] */
 
 @font-face {
-  font-family: "Inter-ExtraBold";
-  src: local("Inter-ExtraBold");
+  font-family: "Inter-SemiBold";
+  src: local("Inter-SemiBold");
+}
+/* @FONTWARNING[{"type": "restricted", "family": "Liberation Mono-Bold", "weight": "700", "style": "normal", "allowsCrossOrigin": false}] */
+
+@font-face {
+  font-family: "Liberation Mono-Bold";
+  src: local("Liberation Mono-Bold");
+}
+/* @FONTWARNING[{"type": "restricted", "family": "Montserrat-SemiBold", "weight": "400", "style": "normal", "allowsCrossOrigin": false}] */
+
+@font-face {
+  font-family: "Montserrat-SemiBold";
+  src: local("Montserrat-SemiBold");
+}
+/* @FONTWARNING[{"type": "restricted", "family": "Liberation Serif-Bold", "weight": "700", "style": "normal", "allowsCrossOrigin": false}] */
+
+@font-face {
+  font-family: "Liberation Serif-Bold";
+  src: local("Liberation Serif-Bold");
 }
