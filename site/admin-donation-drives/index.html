@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Donation Drives</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Montserrat:wght@600;700;800&amp;display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="admin-donation-drives">
+    <main class="main">
+      <div class="container">
+        <header class="section-header-bar">
+          <div class="container-2">
+            <div class="container-3">
+              <img class="background" src="assets/background.svg" alt="Background">
+              <div class="container-4">
+                <p class="text-1">FLEET &amp; LOGISTICS HUB</p>
+              </div>
+            </div>
+            <div class="heading-1">
+              <p class="text-2">Blood Donation Drives Management</p>
+            </div>
+            <div class="container-5">
+              <p class="text-3">Schedule collegiate and mobile community blood donation drives, configure partner<br>hospital quotas, and manage real-time fleet logistics.</p>
+            </div>
+          </div>
+          <div class="container-6">
+            <button class="button" type="button">
+              <img class="container-7" src="assets/container.svg" alt="Container">
+              <div class="container-8">
+                <span class="text-4">Export Schedule (CSV / PDF)</span>
+              </div>
+            </button>
+            <button class="button-2" type="button">
+              <div class="button-shadow"></div>
+              <img class="container-7" src="assets/container-2.svg" alt="Container">
+              <div class="container-8">
+                <span class="text-5">Create New Donation Drive</span>
+              </div>
+            </button>
+          </div>
+        </header>
+        <section class="section-metric-overview-strip">
+          <div class="stat-1">
+            <div class="container-11">
+              <div class="container-12">
+                <p class="text-6">ACTIVE &amp; UPCOMING DRIVES</p>
+              </div>
+              <div class="paragraph">
+                <p class="text-7">18</p>
+                <p class="text-8">Drives</p>
+              </div>
+              <div class="margin">
+                <div class="container-13">
+                  <img class="container-7" src="assets/container-3.svg" alt="Container">
+                  <div class="container-4">
+                    <p class="text-9">2 running today • 16 on schedule</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img class="background-2" src="assets/background-2.svg" alt="Background">
+          </div>
+          <div class="stat-1">
+            <div class="container-11">
+              <div class="container-12">
+                <p class="text-6">TARGET DONORS REGISTERED</p>
+              </div>
+              <div class="paragraph">
+                <p class="text-7">1,420</p>
+                <p class="text-12">Donors</p>
+              </div>
+              <div class="margin">
+                <div class="container-13">
+                  <img class="container-7" src="assets/container-4.svg" alt="Container">
+                  <div class="container-4">
+                    <p class="text-9">76% of aggregate target quota</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img class="background-2" src="assets/background-3.svg" alt="Background">
+          </div>
+          <div class="stat-1">
+            <div class="container-11">
+              <div class="container-12">
+                <p class="text-6">MOBILIZED MEDICAL STAFF</p>
+              </div>
+              <div class="paragraph">
+                <p class="text-7">36</p>
+                <p class="text-12">Phlebotomists</p>
+              </div>
+              <div class="margin">
+                <div class="container-13">
+                  <img class="container-7" src="assets/container-5.svg" alt="Container">
+                  <div class="container-4">
+                    <p class="text-9">4 emergency backup teams ready</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img class="background-2" src="assets/background-4.svg" alt="Background">
+          </div>
+        </section>
+        <nav class="section-filter-navigation-control-strip">
+          <div class="tabs">
+            <button class="button-3" type="button">
+              <span class="text-18">All Drives (18)</span>
+            </button>
+            <button class="button-4" type="button">
+              <span class="text-19">Scheduled (12)</span>
+            </button>
+            <button class="button-5" type="button">
+              <div class="background-5"></div>
+              <div class="container-8">
+                <span class="text-19">Active Today (2)</span>
+              </div>
+            </button>
+            <button class="button-6" type="button">
+              <span class="text-19">Completed (4)</span>
+            </button>
+          </div>
+          <div class="inputs-selectors">
+            <div class="container-27">
+              <input class="input" type="text" placeholder="Search drive name, venue..." aria-label="Search drive name, venue...">
+              <img class="icon" src="assets/icon.svg" alt="Icon">
+            </div>
+            <div class="container-27">
+              <div class="options">
+                <div class="container-29">
+                  <p class="text-22">Host: All Partners</p>
+                </div>
+              </div>
+              <img class="container-30" src="assets/container-6.svg" alt="Container">
+            </div>
+            <div class="container-27">
+              <div class="options">
+                <div class="container-32">
+                  <p class="text-22">Date: Next 30 Days</p>
+                </div>
+              </div>
+              <img class="container-33" src="assets/container-7.svg" alt="Container">
+            </div>
+          </div>
+        </nav>
+        <section class="section-drives-management-table-roster">
+          <div class="table">
+            <header class="header">
+              <div class="row">
+                <div class="cell">
+                  <p class="text-24">DRIVE NAME &amp; HOST</p>
+                </div>
+                <div class="cell-2">
+                  <p class="text-24">DATE &amp;<br>OPERATING<br>HOURS</p>
+                </div>
+                <div class="cell-3">
+                  <p class="text-24">LOCATION /<br>VENUE</p>
+                </div>
+                <div class="cell-4">
+                  <p class="text-24">COLLECTION TARGET</p>
+                </div>
+                <div class="cell-5">
+                  <p class="text-24">ASSIGNED FLEET</p>
+                </div>
+                <div class="cell-6">
+                  <p class="text-29">ACTIONS</p>
+                </div>
+              </div>
+            </header>
+            <div class="container-12">
+              <div class="row-1">
+                <div class="data">
+                  <div class="container-12">
+                    <p class="metro-university-blood-crusade">Metro<br>University<br>Blood Crusade<br>2024</p>
+                  </div>
+                  <div class="margin-4">
+                    <div class="container-13">
+                      <img class="container-7" src="assets/container-8.svg" alt="Container">
+                      <div class="container-37">
+                        <p class="text-30">City General<br>Hospital &amp;<br>University Student<br>Council</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="data-2">
+                  <div class="background-6">
+                    <p class="text-31">Scheduled</p>
+                  </div>
+                  <p class="text-32">Nov 25, 2024</p>
+                  <div class="container-38">
+                    <p class="text-30">09:00 AM –<br>04:00 PM EST</p>
+                  </div>
+                </div>
+                <div class="data-3">
+                  <div class="container-12">
+                    <p class="student-recreation-center">Student<br>Recreation<br>Center</p>
+                  </div>
+                  <div class="container-12">
+                    <p class="bay-a-indoor-access">Bay A (Indoor<br>access • Freight<br>lift)</p>
+                  </div>
+                </div>
+                <div class="data-4">
+                  <div class="container-41">
+                    <div class="paragraph-4">
+                      <p class="text-34">200 Units</p>
+                      <p class="text-9">42 Donors</p>
+                    </div>
+                    <div class="background-7">
+                      <div class="background-8"></div>
+                    </div>
+                    <div class="container-12">
+                      <p class="text-36">21% Pre-registered</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="data-5">
+                  <img class="container-7" src="assets/container-9.svg" alt="Container">
+                  <div class="container-44">
+                    <p class="text-32">Mobile Team<br>Alpha (6<br>Beds)</p>
+                  </div>
+                </div>
+                <img class="data-6" src="assets/data.svg" alt="Data">
+              </div>
+              <div class="row-2">
+                <div class="data-7">
+                  <div class="container-12">
+                    <p class="metro-university-blood-crusade">Civic Center<br>Holiday Drive</p>
+                  </div>
+                  <div class="margin-4">
+                    <div class="container-13">
+                      <img class="container-7" src="assets/container-10.svg" alt="Container">
+                      <div class="container-38">
+                        <p class="text-30">St. Jude Regional<br>Blood Bank</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="data-2">
+                  <div class="background-6">
+                    <p class="text-31">Scheduled</p>
+                  </div>
+                  <p class="text-32">Dec 02, 2024</p>
+                  <div class="container-38">
+                    <p class="text-30">08:00 AM –<br>03:00 PM EST</p>
+                  </div>
+                </div>
+                <div class="data-3">
+                  <div class="container-12">
+                    <p class="student-recreation-center">Downtown<br>Plaza, Grand<br>Ballroom</p>
+                  </div>
+                  <div class="container-12">
+                    <p class="bay-a-indoor-access">Ground Floor<br>(Street Ramp<br>Available)</p>
+                  </div>
+                </div>
+                <div class="data-10">
+                  <div class="container-41">
+                    <div class="paragraph-4">
+                      <p class="text-34">150 Units</p>
+                      <p class="text-9">18 Donors</p>
+                    </div>
+                    <div class="background-7">
+                      <div class="background-11"></div>
+                    </div>
+                    <div class="container-12">
+                      <p class="text-36">12% Pre-registered</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="data-11">
+                  <img class="container-7" src="assets/container-11.svg" alt="Container">
+                  <div class="container-44">
+                    <p class="text-32">Mobile Van 2<br>+ Field Tent</p>
+                  </div>
+                </div>
+                <img class="data-6" src="assets/data-2.svg" alt="Data">
+              </div>
+              <div class="row-3">
+                <div class="data-13">
+                  <div class="container-12">
+                    <p class="metro-university-blood-crusade">Silicon Valley<br>Tech Park<br>Mobile Unit</p>
+                  </div>
+                  <div class="margin-4">
+                    <div class="container-13">
+                      <img class="container-7" src="assets/container-12.svg" alt="Container">
+                      <div class="container-59">
+                        <p class="text-30">Red Cross Mobile<br>Logistics</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="data-2">
+                  <div class="background-6">
+                    <p class="text-31">Scheduled</p>
+                  </div>
+                  <p class="text-32">Dec 08, 2024</p>
+                  <div class="container-60">
+                    <p class="text-30">10:00 AM –<br>05:00 PM EST</p>
+                  </div>
+                </div>
+                <div class="data-15">
+                  <div class="container-12">
+                    <p class="student-recreation-center">Building 4 West<br>Courtyard</p>
+                  </div>
+                  <div class="container-12">
+                    <p class="bay-a-indoor-access">Outdoor Shaded<br>Canopy Lot #3</p>
+                  </div>
+                </div>
+                <div class="data-16">
+                  <div class="container-41">
+                    <div class="paragraph-6">
+                      <p class="text-34">120 Units</p>
+                      <p class="text-9">65 Donors</p>
+                    </div>
+                    <div class="background-7">
+                      <div class="background-14"></div>
+                    </div>
+                    <div class="container-12">
+                      <p class="text-36">54% Pre-registered</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="data-11">
+                  <img class="container-7" src="assets/container-13.svg" alt="Container">
+                  <div class="container-66">
+                    <p class="text-32">Mobile<br>Coach Unit</p>
+                  </div>
+                </div>
+                <img class="data-6" src="assets/data-3.svg" alt="Data">
+              </div>
+              <div class="row-4-live-active-drive">
+                <div class="data-7">
+                  <div class="container-67">
+                    <div class="container-68">
+                      <p class="metro-university-blood-crusade">Cebu IT Park<br>Quad Drive</p>
+                    </div>
+                  </div>
+                  <div class="margin-4">
+                    <div class="container-13">
+                      <img class="container-7" src="assets/container-14.svg" alt="Container">
+                      <div class="container-71">
+                        <p class="text-30">Central Blood<br>Reserve</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="data-20">
+                  <div class="background-15">
+                    <div class="background-16"></div>
+                    <p class="text-55">Active<br>Now</p>
+                  </div>
+                  <p class="text-32">Today (Live)</p>
+                  <div class="container-38">
+                    <p class="text-30">08:00 AM –<br>06:00 PM EST</p>
+                  </div>
+                </div>
+                <div class="data-3">
+                  <div class="container-12">
+                    <p class="student-recreation-center">Tower 2<br>Concourse,<br>Central Garden</p>
+                  </div>
+                  <div class="container-12">
+                    <p class="bay-a-indoor-access">Covered Plaza<br>with Air Cooling<br>Units</p>
+                  </div>
+                </div>
+                <div class="data-10">
+                  <div class="container-41">
+                    <div class="paragraph-6">
+                      <p class="text-34">180 Units</p>
+                      <p class="text-55">124 Done</p>
+                    </div>
+                    <div class="background-7">
+                      <div class="background-18"></div>
+                    </div>
+                    <div class="container-12">
+                      <p class="text-36">69% collected so far</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="data-11">
+                  <img class="container-7" src="assets/container-15.svg" alt="Container">
+                  <div class="container-44">
+                    <p class="text-32">Team Alpha<br>(4 Deployed)</p>
+                  </div>
+                </div>
+                <div class="data-24">
+                  <button class="button-7" type="button">
+                    <span class="text-62">Monitor<br>Live</span>
+                  </button>
+                  <img class="container-7" src="assets/button.svg" alt="Button">
+                  <button class="button-9" type="button">
+                    <span class="text-63">Close</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="table-footer-pagination">
+            <div class="container-4">
+              <p class="text-30">Showing 4 of 18 registered donation drives</p>
+            </div>
+            <div class="container-80">
+              <button class="button-10" type="button">
+                <span class="text-65">Previous</span>
+              </button>
+              <button class="button-11" type="button">
+                <span class="text-62">1</span>
+              </button>
+              <button class="button-12" type="button">
+                <span class="text-63">2</span>
+              </button>
+              <button class="button-12" type="button">
+                <span class="text-63">3</span>
+              </button>
+              <button class="button-12" type="button">
+                <span class="text-63">Next</span>
+              </button>
+            </div>
+          </footer>
+        </section>
+      </div>
+    </main>
+    <header class="header-2">
+      <div class="container-80">
+        <div class="img-logo-png-margin">
+          <div class="logo-png"></div>
+        </div>
+        <div class="container-82">
+          <p class="text-70">Admin<br>Portal</p>
+        </div>
+        <div class="container-4">
+          <p class="text-71">/</p>
+        </div>
+        <div class="container-4">
+          <p class="text-72">Overview</p>
+        </div>
+      </div>
+      <div class="container-85">
+        <div class="container-86">
+          <input class="input-2" type="text" placeholder="Search facilities, drives, administrators..." aria-label="Search facilities, drives, administrators...">
+          <img class="icon-2" src="assets/icon-2.svg" alt="Icon">
+        </div>
+        <div class="background-19">
+          <div class="background-20"></div>
+          <div class="container-87">
+            <p class="text-73">Operational • Master Admin<br>Console</p>
+          </div>
+        </div>
+        <img class="container-7" src="assets/button-notifications.svg" alt="Button - Notifications">
+        <div class="container-88">
+          <div class="container-4">
+            <div class="container-90">
+              <p class="text-74">System<br>Administrator</p>
+            </div>
+            <div class="container-90">
+              <p class="text-75">Root Ops</p>
+            </div>
+          </div>
+          <img class="background-21" src="assets/background-5.svg" alt="Background">
+        </div>
+      </div>
+    </header>
+    <aside class="aside">
+      <aside class="aside-shadow"></aside>
+      <div class="container-12">
+        <div class="container-93">
+          <div class="container-94">
+            <div class="logo-png-2"></div>
+            <div class="container-4">
+              <div class="container-12">
+                <p class="text-76">LIFELINE</p>
+              </div>
+              <div class="container-12">
+                <p class="text-77">— Your Blood. Their Hope —</p>
+              </div>
+            </div>
+          </div>
+          <div class="margin-8">
+            <div class="container-98">
+              <div class="overlay">
+                <p class="text-78">Admin Operations</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="nav-margin">
+          <nav class="nav">
+            <a class="link" href="../admin-dashboard/index.html">
+              <img class="container-7" src="assets/container-16.svg" alt="Container">
+              <div class="container-4">
+                <span class="text-71">Dashboard</span>
+              </div>
+            </a>
+            <a class="link" href="../admin-hospitals/index.html">
+              <img class="container-7" src="assets/container-17.svg" alt="Container">
+              <div class="container-4">
+                <span class="text-71">Hospitals &amp; Blood Banks</span>
+              </div>
+            </a>
+            <a class="link-3" href="../admin-donation-drives/index.html">
+              <img class="container-7" src="assets/container-18.svg" alt="Container">
+              <div class="container-4">
+                <span class="text-81">Donation Drives</span>
+              </div>
+            </a>
+          </nav>
+        </nav>
+      </div>
+      <div class="container-105">
+        <a class="link-4" href="../login/index.html">
+          <img class="container-7" src="assets/container-19.svg" alt="Container">
+          <div class="container-4">
+            <span class="text-82">Log Out</span>
+          </div>
+        </a>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Donation Record Management - Lifeline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Montserrat:wght@700&amp;family=Liberation+Mono:ital,wght@1,600&amp;display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="staff-donation-record-management-lifeline">
+    <main class="main">
+      <div class="container">
+        <div class="top-operational-banner-metrics-overview-margin">
+          <div class="top-operational-banner-metrics-overview">
+            <div class="container-2">
+              <div class="container-3">
+                <div class="background"></div>
+                <div class="container-4">
+                  <p class="text-1">PHLEBOTOMY &amp; INTAKE<br>REGISTRY</p>
+                </div>
+                <div class="container-5">
+                  <p class="text-2">/</p>
+                </div>
+                <div class="container-6">
+                  <p class="text-3">ACTIVE SESSION: BAY<br>A-4</p>
+                </div>
+              </div>
+              <div class="heading-1">
+                <p class="text-4">Donation Records<br>Management</p>
+              </div>
+              <div class="container-7">
+                <p class="text-5">Search, filter, verify donor intake details, approve schedules,<br>record collected volume, and mark records as Completed.</p>
+              </div>
+            </div>
+            <div class="quick-stats-metric-strip">
+              <div class="background-shadow">
+                <img class="background-2" src="assets/background.svg" alt="Background">
+                <div class="container-5">
+                  <div class="heading-1">
+                    <p class="text-6">Awaiting<br>Review</p>
+                  </div>
+                  <div class="paragraph">
+                    <p class="text-7">14 </p>
+                    <p class="text-8">+3</p>
+                    <p class="text-9">today</p>
+                  </div>
+                </div>
+              </div>
+              <div class="background-shadow-2">
+                <img class="background-3" src="assets/background-2.svg" alt="Background">
+                <div class="container-5">
+                  <div class="heading-1">
+                    <p class="text-6">Approved<br>Today</p>
+                  </div>
+                  <div class="heading-1">
+                    <p class="text-11">29</p>
+                  </div>
+                </div>
+              </div>
+              <div class="background-shadow">
+                <img class="background-4" src="assets/background-3.svg" alt="Background">
+                <div class="container-5">
+                  <div class="heading-1">
+                    <p class="text-6">Volume<br>Drawn</p>
+                  </div>
+                  <div class="paragraph-2">
+                    <p class="text-11">18.4</p>
+                    <p class="text-14">L</p>
+                  </div>
+                </div>
+              </div>
+              <div class="background-shadow-2">
+                <img class="background-4" src="assets/background-4.svg" alt="Background">
+                <div class="container-5">
+                  <div class="heading-1">
+                    <p class="text-6">Active<br>Donors</p>
+                  </div>
+                  <div class="heading-1">
+                    <p class="text-11">48</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="top-operational-banner-metrics-overview-margin">
+          <div class="filter-search-control-toolbar">
+            <div class="container-18">
+              <input class="search-input" type="search" placeholder="Search by Donor Name, Record ID (#LL-), or National Health ID..." aria-label="Search by Donor Name, Record ID (#LL-), or National Health ID...">
+              <div class="action-buttons-print-export">
+                <button class="button" type="button">
+                  <img class="container-19" src="assets/container-2.svg" alt="Container">
+                  <div class="container-20">
+                    <span class="text-17">Print Daily Roster</span>
+                  </div>
+                </button>
+                <button class="button" type="button">
+                  <img class="container-19" src="assets/container-3.svg" alt="Container">
+                  <div class="container-20">
+                    <span class="text-17">Export CSV</span>
+                  </div>
+                </button>
+                <button class="button-3" type="button">
+                  <img class="container-19" src="assets/container-4.svg" alt="Container">
+                  <div class="container-20">
+                    <span class="text-19">New Manual Entry</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+            <select class="filter-multi-select-strip" aria-label="FILTERS:"><option>FILTERS:</option></select>
+          </div>
+        </div>
+        <div class="comprehensive-data-table-crud">
+          <div class="container-25">
+            <div class="table">
+              <header class="header-row">
+                <div class="cell">
+                  <p class="text-20">RECORD<br>ID</p>
+                </div>
+                <div class="cell-2">
+                  <p class="text-20">DONOR NAME<br>&amp; CONTACT</p>
+                </div>
+                <div class="cell-3">
+                  <p class="text-20">BLOOD<br>GROUP</p>
+                </div>
+                <div class="cell-4">
+                  <p class="text-20">DONATION<br>DATE /<br>SCHEDULE</p>
+                </div>
+                <div class="cell-5">
+                  <p class="text-20">LOCATION /<br>WARD</p>
+                </div>
+                <div class="cell-6">
+                  <p class="text-20">STATUS</p>
+                </div>
+                <div class="cell-7">
+                  <p class="text-20">VOLUME<br>(ML)</p>
+                </div>
+                <div class="cell-8">
+                  <p class="text-27">OPERATIONAL ACTIONS</p>
+                </div>
+              </header>
+              <div class="heading-1">
+                <div class="row-1-pending-review-marcus-vance">
+                  <div class="data">
+                    <img class="container-19" src="assets/container-8.svg" alt="Container">
+                    <div class="container-5">
+                      <p class="text-28">#LL-<br>8821</p>
+                    </div>
+                  </div>
+                  <div class="data-2">
+                    <div class="overlay">
+                      <p class="text-29">MV</p>
+                    </div>
+                    <div class="container-5">
+                      <div class="heading-1">
+                        <p class="text-30">Marcus<br>Vance</p>
+                      </div>
+                      <div class="heading-1">
+                        <p class="text-6">+1 (555)<br>382-9012</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="data-3">
+                    <div class="background-shadow-5">
+                      <p class="text-32">O+</p>
+                    </div>
+                  </div>
+                  <div class="data-4">
+                    <div class="heading-1">
+                      <p class="nov-30-2024">Nov 30,<br>2024</p>
+                    </div>
+                    <div class="heading-1">
+                      <p class="text-6">10:00 AM<br>(Scheduled)</p>
+                    </div>
+                  </div>
+                  <div class="data-5">
+                    <div class="container-33">
+                      <img class="container-19" src="assets/container-9.svg" alt="Container">
+                      <p class="text-34">Central Bay<br>3</p>
+                    </div>
+                  </div>
+                  <div class="data-6">
+                    <div class="background-6">
+                      <div class="background-7"></div>
+                      <p class="text-35">PENDING<br>REVIEW</p>
+                    </div>
+                  </div>
+                  <div class="data-7">
+                    <p class="text-36">-- mL</p>
+                  </div>
+                  <div class="data-8">
+                    <button class="button-4" type="button">
+                      <img class="container-19" src="assets/container-10.svg" alt="Container">
+                      <div class="container-36">
+                        <span class="text-37">Verify<br>&amp;<br>Review</span>
+                      </div>
+                    </button>
+                    <img class="container-19" src="assets/button.svg" alt="Button">
+                    <img class="container-19" src="assets/button-2.svg" alt="Button">
+                  </div>
+                </div>
+                <div class="row-2-approved-rachel-jenkins">
+                  <div class="data-9">
+                    <p class="text-38">#LL-<br>8805</p>
+                  </div>
+                  <div class="data-10">
+                    <div class="background-8">
+                      <p class="text-39">RJ</p>
+                    </div>
+                    <div class="container-5">
+                      <div class="heading-1">
+                        <p class="text-30">Rachel<br>Jenkins</p>
+                      </div>
+                      <div class="heading-1">
+                        <p class="text-6">+1 (555)<br>492-1188</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="data-11">
+                    <div class="background-shadow-5">
+                      <p class="text-32">AB+</p>
+                    </div>
+                  </div>
+                  <div class="data-12">
+                    <div class="heading-1">
+                      <p class="nov-30-2024">Nov 28,<br>2024</p>
+                    </div>
+                    <div class="heading-1">
+                      <p class="text-43">02:30 PM</p>
+                    </div>
+                  </div>
+                  <div class="data-13">
+                    <div class="container-42">
+                      <img class="container-19" src="assets/container-11.svg" alt="Container">
+                      <p class="text-34">Mobile<br>Drive A</p>
+                    </div>
+                  </div>
+                  <div class="data-14">
+                    <div class="background-9">
+                      <div class="background-10"></div>
+                      <p class="text-45">APPROVED</p>
+                    </div>
+                  </div>
+                  <div class="data-15">
+                    <div class="background-11">
+                      <p class="text-46">Scheduled</p>
+                    </div>
+                  </div>
+                  <div class="data-16">
+                    <button class="button-7" type="button">
+                      <img class="container-19" src="assets/container-12.svg" alt="Container">
+                      <div class="container-20">
+                        <span class="text-47">Record<br>Volume</span>
+                      </div>
+                    </button>
+                    <img class="container-19" src="assets/button-3.svg" alt="Button">
+                    <img class="container-19" src="assets/button-4.svg" alt="Button">
+                  </div>
+                </div>
+                <div class="row-2-approved-rachel-jenkins">
+                  <div class="data-17">
+                    <p class="text-38">#LL-<br>7940</p>
+                  </div>
+                  <div class="data-10">
+                    <div class="background-12">
+                      <p class="text-39">MV</p>
+                    </div>
+                    <div class="container-5">
+                      <div class="heading-1">
+                        <p class="text-30">Marcus<br>Vance</p>
+                      </div>
+                      <div class="heading-1">
+                        <p class="text-6">Donor ID:<br>D-44021</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="data-19">
+                    <div class="background-shadow-5">
+                      <p class="text-32">O+</p>
+                    </div>
+                  </div>
+                  <div class="data-20">
+                    <div class="heading-1">
+                      <p class="nov-30-2024">Oct 14,<br>2024</p>
+                    </div>
+                    <div class="heading-1">
+                      <p class="text-43">Completed<br>at 11:15 AM</p>
+                    </div>
+                  </div>
+                  <div class="data-21">
+                    <div class="container-33">
+                      <img class="container-19" src="assets/container-13.svg" alt="Container">
+                      <p class="text-34">Central Bay<br>1</p>
+                    </div>
+                  </div>
+                  <div class="data-22">
+                    <div class="background-13">
+                      <div class="background-14"></div>
+                      <p class="text-54">COMPLETED</p>
+                    </div>
+                  </div>
+                  <div class="data-23">
+                    <p class="text-55">450 mL</p>
+                  </div>
+                  <div class="data-16">
+                    <button class="button-7" type="button">
+                      <img class="container-19" src="assets/container-14.svg" alt="Container">
+                      <div class="container-20">
+                        <span class="text-56">Certificate</span>
+                      </div>
+                    </button>
+                    <img class="container-19" src="assets/button-5.svg" alt="Button">
+                  </div>
+                </div>
+                <div class="row-2-approved-rachel-jenkins">
+                  <div class="data-25">
+                    <p class="text-38">#LL-<br>7892</p>
+                  </div>
+                  <div class="data-10">
+                    <div class="background-8">
+                      <p class="text-39">KP</p>
+                    </div>
+                    <div class="container-5">
+                      <div class="heading-1">
+                        <p class="text-30">Kevin<br>Patel</p>
+                      </div>
+                      <div class="heading-1">
+                        <p class="text-6">+1 (555)<br>774-2901</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="data-27">
+                    <div class="background-shadow-5">
+                      <p class="text-32">B+</p>
+                    </div>
+                  </div>
+                  <div class="data-20">
+                    <div class="heading-1">
+                      <p class="nov-30-2024">Oct 12,<br>2024</p>
+                    </div>
+                    <div class="heading-1">
+                      <p class="text-43">Completed<br>at 09:40<br>AM</p>
+                    </div>
+                  </div>
+                  <div class="data-29">
+                    <div class="action-buttons-print-export">
+                      <img class="container-19" src="assets/container-15.svg" alt="Container">
+                      <p class="text-34">Transfusion<br>Rm 2</p>
+                    </div>
+                  </div>
+                  <div class="data-30">
+                    <div class="background-13">
+                      <div class="background-14"></div>
+                      <p class="text-54">COMPLETED</p>
+                    </div>
+                  </div>
+                  <div class="data-31">
+                    <p class="text-55">450 mL</p>
+                  </div>
+                  <div class="data-16">
+                    <button class="button-7" type="button">
+                      <img class="container-19" src="assets/container-16.svg" alt="Container">
+                      <div class="container-20">
+                        <span class="text-56">Certificate</span>
+                      </div>
+                    </button>
+                    <img class="container-19" src="assets/button-6.svg" alt="Button">
+                  </div>
+                </div>
+                <div class="row-2-approved-rachel-jenkins">
+                  <div class="data-33">
+                    <p class="text-38">#LL-<br>7880</p>
+                  </div>
+                  <div class="data-10">
+                    <div class="background-8">
+                      <p class="text-39">SC</p>
+                    </div>
+                    <div class="container-5">
+                      <div class="heading-1">
+                        <p class="text-30">Sarah<br>Connor</p>
+                      </div>
+                      <div class="heading-1">
+                        <p class="text-6">Rare<br>Negative<br>Reserve</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="data-35">
+                    <div class="background-shadow-5">
+                      <p class="text-32">O-</p>
+                    </div>
+                  </div>
+                  <div class="data-36">
+                    <div class="heading-1">
+                      <p class="nov-30-2024">Oct 10,<br>2024</p>
+                    </div>
+                    <div class="heading-1">
+                      <p class="text-43">Urgent Call<br>Response</p>
+                    </div>
+                  </div>
+                  <div class="data-37">
+                    <div class="action-buttons-print-export">
+                      <img class="container-19" src="assets/container-17.svg" alt="Container">
+                      <p class="text-34">Emergency<br>Phlebotomy</p>
+                    </div>
+                  </div>
+                  <div class="data-38">
+                    <div class="background-13">
+                      <div class="background-14"></div>
+                      <p class="text-54">COMPLETED</p>
+                    </div>
+                  </div>
+                  <div class="data-39">
+                    <p class="text-28">500 mL</p>
+                  </div>
+                  <div class="data-16">
+                    <button class="button-7" type="button">
+                      <img class="container-19" src="assets/container-18.svg" alt="Container">
+                      <div class="container-20">
+                        <span class="text-56">Certificate</span>
+                      </div>
+                    </button>
+                    <img class="container-19" src="assets/button-7.svg" alt="Button">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="table-pagination-footer">
+            <div class="container-5">
+              <p class="text-6">Showing records 1 - 5 of 142 total entries</p>
+            </div>
+            <div class="action-buttons-print-export">
+              <button class="button-16" type="button">
+                <span class="text-76">Previous</span>
+              </button>
+              <button class="button-17" type="button">
+                <span class="text-37">1</span>
+              </button>
+              <button class="button-18" type="button">
+                <span class="text-78">2</span>
+              </button>
+              <button class="button-18" type="button">
+                <span class="text-78">3</span>
+              </button>
+              <div class="container-75">
+                <p class="text-5">...</p>
+              </div>
+              <button class="button-18" type="button">
+                <span class="text-78">29</span>
+              </button>
+              <button class="button-16" type="button">
+                <span class="text-76">Next</span>
+              </button>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </main>
+    <header class="header">
+      <div class="action-buttons-print-export">
+        <div class="container-5">
+          <p class="text-83">Staff Portal</p>
+        </div>
+        <div class="container-5">
+          <p class="text-83">/</p>
+        </div>
+        <div class="container-5">
+          <p class="text-30">Hospital Operations</p>
+        </div>
+      </div>
+      <div class="container-80">
+        <div class="background-21">
+          <img class="container-19" src="assets/container-19.svg" alt="Container">
+          <div class="container-5">
+            <p class="text-86">Search donor records, unit IDs...</p>
+          </div>
+        </div>
+        <img class="container-19" src="assets/container-20.svg" alt="Container">
+        <div class="background-shadow-10">
+          <img class="background-22" src="assets/background-5.svg" alt="Background">
+          <div class="container-5">
+            <div class="heading-1">
+              <p class="text-30">Dr. Elena Rostova</p>
+            </div>
+            <div class="heading-1">
+              <p class="text-88">Chief Pathologist</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <aside class="aside">
+      <div class="container-87">
+        <div class="container-88">
+          <div class="lifeline-logo"></div>
+          <div class="container-5">
+            <div class="container-90">
+              <div class="container-5">
+                <p class="text-89">LIFE</p>
+              </div>
+              <div class="container-5">
+                <p class="text-90">LINE</p>
+              </div>
+            </div>
+            <div class="heading-1">
+              <p class="text-91">— Your Blood. <span class="text-91-span-1">Their Hope</span> —</p>
+            </div>
+          </div>
+        </div>
+        <nav class="nav">
+          <div class="margin">
+            <div class="container-94">
+              <p class="staff-operations">STAFF OPERATIONS</p>
+            </div>
+          </div>
+          <a class="link" href="../staff-dashboard/index.html">
+            <img class="container-19" src="assets/container-21.svg" alt="Container">
+            <div class="container-5">
+              <span class="text-92">Dashboard</span>
+            </div>
+          </a>
+          <a class="link-2" href="../staff-donation-records/index.html">
+            <img class="container-19" src="assets/container-22.svg" alt="Container">
+            <div class="container-5">
+              <span class="text-93">Donation Records </span>
+            </div>
+          </a>
+          <a class="link" href="../staff-pending-reviews/index.html">
+            <img class="container-19" src="assets/container-23.svg" alt="Container">
+            <div class="container-5">
+              <span class="text-92">Pending Reviews</span>
+            </div>
+          </a>
+          <a class="link" href="../staff-donation-drives/index.html">
+            <img class="container-19" src="assets/container-24.svg" alt="Container">
+            <div class="container-5">
+              <span class="text-92">Donation Drives</span>
+            </div>
+          </a>
+          <a class="link" href="../staff-facility-profile/index.html">
+            <img class="container-19" src="assets/container-25.svg" alt="Container">
+            <div class="container-5">
+              <span class="text-92">Facility Profile</span>
+            </div>
+          </a>
+          <a class="link" href="#">
+            <img class="container-19" src="assets/container-26.svg" alt="Container">
+            <div class="container-5">
+              <span class="text-92">Notifications</span>
+            </div>
+          </a>
+        </nav>
+      </div>
+      <div class="container-107">
+        <a class="link-7" href="../login/index.html">
+          <img class="svg" src="assets/svg.svg" alt="SVG">
+          <div class="container-5">
+            <span class="text-98">Logout</span>
+          </div>
+        </a>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

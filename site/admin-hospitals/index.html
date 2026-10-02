@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Hospitals &amp; Blood Banks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;500;600&amp;family=Liberation+Mono:wght@400;500&amp;display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="admin-hospitals-blood-banks">
+    <main class="main">
+      <div class="container">
+        <header class="section-header-bar">
+          <div class="decorative-soft-watermark"></div>
+          <div class="container-2">
+            <div class="container-3">
+              <img class="background" src="assets/background.svg" alt="Background">
+              <div class="heading-1">
+                <p class="text-1">Hospitals &amp; Blood Banks Management</p>
+              </div>
+            </div>
+            <div class="container-4">
+              <p class="text-2">Register new partner institutions, update accreditation details, and manage active clinical<br>facility nodes across regional blood collection networks.</p>
+            </div>
+          </div>
+          <button class="button" type="button">
+            <img class="container-5" src="assets/container.svg" alt="Container">
+            <div class="container-6">
+              <span class="text-3">+ Add Hospital / Blood Bank</span>
+            </div>
+          </button>
+        </header>
+        <section class="section-metric-badges-summary-strip">
+          <div class="background-shadow">
+            <div class="container-7">
+              <div class="heading-1">
+                <p class="text-4">TOTAL FACILITIES</p>
+              </div>
+              <img class="container-5" src="assets/background-2.svg" alt="Background">
+            </div>
+            <div class="margin">
+              <div class="paragraph">
+                <p class="text-5">42</p>
+                <p class="text-6">+3 this quarter</p>
+              </div>
+            </div>
+          </div>
+          <div class="background-shadow">
+            <div class="container-7">
+              <div class="heading-1">
+                <p class="text-4">HOSPITALS</p>
+              </div>
+              <img class="container-5" src="assets/background-3.svg" alt="Background">
+            </div>
+            <div class="margin">
+              <div class="paragraph">
+                <p class="text-5">31</p>
+                <p class="text-9">Apex &amp; Primary</p>
+              </div>
+            </div>
+          </div>
+          <div class="background-shadow">
+            <div class="container-7">
+              <div class="container-12">
+                <p class="text-4">INDEPENDENT BLOOD<br>BANKS</p>
+              </div>
+              <img class="container-5" src="assets/background-4.svg" alt="Background">
+            </div>
+            <div class="margin">
+              <div class="paragraph">
+                <p class="text-5">11</p>
+                <p class="text-9">Hubs &amp; Centers</p>
+              </div>
+            </div>
+          </div>
+          <div class="background-shadow">
+            <div class="container-7">
+              <div class="heading-1">
+                <p class="text-4">DOH ACCREDITED</p>
+              </div>
+              <img class="container-5" src="assets/background-5.svg" alt="Background">
+            </div>
+            <div class="margin">
+              <div class="paragraph">
+                <p class="text-14">100%</p>
+                <p class="text-9">ISBT-128 Verified</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section-filter-strip-controls">
+          <input class="search-bar" type="search" placeholder="Search by facility name, license number, or city..." aria-label="Search by facility name, license number, or city...">
+          <div class="dropdowns-filters">
+            <div class="background-6">
+              <div class="heading-1">
+                <p class="text-9">Type:</p>
+              </div>
+              <div class="options">
+                <div class="container-16">
+                  <p class="text-17">All Types</p>
+                </div>
+              </div>
+            </div>
+            <div class="background-6">
+              <div class="heading-1">
+                <p class="text-9">Region:</p>
+              </div>
+              <div class="options">
+                <div class="container-18">
+                  <p class="text-17">Central Visayas (R7)</p>
+                </div>
+              </div>
+            </div>
+            <div class="background-6">
+              <div class="heading-1">
+                <p class="text-9">Status:</p>
+              </div>
+              <div class="options">
+                <div class="container-20">
+                  <p class="text-17">Active Only</p>
+                </div>
+              </div>
+            </div>
+            <img class="container-5" src="assets/button.svg" alt="Button">
+          </div>
+        </section>
+        <section class="section-facility-roster-table">
+          <div class="container-21">
+            <div class="table">
+              <header class="header-row">
+                <div class="cell">
+                  <p class="text-22">FACILITY NAME &amp;<br>CLASSIFICATION</p>
+                </div>
+                <div class="cell-2">
+                  <p class="text-22">ACCREDITATION<br>ID</p>
+                </div>
+                <div class="cell-3">
+                  <p class="text-22">LOCATION</p>
+                </div>
+                <div class="cell-4">
+                  <p class="text-22">CLINICAL CONTACT</p>
+                </div>
+                <div class="cell-5">
+                  <p class="text-22">CAPACITY &amp;<br>INFRASTRUCTURE</p>
+                </div>
+                <div class="cell-6">
+                  <p class="text-27">STATUS</p>
+                </div>
+                <div class="cell-7">
+                  <p class="text-28">ACTIONS</p>
+                </div>
+              </header>
+              <div class="body">
+                <div class="row-1">
+                  <div class="data">
+                    <img class="margin-5" src="assets/margin.svg" alt="Margin">
+                    <div class="heading-1">
+                      <div class="body">
+                        <p class="text-29">St. Jude<br>Regional<br>Blood Bank</p>
+                      </div>
+                      <div class="margin-6">
+                        <div class="container-24">
+                          <div class="background-9">
+                            <p class="text-6">Blood<br>Bank</p>
+                          </div>
+                          <div class="container-25">
+                            <p class="text-9">• 24/7<br>Transfusion<br>Node</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="data-2">
+                    <div class="paragraph-background">
+                      <p class="text-32">DOH-BB-CEB-</p>
+                      <p class="text-33">00063</p>
+                    </div>
+                  </div>
+                  <div class="data-3">
+                    <div class="body">
+                      <p class="banilad-gov-cuenco-ave">Banilad Gov.<br>Cuenco Ave</p>
+                    </div>
+                    <div class="body">
+                      <p class="cebu-city-6000">Cebu City,<br>6000</p>
+                    </div>
+                  </div>
+                  <div class="data-4">
+                    <div class="body">
+                      <p class="banilad-gov-cuenco-ave">+63 (032) 416-2020</p>
+                    </div>
+                    <div class="body">
+                      <p class="cebu-city-6000">intake@stjude-blood.org</p>
+                    </div>
+                  </div>
+                  <div class="data-5">
+                    <div class="container-30">
+                      <img class="container-5" src="assets/container-3.svg" alt="Container">
+                      <p class="text-35">6 Phlebotomy<br>Chairs</p>
+                    </div>
+                    <div class="container-30">
+                      <img class="container-5" src="assets/container-4.svg" alt="Container">
+                      <p class="text-36">500 Unit Cryo<br>Vault</p>
+                    </div>
+                  </div>
+                  <div class="data-6">
+                    <div class="background-10">
+                      <div class="background-11"></div>
+                      <p class="text-37">Active</p>
+                    </div>
+                  </div>
+                  <img class="data-7" src="assets/data.svg" alt="Data">
+                </div>
+                <div class="row-2">
+                  <div class="data">
+                    <img class="margin-5" src="assets/margin-2.svg" alt="Margin">
+                    <div class="heading-1">
+                      <div class="body">
+                        <p class="text-29">Vicente Sotto<br>Memorial<br>Medical<br>Center</p>
+                      </div>
+                      <div class="margin-6">
+                        <div class="container-24">
+                          <div class="background-12">
+                            <p class="text-39">Apex<br>Hospital</p>
+                          </div>
+                          <div class="container-37">
+                            <p class="text-9">• Tertiary<br>Gov<br>Facility</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="data-9">
+                    <div class="paragraph-background-2">
+                      <p class="text-32">DOH-HOSP-</p>
+                      <p class="text-33">CEB-00112</p>
+                    </div>
+                  </div>
+                  <div class="data-3">
+                    <div class="body">
+                      <p class="banilad-gov-cuenco-ave">B.<br>Rodriguez<br>St</p>
+                    </div>
+                    <div class="body">
+                      <p class="cebu-city-6000">Cebu City,<br>6000</p>
+                    </div>
+                  </div>
+                  <div class="data-4">
+                    <div class="body">
+                      <p class="banilad-gov-cuenco-ave">+63 (032) 255-1591</p>
+                    </div>
+                    <div class="body">
+                      <p class="cebu-city-6000">vsmmc.transfusion@gov.ph</p>
+                    </div>
+                  </div>
+                  <div class="data-5">
+                    <div class="container-30">
+                      <img class="container-5" src="assets/container-5.svg" alt="Container">
+                      <p class="text-35">18<br>Phlebotomy<br>Beds</p>
+                    </div>
+                    <div class="container-30">
+                      <img class="container-5" src="assets/container-6.svg" alt="Container">
+                      <p class="text-36">Level 3 Trauma<br>Center</p>
+                    </div>
+                  </div>
+                  <div class="data-13">
+                    <div class="background-10">
+                      <div class="background-11"></div>
+                      <p class="text-37">Active</p>
+                    </div>
+                  </div>
+                  <img class="data-7" src="assets/data-2.svg" alt="Data">
+                </div>
+                <div class="row-2">
+                  <div class="data">
+                    <img class="margin-5" src="assets/margin-3.svg" alt="Margin">
+                    <div class="heading-1">
+                      <div class="body">
+                        <p class="text-29">Cebu Doctors'<br>University<br>Hospital</p>
+                      </div>
+                      <div class="margin-6">
+                        <div class="container-24">
+                          <div class="background-15">
+                            <p class="text-39">Private<br>Hospital</p>
+                          </div>
+                          <div class="heading-1">
+                            <p class="text-9">•<br>Academic<br>Medical<br>Center</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="data-16">
+                    <div class="paragraph-background-2">
+                      <p class="text-32">DOH-HOSP-</p>
+                      <p class="text-33">CEB-00452</p>
+                    </div>
+                  </div>
+                  <div class="data-3">
+                    <div class="body">
+                      <p class="banilad-gov-cuenco-ave">Osmeña<br>Blvd, Capitol<br>Site</p>
+                    </div>
+                    <div class="body">
+                      <p class="cebu-city-6000">Cebu City,<br>6000</p>
+                    </div>
+                  </div>
+                  <div class="data-4">
+                    <div class="body">
+                      <p class="banilad-gov-cuenco-ave">+63 (032) 255-5555</p>
+                    </div>
+                    <div class="body">
+                      <p class="cebu-city-6000">bloodbank@cebudoctors.edu</p>
+                    </div>
+                  </div>
+                  <div class="data-5">
+                    <div class="container-30">
+                      <img class="container-5" src="assets/container-7.svg" alt="Container">
+                      <p class="text-35">12<br>Phlebotomy<br>Beds</p>
+                    </div>
+                    <div class="container-30">
+                      <img class="container-5" src="assets/container-8.svg" alt="Container">
+                      <p class="text-36">Apheresis<br>Equipped</p>
+                    </div>
+                  </div>
+                  <div class="data-20">
+                    <div class="background-10">
+                      <div class="background-11"></div>
+                      <p class="text-37">Active</p>
+                    </div>
+                  </div>
+                  <img class="data-7" src="assets/data-3.svg" alt="Data">
+                </div>
+                <div class="row-2">
+                  <div class="data">
+                    <img class="margin-5" src="assets/margin-4.svg" alt="Margin">
+                    <div class="heading-1">
+                      <div class="body">
+                        <p class="text-29">Red Cross<br>Regional<br>Logistics Hub</p>
+                      </div>
+                      <div class="margin-6">
+                        <div class="container-24">
+                          <div class="background-18">
+                            <p class="text-6">Blood<br>Bank</p>
+                          </div>
+                          <div class="container-61">
+                            <p class="text-9">• Strategic<br>Reserve</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="data-23">
+                    <div class="paragraph-background">
+                      <p class="text-32">PRC-R7-HUB-</p>
+                      <p class="text-33">0091</p>
+                    </div>
+                  </div>
+                  <div class="data-3">
+                    <div class="body">
+                      <p class="banilad-gov-cuenco-ave">Subangdaku</p>
+                    </div>
+                    <div class="body">
+                      <p class="cebu-city-6000">Mandaue City,<br>6014</p>
+                    </div>
+                  </div>
+                  <div class="data-4">
+                    <div class="body">
+                      <p class="banilad-gov-cuenco-ave">+63 (032) 345-8899</p>
+                    </div>
+                    <div class="body">
+                      <p class="cebu-city-6000">loghub@redcross.org.ph</p>
+                    </div>
+                  </div>
+                  <div class="data-5">
+                    <div class="container-30">
+                      <img class="container-5" src="assets/container-9.svg" alt="Container">
+                      <p class="text-35">Mobile Fleet<br>Hub</p>
+                    </div>
+                    <div class="container-30">
+                      <img class="container-5" src="assets/container-10.svg" alt="Container">
+                      <p class="text-36">1,200 Unit Buffer</p>
+                    </div>
+                  </div>
+                  <div class="data-27">
+                    <div class="background-10">
+                      <div class="background-11"></div>
+                      <p class="text-37">Active</p>
+                    </div>
+                  </div>
+                  <img class="data-7" src="assets/data-4.svg" alt="Data">
+                </div>
+                <div class="row-2">
+                  <div class="data">
+                    <img class="margin-5" src="assets/margin-5.svg" alt="Margin">
+                    <div class="heading-1">
+                      <div class="body">
+                        <p class="text-29">Chong Hua<br>Hospital<br>Mandaue</p>
+                      </div>
+                      <div class="margin-6">
+                        <div class="container-24">
+                          <div class="background-15">
+                            <p class="text-39">Hospital</p>
+                          </div>
+                          <div class="container-73">
+                            <p class="text-9">• Cancer<br>&amp; Blood<br>Institute</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="data-30">
+                    <div class="paragraph-background-2">
+                      <p class="text-32">DOH-HOSP-</p>
+                      <p class="text-33">MAN-00219</p>
+                    </div>
+                  </div>
+                  <div class="data-3">
+                    <div class="body">
+                      <p class="banilad-gov-cuenco-ave">Mantawi<br>International<br>Drive</p>
+                    </div>
+                    <div class="body">
+                      <p class="cebu-city-6000">Mandaue City,<br>6014</p>
+                    </div>
+                  </div>
+                  <div class="data-4">
+                    <div class="body">
+                      <p class="banilad-gov-cuenco-ave">+63 (032) 233-8000</p>
+                    </div>
+                    <div class="body">
+                      <p class="cebu-city-6000">lab.blood@chonghua.com.ph</p>
+                    </div>
+                  </div>
+                  <div class="data-5">
+                    <div class="container-30">
+                      <img class="container-5" src="assets/container-11.svg" alt="Container">
+                      <p class="text-35">8 Phlebotomy<br>Chairs</p>
+                    </div>
+                    <div class="container-30">
+                      <img class="container-5" src="assets/container-12.svg" alt="Container">
+                      <p class="text-36">Platelet Agitators</p>
+                    </div>
+                  </div>
+                  <div class="data-34">
+                    <div class="background-10">
+                      <div class="background-11"></div>
+                      <p class="text-37">Active</p>
+                    </div>
+                  </div>
+                  <img class="data-7" src="assets/data-5.svg" alt="Data">
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="table-footer-pagination">
+            <div class="heading-1">
+              <p class="text-36">Showing <span class="text-75-span-1">5</span> of <span class="text-75-span-1">42</span> facilities registered in Central Visayas</p>
+            </div>
+            <div class="container-83">
+              <button class="button-3" type="button">
+                <span class="text-76">Previous</span>
+              </button>
+              <button class="button-4" type="button">
+                <span class="text-77">1</span>
+              </button>
+              <button class="button-5" type="button">
+                <span class="text-78">2</span>
+              </button>
+              <button class="button-5" type="button">
+                <span class="text-78">3</span>
+              </button>
+              <button class="button-5" type="button">
+                <span class="text-78">Next</span>
+              </button>
+            </div>
+          </footer>
+        </section>
+        <section class="section-metric-badges-summary-strip">
+          <div class="clinical-compliance-card">
+            <div class="container-84">
+              <div class="container-7">
+                <div class="container-86">
+                  <p class="text-29">Accreditation<br>Health</p>
+                </div>
+                <div class="background-24">
+                  <p class="text-6">100% Up to<br>Date</p>
+                </div>
+              </div>
+              <div class="margin-15">
+                <div class="body">
+                  <p class="cebu-city-6000">All 42 nodes maintain active Bureau of<br>Health Facilities and Services (BHFS)<br>compliance and daily cold chain telemetry<br>reports.</p>
+                </div>
+              </div>
+            </div>
+            <div class="inline-svg-donut-chart">
+              <div class="container-88">
+                <img class="svg" src="assets/svg.svg" alt="SVG">
+                <div class="container-89">
+                  <div class="heading-1">
+                    <p class="text-83">74%</p>
+                  </div>
+                  <div class="heading-1">
+                    <p class="text-9">Hospitals</p>
+                  </div>
+                </div>
+              </div>
+              <div class="container-92">
+                <div class="container-3">
+                  <div class="background-25"></div>
+                  <div class="heading-1">
+                    <p class="text-85">Hospitals (31)</p>
+                  </div>
+                </div>
+                <div class="container-3">
+                  <div class="background-26"></div>
+                  <div class="heading-1">
+                    <p class="text-9">Blood Banks (11)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="background-27">
+              <div class="heading-1">
+                <p class="text-85">Next Periodic DOH Audit</p>
+              </div>
+              <div class="heading-1">
+                <p class="text-88">In 18 Days</p>
+              </div>
+            </div>
+          </div>
+          <div class="clinical-compliance-card">
+            <div class="container-84">
+              <div class="container-7">
+                <div class="container-101">
+                  <p class="text-29">Active Cryo-Storage<br>Capacity</p>
+                </div>
+                <img class="container-5" src="assets/container-13.svg" alt="Container">
+              </div>
+              <div class="margin-15">
+                <div class="body">
+                  <p class="cebu-city-6000">Aggregated real-time cold vault readiness<br>across regional medical facility freezers and<br>centrifuges.</p>
+                </div>
+              </div>
+            </div>
+            <div class="container-104">
+              <div class="container-84">
+                <div class="container-106">
+                  <div class="body">
+                    <p class="text-85">Packed Red Cells (4°C)</p>
+                  </div>
+                  <div class="body">
+                    <p class="text-91">82% Capacity (2,410 U)</p>
+                  </div>
+                </div>
+                <div class="background-28">
+                  <div class="background-29"></div>
+                </div>
+              </div>
+              <div class="container-84">
+                <div class="container-106">
+                  <div class="container-111">
+                    <p class="text-85">Fresh Frozen Plasma<br>(-18°C)</p>
+                  </div>
+                  <div class="container-112">
+                    <p class="text-91">65% Capacity (910<br>U)</p>
+                  </div>
+                </div>
+                <div class="background-28">
+                  <div class="background-31"></div>
+                </div>
+              </div>
+              <div class="container-84">
+                <div class="container-106">
+                  <div class="container-115">
+                    <p class="text-85">Platelet Concentrates (22°C<br>Agitator)</p>
+                  </div>
+                  <div class="container-116">
+                    <p class="text-6">38% (Critical<br>Alert)</p>
+                  </div>
+                </div>
+                <div class="background-28">
+                  <div class="background-33"></div>
+                </div>
+              </div>
+            </div>
+            <a class="link" href="#">
+              <div class="heading-1">
+                <span class="text-96">Inspect All Cold Vault Telemetry</span>
+              </div>
+              <img class="container-5" src="assets/container-14.svg" alt="Container">
+            </a>
+          </div>
+          <div class="facility-photo-field-readiness-focus">
+            <img class="img-1" src="assets/image.jpg" alt="">
+            <div class="gradient"></div>
+            <div class="container-84">
+              <div class="container-30">
+                <div class="background-11"></div>
+                <p class="text-97">FACILITY ONBOARDING PROTOCOL</p>
+              </div>
+              <div class="body">
+                <p class="standardized-doh-nvbsp-facility">Standardized DOH-NVBSP<br>Facility Link</p>
+              </div>
+              <div class="margin-6">
+                <div class="body">
+                  <p class="new-clinical-centers-undergo">New clinical centers undergo automated<br>cross-matching network integration within<br>48 operational hours of registration.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <header class="header">
+      <div class="container-83">
+        <div class="img-logo-png-margin">
+          <div class="logo-png"></div>
+        </div>
+        <div class="container-123">
+          <p class="text-98">Admin<br>Portal</p>
+        </div>
+        <div class="heading-1">
+          <p class="text-99">/</p>
+        </div>
+        <div class="heading-1">
+          <p class="text-29">Overview</p>
+        </div>
+      </div>
+      <div class="container-126">
+        <div class="container-127">
+          <input class="input" type="text" placeholder="Search facilities, drives, administrators..." aria-label="Search facilities, drives, administrators...">
+          <img class="icon" src="assets/icon.svg" alt="Icon">
+        </div>
+        <div class="background-35">
+          <div class="background-36"></div>
+          <div class="container-128">
+            <p class="text-85">Operational • Master Admin<br>Console</p>
+          </div>
+        </div>
+        <img class="container-5" src="assets/button-notifications.svg" alt="Button - Notifications">
+        <div class="container-129">
+          <div class="heading-1">
+            <div class="container-131">
+              <p class="text-102">System<br>Administrator</p>
+            </div>
+            <div class="container-131">
+              <p class="text-103">Root Ops</p>
+            </div>
+          </div>
+          <img class="background-37" src="assets/background-6.svg" alt="Background">
+        </div>
+      </div>
+    </header>
+    <aside class="aside">
+      <aside class="aside-shadow"></aside>
+      <div class="body">
+        <div class="container-134">
+          <div class="container-3">
+            <div class="logo-png-2"></div>
+            <div class="heading-1">
+              <div class="body">
+                <p class="text-104">LIFELINE</p>
+              </div>
+              <div class="body">
+                <p class="text-105">— Your Blood. Their Hope —</p>
+              </div>
+            </div>
+          </div>
+          <div class="margin">
+            <div class="container-139">
+              <div class="overlay">
+                <p class="text-106">Admin Operations</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="nav-margin">
+          <nav class="nav">
+            <a class="link-2" href="../admin-dashboard/index.html">
+              <img class="container-5" src="assets/container-15.svg" alt="Container">
+              <div class="heading-1">
+                <span class="text-99">Dashboard</span>
+              </div>
+            </a>
+            <a class="link-2" href="../admin-hospitals/index.html">
+              <img class="container-5" src="assets/container-16.svg" alt="Container">
+              <div class="heading-1">
+                <span class="text-99">Hospitals &amp; Blood Banks</span>
+              </div>
+            </a>
+            <a class="link-2" href="../admin-donation-drives/index.html">
+              <img class="container-5" src="assets/container-17.svg" alt="Container">
+              <div class="heading-1">
+                <span class="text-99">Donation Drives</span>
+              </div>
+            </a>
+          </nav>
+        </nav>
+      </div>
+      <div class="container-146">
+        <a class="link-5" href="../login/index.html">
+          <img class="container-5" src="assets/container-18.svg" alt="Container">
+          <div class="heading-1">
+            <span class="text-110">Log Out</span>
+          </div>
+        </a>
+      </div>
+    </aside>
+    <aside class="aside-add-edit-facility-side-drawer">
+      <aside class="aside-add-edit-facility-side-drawer-shadow"></aside>
+      <header class="drawer-header">
+        <div class="dropdowns-filters">
+          <img class="background-38" src="assets/background-7.svg" alt="Background">
+          <div class="heading-1">
+            <div class="body">
+              <p class="text-111">Add New Facility</p>
+            </div>
+            <div class="body">
+              <p class="text-9">ISBT-128 Integrated Clinical Node Registry</p>
+            </div>
+          </div>
+        </div>
+        <img class="container-5" src="assets/button-close-modal.svg" alt="Button - Close modal">
+      </header>
+      <form class="drawer-form-body">
+        <div class="facility-type-selector">
+          <div class="body">
+            <p class="facility-classification">Facility Classification <span class="facility-classification-span-1">*</span></p>
+          </div>
+          <div class="container-152">
+            <div class="label-2">
+              <input class="input-2" type="text" placeholder="">
+              <div class="heading-1">
+                <div class="body">
+                  <p class="text-113">Hospital</p>
+                </div>
+                <div class="body">
+                  <p class="text-36">General, apex, or specialized clinic</p>
+                </div>
+              </div>
+            </div>
+            <div class="label-3">
+              <input class="input-3" type="text" placeholder="">
+              <div class="heading-1">
+                <div class="body">
+                  <p class="text-113">Blood Bank</p>
+                </div>
+                <div class="body">
+                  <p class="text-36">Dedicated donor hub / depot</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="facility-name">
+          <div class="body">
+            <p class="facility-classification">Institution Official Name <span class="institution-official-name-span-1">*</span></p>
+          </div>
+          <input class="input-4" type="text" placeholder="e.g. St. Jude Regional Blood Bank" aria-label="e.g. St. Jude Regional Blood Bank">
+        </div>
+        <div class="facility-name">
+          <div class="body">
+            <p class="facility-classification">DOH / License Accreditation ID <span class="doh-license-accreditation-id-span-1">*</span></p>
+          </div>
+          <div class="container-159">
+            <input class="input-5" type="text" placeholder="e.g. DOH-BB-CEB-00063" aria-label="e.g. DOH-BB-CEB-00063">
+            <img class="container-160" src="assets/container-19.svg" alt="Container">
+          </div>
+        </div>
+        <div class="container-152">
+          <div class="container-161">
+            <div class="body">
+              <p class="facility-classification">Street Address <span class="street-address-span-1">*</span></p>
+            </div>
+            <input class="input-6" type="text" placeholder="Gov. Cuenco Ave" aria-label="Gov. Cuenco Ave">
+          </div>
+          <div class="container-161">
+            <div class="body">
+              <p class="facility-classification">City &amp; Postal Code <span class="city-postal-code-span-1">*</span></p>
+            </div>
+            <input class="input-7" type="text" placeholder="Cebu City, 6000" aria-label="Cebu City, 6000">
+          </div>
+        </div>
+        <div class="container-152">
+          <div class="container-161">
+            <div class="body">
+              <p class="facility-classification">Primary Clinical Hotline <span class="primary-clinical-hotline-span-1">*</span></p>
+            </div>
+            <div class="container-159">
+              <input class="input-8" type="text" placeholder="+63 (032) 416-2020" aria-label="+63 (032) 416-2020">
+              <img class="container-165" src="assets/container-20.svg" alt="Container">
+            </div>
+          </div>
+          <div class="container-161">
+            <div class="body">
+              <p class="facility-classification">Official Intake Email <span class="official-intake-email-span-1">*</span></p>
+            </div>
+            <div class="container-159">
+              <input class="input-9" type="text" placeholder="intake@institution.org" aria-label="intake@institution.org">
+              <img class="container-168" src="assets/container-21.svg" alt="Container">
+            </div>
+          </div>
+        </div>
+        <div class="container-152">
+          <div class="container-161">
+            <div class="body">
+              <p class="facility-classification">Phlebotomy Stations / Beds</p>
+            </div>
+            <input class="input-10" type="text" placeholder="e.g. 6 Chairs, 2 Beds" aria-label="e.g. 6 Chairs, 2 Beds">
+          </div>
+          <div class="container-161">
+            <div class="body">
+              <p class="facility-classification">Cryo Storage Unit Spec</p>
+            </div>
+            <input class="input-11" type="text" placeholder="e.g. 500 Unit Vault" aria-label="e.g. 500 Unit Vault">
+          </div>
+        </div>
+        <div class="regulatory-archival-notice">
+          <img class="container-5" src="assets/margin-6.svg" alt="Margin">
+          <div class="container-171">
+            <div class="body">
+              <p class="text-88">Compliance Regulation</p>
+            </div>
+            <div class="body">
+              <p class="text-36">Removing or de-activating a facility archives past donor transaction logs under<br>Philippine DOH &amp; ISBT-128 compliance for a statutory retention period of 10 years.</p>
+            </div>
+          </div>
+        </div>
+      </form>
+      <footer class="drawer-footer-actions">
+        <button class="button-8" type="button">
+          <span class="text-119">Cancel</span>
+        </button>
+        <button class="button-9" type="button">
+          <img class="container-5" src="assets/container-22.svg" alt="Container">
+          <div class="container-6">
+            <span class="text-3">Save Facility</span>
+          </div>
+        </button>
+      </footer>
+    </aside>
+  </div>
+</body>
+</html>
