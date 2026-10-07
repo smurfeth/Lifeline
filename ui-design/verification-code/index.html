@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Email Address - Lifeline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="auth-page-wrapper">
+    <div class="auth-ambient-glow" aria-hidden="true"></div>
+
+    <div class="auth-card-container">
+      <main class="auth-card">
+        <!-- Brand Header -->
+        <header class="brand-header">
+          <div class="brand-logo-wrapper">
+            <img class="brand-logo" src="assets/lifeline-logo.jpg" alt="Lifeline Brand Logo" onerror="this.onerror=null; this.src='https://placehold.co/80x80?text=LIFE+LINE';">
+          </div>
+
+          <div class="brand-title">
+            <span class="brand-title-life">LIFE</span><span class="brand-title-line">LINE</span>
+          </div>
+
+          <div class="brand-tagline">— YOUR BLOOD. THEIR HOPE —</div>
+        </header>
+
+        <!-- Mail Icon & Verification Header -->
+        <div class="verify-badge-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </div>
+
+        <div>
+          <h1 class="auth-title">Verify Your Email Address</h1>
+          <p class="auth-subtitle">
+            We've sent a 6-digit confirmation code to your email. Enter the code below to complete registration.
+          </p>
+        </div>
+
+        <!-- Feedback Alert Banner -->
+        <div id="verifyAlert" class="auth-alert-message" role="alert"></div>
+
+        <!-- 6-digit Code Inputs -->
+        <form id="verifyForm" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+          <div class="code-inputs-container" id="codeInputsContainer">
+            <input type="text" maxlength="1" class="code-box" pattern="[0-9]*" inputmode="numeric" autofocus required>
+            <input type="text" maxlength="1" class="code-box" pattern="[0-9]*" inputmode="numeric" required>
+            <input type="text" maxlength="1" class="code-box" pattern="[0-9]*" inputmode="numeric" required>
+            <input type="text" maxlength="1" class="code-box" pattern="[0-9]*" inputmode="numeric" required>
+            <input type="text" maxlength="1" class="code-box" pattern="[0-9]*" inputmode="numeric" required>
+            <input type="text" maxlength="1" class="code-box" pattern="[0-9]*" inputmode="numeric" required>
+          </div>
+
+          <button type="submit" id="verifyBtn" class="btn-submit">
+            <span>Verify & Continue to Log In</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 01.5-.5h11.793l-3.147-3.146a.5.5 0 01.708-.708l4 4a.5.5 0 010 .708l-4 4a.5.5 0 01-.708-.708L13.293 8.5H1.5A.5.5 0 011 8z"/></svg>
+          </button>
+        </form>
+
+        <div class="resend-box">
+          <span>Didn't receive code?</span>
+          <a class="resend-link" id="resendBtn">Resend Code</a>
+        </div>
+
+        <footer class="auth-footer">
+          <a class="login-redirect-link" href="../login/index.html">← Back to Log In</a>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const inputs = document.querySelectorAll('.code-box');
+      const form = document.getElementById('verifyForm');
+      const alertBox = document.getElementById('verifyAlert');
+      const resendBtn = document.getElementById('resendBtn');
+
+      // Auto-focus next input
+      inputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+          if (e.target.value.length === 1 && index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          }
+        });
+
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !e.target.value && index > 0) {
+            inputs[index - 1].focus();
+          }
+        });
+      });
+
+      // Quick autofill demo with 882190
+      if (inputs.length > 0) {
+        const demoCode = "882190";
+        inputs.forEach((input, i) => {
+          input.value = demoCode[i] || "";
+        });
+      }
+
+      // Handle submission
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alertBox.className = 'auth-alert-message is-success';
+        alertBox.textContent = 'Email verified successfully! Redirecting to Log In...';
+        alertBox.style.display = 'flex';
+
+        setTimeout(() => {
+          window.location.href = '../login/index.html';
+        }, 1200);
+      });
+
+      // Resend button
+      resendBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        alertBox.className = 'auth-alert-message is-success';
+        alertBox.textContent = 'A new 6-digit code has been sent to your email!';
+        alertBox.style.display = 'flex';
+        setTimeout(() => {
+          alertBox.style.display = 'none';
+        }, 3000);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - Lifeline Blood Donation Network</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="auth-page-wrapper">
+    <div class="auth-ambient-glow" aria-hidden="true"></div>
+
+    <div class="auth-card-container">
+      <main class="auth-card">
+        <!-- Brand Identity Header -->
+        <header class="brand-header">
+          <div class="brand-logo-wrapper">
+            <img class="brand-logo" src="assets/lifeline-logo.jpg" alt="Lifeline Brand Logo" onerror="this.onerror=null; this.src='https://placehold.co/80x80?text=LIFE+LINE';">
+          </div>
+
+          <div class="brand-title">
+            <span class="brand-title-life">LIFE</span><span class="brand-title-line">LINE</span>
+          </div>
+
+          <div class="brand-tagline">
+            <span class="tagline-dash">—</span>
+            <span class="tagline-blood">YOUR BLOOD.</span>
+            <span class="tagline-hope">THEIR HOPE —</span>
+          </div>
+
+          <h1 class="auth-title">Sign In to Your Account</h1>
+          <p class="auth-subtitle">Access your blood donation portal or staff station</p>
+          <p class="auth-demo-hint">🔑 Demo: username <strong>Donor</strong>, <strong>Staff</strong>, or <strong>Admin</strong> — password <strong>123456</strong></p>
+        </header>
+
+        <!-- Feedback Alert -->
+        <div id="authAlert" class="auth-alert-message" role="alert" aria-live="polite"></div>
+
+        <!-- Credentials Form -->
+        <form class="auth-form" id="signInForm" novalidate>
+          <!-- Username -->
+          <div class="form-group">
+            <label class="form-label" for="identifier">
+              Username <span class="required-star">*</span>
+            </label>
+            <div class="input-field-wrapper">
+              <span class="input-icon-lead" aria-hidden="true">
+                <img src="assets/icon.svg" alt="" width="16" height="16">
+              </span>
+              <input
+                type="text"
+                id="identifier"
+                name="identifier"
+                class="form-input"
+                placeholder="Donor, Staff, or Admin"
+                required
+                autocomplete="username"
+                autocapitalize="none"
+                spellcheck="false"
+              >
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label" for="password">
+                Password <span class="required-star">*</span>
+              </label>
+              <a href="#" class="forgot-password-link" id="forgotPasswordLink">Forgot Password?</a>
+            </div>
+            <div class="input-field-wrapper">
+              <span class="input-icon-lead" aria-hidden="true">
+                <img src="assets/icon-2.svg" alt="" width="14" height="18">
+              </span>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-input form-input-password"
+                placeholder="••••••••••••"
+                required
+                autocomplete="current-password"
+              >
+              <button
+                type="button"
+                id="togglePasswordBtn"
+                class="btn-password-toggle"
+                aria-label="Show password"
+                title="Show password"
+              >
+                <img id="togglePasswordIcon" src="assets/button-toggle-password-visibility.svg" alt="" width="19" height="13">
+              </button>
+            </div>
+          </div>
+
+          <!-- Remember Workstation / Device Checkbox -->
+          <div class="remember-device-row">
+            <label class="checkbox-label" for="rememberDevice">
+              <input type="checkbox" id="rememberDevice" name="rememberDevice" class="checkbox-native-input" checked>
+              <span class="checkbox-custom" aria-hidden="true">
+                <svg viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 4L3.8 6.8L9 1.2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="checkbox-text">Remember this device</span>
+            </label>
+          </div>
+
+          <!-- Primary Submit Action -->
+          <button type="submit" id="submitBtn" class="btn-submit-signin">
+            <span class="btn-icon" aria-hidden="true">
+              <img src="assets/container.svg" alt="" width="15" height="15">
+            </span>
+            <span>Sign In to Lifeline</span>
+          </button>
+        </form>
+
+        <!-- Secondary Registration Navigation -->
+        <footer class="auth-footer">
+          <p class="auth-footer-text">
+            Don't have an account?
+            <a class="register-redirect-link" href="../create-account-donor/index.html">Register as Donor or Staff</a>
+          </p>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Client-side interactions
+    document.addEventListener('DOMContentLoaded', () => {
+      const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+      const passwordInput = document.getElementById('password');
+      const togglePasswordIcon = document.getElementById('togglePasswordIcon');
+      const form = document.getElementById('signInForm');
+      const authAlert = document.getElementById('authAlert');
+      const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+
+      // Toggle password visibility
+      if (togglePasswordBtn && passwordInput && togglePasswordIcon) {
+        let isVisible = false;
+        togglePasswordBtn.addEventListener('click', () => {
+          isVisible = !isVisible;
+          passwordInput.type = isVisible ? 'text' : 'password';
+          togglePasswordBtn.setAttribute('aria-label', isVisible ? 'Hide password' : 'Show password');
+          togglePasswordBtn.setAttribute('title', isVisible ? 'Hide password' : 'Show password');
+          togglePasswordIcon.src = isVisible ? 'assets/eye-slash.svg' : 'assets/button-toggle-password-visibility.svg';
+        });
+      }
+
+      // Forgot password prompt
+      if (forgotPasswordLink) {
+        forgotPasswordLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          showAlert('Please contact your hospital station administrator or clinical dispatch coordinator to reset your credentials.', 'is-error');
+        });
+      }
+
+      // Display alert banner helper
+      function showAlert(msg, type = 'is-error') {
+        if (!authAlert) return;
+        authAlert.textContent = msg;
+        authAlert.className = `auth-alert-message ${type}`;
+        authAlert.style.display = 'flex';
+      }
+
+      function clearAlert() {
+        if (!authAlert) return;
+        authAlert.textContent = '';
+        authAlert.className = 'auth-alert-message';
+        authAlert.style.display = 'none';
+      }
+
+      // Form validation & submission
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          clearAlert();
+
+          const identifier = document.getElementById('identifier').value.trim();
+          const password = document.getElementById('password').value;
+
+          if (!identifier) {
+            showAlert('Please enter your username.');
+            document.getElementById('identifier').focus();
+            return;
+          }
+
+          if (!password) {
+            showAlert('Please enter your password.');
+            document.getElementById('password').focus();
+            return;
+          }
+
+          // Dummy credential check
+          // Valid accounts: Donor / Staff / Admin  — all with password: 123456
+          const dummyAccounts = {
+            'donor': '../donor/dashboard/index.html',
+            'staff': '../staff/dashboard/index.html',
+            'admin': '../admin/dashboard/index.html'
+          };
+
+          const idLower = identifier.toLowerCase().trim();
+          const destination = dummyAccounts[idLower];
+
+          if (!destination || password !== '123456') {
+            showAlert('Invalid username or password. Try: Donor, Staff, or Admin with password 123456.');
+            return;
+          }
+
+          const roleNames = { donor: 'Donor Portal', staff: 'Staff Station', admin: 'Admin Command Center' };
+          showAlert(`Signing in to ${roleNames[idLower]}...`, 'is-success');
+          setTimeout(() => {
+            window.location.href = destination;
+          }, 600);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
