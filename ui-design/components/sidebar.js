@@ -170,6 +170,20 @@
     // The Figma hamburger is: div[style*="width: 18px"][style*="height: 12px"][style*="background: #5B403D"]
     // inside a padding:8px container which is the clickable area.
     function wireHamburgerIcon() {
+      function wireButton(btn) {
+        if (!btn._lifelineWired) {
+          btn._lifelineWired = true;
+          btn.style.cursor = 'pointer';
+          btn.setAttribute('title', 'Open Navigation Menu');
+          btn.setAttribute('role', 'button');
+          btn.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            openDrawer();
+          });
+        }
+      }
+
+      let matchedHamburger = false;
       const allDivs = document.querySelectorAll('div');
       allDivs.forEach(el => {
         const s = el.getAttribute('style') || '';
@@ -189,18 +203,39 @@
               break;
             }
           }
-          if (!btn._lifelineWired) {
-            btn._lifelineWired = true;
-            btn.style.cursor = 'pointer';
-            btn.setAttribute('title', 'Open Navigation Menu');
-            btn.setAttribute('role', 'button');
-            btn.addEventListener('click', (ev) => {
-              ev.stopPropagation();
-              openDrawer();
-            });
-          }
+          wireButton(btn);
+          matchedHamburger = true;
         }
       });
+
+      if (matchedHamburger) return;
+
+      const breadcrumb = Array.from(document.querySelectorAll('div')).find(el => {
+        return /(?:Admin|Staff|Donor) Portal\s*\//.test(el.textContent || '');
+      });
+      if (!breadcrumb) return;
+
+      const header = breadcrumb.closest('div[style*="position: absolute"]');
+      if (!header) return;
+
+      const icon = Array.from(header.querySelectorAll('div')).find(el => {
+        const s = el.getAttribute('style') || '';
+        return s.includes('outline:') || s.includes('background: #') || s.includes('background:#');
+      });
+      if (!icon) return;
+
+      let btn = icon;
+      for (let i = 0; i < 4; i++) {
+        if (!btn.parentElement) break;
+        btn = btn.parentElement;
+        const ps = btn.getAttribute('style') || '';
+        if (ps.includes('padding: 6px') || ps.includes('padding:6px') ||
+            ps.includes('padding: 8px') || ps.includes('padding:8px') ||
+            ps.includes('border-radius: 8px')) {
+          break;
+        }
+      }
+      wireButton(btn);
     }
 
     wireHamburgerIcon();
