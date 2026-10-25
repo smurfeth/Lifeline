@@ -2,161 +2,174 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Staff Account - Lifeline</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create Your Account – Lifeline Staff</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;900&family=Material+Symbols+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="auth-page-wrapper">
-    <div class="auth-ambient-glow" aria-hidden="true"></div>
 
-    <div class="auth-card-container">
-      <main class="auth-card">
-        <!-- Brand Identity Header -->
-        <header class="brand-header">
-          <div class="brand-logo-wrapper">
-            <img class="brand-logo" src="assets/lifeline-logo.jpg" alt="Lifeline Brand Logo" onerror="this.onerror=null; this.src='https://placehold.co/80x80?text=LIFE+LINE';">
+  <main class="page">
+    <div class="card">
+      <a class="back-home-link" href="../landing/index.html" aria-label="Back to the landing page">← Back to Home</a>
+
+      <!-- Brand header -->
+      <header class="card-head">
+        <img class="logo" src="../assets/Lifeline%20Logo.png" alt="Lifeline logo">
+        <div class="wordmark">LIFE<span>LINE</span></div>
+        <p class="tagline">— Your Blood. <span>Their Hope</span> —</p>
+        <h1>Create Your Account</h1>
+        <p class="subtitle">Authorized hospital, blood bank, and laboratory personnel registration</p>
+      </header>
+
+      <!-- Role switch -->
+      <nav class="role-switch" aria-label="Account type">
+        <a class="role" href="../create-account-donor/index.html">
+          <span class="material-symbols-outlined">volunteer_activism</span>
+          Voluntary Donor
+        </a>
+        <a class="role active" href="#" aria-current="page">
+          <span class="material-symbols-outlined">medical_services</span>
+          Clinical Staff
+        </a>
+      </nav>
+
+      <form class="form" action="#" method="post" novalidate>
+
+        <!-- Professional identification -->
+        <fieldset class="group">
+          <legend>Professional Identification</legend>
+          <div class="row">
+            <div class="field">
+              <label for="fullName">Full Legal Name <span class="req">*</span></label>
+              <input class="control" type="text" id="fullName" name="fullName" placeholder="e.g. Dr. Maria Clara Santos" required>
+            </div>
+            <div class="field">
+              <label for="role">Professional Role / Title <span class="req">*</span></label>
+              <div class="select-wrap">
+                <select class="control" id="role" name="role" required>
+                  <option value="" selected disabled>Select Role / Position</option>
+                  <option>Physician</option>
+                  <option>Medical Technologist</option>
+                  <option>Nurse</option>
+                  <option>Phlebotomist</option>
+                  <option>Blood Bank Administrator</option>
+                </select>
+                <span class="material-symbols-outlined select-arrow">expand_more</span>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Facility affiliation -->
+        <fieldset class="group">
+          <legend>Hospital / Facility Affiliation</legend>
+          <div class="field">
+            <label for="facility">Affiliated Blood Bank or Hospital <span class="req">*</span></label>
+            <div class="select-wrap">
+              <select class="control" id="facility" name="facility" required>
+                <option value="" selected disabled>Select affiliated healthcare institution</option>
+                <option>Cebu Doctors' University Hospital</option>
+                <option>Vicente Sotto Memorial Medical Center</option>
+                <option>Philippine Red Cross – Cebu Chapter</option>
+              </select>
+              <span class="material-symbols-outlined select-arrow">expand_more</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="facilityId">Facility ID / DOH Accreditation No. <span class="req">*</span></label>
+              <input class="control" type="text" id="facilityId" name="facilityId" placeholder="e.g. DOH-BB-00412" required>
+            </div>
+            <div class="field">
+              <label for="email">Official Institutional Email <span class="req">*</span></label>
+              <div class="icon-wrap">
+                <span class="material-symbols-outlined field-icon">mail</span>
+                <input class="control has-icon" type="email" id="email" name="email" placeholder="staff@hospital.org.ph" required>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Credentials -->
+        <fieldset class="group">
+          <legend>Professional Regulatory Credentials</legend>
+          <div class="row">
+            <div class="field">
+              <label for="prcNo">PRC License Number <span class="req">*</span></label>
+              <input class="control" type="text" id="prcNo" name="prcNo" placeholder="e.g. 0184920" required>
+            </div>
+            <div class="field">
+              <label for="prcExpiry">PRC ID Expiration Date <span class="req">*</span></label>
+              <input class="control" type="date" id="prcExpiry" name="prcExpiry" required>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Document upload -->
+        <fieldset class="group">
+          <legend>Document Verification</legend>
+          <div class="field">
+            <label for="document">Upload PRC License / Hospital Employee ID (PDF or Image, max 10MB) <span class="req">*</span></label>
+            <label class="dropzone" for="document">
+              <span class="drop-icon"><span class="material-symbols-outlined">upload_file</span></span>
+              <span class="drop-title">Click to select digital copy or drag &amp; drop</span>
+              <span class="drop-note">Accepted: High-res PDF, PNG, or JPG (Max 10MB)</span>
+              <input type="file" id="document" name="document" accept=".pdf,.png,.jpg,.jpeg" required hidden>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Security -->
+        <fieldset class="group">
+          <legend>Account Security</legend>
+          <div class="row">
+            <div class="field">
+              <label for="password">Password <span class="req">*</span></label>
+              <div class="icon-wrap">
+                <span class="material-symbols-outlined field-icon">lock</span>
+                <input class="control has-icon" type="password" id="password" name="password" placeholder="••••••••••••" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="confirmPassword">Confirm Password <span class="req">*</span></label>
+              <div class="icon-wrap">
+                <span class="material-symbols-outlined field-icon">lock_reset</span>
+                <input class="control has-icon" type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••••••" required>
+              </div>
+            </div>
           </div>
 
-          <div class="brand-title">
-            <span class="brand-title-life">LIFE</span><span class="brand-title-line">LINE</span>
-          </div>
+          <ul class="rules">
+            <li>8+ characters</li>
+            <li>1 uppercase letter</li>
+            <li>1 number &amp; symbol</li>
+          </ul>
 
-          <div class="brand-tagline">
-            <span class="tagline-dash">—</span>
-            <span class="tagline-blood">YOUR BLOOD.</span>
-            <span class="tagline-hope">THEIR HOPE —</span>
-          </div>
-
-          <h1 class="auth-title">Register Staff Station</h1>
-          <p class="auth-subtitle">Clinical personnel and hospital blood bank authorization</p>
-        </header>
-
-        <!-- Connected Role Switcher Tabs -->
-        <nav class="role-tabs-container" aria-label="Account type selector">
-          <a href="../create-account-donor/index.html" class="role-tab">
-            <span class="role-tab-icon">
-              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zm2 1.5a5.5 5.5 0 01-4 0C2.9 10 1 11.8 1 14v1h14v-1c0-2.2-1.9-4-5-4.5z"/></svg>
+          <label class="terms">
+            <input type="checkbox" name="terms" required>
+            <span>
+              I agree to the <a href="#">Lifeline Staff Terms and Conditions</a> and understand my
+              responsibilities in managing and protecting donor records.
             </span>
-            <span>Voluntary Donor</span>
-          </a>
-          <a href="../create-account-staff/index.html" class="role-tab active" aria-current="page">
-            <span class="role-tab-icon">
-              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H4zm3 3h2v2h2v2H9v2H7V9H5V7h2V5z"/></svg>
-            </span>
-            <span>Hospital Staff</span>
-          </a>
-        </nav>
+          </label>
+        </fieldset>
 
-        <!-- Registration Form -->
-        <form class="registration-form" id="staffRegisterForm">
-          <!-- Full Name -->
-          <div class="form-group">
-            <label class="form-label" for="fullName">
-              Full Legal Name <span class="required-star">*</span>
-            </label>
-            <div class="input-field-wrapper">
-              <input type="text" id="fullName" name="fullName" class="form-input" placeholder="e.g. Dr. Elena Rostova" required>
-            </div>
-          </div>
-
-          <!-- Official Hospital Email -->
-          <div class="form-group">
-            <label class="form-label" for="email">
-              Institutional Email Address <span class="required-star">*</span>
-            </label>
-            <div class="input-field-wrapper">
-              <input type="email" id="email" name="email" class="form-input" placeholder="e.g. elena.rostova@stjude.org" required>
-            </div>
-          </div>
-
-          <!-- Facility & Staff ID -->
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="facility">
-                Hospital / Blood Center <span class="required-star">*</span>
-              </label>
-              <div class="input-field-wrapper">
-                <input type="text" id="facility" name="facility" class="form-input" placeholder="e.g. St. Jude Regional Hospital" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="staffId">
-                Clinical / Staff ID <span class="required-star">*</span>
-              </label>
-              <div class="input-field-wrapper">
-                <input type="text" id="staffId" name="staffId" class="form-input" placeholder="e.g. SF-88219" required>
-              </div>
-            </div>
-          </div>
-
-          <!-- Password & Confirmation -->
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="password">
-                Create Password <span class="required-star">*</span>
-              </label>
-              <div class="input-field-wrapper">
-                <input type="password" id="password" name="password" class="form-input" placeholder="••••••••••••" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="confirmPassword">
-                Confirm Password <span class="required-star">*</span>
-              </label>
-              <div class="input-field-wrapper">
-                <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="••••••••••••" required>
-              </div>
-            </div>
-          </div>
-
-          <!-- Agreement Checkbox -->
-          <div class="terms-row">
-            <label class="checkbox-container" style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
-              <input type="checkbox" id="termsCheck" name="terms" class="checkbox-native" required checked>
-              <span class="checkbox-custom" aria-hidden="true">
-                <svg viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 4L3.8 6.8L9 1.2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <span class="terms-text">
-                I certify that I am authorized clinical personnel under <a href="#" class="terms-link">Lifeline Institutional Compliance Protocols</a>.
-              </span>
-            </label>
-          </div>
-
-          <!-- Submit Button -->
-          <button type="submit" id="submitBtn" class="btn-submit">
-            <span>Submit and Verify Email</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 01.5-.5h11.793l-3.147-3.146a.5.5 0 01.708-.708l4 4a.5.5 0 010 .708l-4 4a.5.5 0 01-.708-.708L13.293 8.5H1.5A.5.5 0 011 8z"/></svg>
+        <!-- Actions -->
+        <div class="actions">
+          <button class="submit" type="submit">
+            <span class="material-symbols-outlined">mark_email_read</span>
+            Submit and Verify Email
           </button>
-        </form>
+          <p class="signin">Already verified? <a href="../login/index.html">Sign in to Clinical Staff Portal</a></p>
+        </div>
 
-        <!-- Footer Navigation to Login -->
-        <footer class="auth-footer">
-          <span>Already registered with Lifeline?</span>
-          <a class="login-redirect-link" href="../login/index.html">Sign In to Portal</a>
-        </footer>
-      </main>
+      </form>
+
     </div>
-  </div>
+  </main>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('staffRegisterForm');
-      if (form) {
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          // Simulate account creation and dispatch to verification code page
-          window.location.href = '../verification-code/index.html';
-        });
-      }
-    });
-  </script>
 </body>
 </html>

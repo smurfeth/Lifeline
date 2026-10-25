@@ -109,6 +109,22 @@ html, body {
   gap: 4px;
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
+.back-home-link {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--neutral-500);
+  font-size: 12px;
+  font-weight: 600;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+.back-home-link:hover { background: var(--primary-subtle); color: var(--primary); }
+.back-home-link:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
 /* ==========================================================================
    Brand Header

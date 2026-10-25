@@ -758,32 +758,33 @@
 
 .html-body .heading {
   position: relative;
-  width: 696px;
-  height: 112px;
+  width: min(100%, 700px);
+  min-height: 112px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.2em;
+  row-gap: 0;
 }
 
 .html-body .text-15 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 56px;
-  display: flex;
+  position: static;
+  display: inline-flex;
   align-items: center;
+  height: auto;
   font-family: "Montserrat-Bold", Helvetica;
   font-weight: 700;
   color: #1e1b19;
   font-size: 48px;
   letter-spacing: -1.2px;
   line-height: 56px;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .html-body .container-9 {
   display: inline-flex;
-  align-items: flex-start;
-  position: absolute;
-  top: 0;
-  left: 287px;
+  align-items: flex-end;
+  position: static;
 }
 
 .html-body .text-16 {
@@ -818,12 +819,10 @@
 }
 
 .html-body .text-17 {
-  position: absolute;
-  top: 0;
-  left: 551px;
-  height: 56px;
-  display: flex;
+  position: static;
+  display: inline-flex;
   align-items: center;
+  height: auto;
   font-family: "Montserrat-Bold", Helvetica;
   font-weight: 700;
   color: #1e1b19;
@@ -834,19 +833,19 @@
 }
 
 .html-body .text-18 {
-  position: absolute;
-  top: 56px;
-  left: 0;
-  height: 56px;
-  display: flex;
+  position: static;
+  display: inline-flex;
   align-items: center;
+  height: auto;
+  flex-basis: 100%;
+  max-width: 100%;
   font-family: "Montserrat-Bold", Helvetica;
   font-weight: 700;
   color: #1e1b19;
   font-size: 48px;
   letter-spacing: -1.2px;
   line-height: 56px;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .html-body .margin-3 {

@@ -1,780 +1,233 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lifeline UI Design</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Operations Dashboard – Lifeline Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="lifeline-page-shell">
-<div style="width: 1280px; padding-top: 64px; padding-bottom: 145px; padding-left: 24px; padding-right: 24px; position: relative; background: linear-gradient(0deg, #FFF8F5 0%, #FFF8F5 100%), white; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-  <div style="width: 100%; max-width: 1280px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-    <div style="align-self: stretch; padding-bottom: 32px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-      <div style="align-self: stretch; justify-content: space-between; align-items: flex-end; display: inline-flex">
-        <div style="max-width: 768px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="align-self: stretch; padding-bottom: 4px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
-              <div style="width: 16px; height: 16px; position: relative; overflow: hidden">
-                <div style="width: 12px; height: 11.79px; left: 2px; top: 1.96px; position: absolute; outline: 1.33px #E53935 solid; outline-offset: -0.67px"></div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">CENTRAL ADMINISTRATIVE AUTHORITY</div>
-              </div>
-            </div>
-          </div>
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 32px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word">Admin Operations Dashboard</div>
-          </div>
-          <div style="align-self: stretch; padding-top: 4px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-              <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 16px; font-family: Inter; font-weight: 400; line-height: 24px; word-wrap: break-word">Overview of registered clinical facilities, scheduled blood drives, and network logistics across all<br/>healthcare sectors.</div>
-            </div>
-          </div>
+
+  <!-- ===== Sidebar (opens with the menu button) ===== -->
+  <aside class="sidebar" id="sidebar" aria-label="Main menu">
+    <div class="sidebar-top">
+      <div class="sidebar-brand">
+        <img class="sidebar-logo" src="../../assets/Lifeline%20Logo.png" alt="Lifeline logo">
+        <div>
+          <div class="sidebar-name">LIFE<span>LINE</span></div>
+          <div class="sidebar-tag">— Your Blood. <span>Their Hope</span> —</div>
         </div>
-        <div style="padding-right: 168.59px; flex-direction: column; justify-content: center; align-items: flex-start; gap: 16px; display: inline-flex">
-          <div style="padding-left: 24px; padding-right: 24px; padding-top: 8px; padding-bottom: 8px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 8px; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-            <div style="width: 20px; height: 20px; position: relative; overflow: hidden">
-              <div style="width: 15px; height: 15px; left: 2.50px; top: 2.50px; position: absolute; outline: 1.67px #263238 solid; outline-offset: -0.83px"></div>
-            </div>
-            <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-              <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">+ Register Hospital / Blood Bank</div>
-            </div>
-          </div>
-          <div style="padding-left: 24px; padding-right: 24px; padding-top: 8px; padding-bottom: 8px; position: relative; background: #E53935; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-            <div style="width: 233.70px; height: 36px; left: 0px; top: 0px; position: absolute; background: rgba(255, 255, 255, 0); box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.10), 0px 4px 6px -1px rgba(0, 0, 0, 0.10); border-radius: 8px"></div>
-            <div style="width: 20px; height: 20px; position: relative; overflow: hidden">
-              <div style="width: 15px; height: 15px; left: 2.50px; top: 2.50px; position: absolute; outline: 1.67px white solid; outline-offset: -0.83px"></div>
-            </div>
-            <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-              <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">+ Schedule Blood Drive</div>
-            </div>
-          </div>
-        </div>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
+          <span class="material-symbols-outlined">close</span>
+        </button>
       </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-item active" href="../dashboard/index.html">
+          <span class="material-symbols-outlined">dashboard</span> Dashboard
+        </a>
+        <a class="nav-item" href="../hospitals-blood-banks/index.html">
+          <span class="material-symbols-outlined">local_hospital</span> Hospitals &amp; Blood Banks
+        </a>
+        <a class="nav-item" href="../donation-drives/index.html">
+          <span class="material-symbols-outlined">event_available</span> Donation Drives
+        </a>
+      </nav>
     </div>
-    <div style="align-self: stretch; padding-bottom: 32px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-      <div style="align-self: stretch; justify-content: center; align-items: flex-start; gap: 24px; display: inline-flex">
-        <div style="flex: 1 1 0; padding: 24px; position: relative; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); overflow: hidden; border-radius: 12px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 2px; display: inline-flex">
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-            <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">REGISTERED FACILITIES</div>
-              </div>
-              <div style="width: 40px; height: 40px; background: #FFF6F2; border-radius: 8px; justify-content: center; align-items: center; display: flex">
-                <div style="width: 20px; height: 20px; position: relative; overflow: hidden">
-                  <div style="width: 15px; height: 15px; left: 2.50px; top: 2.50px; position: absolute; outline: 1.67px #263238 solid; outline-offset: -0.83px"></div>
-                </div>
-              </div>
-            </div>
-            <div style="align-self: stretch; padding-top: 12px; justify-content: flex-start; align-items: baseline; gap: 4px; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 48px; font-family: Montserrat; font-weight: 700; line-height: 56px; word-wrap: break-word">42</div>
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">Active</div>
-            </div>
-            <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-              <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 20px; word-wrap: break-word">Active Partner Network</div>
-            </div>
-          </div>
-          <div style="align-self: stretch; padding-top: 24px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="align-self: stretch; padding-top: 16px; border-top: 1px rgba(236, 239, 241, 0.60) solid; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                <div style="width: 8px; height: 8px; background: #E53935; border-radius: 9999px"></div>
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 500; line-height: 14px; word-wrap: break-word">All 42 accredited</div>
-                </div>
-              </div>
-              <div style="width: 16px; height: 16px; position: relative; overflow: hidden">
-                <div style="width: 12px; height: 12px; left: 2px; top: 2px; position: absolute; outline: 1.33px #546E7A solid; outline-offset: -0.67px"></div>
-              </div>
-            </div>
-          </div>
-          <div style="width: 144px; height: 144px; left: 194px; top: -48px; position: absolute; background: #FFF6F2; border-radius: 9999px"></div>
-        </div>
-        <div style="flex: 1 1 0; padding: 24px; position: relative; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); overflow: hidden; border-radius: 12px; flex-direction: column; justify-content: space-between; align-items: flex-start; display: inline-flex">
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-            <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">SCHEDULED DRIVES</div>
-              </div>
-              <div style="width: 40px; height: 40px; background: #FFEBEE; border-radius: 8px; justify-content: center; align-items: center; display: flex">
-                <div style="width: 20px; height: 20px; position: relative; overflow: hidden">
-                  <div style="width: 15px; height: 15px; left: 2.50px; top: 2.50px; position: absolute; outline: 1.67px #E53935 solid; outline-offset: -0.83px"></div>
-                </div>
-              </div>
-            </div>
-            <div style="align-self: stretch; padding-top: 12px; justify-content: flex-start; align-items: baseline; gap: 4px; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 48px; font-family: Montserrat; font-weight: 700; line-height: 56px; word-wrap: break-word">18</div>
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">Drives</div>
-            </div>
-            <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-              <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 20px; word-wrap: break-word">This Quarter</div>
-            </div>
-          </div>
-          <div style="align-self: stretch; padding-top: 24px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="align-self: stretch; padding-top: 16px; border-top: 1px rgba(236, 239, 241, 0.60) solid; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                <div style="width: 16px; height: 16px; position: relative; overflow: hidden">
-                  <div style="width: 12px; height: 12px; left: 2px; top: 2px; position: absolute; outline: 1.33px #E53935 solid; outline-offset: -0.67px"></div>
-                </div>
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 600; line-height: 14px; word-wrap: break-word">4 drives this week</div>
-                </div>
-              </div>
-              <div style="padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; background: #FFEBEE; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 11px; font-family: Inter; font-weight: 600; line-height: 14px; word-wrap: break-word">On Track</div>
-              </div>
-            </div>
-          </div>
-          <div style="width: 144px; height: 144px; left: 194px; top: -48px; position: absolute; background: rgba(255, 235, 238, 0.40); border-radius: 9999px"></div>
-        </div>
-        <div style="flex: 1 1 0; padding: 24px; position: relative; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); overflow: hidden; border-radius: 12px; flex-direction: column; justify-content: space-between; align-items: flex-start; display: inline-flex">
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-            <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">REGIONAL INVENTORY</div>
-              </div>
-              <div style="width: 40px; height: 40px; background: #FFF6F2; border-radius: 8px; justify-content: center; align-items: center; display: flex">
-                <div style="width: 20px; height: 20px; position: relative; overflow: hidden">
-                  <div style="width: 15.29px; height: 13.33px; left: 2.35px; top: 3.33px; position: absolute; outline: 1.67px #E53935 solid; outline-offset: -0.83px"></div>
-                </div>
-              </div>
-            </div>
-            <div style="align-self: stretch; padding-top: 12px; justify-content: flex-start; align-items: baseline; gap: 4px; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 48px; font-family: Montserrat; font-weight: 700; line-height: 56px; word-wrap: break-word">1,420</div>
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">Units</div>
-            </div>
-            <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-              <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 20px; word-wrap: break-word">Cold Chain Optimal</div>
-            </div>
-          </div>
-          <div style="align-self: stretch; padding-top: 24px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="align-self: stretch; padding-top: 16px; border-top: 1px rgba(236, 239, 241, 0.60) solid; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                <div style="width: 8px; height: 8px; background: #E53935; border-radius: 9999px"></div>
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 11px; font-family: Inter; font-weight: 600; line-height: 14px; word-wrap: break-word">O- Critical: 42 Units</div>
-                </div>
-              </div>
-              <div style="padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; background: #FCEEE8; border-radius: 4px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 500; line-height: 14px; word-wrap: break-word">9.4 Days</div>
-              </div>
-            </div>
-          </div>
-          <div style="width: 144px; height: 144px; left: 194px; top: -48px; position: absolute; background: rgba(252, 238, 232, 0.60); border-radius: 9999px"></div>
-        </div>
-        <div style="flex: 1 1 0; padding: 24px; position: relative; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); overflow: hidden; border-radius: 12px; flex-direction: column; justify-content: space-between; align-items: flex-start; display: inline-flex">
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-            <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">SYSTEM DISPATCHES</div>
-              </div>
-              <div style="width: 40px; height: 40px; background: #ECEFF1; border-radius: 8px; justify-content: center; align-items: center; display: flex">
-                <div style="width: 20px; height: 20px; position: relative; overflow: hidden">
-                  <div style="width: 15px; height: 11.67px; left: 2.50px; top: 4.17px; position: absolute; outline: 1.67px #263238 solid; outline-offset: -0.83px"></div>
-                </div>
-              </div>
-            </div>
-            <div style="align-self: stretch; padding-top: 12px; justify-content: flex-start; align-items: baseline; gap: 4px; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 48px; font-family: Montserrat; font-weight: 700; line-height: 56px; word-wrap: break-word">28</div>
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">Active</div>
-            </div>
-            <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-              <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 20px; word-wrap: break-word">Emergency Logistics</div>
-            </div>
-          </div>
-          <div style="align-self: stretch; padding-top: 24px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="align-self: stretch; padding-top: 16px; border-top: 1px rgba(236, 239, 241, 0.60) solid; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                <div style="width: 16px; height: 16px; position: relative; overflow: hidden">
-                  <div style="width: 10.67px; height: 12px; left: 2.67px; top: 2px; position: absolute; outline: 1.33px #263238 solid; outline-offset: -0.67px"></div>
-                </div>
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 600; line-height: 14px; word-wrap: break-word">GPS En Route: 12</div>
-                </div>
-              </div>
-              <div style="padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; background: #FFF6F2; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 600; line-height: 14px; word-wrap: break-word">100% Monitored</div>
-              </div>
-            </div>
-          </div>
-          <div style="width: 144px; height: 144px; left: 194px; top: -48px; position: absolute; background: #FFF6F2; border-radius: 9999px"></div>
-        </div>
-      </div>
+
+    <div class="sidebar-bottom">
+      <a class="nav-item logout" href="../../login/index.html">
+        <span class="material-symbols-outlined">logout</span> Log Out
+      </a>
     </div>
-    <div style="align-self: stretch; padding-bottom: 32px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-      <div style="align-self: stretch; justify-content: center; align-items: flex-start; gap: 32px; display: inline-flex">
-        <div style="flex: 1 1 0; padding: 24px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 12px; flex-direction: column; justify-content: space-between; align-items: flex-start; display: inline-flex">
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-            <div style="align-self: stretch; padding-bottom: 16px; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 2px; display: inline-flex">
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 20px; font-family: Montserrat; font-weight: 600; line-height: 28px; word-wrap: break-word">Registered Facilities Overview</div>
-                </div>
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Quick monitoring of recently added or active partner institutions.</div>
-                </div>
-              </div>
-              <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">View All 42 Facilities</div>
-                </div>
-                <div style="width: 16px; height: 16px; position: relative; overflow: hidden">
-                  <div style="width: 12px; height: 9.33px; left: 2px; top: 3.33px; position: absolute; outline: 1.33px #E53935 solid; outline-offset: -0.67px"></div>
-                </div>
-              </div>
-            </div>
-            <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-              <div style="align-self: stretch; padding: 16px; background: rgba(255, 246, 242, 0.50); border-radius: 8px; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                  <div style="width: 44px; height: 44px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 8px; justify-content: center; align-items: center; display: flex">
-                    <div style="width: 24px; height: 24px; position: relative; overflow: hidden">
-                      <div style="width: 18.35px; height: 16px; left: 2.82px; top: 4px; position: absolute; outline: 2px #E53935 solid; outline-offset: -1px"></div>
-                    </div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="align-self: stretch; flex-direction: column; justify-content: center; align-items: flex-start; gap: 4px; display: flex">
-                      <div style="overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">St. Jude Regional Blood Bank</div>
-                      </div>
-                      <div style="padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; background: #ECEFF1; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 500; line-height: 14px; word-wrap: break-word">Blood Bank</div>
-                      </div>
-                    </div>
-                    <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                      <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 9.33px; height: 10.78px; left: 2.33px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                            <div style="width: 3.50px; height: 3.50px; left: 5.25px; top: 4.67px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Central Visayas</div>
-                        </div>
-                        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">•</div>
-                        </div>
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 10.50px; height: 10.50px; left: 1.75px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">+63 (032) 416-2020</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div style="justify-content: flex-start; align-items: center; gap: 7.99px; display: flex">
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 9999px; justify-content: flex-start; align-items: center; gap: 6px; display: flex">
-                    <div style="width: 6px; height: 6px; background: #E53935; border-radius: 9999px"></div>
-                    <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 600; line-height: 14px; word-wrap: break-word">Active</div>
-                  </div>
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: #263238; border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Manage</div>
-                  </div>
-                </div>
-              </div>
-              <div style="align-self: stretch; padding: 16px; background: rgba(255, 246, 242, 0.50); border-radius: 8px; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                  <div style="width: 44px; height: 44px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 8px; justify-content: center; align-items: center; display: flex">
-                    <div style="width: 24px; height: 24px; position: relative; overflow: hidden">
-                      <div style="width: 18px; height: 18px; left: 3px; top: 3px; position: absolute; outline: 2px #263238 solid; outline-offset: -1px"></div>
-                    </div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="align-self: stretch; flex-direction: column; justify-content: center; align-items: flex-start; gap: 4px; display: flex">
-                      <div style="overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">Cebu Doctors' University Hospital</div>
-                      </div>
-                      <div style="padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; background: #ECEFF1; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 500; line-height: 14px; word-wrap: break-word">Level 3 Hospital</div>
-                      </div>
-                    </div>
-                    <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                      <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 9.33px; height: 10.78px; left: 2.33px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                            <div style="width: 3.50px; height: 3.50px; left: 5.25px; top: 4.67px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Banilad Sector</div>
-                        </div>
-                        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">•</div>
-                        </div>
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 10.50px; height: 10.50px; left: 1.75px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">12 Transfusion Beds</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div style="justify-content: flex-start; align-items: center; gap: 7.99px; display: flex">
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 9999px; justify-content: flex-start; align-items: center; gap: 6px; display: flex">
-                    <div style="width: 6px; height: 6px; background: #E53935; border-radius: 9999px"></div>
-                    <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 600; line-height: 14px; word-wrap: break-word">Active</div>
-                  </div>
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: #263238; border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Manage</div>
-                  </div>
-                </div>
-              </div>
-              <div style="align-self: stretch; height: 96px; position: relative; background: rgba(255, 246, 242, 0.50); border-radius: 8px">
-                <div style="left: 16px; top: 16px; position: absolute; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex">
-                  <div style="width: 44px; height: 44px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 8px; justify-content: center; align-items: center; display: flex">
-                    <div style="width: 24px; height: 24px; position: relative; overflow: hidden">
-                      <div style="width: 17.86px; height: 16px; left: 3.07px; top: 3px; position: absolute; outline: 2px #E53935 solid; outline-offset: -1px"></div>
-                    </div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="align-self: stretch; flex-direction: column; justify-content: center; align-items: flex-start; gap: 4px; display: flex">
-                      <div style="overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">Vicente Sotto Memorial Medical Center</div>
-                      </div>
-                      <div style="padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; background: #FFEBEE; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 11px; font-family: Inter; font-weight: 500; line-height: 14px; word-wrap: break-word">Regional Apex Center</div>
-                      </div>
-                    </div>
-                    <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                      <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 9.33px; height: 10.78px; left: 2.33px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                            <div style="width: 3.50px; height: 3.50px; left: 5.25px; top: 4.67px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">B. Rodriguez St.</div>
-                        </div>
-                        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">•</div>
-                        </div>
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 10.50px; height: 10.50px; left: 1.75px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">24 Dedicated ICU Beds</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div style="left: 413.88px; top: 30px; position: absolute; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                  <div style="padding-top: 4px; padding-bottom: 4px; padding-left: 8px; padding-right: 10.10px; background: #FFEBEE; border-radius: 9999px; justify-content: flex-start; align-items: center; gap: 6px; display: flex">
-                    <div style="width: 3.89px; height: 6px; background: #E53935; border-radius: 9999px"></div>
-                    <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 11px; font-family: Inter; font-weight: 700; line-height: 14px; word-wrap: break-word">High<br/>Demand</div>
-                  </div>
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: #E53935; border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Dispatch</div>
-                  </div>
-                </div>
-              </div>
-              <div style="align-self: stretch; padding: 16px; background: rgba(255, 246, 242, 0.50); border-radius: 8px; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                  <div style="width: 44px; height: 44px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 8px; justify-content: center; align-items: center; display: flex">
-                    <div style="width: 24px; height: 24px; position: relative; overflow: hidden">
-                      <div style="width: 16px; height: 16px; left: 4px; top: 4px; position: absolute; outline: 2px #263238 solid; outline-offset: -1px"></div>
-                      <div style="width: 6px; height: 6px; left: 9px; top: 9px; position: absolute; outline: 2px #263238 solid; outline-offset: -1px"></div>
-                    </div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="align-self: stretch; flex-direction: column; justify-content: center; align-items: flex-start; gap: 4px; display: flex">
-                      <div style="overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">Red Cross Regional Logistics Hub</div>
-                      </div>
-                      <div style="padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; background: #ECEFF1; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 500; line-height: 14px; word-wrap: break-word">Cold Storage Hub</div>
-                      </div>
-                    </div>
-                    <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                      <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 9.33px; height: 10.78px; left: 2.33px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                            <div style="width: 3.50px; height: 3.50px; left: 5.25px; top: 4.67px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Subangdaku District</div>
-                        </div>
-                        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">•</div>
-                        </div>
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 10.50px; height: 10.50px; left: 1.75px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">-24°C Plasma Cryo</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div style="justify-content: flex-start; align-items: center; gap: 7.99px; display: flex">
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 9999px; justify-content: flex-start; align-items: center; gap: 6px; display: flex">
-                    <div style="width: 6px; height: 6px; background: #E53935; border-radius: 9999px"></div>
-                    <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 600; line-height: 14px; word-wrap: break-word">Active</div>
-                  </div>
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: #263238; border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Manage</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div style="align-self: stretch; padding-top: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="align-self: stretch; padding-top: 8px; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Showing 4 of 42 active regional sites</div>
-              </div>
-              <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                <div style="width: 8px; height: 8px; background: #E53935; border-radius: 9999px"></div>
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Encrypted Cold-Chain Feeds Online</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div style="flex: 1 1 0; padding: 24px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 12px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 17px; display: inline-flex">
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-            <div style="align-self: stretch; padding-bottom: 16px; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 2px; display: inline-flex">
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 20px; font-family: Montserrat; font-weight: 600; line-height: 28px; word-wrap: break-word">Upcoming Scheduled Donation Drives</div>
-                </div>
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Next field drives and collegiate mobile campaigns.</div>
-                </div>
-              </div>
-              <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Manage All 18 Drives</div>
-                </div>
-                <div style="width: 16px; height: 16px; position: relative; overflow: hidden">
-                  <div style="width: 12px; height: 9.33px; left: 2px; top: 3.33px; position: absolute; outline: 1.33px #E53935 solid; outline-offset: -0.67px"></div>
-                </div>
-              </div>
-            </div>
-            <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-              <div style="align-self: stretch; padding: 16px; background: rgba(255, 246, 242, 0.50); border-radius: 8px; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                  <div style="width: 48px; padding-top: 4px; padding-bottom: 4px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: flex">
-                      <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 11px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 14px; word-wrap: break-word">NOV</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: flex">
-                      <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 20px; font-family: Montserrat; font-weight: 700; line-height: 25px; word-wrap: break-word">25</div>
-                    </div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="align-self: stretch; flex-direction: column; justify-content: center; align-items: flex-start; gap: 4px; display: flex">
-                      <div style="overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">Metro University Blood Crusade 2024</div>
-                      </div>
-                      <div style="padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; background: #FFF6F2; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 500; line-height: 14px; word-wrap: break-word">Target: 200 Units</div>
-                      </div>
-                    </div>
-                    <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                      <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 9.33px; height: 10.78px; left: 2.33px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                            <div style="width: 3.50px; height: 3.50px; left: 5.25px; top: 4.67px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Student Gym Hall B</div>
-                        </div>
-                        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">•</div>
-                        </div>
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 10.50px; height: 10.31px; left: 1.75px; top: 1.72px; position: absolute; outline: 1.17px #E53935 solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Staffed & Confirmed</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div style="justify-content: flex-start; align-items: center; gap: 7.99px; display: flex">
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Details</div>
-                  </div>
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: #263238; border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Edit</div>
-                  </div>
-                </div>
-              </div>
-              <div style="align-self: stretch; padding: 16px; background: rgba(255, 246, 242, 0.50); border-radius: 8px; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                  <div style="width: 48px; padding-top: 4px; padding-bottom: 4px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: flex">
-                      <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 11px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 14px; word-wrap: break-word">DEC</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: flex">
-                      <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 20px; font-family: Montserrat; font-weight: 700; line-height: 25px; word-wrap: break-word">02</div>
-                    </div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
-                      <div style="overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">Civic Center Holiday Drive</div>
-                      </div>
-                      <div style="padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; background: #FFF6F2; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 500; line-height: 14px; word-wrap: break-word">Target: 150 Units</div>
-                      </div>
-                    </div>
-                    <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                      <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 9.33px; height: 10.78px; left: 2.33px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                            <div style="width: 3.50px; height: 3.50px; left: 5.25px; top: 4.67px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Downtown Plaza Ballroom</div>
-                        </div>
-                        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">•</div>
-                        </div>
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 10.50px; height: 10.50px; left: 1.75px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Scheduled</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div style="justify-content: flex-start; align-items: center; gap: 7.99px; display: flex">
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Details</div>
-                  </div>
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: #263238; border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Edit</div>
-                  </div>
-                </div>
-              </div>
-              <div style="align-self: stretch; padding: 16px; background: rgba(255, 246, 242, 0.50); border-radius: 8px; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                  <div style="width: 48px; padding-top: 4px; padding-bottom: 4px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: flex">
-                      <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 11px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 14px; word-wrap: break-word">DEC</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: flex">
-                      <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 20px; font-family: Montserrat; font-weight: 700; line-height: 25px; word-wrap: break-word">08</div>
-                    </div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="align-self: stretch; flex-direction: column; justify-content: center; align-items: flex-start; gap: 4px; display: flex">
-                      <div style="overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">Silicon Valley Tech Park Mobile Unit</div>
-                      </div>
-                      <div style="padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; background: #FFF6F2; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 500; line-height: 14px; word-wrap: break-word">Target: 120 Units</div>
-                      </div>
-                    </div>
-                    <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                      <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 9.33px; height: 10.78px; left: 2.33px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                            <div style="width: 3.50px; height: 3.50px; left: 5.25px; top: 4.67px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Courtyard Building 4</div>
-                        </div>
-                        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">•</div>
-                        </div>
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 10.50px; height: 10.50px; left: 1.75px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Planning Stage</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div style="justify-content: flex-start; align-items: center; gap: 7.99px; display: flex">
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Details</div>
-                  </div>
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: #263238; border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Edit</div>
-                  </div>
-                </div>
-              </div>
-              <div style="align-self: stretch; padding: 16px; background: rgba(255, 246, 242, 0.50); border-radius: 8px; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                  <div style="width: 48px; padding-top: 4px; padding-bottom: 4px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: flex">
-                      <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 11px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 14px; word-wrap: break-word">DEC</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: flex">
-                      <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 20px; font-family: Montserrat; font-weight: 700; line-height: 25px; word-wrap: break-word">14</div>
-                    </div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="align-self: stretch; flex-direction: column; justify-content: center; align-items: flex-start; gap: 4px; display: flex">
-                      <div style="overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">Eastside Medical Community Drive</div>
-                      </div>
-                      <div style="padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; background: #FFF6F2; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 11px; font-family: Inter; font-weight: 500; line-height: 14px; word-wrap: break-word">Target: 100 Units</div>
-                      </div>
-                    </div>
-                    <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                      <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 9.33px; height: 10.78px; left: 2.33px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                            <div style="width: 3.50px; height: 3.50px; left: 5.25px; top: 4.67px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Cultural Center Hall</div>
-                        </div>
-                        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">•</div>
-                        </div>
-                        <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                          <div style="width: 14px; height: 14px; position: relative; overflow: hidden">
-                            <div style="width: 10.50px; height: 10.50px; left: 1.75px; top: 1.75px; position: absolute; outline: 1.17px #546E7A solid; outline-offset: -0.58px"></div>
-                          </div>
-                          <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Scheduled</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div style="justify-content: flex-start; align-items: center; gap: 7.99px; display: flex">
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Details</div>
-                  </div>
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; background: #263238; border-radius: 4px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Edit</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div style="align-self: stretch; padding-top: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="align-self: stretch; padding-top: 8px; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Showing next 4 upcoming campaigns</div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 11px; font-family: Inter; font-weight: 600; line-height: 14px; word-wrap: break-word">570 Target Units Combined</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ===== Top bar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+
+    <div class="crumbs">
+      <span class="crumb-bar"></span>
+      <span>Admin Portal /</span>
+      <strong>Dashboard</strong>
     </div>
-    <div style="align-self: stretch; padding: 24px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 12px; justify-content: space-between; align-items: center; display: inline-flex">
-      <div style="justify-content: flex-start; align-items: center; gap: 16px; display: flex">
-        <div style="width: 48px; height: 48px; background: #FFF6F2; border-radius: 12px; justify-content: center; align-items: center; display: flex">
-          <div style="width: 24px; height: 24px; position: relative; overflow: hidden">
-            <div style="width: 18px; height: 16px; left: 3px; top: 4px; position: absolute; outline: 2px #263238 solid; outline-offset: -1px"></div>
-          </div>
-        </div>
-        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 16px; font-family: Montserrat; font-weight: 600; line-height: 24px; word-wrap: break-word">Administrative Orchestration Toolbar</div>
-          </div>
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Immediate system routines, compliance audits, and priority network<br/>triggers.</div>
-          </div>
-        </div>
-      </div>
-      <div style="width: 672.16px; height: 72px; position: relative">
-        <div style="padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 242.61px; top: 0px; position: absolute; background: #F5F7F8; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 6px; display: inline-flex">
-          <div style="width: 16px; height: 16px; position: relative; overflow: hidden">
-            <div style="width: 12px; height: 12px; left: 2px; top: 2px; position: absolute; outline: 1.33px #263238 solid; outline-offset: -0.67px"></div>
-          </div>
-          <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">System Audit Log</div>
-          </div>
-        </div>
-        <div style="padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 405.54px; top: 0px; position: absolute; background: #F5F7F8; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 6px; display: inline-flex">
-          <div style="width: 16px; height: 16px; position: relative; overflow: hidden">
-            <div style="width: 10.67px; height: 10.67px; left: 2.67px; top: 2.67px; position: absolute; outline: 1.33px #263238 solid; outline-offset: -0.67px"></div>
-          </div>
-          <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-            <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Download Monthly Network Manifest</div>
-          </div>
-        </div>
-        <div style="padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; left: 422.66px; top: 40px; position: absolute; background: #FFEBEE; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 6px; display: inline-flex">
-          <div style="width: 8px; height: 8px; background: #E53935; border-radius: 9999px"></div>
-          <div style="width: 16px; height: 16px; position: relative; overflow: hidden">
-            <div style="width: 10.67px; height: 12px; left: 2.67px; top: 2px; position: absolute; outline: 1.33px #E53935 solid; outline-offset: -0.67px"></div>
-          </div>
-          <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-            <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Emergency Blood Re-allocation</div>
-          </div>
-        </div>
-      </div>
+
+    <label class="search">
+      <span class="material-symbols-outlined">search</span>
+      <input type="search" placeholder="Search facilities, blood drives, hospitals...">
+    </label>
+
+    <button class="icon-btn bell" type="button" aria-label="Notifications">
+      <span class="material-symbols-outlined">notifications</span>
+      <span class="bell-dot"></span>
+    </button>
+
+    <div class="admin-chip">
+      <span class="avatar"><span class="material-symbols-outlined">person</span></span>
+      <span><b>System Administrator</b><small>Root Ops</small></span>
     </div>
-  </div>
-  <div style="width: 1280px; height: 64px; padding-left: 24px; padding-right: 24px; left: 0px; top: 0px; position: absolute; background: rgba(255, 255, 255, 0.90); box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.04); border-top: 1px #E5E7EB solid; backdrop-filter: blur(12px); justify-content: flex-start; align-items: center; gap: 51.80px; display: inline-flex">
-    <div style="justify-content: flex-start; align-items: center; gap: 24px; display: flex">
-      <div style="padding: 6px; border-radius: 4px; justify-content: center; align-items: center; display: flex">
-        <div style="width: 20px; height: 20px; position: relative; overflow: hidden">
-          <div style="width: 13.33px; height: 10px; left: 3.33px; top: 5px; position: absolute; outline: 1.83px #263238 solid; outline-offset: -0.92px"></div>
-        </div>
+  </header>
+
+  <main class="page">
+    <section class="page-head">
+      <div>
+        <p class="eyebrow"><span class="material-symbols-outlined">shield</span> CENTRAL ADMINISTRATIVE AUTHORITY</p>
+        <h1>Admin Operations Dashboard</h1>
+        <p class="lead">Overview of registered clinical facilities, scheduled blood drives, and network logistics across all healthcare sectors.</p>
       </div>
-      <div style="justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-        <div style="width: 4px; height: 16px; background: #E53935; border-radius: 9999px"></div>
-        <div style="justify-content: flex-start; align-items: center; gap: 6px; display: flex">
-          <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="justify-content: center; display: flex; flex-direction: column; color: #546E7A; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 20px; word-wrap: break-word">Admin Portal /</div>
-          </div>
-          <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 14px; font-family: Inter; font-weight: 700; line-height: 20px; word-wrap: break-word">Dashboard</div>
-          </div>
-        </div>
+      <div class="head-actions">
+        <a class="btn btn-white-border" href="../hospitals-blood-banks/index.html#add-facility"><span class="material-symbols-outlined">add</span> Register Hospital / Blood Bank</a>
+        <a class="btn btn-red" href="../donation-drives/index.html"><span class="material-symbols-outlined">add</span> Schedule Blood Drive</a>
       </div>
-    </div>
-    <div style="flex: 1 1 0; max-width: 624px; padding-left: 24px; padding-right: 24px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-      <div style="align-self: stretch; position: relative; justify-content: flex-start; align-items: center; display: inline-flex">
-        <div style="flex: 1 1 0; padding-top: 9px; padding-bottom: 10px; padding-left: 40px; padding-right: 16px; background: #FFF6F2; overflow: hidden; border-radius: 9999px; outline: 1px rgba(0, 0, 0, 0) solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="align-self: stretch; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: rgba(84, 110, 122, 0.60); font-size: 14px; font-family: Inter; font-weight: 400; word-wrap: break-word">Search facilities, blood drives, hospitals...</div>
-          </div>
+    </section>
+
+    <section class="kpis">
+      <article class="card kpi">
+        <div class="kpi-top"><span class="label">REGISTERED FACILITIES</span><span class="stat-ico c-blush"><span class="material-symbols-outlined">domain</span></span></div>
+        <div class="kpi-num"><b>42</b><span class="red">Active</span></div>
+        <p class="kpi-sub">Active Partner Network</p>
+        <div class="kpi-foot"><span class="kpi-note"><span class="dot"></span>All 42 accredited</span><span class="material-symbols-outlined">verified</span></div>
+      </article>
+      <article class="card kpi">
+        <div class="kpi-top"><span class="label">SCHEDULED DRIVES</span><span class="stat-ico c-rose"><span class="material-symbols-outlined">event</span></span></div>
+        <div class="kpi-num"><b>18</b><span class="">Drives</span></div>
+        <p class="kpi-sub">This Quarter</p>
+        <div class="kpi-foot"><span class="kpi-note"><span class="material-symbols-outlined red">event_available</span>4 drives this week</span><span class="pill pill-rose">On Track</span></div>
+      </article>
+      <article class="card kpi">
+        <div class="kpi-top"><span class="label">REGIONAL INVENTORY</span><span class="stat-ico c-blush"><span class="material-symbols-outlined">bloodtype</span></span></div>
+        <div class="kpi-num"><b>1,420</b><span class="slate">Units</span></div>
+        <p class="kpi-sub">Cold Chain Optimal</p>
+        <div class="kpi-foot"><span class="kpi-note"><span class="dot"></span><span class="red">O- Critical: 42 Units</span></span><span class="pill pill-tint">9.4 Days</span></div>
+      </article>
+      <article class="card kpi">
+        <div class="kpi-top"><span class="label">SYSTEM DISPATCHES</span><span class="stat-ico c-tint"><span class="material-symbols-outlined">local_shipping</span></span></div>
+        <div class="kpi-num"><b>28</b><span class="red">Active</span></div>
+        <p class="kpi-sub">Emergency Logistics</p>
+        <div class="kpi-foot"><span class="kpi-note"><span class="material-symbols-outlined">navigation</span>GPS En Route: 12</span><span class="pill pill-blush">100% Monitored</span></div>
+      </article>
+    </section>
+
+    <section class="panels">
+      <article class="card panel">
+        <div class="panel-head">
+          <div><h2>Registered Facilities Overview</h2><p>Quick monitoring of recently added or active partner institutions.</p></div>
+          <a class="link-red" href="../hospitals-blood-banks/index.html">View All 42 Facilities <span class="material-symbols-outlined">arrow_forward</span></a>
         </div>
-        <div style="width: 16px; height: 16px; left: 14px; top: 11px; position: absolute; overflow: hidden">
-          <div style="width: 11px; height: 11px; left: 3px; top: 3px; position: absolute; outline: 1.33px #546E7A solid; outline-offset: -0.67px"></div>
+        <ul class="rows">
+          <li class="row">
+            <span class="row-ico"><span class="material-symbols-outlined">domain</span></span>
+            <div class="row-main">
+              <div class="row-title"><h3>St. Jude Regional Blood Bank</h3><span class="tag tag-tint">Blood Bank</span></div>
+              <p class="row-meta"><span class="material-symbols-outlined">location_on</span>Central Visayas<s>•</s><span class="material-symbols-outlined">phone</span>+63 (032) 416-2020</p>
+            </div>
+            <div class="row-actions"><span class="pill pill-white"><span class="dot"></span>Active</span><a class="btn btn-sm btn-dark" href="../hospitals-blood-banks/index.html">Manage</a></div>
+          </li>
+          <li class="row">
+            <span class="row-ico"><span class="material-symbols-outlined">local_hospital</span></span>
+            <div class="row-main">
+              <div class="row-title"><h3>Cebu Doctors' University Hospital</h3><span class="tag tag-tint">Level 3 Hospital</span></div>
+              <p class="row-meta"><span class="material-symbols-outlined">location_on</span>Banilad Sector<s>•</s><span class="material-symbols-outlined">bed</span>12 Transfusion Beds</p>
+            </div>
+            <div class="row-actions"><span class="pill pill-white"><span class="dot"></span>Active</span><a class="btn btn-sm btn-dark" href="../hospitals-blood-banks/index.html">Manage</a></div>
+          </li>
+          <li class="row">
+            <span class="row-ico"><span class="material-symbols-outlined">emergency</span></span>
+            <div class="row-main">
+              <div class="row-title"><h3>Vicente Sotto Memorial Medical Center</h3><span class="tag tag-red">Regional Apex Center</span></div>
+              <p class="row-meta"><span class="material-symbols-outlined">location_on</span>B. Rodriguez St.<s>•</s><span class="material-symbols-outlined">airline_seat_flat</span>24 Dedicated ICU Beds</p>
+            </div>
+            <div class="row-actions"><span class="pill pill-rose"><span class="dot"></span>High Demand</span><a class="btn btn-sm btn-red" href="../donation-drives/index.html">Dispatch</a></div>
+          </li>
+          <li class="row">
+            <span class="row-ico"><span class="material-symbols-outlined">ac_unit</span></span>
+            <div class="row-main">
+              <div class="row-title"><h3>Red Cross Regional Logistics Hub</h3><span class="tag tag-tint">Cold Storage Hub</span></div>
+              <p class="row-meta"><span class="material-symbols-outlined">location_on</span>Subangdaku District<s>•</s><span class="material-symbols-outlined">thermostat</span>-24°C Plasma Cryo</p>
+            </div>
+            <div class="row-actions"><span class="pill pill-white"><span class="dot"></span>Active</span><a class="btn btn-sm btn-dark" href="../hospitals-blood-banks/index.html">Manage</a></div>
+          </li>
+        </ul>
+        <div class="panel-foot"><span>Showing 4 of 42 active regional sites</span><span class="live"><span class="dot"></span>Encrypted Cold-Chain Feeds Online</span></div>
+      </article>
+
+      <article class="card panel">
+        <div class="panel-head">
+          <div><h2>Upcoming Scheduled Donation Drives</h2><p>Next field drives and collegiate mobile campaigns.</p></div>
+          <a class="link-red" href="../donation-drives/index.html">Manage All 18 Drives <span class="material-symbols-outlined">arrow_forward</span></a>
         </div>
+        <ul class="rows">
+          <li class="row">
+            <div class="datebox"><small>NOV</small><b>25</b></div>
+            <div class="row-main">
+              <div class="row-title"><h3>Metro University Blood Crusade 2024</h3><span class="tag tag-blush">Target: 200 Units</span></div>
+              <p class="row-meta"><span class="material-symbols-outlined">location_on</span>Student Gym Hall B<s>•</s><span class="material-symbols-outlined red">check_circle</span><span class="strong">Staffed &amp; Confirmed</span></p>
+            </div>
+            <div class="row-actions"><a class="btn btn-sm btn-white" href="../donation-drives/index.html">Details</a><a class="btn btn-sm btn-dark" href="../donation-drives/index.html">Edit</a></div>
+          </li>
+          <li class="row">
+            <div class="datebox"><small>DEC</small><b>02</b></div>
+            <div class="row-main">
+              <div class="row-title"><h3>Civic Center Holiday Drive</h3><span class="tag tag-blush">Target: 150 Units</span></div>
+              <p class="row-meta"><span class="material-symbols-outlined">location_on</span>Downtown Plaza Ballroom<s>•</s><span class="material-symbols-outlined">schedule</span><span class="">Scheduled</span></p>
+            </div>
+            <div class="row-actions"><a class="btn btn-sm btn-white" href="../donation-drives/index.html">Details</a><a class="btn btn-sm btn-dark" href="../donation-drives/index.html">Edit</a></div>
+          </li>
+          <li class="row">
+            <div class="datebox"><small>DEC</small><b>08</b></div>
+            <div class="row-main">
+              <div class="row-title"><h3>Silicon Valley Tech Park Mobile Unit</h3><span class="tag tag-blush">Target: 120 Units</span></div>
+              <p class="row-meta"><span class="material-symbols-outlined">location_on</span>Courtyard Building 4<s>•</s><span class="material-symbols-outlined">schedule</span><span class="">Planning Stage</span></p>
+            </div>
+            <div class="row-actions"><a class="btn btn-sm btn-white" href="../donation-drives/index.html">Details</a><a class="btn btn-sm btn-dark" href="../donation-drives/index.html">Edit</a></div>
+          </li>
+          <li class="row">
+            <div class="datebox"><small>DEC</small><b>14</b></div>
+            <div class="row-main">
+              <div class="row-title"><h3>Eastside Medical Community Drive</h3><span class="tag tag-blush">Target: 100 Units</span></div>
+              <p class="row-meta"><span class="material-symbols-outlined">location_on</span>Cultural Center Hall<s>•</s><span class="material-symbols-outlined">schedule</span><span class="">Scheduled</span></p>
+            </div>
+            <div class="row-actions"><a class="btn btn-sm btn-white" href="../donation-drives/index.html">Details</a><a class="btn btn-sm btn-dark" href="../donation-drives/index.html">Edit</a></div>
+          </li>
+        </ul>
+        <div class="panel-foot"><span>Showing next 4 upcoming campaigns</span><span class="red strong">570 Target Units Combined</span></div>
+      </article>
+    </section>
+
+    <section class="card toolbar">
+      <div class="toolbar-id">
+        <span class="stat-ico c-blush big"><span class="material-symbols-outlined">admin_panel_settings</span></span>
+        <div><h2>Administrative Orchestration Toolbar</h2><p>Immediate system routines, compliance audits, and priority network triggers.</p></div>
       </div>
-    </div>
-    <div style="justify-content: flex-start; align-items: center; gap: 24px; display: flex">
-      <div style="padding: 8px; position: relative; border-radius: 9999px; justify-content: center; align-items: center; display: flex">
-        <div style="width: 20px; height: 20px; position: relative; overflow: hidden">
-          <div style="width: 13.33px; height: 15px; left: 3.33px; top: 2.50px; position: absolute; outline: 1.67px #263238 solid; outline-offset: -0.83px"></div>
-        </div>
-        <div style="width: 8px; height: 8px; left: 24px; top: 4px; position: absolute; background: #E53935; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-end; display: inline-flex">
-          <div style="width: 8px; height: 8px; background: rgba(255, 255, 255, 0); box-shadow: 0px 0px 0px 2px white; border-radius: 9999px"></div>
-        </div>
+      <div class="toolbar-actions">
+        <a class="btn btn-tint" href="#"><span class="material-symbols-outlined">history</span> System Audit Log</a>
+        <a class="btn btn-tint" href="#"><span class="material-symbols-outlined">download</span> Download Monthly Network Manifest</a>
+        <a class="btn btn-rose" href="#"><span class="dot"></span><span class="material-symbols-outlined">bloodtype</span> Emergency Blood Re-allocation</a>
       </div>
-      <div style="padding-top: 4px; padding-bottom: 4px; padding-left: 4px; padding-right: 16px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 9999px; outline: 1px rgba(236, 239, 241, 0.60) solid; outline-offset: -1px; justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-        <div style="width: 32px; height: 32px; background: #B7131A; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 9999px; justify-content: center; align-items: center; display: flex">
-          <div style="width: 16px; height: 16px; position: relative; overflow: hidden">
-            <div style="width: 9.33px; height: 12px; left: 3.33px; top: 2px; position: absolute; outline: 1.33px white solid; outline-offset: -0.67px"></div>
-          </div>
-        </div>
-        <div style="padding-right: 4px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="justify-content: center; display: flex; flex-direction: column; color: #263238; font-size: 13px; font-family: Inter; font-weight: 600; line-height: 16.25px; word-wrap: break-word">System Administrator</div>
-          </div>
-          <div style="align-self: stretch; padding-bottom: 0.75px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="justify-content: center; display: flex; flex-direction: column; color: #00695C; font-size: 11px; font-family: Inter; font-weight: 500; line-height: 13.75px; word-wrap: break-word">Root Ops</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Lifeline Universal Sidebar & Hamburger Menu -->
-<link rel="stylesheet" href="../../components/sidebar.css">
-<script src="../../components/sidebar.js"></script>
-</main>
+    </section>
+  </main>
+
+  <script>
+    // Sidebar open / close
+    const body = document.body;
+    const menuBtn = document.getElementById('menuBtn');
+
+    function setSidebar(open) {
+      body.classList.toggle('sidebar-open', open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+    }
+
+    menuBtn.addEventListener('click', () => setSidebar(!body.classList.contains('sidebar-open')));
+    document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
+    document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
+  </script>
+
 </body>
+</html>

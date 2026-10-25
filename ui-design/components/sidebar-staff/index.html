@@ -1,92 +1,28 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lifeline UI Design</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<main class="lifeline-page-shell">
-<div style="width: 288px; height: 800px; background: #263238; box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.04); flex-direction: column; justify-content: space-between; align-items: flex-start; display: inline-flex">
-  <div style="align-self: stretch; padding: 24px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 24px; display: flex">
-    <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-      <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 20px; display: inline-flex">
-        <img style="width: 40px; height: 40px; max-width: 240px; position: relative; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 9999px" src="https://placehold.co/40x40" />
-        <div style="width: 165px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="align-self: stretch; justify-content: flex-start; align-items: baseline; display: inline-flex">
-            <div style="justify-content: center; display: flex; flex-direction: column"><span style="color: white; font-size: 22px; font-family: Montserrat; font-weight: 700; line-height: 22px; word-wrap: break-word">LIFE</span><span style="color: #E53935; font-size: 22px; font-family: Montserrat; font-weight: 700; line-height: 22px; word-wrap: break-word">LINE</span></div>
-          </div>
-          <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-              <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column"><span style="color: #94A3B8; font-size: 11px; font-family: Montserrat; font-weight: 600; line-height: 11px; word-wrap: break-word">â€” Your Blood. </span><span style="color: #E53935; font-size: 11px; font-family: Montserrat; font-weight: 600; line-height: 11px; word-wrap: break-word">Their Hope â€”</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style="align-self: stretch; padding-top: 16px; padding-bottom: 8px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-        <div style="align-self: stretch; padding-left: 12px; padding-right: 12px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-          <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #90A4AE; font-size: 11px; font-family: Inter; font-weight: 700; text-transform: uppercase; line-height: 24px; letter-spacing: 0.55px; word-wrap: break-word">STAFF OPERATIONS</div>
-        </div>
-      </div>
+﻿<!-- Lifeline sidebar - CSS only, no JavaScript.
+     Needs components/sidebar.css and <body data-page="..."> (used to highlight the current link). -->
+<input type="checkbox" id="lifelineNav" class="lifeline-nav-toggle" aria-label="Toggle navigation menu">
+<label for="lifelineNav" class="lifeline-sb-backdrop"></label>
+<aside class="lifeline-sb lifeline-sb--staff" aria-label="Main menu">
+  <div class="lifeline-sb-main">
+    <div class="lifeline-sb-head">
+      <a class="lifeline-sb-brand" href="../dashboard/index.html">
+        <span class="lifeline-sb-logo"><img src="../../assets/Lifeline%20Logo.png" alt="Lifeline"></span>
+        <span class="lifeline-sb-brandtext">
+          <span class="lifeline-sb-wordmark">LIFE<span>LINE</span></span>
+          <span class="lifeline-sb-tagline">— Your Blood. <span>Their Hope —</span></span>
+        </span>
+      </a>
+      <div class="lifeline-sb-section">Staff Operations</div>
     </div>
-    <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-      <a href="../../staff/dashboard/index.html" style="text-decoration: none; align-self: stretch; padding-top: 8px; padding-bottom: 8px; padding-left: 16px; padding-right: 12px; border-radius: 8px; justify-content: flex-start; align-items: center; display: inline-flex">
-        <div style="width: 20px; justify-content: flex-start; align-items: center; gap: 12px; display: flex">
-          <div style="width: 20px; height: 20px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="width: 15px; height: 15px; background: #CBD5E1"></div>
-          </div>
-          <div style="width: 123.59px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="justify-content: center; display: flex; flex-direction: column; color: #CBD5E1; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">Dashboard</div>
-          </div>
-        </div>
-      </a>
-      <a href="../../staff/donation-records/index.html" style="text-decoration: none; align-self: stretch; height: 40px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-        <div style="width: 20px; height: 20px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="width: 13px; height: 17px; background: #D7E4EC"></div>
-        </div>
-        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="justify-content: center; display: flex; flex-direction: column; color: #D7E4EC; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Donation Records </div>
-        </div>
-      </a>
-      <a href="../../staff/pending-reviews/index.html" style="text-decoration: none; align-self: stretch; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-        <div style="width: 20px; height: 20px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="width: 15px; height: 15px; background: #D7E4EC"></div>
-        </div>
-        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="justify-content: center; display: flex; flex-direction: column; color: #D7E4EC; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Pending Reviews</div>
-        </div>
-      </a>
-      <a href="../../staff/donation-drives/index.html" style="text-decoration: none; align-self: stretch; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="width: 20px; height: 20px; background: #D7E4EC"></div>
-        </div>
-        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="justify-content: center; display: flex; flex-direction: column; color: #D7E4EC; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Donation Drives</div>
-        </div>
-      </a>
-      <a href="../../staff/facility-profile/index.html" style="text-decoration: none; align-self: stretch; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="width: 20px; height: 20px; background: #D7E4EC"></div>
-        </div>
-        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-          <div style="justify-content: center; display: flex; flex-direction: column; color: #D7E4EC; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Facility Profile</div>
-        </div>
-      </a>
-    </div>
+    <nav class="lifeline-sb-nav">
+      <a class="lifeline-sb-link is-lead" href="../dashboard/index.html" data-link="dashboard"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></span><span>Dashboard</span></a>
+      <a class="lifeline-sb-link" href="../donation-records/index.html" data-link="donation-records"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></span><span>Donation Records</span></a>
+      <a class="lifeline-sb-link" href="../pending-reviews/index.html" data-link="pending-reviews"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></span><span>Pending Reviews</span></a>
+      <a class="lifeline-sb-link" href="../donation-drives/index.html" data-link="donation-drives"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></span><span>Donation Drives</span></a>
+      <a class="lifeline-sb-link" href="../facility-profile/index.html" data-link="facility-profile"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/></svg></span><span>Facility Profile</span></a>
+    </nav>
   </div>
-  <div style="align-self: stretch; padding-top: 24px; padding-bottom: 26px; padding-left: 24px; padding-right: 24px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-    <a href="../../login/index.html" style="text-decoration: none; padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-      <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-        <div style="width: 15px; height: 15px; background: #B7131A"></div>
-      </div>
-      <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-        <div style="justify-content: center; display: flex; flex-direction: column; color: #B7131A; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Logout</div>
-      </div>
-    </a>
+  <div class="lifeline-sb-foot">
+    <a class="lifeline-sb-logout" href="../../login/index.html"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg></span><span>Logout</span></a>
   </div>
-</div>
-</main>
-</body>
-</html>
+</aside>
