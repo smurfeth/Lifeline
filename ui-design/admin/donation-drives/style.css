@@ -1,0 +1,7 @@
+﻿html, body { margin: 0; padding: 0; width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; overflow-x: hidden; background: #FFF8F5; }
+body { overflow-x: clip; }
+* { box-sizing: border-box; }
+.lifeline-page-shell { width: 100%; max-width: 100%; min-width: 0; height: auto !important; overflow: hidden; }
+.lifeline-page-shell > [style*="width: 1280px"], .lifeline-page-shell > [style*="width: 1300px"] { width: 100% !important; max-width: 100%; min-width: 0; height: auto !important; box-sizing: border-box; }
+@media (max-width: 960px) { .lifeline-page-shell { overflow: visible; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }

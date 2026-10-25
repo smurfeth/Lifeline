@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Sidebar Backdrop Overlay */
+.lifeline-sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease, visibility 250ms ease;
+}
+
+.lifeline-sidebar-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Slide-out Drawer Panel */
+.lifeline-sidebar-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 290px;
+  max-width: 85vw;
+  height: 100vh;
+  background: #263238;
+  color: #FFFFFF;
+  z-index: 10001;
+  box-shadow: 8px 0 24px rgba(0, 0, 0, 0.25);
+  transform: translateX(-100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.lifeline-sidebar-drawer.is-open {
+  transform: translateX(0);
+}
+
+/* Drawer Header */
+.lifeline-drawer-header {
+  padding: 24px 20px 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lifeline-drawer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.lifeline-drawer-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.lifeline-drawer-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lifeline-drawer-brand-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  line-height: 20px;
+}
+
+.lifeline-drawer-brand-text .life { color: #FFFFFF; }
+.lifeline-drawer-brand-text .line { color: #E53935; }
+
+.lifeline-drawer-tagline {
+  font-size: 10px;
+  font-weight: 500;
+  color: #94A3B8;
+  letter-spacing: 0.3px;
+  margin-top: 2px;
+}
+
+.lifeline-drawer-close-btn {
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.lifeline-drawer-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+/* Role Badge */
+.lifeline-drawer-role-badge {
+  margin: 14px 20px 8px 20px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #CBD5E1;
+  width: fit-content;
+}
+
+/* Nav Menu Links */
+.lifeline-drawer-nav {
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.lifeline-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #CBD5E1;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 150ms ease;
+}
+
+.lifeline-drawer-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  transform: translateX(3px);
+}
+
+.lifeline-drawer-link.active {
+  background: #E53935;
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(229, 57, 53, 0.3);
+}
+
+.lifeline-drawer-link-icon {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.lifeline-drawer-link.active .lifeline-drawer-link-icon {
+  opacity: 1;
+}
+
+/* Role Quick Switcher Pills */
+.lifeline-role-switcher {
+  margin: 10px 16px;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lifeline-role-switcher-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-left: 4px;
+}
+
+.lifeline-role-switcher-btns {
+  display: flex;
+  gap: 4px;
+}
+
+.lifeline-role-pill {
+  flex: 1;
+  padding: 5px 6px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  color: #94A3B8;
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 150ms ease;
+}
+
+.lifeline-role-pill:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lifeline-role-pill.current {
+  background: #BA1A1A;
+  color: #FFFFFF;
+}
+
+/* Drawer Footer */
+.lifeline-drawer-footer {
+  padding: 16px 20px 24px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lifeline-drawer-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #EF4444;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 150ms ease;
+}
+
+.lifeline-drawer-logout-btn:hover {
+  background: rgba(239, 68, 68, 0.12);
+  transform: translateX(3px);
+}
+
+/* Toast Notifications */
+.lifeline-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #263238;
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 10002;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 250ms ease;
+  pointer-events: none;
+}
+
+.lifeline-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lifeline-toast.is-success {
+  background: #006947;
+}
+
+.lifeline-toast.is-warning {
+  background: #D97706;
+}
+
+.lifeline-toast.is-info {
+  background: #1E293B;
+}
+
