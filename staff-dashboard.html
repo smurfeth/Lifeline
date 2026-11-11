@@ -79,6 +79,45 @@
     </div>
   </div>
 
+<!-- Donation Records Table -->
+<h2 style="margin-top: 40px;">Donation Records</h2>
+<table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%; max-width: 900px; background: white; border-color: #ddd;">
+  <thead>
+    <tr style="background: #eee;">
+      <th>ID</th>
+      <th>Blood Type</th>
+      <th>Volume (mL)</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="recordsTableBody">
+    <!-- Rows loaded dynamically -->
+  </tbody>
+</table>
+
+<!-- Edit Record Modal Popup -->
+<div id="editModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+  <div style="background:white; padding:24px; margin:100px auto; max-width:360px; border-radius:8px;">
+    <h3 style="margin-top:0;">Update Record</h3>
+    <input type="hidden" id="editRecordId">
+    
+    <label>Status:</label><br>
+    <select id="editStatus" style="width:100%; margin:8px 0 16px; padding:8px;">
+      <option value="pending">Pending</option>
+      <option value="approved">Approved</option>
+      <option value="completed">Completed</option>
+      <option value="cancelled">Cancelled</option>
+    </select><br>
+
+    <label>Volume (mL):</label><br>
+    <input type="number" id="editVolume" style="width:100%; margin:8px 0 20px; padding:8px;"><br>
+
+    <button onclick="saveRecordUpdate()" style="background:#b00020; color:white; border:none; padding:8px 16px; cursor:pointer; border-radius:4px;">Save</button>
+    <button onclick="closeEditModal()" style="background:#ccc; border:none; padding:8px 16px; cursor:pointer; border-radius:4px;">Cancel</button>
+  </div>
+</div>
+
 <script>
   // ---- CONFIG: your Supabase project ----
   const SUPABASE_URL = "https://pqgyucykyffuwmsueqrm.supabase.co";
@@ -87,6 +126,66 @@
   const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
   const statusEl = document.getElementById('status-msg');
+
+  // 1. Fetch records and display them in the table
+async function loadRecordsTable() {
+  const { data: records, error } = await sb
+    .from('donation_records')
+    .select('*');
+
+  if (error) {
+    console.error('Failed to load table:', error);
+    return;
+  }
+
+  const tbody = document.getElementById('recordsTableBody');
+  tbody.innerHTML = records.map(r => `
+    <tr>
+      <td>${r.id.substring(0, 8)}...</td>
+      <td>${r.blood_type || '-'}</td>
+      <td>${r.volume_ml || 0}</td>
+      <td>${r.status}</td>
+      <td>
+        <button onclick="openEditModal('${r.id}', '${r.status}', ${r.volume_ml || 0})">Edit</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// 2. Modal open/close handlers
+function openEditModal(id, status, volume) {
+  document.getElementById('editRecordId').value = id;
+  document.getElementById('editStatus').value = status;
+  document.getElementById('editVolume').value = volume;
+  document.getElementById('editModal').style.display = 'block';
+}
+
+function closeEditModal() {
+  document.getElementById('editModal').style.display = 'none';
+}
+
+// 3. Save update to Supabase
+async function saveRecordUpdate() {
+  const id = document.getElementById('editRecordId').value;
+  const newStatus = document.getElementById('editStatus').value;
+  const newVolume = parseInt(document.getElementById('editVolume').value, 10) || 0;
+
+  const { error } = await sb
+    .from('donation_records')
+    .update({ status: newStatus, volume_ml: newVolume })
+    .eq('id', id);
+
+  if (error) {
+    alert('Update failed: ' + error.message);
+  } else {
+    closeEditModal();
+    loadStats();        // Refresh stat cards
+    loadRecordsTable(); // Refresh table data
+  }
+}
+
+// Call loadRecordsTable at page initialization
+loadRecordsTable();
 
   async function loadStats() {
     try {
