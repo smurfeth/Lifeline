@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -20,9 +20,7 @@
           <div class="sidebar-name">LIFE<span>LINE</span></div>
           <div class="sidebar-tag">— Your Blood. <span>Their Hope</span> —</div>
         </div>
-        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
-          <span class="material-symbols-outlined">close</span>
-        </button>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
 
       <nav class="sidebar-nav">
@@ -54,9 +52,7 @@
 
   <!-- ===== Top bar ===== -->
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
-      <span class="material-symbols-outlined">menu</span>
-    </button>
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
 
     <div class="crumbs">
       <span class="crumb-bar"></span>
@@ -354,6 +350,7 @@
     </div>
   </main>
 
+  <script src="../../supabaseClient.js"></script>
   <script>
     // Sidebar open / close
     const body = document.body;
@@ -368,6 +365,74 @@
     document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
+
+    // Populate user profile & wire donation submission
+    document.addEventListener('DOMContentLoaded', async () => {
+      const profile = await populateDonorUI();
+      if (profile) {
+        // Card 1 verified profile summary
+        const infoGridStrong = document.querySelectorAll('.info-grid .info strong');
+        if (infoGridStrong.length >= 4) {
+          infoGridStrong[0].textContent = profile.fullName;
+          infoGridStrong[1].innerHTML = `#${profile.donorId} <span class="material-symbols-outlined green">verified</span>`;
+          infoGridStrong[2].textContent = `Rh ${profile.bloodType.includes('-') ? 'Negative' : 'Positive'}`;
+          infoGridStrong[3].textContent = profile.phone;
+        }
+
+        const typeBadge = document.querySelector('.type-badge');
+        if (typeBadge) typeBadge.textContent = profile.bloodType;
+      }
+
+      // Handle donation form submission
+      const form = document.querySelector('.form');
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const facilitySelect = document.getElementById('facility');
+          const facilityName = facilitySelect ? facilitySelect.options[facilitySelect.selectedIndex]?.text : 'St. Jude Regional Blood Bank';
+          const donationDate = document.getElementById('donationDate')?.value || new Date().toISOString().split('T')[0];
+          const slotTimeEl = document.querySelector('input[name="slot"]:checked');
+          const slotTime = slotTimeEl ? slotTimeEl.value : '10:00 AM';
+          const notes = document.getElementById('notes')?.value || '';
+
+          const submitBtn = form.querySelector('button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting to database...';
+          }
+
+          try {
+            await submitDonationRecord({
+              facilityName,
+              scheduledDate: donationDate,
+              slotTime,
+              notes,
+              bloodType: profile?.bloodType || 'O+'
+            });
+
+            alert('Donation record successfully submitted! Redirecting to your donation history...');
+            window.location.href = '../donation-history/index.html';
+          } catch (err) {
+            console.error('Submission error:', err);
+            alert('Failed to submit record. Please check your connection.');
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Submit Donation Record';
+            }
+          }
+        });
+      }
+
+      // Wire Logout
+      const logoutBtn = document.querySelector('.nav-item.logout');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          signOutUser();
+        });
+      }
+    });
   </script>
 
 </body>

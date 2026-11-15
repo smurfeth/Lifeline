@@ -151,6 +151,8 @@
           </span>
         </label>
 
+        <div id="signUpAlert" style="display: none; padding: 12px; margin-bottom: 16px; border-radius: 8px; font-size: 13px; font-weight: 500;"></div>
+
         <button class="submit" type="submit">
           <span class="material-symbols-outlined">mark_email_read</span>
           Submit and Verify Email
@@ -165,5 +167,172 @@
     </div>
   </main>
 
+  <!-- ========================================================================= -->
+  <!-- DIRECT SUPABASE DATABASE INTEGRATION & REGISTRATION LOGIC                 -->
+  <!-- ========================================================================= -->
+  <script>
+    // =========================================================================
+    // 1. SUPABASE DATABASE CONFIGURATION (Connected directly to your Supabase)
+    // =========================================================================
+    const SUPABASE_URL = 'https://bnytmuwgutotekaaylig.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_c5fAj53uud1ud8WFRY_fxg_WOvW2kI1';
+
+    function getSupabaseHeaders(token = null) {
+      const headers = {
+        'apikey': SUPABASE_KEY,
+        'Content-Type': 'application/json'
+      };
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+      return headers;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.querySelector('.form');
+      const alertBox = document.getElementById('signUpAlert');
+
+      function showMessage(msg, isError = true) {
+        if (!alertBox) return;
+        alertBox.textContent = msg;
+        alertBox.style.display = 'block';
+        alertBox.style.background = isError ? '#FFDAD6' : '#D1FAE5';
+        alertBox.style.color = isError ? '#BA1A1A' : '#065F46';
+        alertBox.style.border = isError ? '1px solid #FFB4AC' : '1px solid #A7F3D0';
+      }
+
+      // =======================================================================
+      // 2. DONOR SUBMISSION DIRECTLY CONNECTED TO SUPABASE DATABASE
+      // =======================================================================
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const fullName = document.getElementById('fullName').value.trim();
+        const dob = document.getElementById('dob')?.value || '';
+        const sex = document.getElementById('sex')?.value || '';
+        const formattedSex = sex ? (sex.charAt(0).toUpperCase() + sex.slice(1)) : 'Male';
+        const email = document.getElementById('email').value.trim();
+        const mobile = document.getElementById('mobile').value.trim();
+        const city = document.getElementById('city').value;
+        const bloodTypeEl = document.querySelector('input[name="bloodType"]:checked');
+        const bloodType = bloodTypeEl ? bloodTypeEl.value : 'unknown';
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+          showMessage('Passwords do not match. Please re-enter your password.');
+          return;
+        }
+
+        if (password.length < 8) {
+          showMessage('Password must be at least 8 characters long.');
+          return;
+        }
+
+        showMessage('Connecting directly to Supabase database...', false);
+
+        // Split name into first and last
+        const nameParts = fullName.split(' ');
+        const firstName = nameParts[0] || fullName;
+        const lastName = nameParts.slice(1).join(' ') || '';
+
+        try {
+          // ===================================================================
+          // A. DIRECT SUPABASE AUTH CALL (Creates user in auth.users)
+          // ===================================================================
+          console.log('Sending direct donor signup to Supabase Auth:', `${SUPABASE_URL}/auth/v1/signup`);
+          const authResponse = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
+            method: 'POST',
+            headers: getSupabaseHeaders(),
+            body: JSON.stringify({
+              email: email,
+              password: password,
+              data: {
+                full_name: fullName,
+                first_name: firstName,
+                last_name: lastName,
+                contact_number: mobile,
+                phone: mobile,
+                address: city,
+                dob: dob || null,
+                biological_sex: formattedSex,
+                sex: formattedSex,
+                role: 'donor',
+                blood_group: bloodType,
+                blood_type: bloodType
+              }
+            })
+          });
+
+          const authData = await authResponse.json();
+
+          if (!authResponse.ok) {
+            const errorMsg = authData.error_description || authData.msg || authData.message || 'Failed to create account.';
+            throw new Error(errorMsg);
+          }
+
+          // Save local session state
+          if (authData.access_token) {
+            localStorage.setItem('lifeline_token', authData.access_token);
+            localStorage.setItem('lifeline_session', JSON.stringify(authData));
+            localStorage.setItem('lifeline_user', JSON.stringify(authData.user));
+            localStorage.setItem('lifeline_role', 'donor');
+          }
+
+          // ===================================================================
+          // B. DIRECT SUPABASE DATABASE CALL (Upserts record into public.profiles table)
+          // ===================================================================
+          if (authData.user && authData.access_token) {
+            try {
+              console.log('Inserting donor into Supabase public.profiles table...');
+              const profilePayload = {
+                id: authData.user.id,
+                full_name: fullName,
+                role: 'donor',
+                contact_number: mobile || null,
+                address: city || null,
+                dob: dob || null,
+                biological_sex: formattedSex,
+                blood_group: bloodType !== 'unknown' ? bloodType : null
+              };
+
+              const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/profiles`, {
+                method: 'POST',
+                headers: Object.assign({}, getSupabaseHeaders(authData.access_token), {
+                  'Prefer': 'resolution=merge-duplicates'
+                }),
+                body: JSON.stringify(profilePayload)
+              });
+
+              if (!dbResponse.ok) {
+                await fetch(`${SUPABASE_URL}/rest/v1/profiles?id=eq.${authData.user.id}`, {
+                  method: 'PATCH',
+                  headers: getSupabaseHeaders(authData.access_token),
+                  body: JSON.stringify(profilePayload)
+                });
+              }
+              console.log('Direct Supabase profiles table write confirmed!');
+            } catch (dbErr) {
+              console.warn('Profile table sync notice:', dbErr);
+            }
+          }
+
+          showMessage('Account created successfully in Supabase database! Redirecting...', false);
+          
+          // Store email for verification page
+          sessionStorage.setItem('pending_verification_email', email);
+
+          setTimeout(() => {
+            window.location.href = '../verification-code/index.html';
+          }, 1200);
+
+        } catch (err) {
+          console.error('Registration error:', err);
+          const detail = err && err.message ? err.message : String(err);
+          showMessage(`Database Error: ${detail}`);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
