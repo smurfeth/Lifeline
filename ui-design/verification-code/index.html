@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verify Email Address - Lifeline</title>
+  <title>Verify Email Address – Lifeline</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
@@ -12,7 +12,6 @@
 <body>
   <div class="auth-page-wrapper">
     <div class="auth-ambient-glow" aria-hidden="true"></div>
-
     <div class="auth-card-container">
       <main class="auth-card">
         <!-- Brand Header -->
@@ -20,11 +19,9 @@
           <div class="brand-logo-wrapper">
             <img class="brand-logo" src="assets/lifeline-logo.jpg" alt="Lifeline Brand Logo" onerror="this.onerror=null; this.src='https://placehold.co/80x80?text=LIFE+LINE';">
           </div>
-
           <div class="brand-title">
             <span class="brand-title-life">LIFE</span><span class="brand-title-line">LINE</span>
           </div>
-
           <div class="brand-tagline">— YOUR BLOOD. THEIR HOPE —</div>
         </header>
 
@@ -57,14 +54,16 @@
           </div>
 
           <button type="submit" id="verifyBtn" class="btn-submit">
-            <span>Verify & Continue to Log In</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 01.5-.5h11.793l-3.147-3.146a.5.5 0 01.708-.708l4 4a.5.5 0 010 .708l-4 4a.5.5 0 01-.708-.708L13.293 8.5H1.5A.5.5 0 011 8z"/></svg>
+            <span>Verify &amp; Continue to Log In</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path fill-rule="evenodd" d="M1 8a.5.5 0 01.5-.5h11.793l-3.147-3.146a.5.5 0 01.708-.708l4 4a.5.5 0 010 .708l-4 4a.5.5 0 01-.708-.708L13.293 8.5H1.5A.5.5 0 011 8z"/>
+            </svg>
           </button>
         </form>
 
         <div class="resend-box">
           <span>Didn't receive code?</span>
-          <a class="resend-link" id="resendBtn">Resend Code</a>
+          <a class="resend-link" id="resendBtn" href="#">Resend Code</a>
         </div>
 
         <footer class="auth-footer">
@@ -74,10 +73,22 @@
     </div>
   </div>
 
+  <!-- EmailJS SDK & Verification Logic -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
+    const EMAILJS_PUBLIC_KEY = 'PASTE_YOUR_PUBLIC_KEY_HERE'; // Same Public Key from EmailJS -> Account
+    const EMAILJS_SERVICE_ID = 'service_ptlq86i';
+    const EMAILJS_TEMPLATE_ID = 'template_ucr92ve';
+
+    if (window.emailjs && EMAILJS_PUBLIC_KEY !== 'PASTE_YOUR_PUBLIC_KEY_HERE') {
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-      // Display pending registration email if available
       const pendingEmail = sessionStorage.getItem('pending_verification_email');
+      const pendingName = sessionStorage.getItem('pending_verification_name') || 'Donor';
+      const pendingBlood = sessionStorage.getItem('pending_verification_blood') || 'Not specified';
+
       if (pendingEmail) {
         const sub = document.getElementById('verifySubtitle');
         if (sub) {
@@ -90,10 +101,18 @@
       const alertBox = document.getElementById('verifyAlert');
       const resendBtn = document.getElementById('resendBtn');
 
-      // Auto-focus next input
+      function showAlert(msg, isSuccess = true) {
+        alertBox.className = isSuccess ? 'auth-alert-message is-success' : 'auth-alert-message is-error';
+        alertBox.textContent = msg;
+        alertBox.style.display = 'flex';
+      }
+
+      // Auto-focus next/previous box + allow pasting all 6 digits at once
       inputs.forEach((input, index) => {
         input.addEventListener('input', (e) => {
-          if (e.target.value.length === 1 && index < inputs.length - 1) {
+          const val = e.target.value.replace(/\D/g, '');
+          e.target.value = val.slice(0, 1);
+          if (val && index < inputs.length - 1) {
             inputs[index + 1].focus();
           }
         });
@@ -103,34 +122,68 @@
             inputs[index - 1].focus();
           }
         });
+
+        input.addEventListener('paste', (e) => {
+          e.preventDefault();
+          const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
+          pasted.split('').forEach((char, i) => {
+            if (inputs[i]) inputs[i].value = char;
+          });
+          if (pasted.length > 0) {
+            inputs[Math.min(pasted.length, inputs.length) - 1].focus();
+          }
+        });
       });
 
-      // Focus first input on load
-      if (inputs.length > 0) {
-        inputs[0].focus();
-      }
+      if (inputs.length > 0) inputs[0].focus();
 
-      // Handle submission
+      // Verify entered 6-digit code
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        alertBox.className = 'auth-alert-message is-success';
-        alertBox.textContent = 'Email verified successfully! Redirecting to Log In...';
-        alertBox.style.display = 'flex';
+        const enteredCode = Array.from(inputs).map((inp) => inp.value).join('');
+        const expectedCode = sessionStorage.getItem('pending_verification_code');
 
+        if (enteredCode.length < 6) {
+          showAlert('Please enter all 6 digits from your email.', false);
+          return;
+        }
+
+        if (expectedCode && enteredCode !== expectedCode) {
+          showAlert('Invalid verification code. Please check your email and try again.', false);
+          return;
+        }
+
+        sessionStorage.removeItem('pending_verification_code');
+        showAlert('Email verified successfully! Redirecting to Log In...', true);
         setTimeout(() => {
           window.location.href = '../login/index.html';
         }, 1200);
       });
 
-      // Resend button
-      resendBtn.addEventListener('click', (e) => {
+      // Resend real 6-digit code via EmailJS
+      resendBtn.addEventListener('click', async (e) => {
         e.preventDefault();
-        alertBox.className = 'auth-alert-message is-success';
-        alertBox.textContent = 'A new 6-digit code has been sent to your email!';
-        alertBox.style.display = 'flex';
-        setTimeout(() => {
-          alertBox.style.display = 'none';
-        }, 3000);
+        if (!pendingEmail) {
+          showAlert('No pending email found. Please register again.', false);
+          return;
+        }
+
+        const newCode = Math.floor(100000 + Math.random() * 900000).toString();
+        sessionStorage.setItem('pending_verification_code', newCode);
+        showAlert('Sending new code...', true);
+
+        try {
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            donor_name: pendingName,
+            donor_email: pendingEmail,
+            blood_type: pendingBlood,
+            verification_code: newCode
+          });
+          showAlert(`A new 6-digit code has been sent to ${pendingEmail}!`, true);
+        } catch (err) {
+          console.error('Resend failed:', err);
+          showAlert('Failed to resend email: ' + (err.text || err.message || 'Check EmailJS keys'), false);
+        }
       });
     });
   </script>
