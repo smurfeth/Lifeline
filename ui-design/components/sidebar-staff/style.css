@@ -1,7 +1,145 @@
-﻿html, body { margin: 0; padding: 0; width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; overflow-x: hidden; background: #FFF8F5; }
-body { overflow-x: clip; }
-* { box-sizing: border-box; }
-.lifeline-page-shell { width: 100%; max-width: 100%; min-width: 0; height: auto !important; overflow: hidden; }
-.lifeline-page-shell > [style*="width: 1280px"], .lifeline-page-shell > [style*="width: 1300px"] { width: 100% !important; max-width: 100%; min-width: 0; height: auto !important; box-sizing: border-box; }
-@media (max-width: 960px) { .lifeline-page-shell { overflow: visible; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
+﻿/* =====================================================================
+   Lifeline sidebar - built from the Figma exports, pure CSS (no JavaScript)
+   Markup: components/sidebar-donor.html | sidebar-staff.html | sidebar-admin.html
+   Each page: paste the snippet right after <body data-page="..."> and use
+   <label for="lifelineNav" class="lifeline-menu-btn"> as the menu button.
+   ===================================================================== */
+
+/* Hidden checkbox that stores open / closed */
+.lifeline-nav-toggle { position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; z-index: -1; }
+html:has(.lifeline-nav-toggle:checked) { overflow: hidden; }
+
+/* Menu button (label in the top bar) */
+.lifeline-menu-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border-radius: 8px; cursor: pointer; transition: background .15s; }
+.lifeline-menu-btn:hover { background: #F5ECE8; }
+.lifeline-burger { width: 18px; height: 12px; display: flex; flex-direction: column; justify-content: space-between; }
+.lifeline-burger i { display: block; height: 2px; border-radius: 2px; background: #5B403D; }
+
+/* Backdrop (click to close) */
+.lifeline-sb-backdrop { position: fixed; inset: 0; display: block; background: rgba(15, 23, 42, 0.55); backdrop-filter: blur(4px); z-index: 10000; opacity: 0; visibility: hidden; cursor: pointer; transition: opacity 250ms ease, visibility 250ms ease; }
+.lifeline-nav-toggle:checked ~ .lifeline-sb-backdrop { opacity: 1; visibility: visible; }
+
+/* Drawer shell */
+.lifeline-sb { position: fixed; top: 0; left: 0; bottom: 0; z-index: 10001; max-width: 90vw; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; background: #263238; overflow-y: auto; font-family: 'Inter', sans-serif; transform: translateX(-100%); visibility: hidden; transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms; }
+.lifeline-nav-toggle:checked ~ .lifeline-sb { transform: none; visibility: visible; }
+.lifeline-sb, .lifeline-sb * { box-sizing: border-box; }
+.lifeline-sb a { text-decoration: none; }
+.lifeline-sb-main, .lifeline-sb-foot { align-self: stretch; }
+
+/* Shared pieces */
+.lifeline-sb-brand { display: flex; align-items: center; gap: 20px; align-self: stretch; }
+.lifeline-sb-logo { width: 40px; height: 40px; padding: 2px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #fff; border-radius: 9999px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); }
+.lifeline-sb-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 9999px; }
+.lifeline-sb-brandtext { display: flex; flex-direction: column; }
+.lifeline-sb-wordmark { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #fff; }
+.lifeline-sb-wordmark span { color: #E53935; }
+.lifeline-sb-tagline span { color: #E53935; }
+.lifeline-sb-nav { display: flex; flex-direction: column; gap: 4px; align-self: stretch; }
+.lifeline-sb-link { display: flex; align-items: center; border-radius: 8px; font-size: 14px; line-height: 20px; white-space: nowrap; transition: background .15s, color .15s; }
+.lifeline-sb-link:hover { background: rgba(255, 255, 255, 0.08); }
+.lifeline-sb-icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.lifeline-sb-icon svg { width: 100%; height: 100%; display: block; }
+.lifeline-sb-logout { display: flex; align-items: center; font-size: 14px; font-weight: 600; line-height: 20px; border-radius: 8px; transition: background .15s; }
+.lifeline-sb-logout:hover { background: rgba(255, 255, 255, 0.06); }
+.lifeline-sb a:focus-visible { outline: 2px solid #E53935; outline-offset: 2px; }
+
+/* ---------- Donor (288 wide) ---------- */
+.lifeline-sb--donor { width: 288px; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04); }
+.lifeline-sb--donor .lifeline-sb-main { padding: 24px; display: flex; flex-direction: column; gap: 26px; }
+.lifeline-sb--donor .lifeline-sb-wordmark { font-size: 20px; line-height: 28px; letter-spacing: 0.5px; }
+.lifeline-sb--donor .lifeline-sb-tagline { font-size: 11px; font-weight: 500; line-height: 13.75px; color: #F5ECE8; }
+.lifeline-sb--donor .lifeline-sb-link { gap: 8px; padding: 8px 16px; font-weight: 600; color: #D7E4EC; }
+.lifeline-sb--donor .lifeline-sb-icon { width: 16px; height: 16px; }
+.lifeline-sb--donor .lifeline-sb-foot { padding: 24px; }
+.lifeline-sb--donor .lifeline-sb-logout { gap: 8px; padding: 8px 16px; color: #E53935; }
+.lifeline-sb--donor .lifeline-sb-logout .lifeline-sb-icon { width: 16px; height: 16px; }
+
+/* ---------- Staff (288 wide) ---------- */
+.lifeline-sb--staff { width: 288px; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04); }
+.lifeline-sb--staff .lifeline-sb-main { padding: 24px; display: flex; flex-direction: column; gap: 24px; }
+.lifeline-sb--staff .lifeline-sb-head { display: flex; flex-direction: column; gap: 4px; align-self: stretch; }
+.lifeline-sb--staff .lifeline-sb-logo { padding: 0; }
+.lifeline-sb--staff .lifeline-sb-brandtext { width: 165px; }
+.lifeline-sb--staff .lifeline-sb-wordmark { font-size: 22px; line-height: 22px; }
+.lifeline-sb--staff .lifeline-sb-tagline { padding-top: 2px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; line-height: 11px; color: #94A3B8; }
+.lifeline-sb--staff .lifeline-sb-section { padding: 16px 12px 8px; font-size: 11px; font-weight: 700; line-height: 24px; letter-spacing: 0.55px; text-transform: uppercase; color: #90A4AE; }
+.lifeline-sb--staff .lifeline-sb-link { gap: 8px; padding: 8px 16px; font-weight: 600; color: #D7E4EC; }
+.lifeline-sb--staff .lifeline-sb-link.is-lead { gap: 12px; padding: 8px 12px 8px 16px; font-weight: 500; color: #CBD5E1; }
+.lifeline-sb--staff .lifeline-sb-icon { width: 20px; height: 20px; padding: 2.5px; }
+.lifeline-sb--staff .lifeline-sb-foot { padding: 24px 24px 26px; }
+.lifeline-sb--staff .lifeline-sb-logout { display: inline-flex; gap: 8px; padding: 4px 8px; color: #B7131A; }
+.lifeline-sb--staff .lifeline-sb-logout .lifeline-sb-icon { width: 15px; height: 15px; padding: 0; }
+
+/* ---------- Admin (256 wide) ---------- */
+.lifeline-sb--admin { width: 256px; padding: 24px; box-shadow: 0 12px 32px -4px rgba(38, 50, 56, 0.12); }
+.lifeline-sb--admin .lifeline-sb-main { display: flex; flex-direction: column; }
+.lifeline-sb--admin .lifeline-sb-wordmark { font-size: 18px; line-height: 18px; }
+.lifeline-sb--admin .lifeline-sb-tagline { width: 149px; padding-top: 4px; font-size: 10px; font-weight: 400; line-height: 20px; color: #CFD8DC; }
+.lifeline-sb--admin .lifeline-sb-section { padding: 33px 0 16px; font-size: 11px; font-weight: 600; line-height: 20px; letter-spacing: 0.55px; text-transform: uppercase; color: rgba(207, 216, 220, 0.7); }
+.lifeline-sb--admin .lifeline-sb-link { gap: 12px; padding: 10px 12px; font-weight: 500; color: #CFD8DC; }
+.lifeline-sb--admin .lifeline-sb-link.is-lead { gap: 8px; padding: 8px 16px; font-weight: 400; }
+.lifeline-sb--admin .lifeline-sb-icon { width: 16px; height: 16px; }
+.lifeline-sb--admin .lifeline-sb-foot { padding: 16px 0 0; }
+.lifeline-sb--admin .lifeline-sb-logout { display: inline-flex; gap: 10px; padding: 8px 12px; color: #E53935; }
+.lifeline-sb--admin .lifeline-sb-logout .lifeline-sb-icon { width: 16px; height: 16px; }
+
+/* ---------- Current page (set <body data-page="..."> on each page) ---------- */
+body[data-page="dashboard"] .lifeline-sb-link[data-link="dashboard"],
+body[data-page="submit-donation"] .lifeline-sb-link[data-link="submit-donation"],
+body[data-page="donation-history"] .lifeline-sb-link[data-link="donation-history"],
+body[data-page="donation-drives"] .lifeline-sb-link[data-link="donation-drives"],
+body[data-page="profile"] .lifeline-sb-link[data-link="profile"],
+body[data-page="donation-records"] .lifeline-sb-link[data-link="donation-records"],
+body[data-page="pending-reviews"] .lifeline-sb-link[data-link="pending-reviews"],
+body[data-page="facility-profile"] .lifeline-sb-link[data-link="facility-profile"],
+body[data-page="hospitals-blood-banks"] .lifeline-sb-link[data-link="hospitals-blood-banks"] { background: rgba(255, 255, 255, 0.12); color: #fff; }
+
+/* Raw Figma exports: keep the absolute top bar pinned (this used to be injected by sidebar.js) */
+div[style*="position: absolute"][style*="backdrop-filter: blur(12px)"] { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; max-width: 100% !important; z-index: 1000 !important; box-sizing: border-box !important; }
+
+@media (prefers-reduced-motion: reduce) { .lifeline-sidebar-drawer, .lifeline-sidebar-backdrop, .lifeline-sb, .lifeline-sb-backdrop { transition: none; } }
+
+/* ---- Legacy: pages that still load components/sidebar.js (remove once every page uses the snippets) ---- */
+/* Backdrop */
+.lifeline-sidebar-backdrop { position: fixed; inset: 0; display: block; background: rgba(15, 23, 42, 0.55); backdrop-filter: blur(4px); z-index: 10000; opacity: 0; visibility: hidden; cursor: pointer; transition: opacity 250ms ease, visibility 250ms ease; }
+
+/* Drawer */
+.lifeline-sidebar-drawer { position: fixed; top: 0; left: 0; bottom: 0; width: 290px; max-width: 85vw; height: 100vh; background: #263238; color: #fff; z-index: 10001; box-shadow: 8px 0 24px rgba(0, 0, 0, 0.25); transform: translateX(-100%); visibility: hidden; transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+
+.lifeline-drawer-header { padding: 24px 20px 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: space-between; }
+.lifeline-drawer-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.lifeline-drawer-logo { width: 36px; height: 36px; border-radius: 9999px; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+.lifeline-drawer-logo img { width: 100%; height: 100%; object-fit: contain; padding: 2px; }
+.lifeline-drawer-brand-text { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; letter-spacing: 0.5px; line-height: 20px; }
+.lifeline-drawer-brand-text .life { color: #fff; }
+.lifeline-drawer-brand-text .line { color: #E53935; }
+.lifeline-drawer-tagline { margin-top: 2px; font-size: 10px; font-weight: 500; letter-spacing: 0.3px; color: #94A3B8; }
+.lifeline-drawer-close-btn { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94A3B8; cursor: pointer; transition: all 150ms ease; }
+.lifeline-drawer-close-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+.lifeline-drawer-role-badge { margin: 14px 20px 8px; padding: 4px 10px; width: fit-content; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; background: rgba(255, 255, 255, 0.08); color: #CBD5E1; }
+
+.lifeline-drawer-nav { padding: 8px 16px; display: flex; flex-direction: column; gap: 4px; }
+.lifeline-drawer-link { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 10px; color: #CBD5E1; font-size: 13.5px; font-weight: 500; text-decoration: none; transition: all 150ms ease; }
+.lifeline-drawer-link:hover { background: rgba(255, 255, 255, 0.08); color: #fff; transform: translateX(3px); }
+.lifeline-drawer-link-icon { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; opacity: 0.85; }
+
+.lifeline-drawer-footer { padding: 16px 20px 24px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.lifeline-drawer-logout-btn { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; color: #EF4444; font-size: 13.5px; font-weight: 600; text-decoration: none; transition: all 150ms ease; }
+.lifeline-drawer-logout-btn:hover { background: rgba(239, 68, 68, 0.12); transform: translateX(3px); }
+
+.lifeline-sidebar-drawer.is-open { transform: translateX(0); visibility: visible; }
+.lifeline-sidebar-backdrop.is-open { opacity: 1; visibility: visible; }
+.lifeline-drawer-link.active { background: #E53935; color: #fff; font-weight: 600; box-shadow: 0 2px 8px rgba(229, 57, 53, 0.3); }
+.lifeline-drawer-link.active .lifeline-drawer-link-icon { opacity: 1; }
+.lifeline-role-switcher { margin: 10px 16px; padding: 8px; border-radius: 12px; background: rgba(15, 23, 42, 0.4); display: flex; flex-direction: column; gap: 6px; }
+.lifeline-role-switcher-title { padding-left: 4px; font-size: 10px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px; }
+.lifeline-role-switcher-btns { display: flex; gap: 4px; }
+.lifeline-role-pill { flex: 1; padding: 5px 6px; border-radius: 6px; font-size: 11px; font-weight: 600; text-align: center; text-decoration: none; color: #94A3B8; background: rgba(255, 255, 255, 0.04); transition: all 150ms ease; }
+.lifeline-role-pill:hover { color: #fff; background: rgba(255, 255, 255, 0.1); }
+.lifeline-role-pill.current { background: #BA1A1A; color: #fff; }
+.lifeline-toast { position: fixed; bottom: 24px; right: 24px; background: #263238; color: #fff; padding: 12px 20px; border-radius: 8px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); font-size: 14px; font-weight: 500; z-index: 10002; opacity: 0; transform: translateY(12px); transition: all 250ms ease; pointer-events: none; }
+.lifeline-toast.show { opacity: 1; transform: translateY(0); }
+.lifeline-toast.is-success { background: #006947; }
+.lifeline-toast.is-warning { background: #D97706; }
+.lifeline-toast.is-info { background: #1E293B; }

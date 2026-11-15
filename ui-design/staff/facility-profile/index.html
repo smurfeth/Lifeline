@@ -1,889 +1,158 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lifeline UI Design</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Facility Profile – Lifeline Staff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="lifeline-page-shell">
-<div style="width: 1280px; padding-top: 80px; padding-bottom: 48px; padding-left: 24px; padding-right: 24px; position: relative; background: linear-gradient(0deg, #FFF8F5 0%, #FFF8F5 100%), white; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-  <div style="width: 100%; max-width: 1280px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 24px; display: flex">
-    <div style="align-self: stretch; padding-top: 8px; justify-content: space-between; align-items: center; display: inline-flex">
-      <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: inline-flex">
-        <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-          <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 24px; font-family: Montserrat; font-weight: 700; line-height: 32px; word-wrap: break-word">Facility Profile & Clinical Operations</div>
+
+  <!-- ===== Sidebar (opens with the menu button) ===== -->
+  <aside class="sidebar" id="sidebar" aria-label="Main menu">
+    <div class="sidebar-top">
+      <div class="sidebar-brand">
+        <img class="sidebar-logo" src="../../assets/Lifeline%20Logo.png" alt="Lifeline logo">
+        <div>
+          <div class="sidebar-name">LIFE<span>LINE</span></div>
+          <div class="sidebar-tag">— Your Blood. <span>Their Hope</span> —</div>
         </div>
-        <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-          <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 20px; word-wrap: break-word">Facility operational status, active phlebotomy beds, cold-chain telemetry, and staff shift roster.</div>
-        </div>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
+          <span class="material-symbols-outlined">close</span>
+        </button>
       </div>
-      <div style="justify-content: flex-start; align-items: center; gap: 12px; display: flex">
-        <div style="height: 40px; padding-left: 16px; padding-right: 16px; background: white; border-radius: 8px; outline: 1px #E2E8F0 solid; outline-offset: -1px; justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-          <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-            <div style="width: 10.80px; height: 11.70px; background: #334155"></div>
-          </div>
-          <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-            <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Export Clinic Report</div>
-          </div>
-        </div>
-        <div style="height: 40px; padding-left: 16px; padding-right: 16px; background: #E53935; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-          <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-            <div style="width: 12.60px; height: 12.60px; background: white"></div>
-          </div>
-          <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-            <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Save Profile Changes</div>
-          </div>
-        </div>
-      </div>
+      <div class="sidebar-label">Staff Operations</div>
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="../dashboard/index.html">
+          <span class="material-symbols-outlined">dashboard</span> Dashboard
+        </a>
+        <a class="nav-item" href="../donation-records/index.html">
+          <span class="material-symbols-outlined">description</span> Donation Records
+        </a>
+        <a class="nav-item" href="../pending-reviews/index.html">
+          <span class="material-symbols-outlined">pending_actions</span> Pending Reviews
+        </a>
+        <a class="nav-item" href="../donation-drives/index.html">
+          <span class="material-symbols-outlined">event_available</span> Donation Drives
+        </a>
+        <a class="nav-item active" href="../facility-profile/index.html">
+          <span class="material-symbols-outlined">apartment</span> Facility Profile
+        </a>
+      </nav>
     </div>
-    <div style="align-self: stretch; padding: 16px; background: #FFEBEE; border-radius: 12px; border-left: 4px #FEE2E2 solid; border-top: 1px #FEE2E2 solid; border-right: 1px #FEE2E2 solid; border-bottom: 1px #FEE2E2 solid; justify-content: space-between; align-items: center; display: inline-flex">
-      <div style="justify-content: flex-start; align-items: center; gap: 14px; display: flex">
-        <div style="width: 36px; height: 36px; background: white; border-radius: 8px; outline: 1px #FECACA solid; outline-offset: -1px; justify-content: center; align-items: center; display: flex">
-          <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="width: 17.97px; height: 14.48px; background: #E53935"></div>
-          </div>
-        </div>
-        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 2px; display: inline-flex">
-          <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-            <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #450A0A; font-size: 14px; font-family: Inter; font-weight: 700; line-height: 20px; word-wrap: break-word">Urgent Call: O-Negative Cryo Demand Alert</div>
-            </div>
-            <div style="padding-left: 8px; padding-right: 8px; padding-top: 2px; padding-bottom: 2px; background: #FEE2E2; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 10px; font-family: Inter; font-weight: 700; text-transform: uppercase; line-height: 15px; letter-spacing: 0.50px; word-wrap: break-word">PRIORITY HIGH</div>
-            </div>
-          </div>
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="justify-content: center; display: flex; flex-direction: column; color: #991B1B; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Regional Level 1 Trauma request received from Vicente Sotto Memorial. Beds 1–2 prioritized for immediate intake.</div>
-          </div>
-        </div>
-      </div>
-      <div style="padding-left: 12px; padding-right: 12px; padding-top: 4px; padding-bottom: 4px; background: white; border-radius: 8px; outline: 1px #FECACA solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-        <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">Dispatch Queue: 4 Units</div>
-      </div>
+    <div class="sidebar-bottom">
+      <a class="nav-item logout" href="../../login/index.html">
+        <span class="material-symbols-outlined">logout</span> Log Out
+      </a>
     </div>
-    <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-      <div style="align-self: stretch; padding: 20px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 12px; outline: 1px rgba(226, 232, 240, 0.90) solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 241px; display: inline-flex">
-        <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-          <div style="align-self: stretch; justify-content: space-between; align-items: flex-start; display: inline-flex">
-            <div style="justify-content: flex-start; align-items: flex-start; gap: 12px; display: flex">
-              <div style="width: 48px; height: 48px; background: #FEF2F2; border-radius: 12px; outline: 1px #FEE2E2 solid; outline-offset: -1px; justify-content: center; align-items: center; display: flex">
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="width: 19.50px; height: 19.50px; background: #E53935"></div>
-                </div>
-              </div>
-              <div style="padding-bottom: 5px; padding-right: 47.94px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 3.75px; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 18px; font-family: Montserrat; font-weight: 700; line-height: 22.50px; word-wrap: break-word">St. Jude Regional Blood<br/>Bank</div>
-                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="width: 12.60px; height: 11.90px; background: #047857"></div>
-                  </div>
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #047857; font-size: 12px; font-family: Inter; font-weight: 700; text-transform: uppercase; line-height: 16px; letter-spacing: 0.30px; word-wrap: break-word">ACCREDITED CENTER</div>
-                </div>
-              </div>
-            </div>
-            <div style="padding-top: 6px; padding-bottom: 12px; padding-left: 6px; padding-right: 6px; border-radius: 6px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-              <div style="justify-content: center; align-items: flex-start; display: inline-flex">
-                <div style="width: 15.20px; height: 15.20px; background: #94A3B8"></div>
-              </div>
-            </div>
-          </div>
-          <div style="align-self: stretch; padding: 12px; background: #F8F9FA; border-radius: 8px; outline: 1px #F1F5F9 solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-            <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-              <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">DOH LICENSE & REGULATORY ID</div>
-            </div>
-            <div style="align-self: stretch; padding-right: 0.01px; justify-content: space-between; align-items: center; display: inline-flex">
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Liberation Mono; font-weight: 700; line-height: 20px; word-wrap: break-word">DOH-BB-CEB-00063</div>
-              </div>
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 4px; padding-bottom: 4px; background: #D1FAE5; border-radius: 9999px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #065F46; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Active • Valid Dec 2026</div>
-              </div>
-            </div>
-          </div>
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: flex">
-            <div style="align-self: stretch; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
-              <div style="padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="width: 11.70px; height: 14.40px; background: #E53935"></div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">FACILITY ADDRESS</div>
-                </div>
-                <div style="align-self: stretch; padding-bottom: 0.63px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 22.75px; word-wrap: break-word">Banilad Gov. Cuenco Ave, Cebu City, 6000,<br/>Central Visayas</div>
-                </div>
-              </div>
-            </div>
-            <div style="align-self: stretch; padding-top: 8px; border-top: 1px #F1F5F9 solid; justify-content: center; align-items: flex-start; gap: 8px; display: inline-flex">
-              <div style="flex: 1 1 0; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-                <div style="padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="width: 11.90px; height: 11.89px; background: #E53935"></div>
-                </div>
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                    <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">HOTLINE</div>
-                  </div>
-                  <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                    <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">+63 (032) 416-2020</div>
-                  </div>
-                </div>
-              </div>
-              <div style="flex: 1 1 0; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-                <div style="padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="width: 12.75px; height: 12.74px; background: #94A3B8"></div>
-                </div>
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                    <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">DISPATCH EXT</div>
-                  </div>
-                  <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                    <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Ext 104 / 108</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style="align-self: stretch; padding-top: 8px; border-top: 1px #F1F5F9 solid; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
-              <div style="padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="width: 14.40px; height: 14.40px; background: #64748B"></div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">OPERATING HOURS</div>
-                </div>
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">Mon - Sat: 07:00 AM - 07:00 PM</div>
-                </div>
-                <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                    <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #047857; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Emergency Transfusion On-Call 24/7</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div style="align-self: stretch; padding-top: 12px; border-top: 1px #E2E8F0 solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">CLINICAL & ADMINISTRATIVE LEADS</div>
-          </div>
-          <div style="align-self: stretch; padding: 10px; background: #F8F9FA; border-radius: 8px; outline: 1px #F1F5F9 solid; outline-offset: -1px; justify-content: space-between; align-items: center; display: inline-flex">
-            <div style="justify-content: flex-start; align-items: center; gap: 10px; display: flex">
-              <div style="width: 32px; height: 32px; padding-top: 7.50px; padding-bottom: 8.50px; background: #E2E8F0; border-radius: 9999px; justify-content: center; align-items: center; display: flex">
-                <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">AV</div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Inter; font-weight: 700; line-height: 20px; word-wrap: break-word">Dr. Anthony Villamor, MD</div>
-                </div>
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Lead Medical Director • Pathology</div>
-                </div>
-              </div>
-            </div>
-            <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="width: 11.70px; height: 14.40px; background: #059669"></div>
-            </div>
-          </div>
-          <div style="align-self: stretch; padding: 10px; background: #F8F9FA; border-radius: 8px; outline: 1px #F1F5F9 solid; outline-offset: -1px; justify-content: space-between; align-items: center; display: inline-flex">
-            <div style="justify-content: flex-start; align-items: center; gap: 10px; display: flex">
-              <div style="width: 32px; height: 32px; padding-top: 7.50px; padding-bottom: 8.50px; background: #FEE2E2; border-radius: 9999px; justify-content: center; align-items: center; display: flex">
-                <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">MR</div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Inter; font-weight: 700; line-height: 20px; word-wrap: break-word">Maria Elena Ramos, RN, RMT</div>
-                </div>
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Chief Phlebotomist / Lab Manager</div>
-                </div>
-              </div>
-            </div>
-            <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="width: 11.70px; height: 14.40px; background: #E53935"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 24px; display: inline-flex">
-        <div style="align-self: stretch; padding: 20px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 12px; outline: 1px rgba(226, 232, 240, 0.90) solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-          <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
-            <div style="justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="width: 16px; height: 16px; background: #E53935"></div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 18px; font-family: Montserrat; font-weight: 700; line-height: 28px; word-wrap: break-word">Cold Storage Telemetry</div>
-              </div>
-            </div>
-            <div style="padding-left: 10px; padding-right: 10px; padding-top: 4px; padding-bottom: 4px; background: #F1F5F9; border-radius: 9999px; outline: 1px #E2E8F0 solid; outline-offset: -1px; justify-content: flex-start; align-items: center; gap: 6px; display: flex">
-              <div style="width: 6px; height: 6px; background: #E53935; border-radius: 9999px"></div>
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Live Sensors Active</div>
-            </div>
-          </div>
-          <div style="align-self: stretch; justify-content: center; align-items: flex-start; gap: 12px; display: inline-flex">
-            <div style="flex: 1 1 0; padding: 14px; background: #F8F9FA; border-radius: 8px; outline: 1px #E2E8F0 solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
-              <div style="align-self: stretch; padding-right: 0.01px; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">WHOLE BLOOD</div>
-                </div>
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="width: 10.40px; height: 12.80px; background: #E53935"></div>
-                </div>
-              </div>
-              <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; display: flex">
-                <div style="align-self: stretch; height: 32px; position: relative">
-                  <div style="left: 0px; top: -0.50px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 24px; font-family: Montserrat; font-weight: 700; line-height: 32px; word-wrap: break-word">340 </div>
-                  <div style="left: 51.43px; top: 11.50px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Montserrat; font-weight: 600; line-height: 16px; word-wrap: break-word">/ 500 units</div>
-                </div>
-                <div style="align-self: stretch; height: 6px; position: relative; background: #E2E8F0; overflow: hidden; border-radius: 9999px">
-                  <div style="width: 104.59px; height: 6px; left: 0px; top: 0px; position: absolute; background: #E53935; border-radius: 9999px"></div>
-                </div>
-              </div>
-              <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="padding-right: 20.50px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #047857; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">68%<br/>Capacity</div>
-                </div>
-                <div style="padding-right: 36.47px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #047857; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Optimal<br/>Surplus</div>
-                </div>
-              </div>
-            </div>
-            <div style="flex: 1 1 0; padding: 14px; background: #F8F9FA; border-radius: 8px; outline: 1px #E2E8F0 solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 13.50px; display: inline-flex">
-              <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">PRBC CELLS</div>
-                </div>
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="width: 11.20px; height: 11.20px; background: #059669"></div>
-                </div>
-              </div>
-              <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-                <div style="align-self: stretch; height: 32px; position: relative">
-                  <div style="left: 0px; top: -0.50px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 24px; font-family: Montserrat; font-weight: 700; line-height: 32px; word-wrap: break-word">180 </div>
-                  <div style="left: 45.94px; top: 11.50px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Montserrat; font-weight: 600; line-height: 16px; word-wrap: break-word">units</div>
-                </div>
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Target: 2°C – 6°C</div>
-                </div>
-              </div>
-              <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
-                <div style="width: 6px; height: 6px; background: #10B981; border-radius: 9999px"></div>
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #047857; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">4.1°C Stable</div>
-              </div>
-            </div>
-            <div style="flex: 1 1 0; padding: 14px; background: #F8F9FA; border-radius: 8px; outline: 1px #E2E8F0 solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 13.50px; display: inline-flex">
-              <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">FFP VAULT A</div>
-                </div>
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="width: 12px; height: 12.80px; background: #0284C7"></div>
-                </div>
-              </div>
-              <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-                <div style="align-self: stretch; height: 32px; position: relative">
-                  <div style="left: 0px; top: -0.50px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 24px; font-family: Montserrat; font-weight: 700; line-height: 32px; word-wrap: break-word">88% </div>
-                  <div style="left: 56.89px; top: 11.50px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Montserrat; font-weight: 600; line-height: 16px; word-wrap: break-word">fill</div>
-                </div>
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Deep Cryo Freezer</div>
-                </div>
-              </div>
-              <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
-                <div style="width: 6px; height: 6px; background: #10B981; border-radius: 9999px"></div>
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #047857; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">-30.4°C Vault</div>
-              </div>
-            </div>
-            <div style="flex: 1 1 0; padding: 14px; background: #F8F9FA; border-radius: 8px; outline: 1px #E2E8F0 solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 13.50px; display: inline-flex">
-              <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 600; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">PLATELETS</div>
-                </div>
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="width: 15.20px; height: 11.20px; background: #E53935"></div>
-                </div>
-              </div>
-              <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 24px; font-family: Montserrat; font-weight: 700; line-height: 32px; word-wrap: break-word">Agitator 1</div>
-                </div>
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Continuous Motion</div>
-                </div>
-              </div>
-              <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
-                <div style="width: 6px; height: 6px; background: #10B981; border-radius: 9999px"></div>
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #047857; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">22.0°C Rocking</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div style="align-self: stretch; padding: 20px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 12px; outline: 1px rgba(226, 232, 240, 0.90) solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-          <div style="align-self: stretch; padding-bottom: 12px; border-bottom: 1px #F1F5F9 solid; justify-content: space-between; align-items: center; display: inline-flex">
-            <div style="justify-content: flex-start; align-items: center; gap: 10px; display: flex">
-              <div style="width: 32px; height: 32px; background: #FEF2F2; border-radius: 8px; outline: 1px #FEE2E2 solid; outline-offset: -1px; justify-content: center; align-items: center; display: flex">
-                <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                  <div style="width: 16px; height: 8.50px; background: #E53935"></div>
-                </div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 2px; display: inline-flex">
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 18px; font-family: Montserrat; font-weight: 700; line-height: 22.50px; word-wrap: break-word">Phlebotomy Station Grid</div>
-                </div>
-                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">4 clinical phlebotomy stations • Real-time telemetry</div>
-                </div>
-              </div>
-            </div>
-            <div style="justify-content: flex-start; align-items: center; gap: 6px; display: flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 4px; padding-bottom: 4px; background: #F1F5F9; border-radius: 9999px; outline: 1px #E2E8F0 solid; outline-offset: -1px; justify-content: center; align-items: center; display: flex">
-                <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">All (4)</div>
-              </div>
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 4px; padding-bottom: 4px; background: #FEF2F2; border-radius: 9999px; outline: 1px #FECACA solid; outline-offset: -1px; justify-content: flex-start; align-items: center; gap: 6px; display: flex">
-                <div style="width: 6px; height: 6px; background: #E53935; border-radius: 9999px"></div>
-                <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Occupied (1)</div>
-              </div>
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 4px; padding-bottom: 4px; background: #FFFBEB; border-radius: 9999px; outline: 1px #FDE68A solid; outline-offset: -1px; justify-content: flex-start; align-items: center; gap: 6px; display: flex">
-                <div style="width: 6px; height: 6px; background: #F59E0B; border-radius: 9999px"></div>
-                <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #92400E; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Sanitizing (1)</div>
-              </div>
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 4px; padding-bottom: 4px; background: #F1F5F9; border-radius: 9999px; outline: 1px #E2E8F0 solid; outline-offset: -1px; justify-content: flex-start; align-items: center; gap: 6px; display: flex">
-                <div style="width: 6px; height: 6px; background: #475569; border-radius: 9999px"></div>
-                <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Available (2)</div>
-              </div>
-            </div>
-          </div>
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="align-self: stretch; padding: 16px; background: #F8F9FA; border-radius: 12px; outline: 1px #FECACA solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
-              <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-                <div style="align-self: stretch; padding-bottom: 8px; border-bottom: 1px #E2E8F0 solid; justify-content: space-between; align-items: center; display: inline-flex">
-                  <div style="justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-                    <div style="width: 10px; height: 10px; background: #E53935; border-radius: 9999px"></div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 14px; font-family: Montserrat; font-weight: 700; line-height: 20px; word-wrap: break-word">Bed 01</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">• Whole Blood</div>
-                    </div>
-                  </div>
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 2px; padding-bottom: 2px; background: #FEE2E2; border-radius: 9999px; outline: 1px #FECACA solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Occupied</div>
-                  </div>
-                </div>
-                <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 2px; display: flex">
-                  <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 7.99px; display: inline-flex">
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">Donor #441</div>
-                    </div>
-                    <div style="padding-left: 6px; padding-right: 6px; padding-top: 2px; padding-bottom: 2px; background: #FEE2E2; border-radius: 4px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">O+</div>
-                    </div>
-                  </div>
-                  <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                    <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Session: 12 mins elapsed • Standard Whole Blood</div>
-                  </div>
-                </div>
-                <div style="align-self: stretch; padding-top: 4px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="align-self: stretch; padding: 8px; background: white; border-radius: 8px; outline: 1px #E2E8F0 solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
-                    <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
-                      <div style="justify-content: flex-start; align-items: center; gap: 3.99px; display: flex">
-                        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                          <div style="width: 9.10px; height: 11.20px; background: #E53935"></div>
-                        </div>
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #475569; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">Collection Volume</div>
-                      </div>
-                      <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                        <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 14px; font-family: Inter; font-weight: 700; line-height: 20px; word-wrap: break-word">450 / 500 mL (80%)</div>
-                      </div>
-                    </div>
-                    <div style="align-self: stretch; height: 6px; position: relative; background: #F1F5F9; overflow: hidden; border-radius: 9999px">
-                      <div style="width: 260.53px; height: 6px; left: 0px; top: 0px; position: absolute; background: #E53935; border-radius: 9999px"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div style="align-self: stretch; padding-top: 8px; border-top: 1px #E2E8F0 solid; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="width: 9px; height: 9px; background: #94A3B8"></div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="justify-content: center; display: flex; flex-direction: column"><span style="color: #475569; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Phleb: </span><span style="color: #1E293B; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">M. Ramos, RN</span></div>
-                  </div>
-                </div>
-                <div style="height: 32px; padding-left: 12px; padding-right: 12px; background: white; border-radius: 8px; outline: 1px #E2E8F0 solid; outline-offset: -1px; justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-                    <div style="width: 9px; height: 9px; background: #E53935"></div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Telemetry</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style="align-self: stretch; padding: 16px; background: #F8F9FA; border-radius: 12px; outline: 1px #FDE68A solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 34px; display: inline-flex">
-              <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-                <div style="align-self: stretch; padding-bottom: 8px; border-bottom: 1px #E2E8F0 solid; justify-content: space-between; align-items: center; display: inline-flex">
-                  <div style="justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-                    <div style="width: 10px; height: 10px; background: #F59E0B; border-radius: 9999px"></div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 14px; font-family: Montserrat; font-weight: 700; line-height: 20px; word-wrap: break-word">Bed 02</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">• Turnaround</div>
-                    </div>
-                  </div>
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 2px; padding-bottom: 2px; background: #FEF3C7; border-radius: 9999px; outline: 1px #FDE68A solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="justify-content: center; display: flex; flex-direction: column; color: #92400E; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Sanitizing</div>
-                  </div>
-                </div>
-                <div style="align-self: stretch; padding-top: 2px; justify-content: space-between; align-items: center; display: inline-flex">
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 2px; display: inline-flex">
-                    <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">Post-Donation Sterilization</div>
-                    </div>
-                    <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Surface disinfection & line flush protocol</div>
-                    </div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="width: 12.15px; height: 14.40px; background: #D97706"></div>
-                  </div>
-                </div>
-                <div style="align-self: stretch; padding-top: 4px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="align-self: stretch; padding-left: 10px; padding-right: 10px; padding-top: 6px; padding-bottom: 6px; background: white; border-radius: 8px; outline: 1px #FDE68A solid; outline-offset: -1px; justify-content: space-between; align-items: center; display: inline-flex">
-                    <div style="justify-content: flex-start; align-items: center; gap: 3.99px; display: flex">
-                      <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                        <div style="width: 9.80px; height: 11.55px; background: #D97706"></div>
-                      </div>
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #475569; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Sterilization Cycle:</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">ETA 3 mins remaining</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div style="align-self: stretch; padding-top: 8px; border-top: 1px #E2E8F0 solid; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="width: 10.13px; height: 12px; background: #94A3B8"></div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="justify-content: center; display: flex; flex-direction: column"><span style="color: #475569; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Tech: </span><span style="color: #1E293B; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">A. Calo</span></div>
-                  </div>
-                </div>
-                <div style="height: 32px; padding-left: 12px; padding-right: 12px; background: white; border-radius: 8px; outline: 1px #E2E8F0 solid; outline-offset: -1px; justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-                    <div style="width: 12.06px; height: 6.66px; background: #E53935"></div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Mark Ready</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style="align-self: stretch; padding: 16px; background: #F8F9FA; border-radius: 12px; outline: 1px #E2E8F0 solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
-              <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-                <div style="align-self: stretch; padding-bottom: 8px; border-bottom: 1px #E2E8F0 solid; justify-content: space-between; align-items: center; display: inline-flex">
-                  <div style="justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-                    <div style="width: 10px; height: 10px; background: #334155; border-radius: 9999px"></div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 14px; font-family: Montserrat; font-weight: 700; line-height: 20px; word-wrap: break-word">Bed 03</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">• Ready</div>
-                    </div>
-                  </div>
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 2px; padding-bottom: 2px; background: #F1F5F9; border-radius: 9999px; outline: 1px #E2E8F0 solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Available</div>
-                  </div>
-                </div>
-                <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 2px; display: flex">
-                  <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 5.99px; display: inline-flex">
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">Ready for Intake</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="width: 14.40px; height: 13.60px; background: #E53935"></div>
-                    </div>
-                  </div>
-                  <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                    <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Station prepped & calibrated at 09:12 AM</div>
-                  </div>
-                </div>
-                <div style="align-self: stretch; padding-top: 4px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="align-self: stretch; padding-left: 10px; padding-right: 10px; padding-top: 6px; padding-bottom: 6px; background: white; border-radius: 8px; outline: 1px #E2E8F0 solid; outline-offset: -1px; justify-content: space-between; align-items: center; display: inline-flex">
-                    <div style="justify-content: flex-start; align-items: center; gap: 3.99px; display: flex">
-                      <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                        <div style="width: 11.20px; height: 8.40px; background: #E53935"></div>
-                      </div>
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #475569; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Waiting Donors:</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">3 in Priority Queue</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div style="align-self: stretch; padding-top: 8px; padding-right: 0.01px; border-top: 1px #E2E8F0 solid; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="width: 12px; height: 12px; background: #E53935"></div>
-                  </div>
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Triage Cleared</div>
-                </div>
-                <div style="height: 32px; padding-left: 12px; padding-right: 12px; background: #E53935; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-                    <div style="width: 12px; height: 9px; background: white"></div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Assign Donor</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style="align-self: stretch; padding: 16px; background: #F8F9FA; border-radius: 12px; outline: 1px #E2E8F0 solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
-              <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: flex">
-                <div style="align-self: stretch; padding-bottom: 8px; border-bottom: 1px #E2E8F0 solid; justify-content: space-between; align-items: center; display: inline-flex">
-                  <div style="justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-                    <div style="width: 10px; height: 10px; background: #334155; border-radius: 9999px"></div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 14px; font-family: Montserrat; font-weight: 700; line-height: 20px; word-wrap: break-word">Bed 04</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 500; line-height: 16px; word-wrap: break-word">• Ready</div>
-                    </div>
-                  </div>
-                  <div style="padding-left: 8px; padding-right: 8px; padding-top: 2px; padding-bottom: 2px; background: #F1F5F9; border-radius: 9999px; outline: 1px #E2E8F0 solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Available</div>
-                  </div>
-                </div>
-                <div style="align-self: stretch; padding-top: 2px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 2px; display: flex">
-                  <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 6px; display: inline-flex">
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">Ready for Intake</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="width: 14.40px; height: 13.60px; background: #E53935"></div>
-                    </div>
-                  </div>
-                  <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                    <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Station prepped & sanitized at 09:30 AM</div>
-                  </div>
-                </div>
-                <div style="align-self: stretch; padding-top: 4px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                  <div style="align-self: stretch; padding-left: 10px; padding-right: 10px; padding-top: 6px; padding-bottom: 6px; background: white; border-radius: 8px; outline: 1px #E2E8F0 solid; outline-offset: -1px; justify-content: space-between; align-items: center; display: inline-flex">
-                    <div style="justify-content: flex-start; align-items: center; gap: 3.99px; display: flex">
-                      <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                        <div style="width: 11.20px; height: 11.20px; background: #94A3B8"></div>
-                      </div>
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #475569; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">Next Slot:</div>
-                    </div>
-                    <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                      <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">10:15 AM (Appt #892)</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div style="align-self: stretch; padding-top: 8px; border-top: 1px #E2E8F0 solid; justify-content: space-between; align-items: center; display: inline-flex">
-                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                    <div style="width: 12px; height: 12px; background: #E53935"></div>
-                  </div>
-                  <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Supplies Ready</div>
-                </div>
-                <div style="height: 32px; padding-left: 12px; padding-right: 12px; background: #E53935; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-                    <div style="width: 12px; height: 9px; background: white"></div>
-                  </div>
-                  <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Assign Donor</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ===== Top bar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <div class="crumbs">
+      <span class="crumb-bar"></span>
+      <span>Staff Portal /</span>
+      <strong>Facility Profile</strong>
     </div>
-    <div style="align-self: stretch; padding: 20px; background: white; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); border-radius: 12px; outline: 1px rgba(226, 232, 240, 0.90) solid; outline-offset: -1px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-      <div style="align-self: stretch; padding-bottom: 12px; border-bottom: 1px #F1F5F9 solid; justify-content: space-between; align-items: center; display: inline-flex">
-        <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 2px; display: inline-flex">
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 18px; font-family: Montserrat; font-weight: 700; line-height: 28px; word-wrap: break-word">On-Duty Staff & Shift Roster</div>
-          </div>
-          <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-            <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 400; line-height: 16px; word-wrap: break-word">6 active clinical practitioners assigned to current station shift.</div>
-          </div>
-        </div>
-        <div style="padding-left: 12px; padding-right: 12px; padding-top: 6px; padding-bottom: 6px; background: #FEF2F2; border-radius: 8px; outline: 1px #FECACA solid; outline-offset: -1px; justify-content: flex-start; align-items: center; gap: 6px; display: flex">
-          <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-            <div style="width: 13.60px; height: 10.20px; background: #E53935"></div>
-          </div>
-          <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-            <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">+ Assign New Staff Shift</div>
-          </div>
+    <label class="search top">
+      <span class="material-symbols-outlined">search</span>
+      <input type="search" placeholder="Search donation slots...">
+    </label>
+    <button class="icon-btn bell" type="button" aria-label="Notifications">
+      <span class="material-symbols-outlined">notifications</span>
+      <span class="bell-dot"></span>
+    </button>
+    <a class="user-pill" href="../facility-profile/index.html">
+      <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
+      <span>
+        <span class="user-name">Dr. Aris Catadman</span>
+        <span class="user-type">Chief Pathologist</span>
+      </span>
+    </a>
+  </header>
+
+  <main class="page">
+    <div class="container">
+
+      <div class="page-head">
+        <div><h1>Facility Profile &amp; Clinical Operations</h1><p>Facility operational status, active phlebotomy beds, cold-chain telemetry, and staff shift roster.</p></div>
+        <div class="actions"><button class="btn btn-light" type="button"><span class="material-symbols-outlined">download</span> Export Clinic Report</button><button class="btn btn-primary" type="button"><span class="material-symbols-outlined">save</span> Save Profile Changes</button></div>
+      </div>
+
+      <section class="alert">
+        <div class="alert-left"><span class="alert-icon" style="background:#fff;color:var(--red-bright)"><span class="material-symbols-outlined">emergency</span></span><div><b>Urgent Call: O-Negative Cryo Demand Alert</b> <span class="pill pill-red">PRIORITY HIGH</span><p>Regional Level 1 Trauma request received from Vicente Sotto Memorial. Beds 1–2 prioritized for immediate intake.</p></div></div>
+        <span class="pill pill-red">Dispatch Queue: 4 Units</span>
+      </section>
+
+      <div class="profile-grid">
+        <section class="card flush">
+          <div class="card-head"><div><h2>St. Jude Regional Blood Bank</h2><span class="green small"><b><span class="material-symbols-outlined">verified</span> ACCREDITED CENTER</b></span></div><button class="icon-btn" type="button" aria-label="Edit"><span class="material-symbols-outlined">edit</span></button></div>
+          <div class="kv"><span class="label">DOH License &amp; Regulatory ID</span><div class="row"><strong><code>DOH-BB-CEB-00063</code></strong><span class="pill pill-green">Active • Valid Dec 2026</span></div></div>
+          <div class="kv"><span class="label">Facility Address</span><strong>Banilad Gov. Cuenco Ave, Cebu City, 6000, Central Visayas</strong></div>
+          <div class="kv"><span class="label">Hotline</span><strong>+63 (032) 416-2020</strong><small>Dispatch Ext 104 / 108</small></div>
+          <div class="kv"><span class="label">Operating Hours</span><strong>Mon - Sat: 07:00 AM - 07:00 PM</strong><small class="green">Emergency Transfusion On-Call 24/7</small></div>
+          <div class="kv" style="background:none;border:0;padding:0"><span class="label">Clinical &amp; Administrative Leads</span></div>
+          <div class="kv"><div class="person"><span class="ini ">AV</span><div><b>Dr. Anthony Villamor, MD</b><small>Lead Medical Director • Pathology</small></div></div></div>
+          <div class="kv" style="margin-bottom:24px"><div class="person"><span class="ini red">MR</span><div><b>Maria Elena Ramos, RN, RMT</b><small>Chief Phlebotomist / Lab Manager</small></div></div></div>
+        </section>
+        <div>
+          <section class="card flush">
+            <div class="card-head"><h2 class="with-icon"><span class="material-symbols-outlined red">ac_unit</span> Cold Storage Telemetry</h2><span class="pill ">Live Sensors Active</span></div>
+            <div class="tele">
+              <div><span class="label">Whole Blood</span><b>340 <small>/ 500 units</small></b><div class="bar"><span style="width: 68%"></span></div><small class="green"><b>68% Capacity • Optimal Surplus</b></small></div>
+              <div><span class="label">PRBC Cells</span><b>180 <small>units</small></b><small>Target: 2°C – 6°C</small><br><small class="green"><b>● 4.1°C Stable</b></small></div>
+              <div><span class="label">FFP Vault A</span><b>88% <small>fill</small></b><small>Deep Cryo Freezer</small><br><small class="green"><b>● -30.4°C Vault</b></small></div>
+              <div><span class="label">Platelets</span><b style="font-size:20px">Agitator 1</b><small>Continuous Motion</small><br><small class="green"><b>● 22.0°C Rocking</b></small></div>
+            </div>
+          </section>
+          <section class="card flush">
+            <div class="card-head"><div><h2>Phlebotomy Station Grid</h2><p>4 clinical phlebotomy stations • Real-time telemetry</p></div><div class="chips"><span class="pill ">All (4)</span><span class="pill pill-red">Occupied (1)</span><span class="pill pill-amber">Sanitizing (1)</span><span class="pill pill-gray">Available (2)</span></div></div>
+            <div class="beds">
+        <div class="bed"><div class="bed-top"><b>Bed 01</b><span class="pill pill-red">Occupied</span></div><b>Donor #441 <span class="pill pill-red">O+</span></b><span>Session: 12 mins elapsed</span><span>Collection Volume: <b class="red">450 / 500 mL (90%)</b></span><div class="bar"><span style="width: 90%"></span></div><div class="bed-foot"><span>Phleb: M. Ramos, RN</span><button class="btn btn-sm btn-light" type="button">Telemetry</button></div></div>
+        <div class="bed"><div class="bed-top"><b>Bed 02</b><span class="pill pill-amber">Sanitizing</span></div><b>Post-Donation Sterilization</b><span>Surface disinfection &amp; line flush protocol</span><span>Sterilization Cycle: <b>ETA 3 mins remaining</b></span><div class="bar"><span style="width: 60%"></span></div><div class="bed-foot"><span>Tech: A. Calo</span><button class="btn btn-sm btn-light" type="button">Mark Ready</button></div></div>
+        <div class="bed"><div class="bed-top"><b>Bed 03</b><span class="pill pill-gray">Available</span></div><b>Ready for Intake</b><span>Station prepped &amp; calibrated at 09:12 AM</span><span>Waiting Donors: <b class="red">3 in Priority Queue</b></span><div class="bar"><span style="width: 0%"></span></div><div class="bed-foot"><span>Triage Cleared</span><button class="btn btn-sm btn-primary" type="button">Assign Donor</button></div></div>
+        <div class="bed"><div class="bed-top"><b>Bed 04</b><span class="pill pill-gray">Available</span></div><b>Ready for Intake</b><span>Station prepped &amp; sanitized at 09:30 AM</span><span>Next Slot: <b>10:15 AM (Appt #892)</b></span><div class="bar"><span style="width: 0%"></span></div><div class="bed-foot"><span>Supplies Ready</span><button class="btn btn-sm btn-primary" type="button">Assign Donor</button></div></div>
+            </div>
+          </section>
         </div>
       </div>
-      <div style="align-self: stretch; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-        <div style="align-self: stretch; background: #F8FAFC; border-bottom: 1px #E2E8F0 solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-          <div style="align-self: stretch; justify-content: center; align-items: flex-start; display: inline-flex">
-            <div style="width: 245.48px; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 12px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 700; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">STAFF MEMBER</div>
-            </div>
-            <div style="width: 150.97px; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 12px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 700; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">BADGE ID</div>
-            </div>
-            <div style="width: 227.52px; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 12px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 700; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">CLINICAL ROLE</div>
-            </div>
-            <div style="width: 164.73px; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 12px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 700; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">CURRENT SHIFT</div>
-            </div>
-            <div style="width: 217.31px; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 12px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 700; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">ASSIGNMENT</div>
-            </div>
-            <div style="width: 183.98px; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 12px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; flex-direction: column; justify-content: flex-start; align-items: flex-end; display: inline-flex">
-              <div style="text-align: right; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 12px; font-family: Inter; font-weight: 700; text-transform: uppercase; line-height: 16px; letter-spacing: 0.60px; word-wrap: break-word">STATUS</div>
-            </div>
-          </div>
-        </div>
-        <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-          <div style="align-self: stretch; justify-content: center; align-items: flex-start; display: inline-flex">
-            <div style="width: 245.48px; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 12px; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
-              <div style="width: 32px; height: 32px; padding-top: 7.50px; padding-bottom: 8.50px; background: #E2E8F0; border-radius: 9999px; justify-content: center; align-items: center; display: flex">
-                <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">MR</div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Maria Elena Ramos</div>
-              </div>
-            </div>
-            <div style="width: 150.97px; padding-left: 16px; padding-right: 16px; padding-top: 18.50px; padding-bottom: 18.50px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 14px; font-family: Liberation Mono; font-weight: 500; line-height: 20px; word-wrap: break-word">STJ-PHL-008</div>
-            </div>
-            <div style="width: 227.52px; padding-top: 18px; padding-bottom: 19px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">Head Phlebotomist, RN</div>
-            </div>
-            <div style="width: 164.73px; padding-top: 18px; padding-bottom: 19px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">07:00 - 15:00</div>
-            </div>
-            <div style="width: 217.31px; padding-top: 17.50px; padding-bottom: 16.50px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 3.50px; padding-bottom: 3.50px; background: #FEE2E2; border-radius: 9999px; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Station 1 & 2 Lead</div>
-              </div>
-            </div>
-            <div style="width: 183.98px; padding-top: 17.50px; padding-bottom: 16.50px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-end; display: inline-flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 3.50px; padding-bottom: 3.50px; background: #D1FAE5; border-radius: 9999px; justify-content: flex-end; align-items: flex-start; display: inline-flex">
-                <div style="text-align: right; justify-content: center; display: flex; flex-direction: column; color: #065F46; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Active On Floor</div>
-              </div>
-            </div>
-          </div>
-          <div style="align-self: stretch; border-top: 1px #F1F5F9 solid; justify-content: center; align-items: flex-start; display: inline-flex">
-            <div style="width: 245.48px; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 12px; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
-              <div style="width: 32px; height: 32px; padding-top: 7.50px; padding-bottom: 8.50px; background: #E2E8F0; border-radius: 9999px; justify-content: center; align-items: center; display: flex">
-                <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">JM</div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Joshua Morales</div>
-              </div>
-            </div>
-            <div style="width: 150.97px; padding-left: 16px; padding-right: 16px; padding-top: 18.50px; padding-bottom: 18.50px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 14px; font-family: Liberation Mono; font-weight: 500; line-height: 20px; word-wrap: break-word">STJ-PHL-024</div>
-            </div>
-            <div style="width: 227.52px; padding-top: 18px; padding-bottom: 19px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">Phlebotomist, RMT</div>
-            </div>
-            <div style="width: 164.73px; padding-top: 18px; padding-bottom: 19px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">07:00 - 15:00</div>
-            </div>
-            <div style="width: 217.31px; padding-top: 17.50px; padding-bottom: 16.50px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 3.50px; padding-bottom: 3.50px; background: #F1F5F9; border-radius: 9999px; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Station 5</div>
-              </div>
-            </div>
-            <div style="width: 183.98px; padding-top: 17.50px; padding-bottom: 16.50px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-end; display: inline-flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 3.50px; padding-bottom: 3.50px; background: #D1FAE5; border-radius: 9999px; justify-content: flex-end; align-items: flex-start; display: inline-flex">
-                <div style="text-align: right; justify-content: center; display: flex; flex-direction: column; color: #065F46; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Active On Floor</div>
-              </div>
-            </div>
-          </div>
-          <div style="align-self: stretch; border-top: 1px #F1F5F9 solid; justify-content: center; align-items: flex-start; display: inline-flex">
-            <div style="width: 245.48px; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 12px; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
-              <div style="width: 32px; height: 32px; padding-top: 7.50px; padding-bottom: 8.50px; background: #E2E8F0; border-radius: 9999px; justify-content: center; align-items: center; display: flex">
-                <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">AC</div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Althea Calo</div>
-              </div>
-            </div>
-            <div style="width: 150.97px; padding-left: 16px; padding-right: 16px; padding-top: 18.50px; padding-bottom: 18.50px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 14px; font-family: Liberation Mono; font-weight: 500; line-height: 20px; word-wrap: break-word">STJ-MED-012</div>
-            </div>
-            <div style="width: 227.52px; padding-top: 18px; padding-bottom: 19px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">Sanitation & Lab Tech</div>
-            </div>
-            <div style="width: 164.73px; padding-top: 18px; padding-bottom: 19px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">07:00 - 15:00</div>
-            </div>
-            <div style="width: 217.31px; padding-top: 17.50px; padding-bottom: 16.50px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 3.50px; padding-bottom: 3.50px; background: #F1F5F9; border-radius: 9999px; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Station 2 Prep</div>
-              </div>
-            </div>
-            <div style="width: 183.98px; padding-top: 17.50px; padding-bottom: 16.50px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-end; display: inline-flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 3.50px; padding-bottom: 3.50px; background: #FEF3C7; border-radius: 9999px; justify-content: flex-end; align-items: flex-start; display: inline-flex">
-                <div style="text-align: right; justify-content: center; display: flex; flex-direction: column; color: #92400E; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Sterilizing</div>
-              </div>
-            </div>
-          </div>
-          <div style="align-self: stretch; border-top: 1px #F1F5F9 solid; justify-content: center; align-items: flex-start; display: inline-flex">
-            <div style="width: 245.48px; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 12px; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
-              <div style="width: 32px; height: 32px; padding-top: 7.50px; padding-bottom: 8.50px; background: #E2E8F0; border-radius: 9999px; justify-content: center; align-items: center; display: flex">
-                <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">RG</div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Rafael Gomez</div>
-              </div>
-            </div>
-            <div style="width: 150.97px; padding-left: 16px; padding-right: 16px; padding-top: 18.50px; padding-bottom: 18.50px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 14px; font-family: Liberation Mono; font-weight: 500; line-height: 20px; word-wrap: break-word">STJ-ENG-003</div>
-            </div>
-            <div style="width: 227.52px; padding-top: 18px; padding-bottom: 19px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">Biomedical Engineer</div>
-            </div>
-            <div style="width: 164.73px; padding-top: 18px; padding-bottom: 19px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">08:00 - 16:00</div>
-            </div>
-            <div style="width: 217.31px; padding-top: 17.50px; padding-bottom: 16.50px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 3.50px; padding-bottom: 3.50px; background: #F1F5F9; border-radius: 9999px; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Station 8 Calibration</div>
-              </div>
-            </div>
-            <div style="width: 183.98px; padding-top: 17.50px; padding-bottom: 16.50px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-end; display: inline-flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 3.50px; padding-bottom: 3.50px; background: #E2E8F0; border-radius: 9999px; justify-content: flex-end; align-items: flex-start; display: inline-flex">
-                <div style="text-align: right; justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">In Maintenance</div>
-              </div>
-            </div>
-          </div>
-          <div style="align-self: stretch; border-top: 1px #F1F5F9 solid; justify-content: center; align-items: flex-start; display: inline-flex">
-            <div style="width: 245.48px; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 12px; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
-              <div style="width: 32px; height: 32px; padding-top: 7.50px; padding-bottom: 8.50px; background: #FEE2E2; border-radius: 9999px; justify-content: center; align-items: center; display: flex">
-                <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">SL</div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Dr. Sarah Lin</div>
-              </div>
-            </div>
-            <div style="width: 150.97px; padding-left: 16px; padding-right: 16px; padding-top: 18.50px; padding-bottom: 18.50px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 14px; font-family: Liberation Mono; font-weight: 500; line-height: 20px; word-wrap: break-word">STJ-DOC-002</div>
-            </div>
-            <div style="width: 227.52px; padding-top: 18px; padding-bottom: 19px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">Clinical Supervisor, MD</div>
-            </div>
-            <div style="width: 164.73px; padding-top: 18px; padding-bottom: 19px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">07:00 - 15:00</div>
-            </div>
-            <div style="width: 217.31px; padding-top: 17.50px; padding-bottom: 16.50px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 3.50px; padding-bottom: 3.50px; background: #FEE2E2; border-radius: 9999px; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #E53935; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Triage & Clearance</div>
-              </div>
-            </div>
-            <div style="width: 183.98px; padding-top: 17.50px; padding-bottom: 16.50px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-end; display: inline-flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 3.50px; padding-bottom: 3.50px; background: #D1FAE5; border-radius: 9999px; justify-content: flex-end; align-items: flex-start; display: inline-flex">
-                <div style="text-align: right; justify-content: center; display: flex; flex-direction: column; color: #065F46; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Consulting</div>
-              </div>
-            </div>
-          </div>
-          <div style="align-self: stretch; border-top: 1px #F1F5F9 solid; justify-content: center; align-items: flex-start; display: inline-flex">
-            <div style="width: 245.48px; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 12px; justify-content: flex-start; align-items: center; gap: 10px; display: flex">
-              <div style="width: 32px; height: 32px; padding-top: 7.50px; padding-bottom: 8.50px; background: #E2E8F0; border-radius: 9999px; justify-content: center; align-items: center; display: flex">
-                <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 16px; word-wrap: break-word">BN</div>
-              </div>
-              <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 14px; font-family: Inter; font-weight: 600; line-height: 20px; word-wrap: break-word">Bernadette Neri</div>
-              </div>
-            </div>
-            <div style="width: 150.97px; padding-top: 18.50px; padding-bottom: 18px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 14px; font-family: Liberation Mono; font-weight: 500; line-height: 20px; word-wrap: break-word">STJ-LOG-019</div>
-            </div>
-            <div style="width: 227.52px; padding-top: 18px; padding-bottom: 18.50px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #1E293B; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">Cold Chain Officer</div>
-            </div>
-            <div style="width: 164.73px; padding-top: 18px; padding-bottom: 18.50px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 14px; font-family: Inter; font-weight: 500; line-height: 20px; word-wrap: break-word">15:00 - 23:00</div>
-            </div>
-            <div style="width: 217.31px; padding-top: 17.50px; padding-bottom: 16px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 3.50px; padding-bottom: 3.50px; background: #F1F5F9; border-radius: 9999px; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Cryo Vault & Logistics</div>
-              </div>
-            </div>
-            <div style="width: 183.98px; padding-top: 17.50px; padding-bottom: 16px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-end; display: inline-flex">
-              <div style="padding-left: 10px; padding-right: 10px; padding-top: 3.50px; padding-bottom: 3.50px; background: #F1F5F9; border-radius: 9999px; justify-content: flex-end; align-items: flex-start; display: inline-flex">
-                <div style="text-align: right; justify-content: center; display: flex; flex-direction: column; color: #334155; font-size: 12px; font-family: Inter; font-weight: 600; line-height: 16px; word-wrap: break-word">Shift Starts 15:00</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <section class="card flush">
+        <div class="card-head"><div><h2>On-Duty Staff &amp; Shift Roster</h2><p>6 active clinical practitioners assigned to current station shift.</p></div><button class="btn btn-sm" style="background:#FEF2F2;color:var(--red-bright)" type="button"><span class="material-symbols-outlined">add</span> Assign New Staff Shift</button></div>
+        <div class="table-wrap"><table class="table"><thead><tr><th>Staff Member</th><th>Badge ID</th><th>Clinical Role</th><th>Current Shift</th><th>Assignment</th><th class=right>Status</th></tr></thead><tbody>
+<tr><td><div class="person"><span class="ini red">MR</span><b>Maria Elena Ramos</b></div></td><td><code>STJ-PHL-008</code></td><td>Head Phlebotomist, RN</td><td>07:00 - 15:00</td><td><span class="pill ">Station 1 &amp; 2 Lead</span></td><td class="right"><span class="pill pill-green">Active On Floor</span></td></tr>
+<tr><td><div class="person"><span class="ini ">JM</span><b>Joshua Morales</b></div></td><td><code>STJ-PHL-024</code></td><td>Phlebotomist, RMT</td><td>07:00 - 15:00</td><td><span class="pill ">Station 5</span></td><td class="right"><span class="pill pill-green">Active On Floor</span></td></tr>
+<tr><td><div class="person"><span class="ini ">AC</span><b>Althea Calo</b></div></td><td><code>STJ-MED-012</code></td><td>Sanitation &amp; Lab Tech</td><td>07:00 - 15:00</td><td><span class="pill ">Station 2 Prep</span></td><td class="right"><span class="pill pill-amber">Sterilizing</span></td></tr>
+<tr><td><div class="person"><span class="ini ">RG</span><b>Rafael Gomez</b></div></td><td><code>STJ-ENG-003</code></td><td>Biomedical Engineer</td><td>08:00 - 16:00</td><td><span class="pill ">Station 8 Calibration</span></td><td class="right"><span class="pill pill-gray">In Maintenance</span></td></tr>
+<tr><td><div class="person"><span class="ini red">SL</span><b>Dr. Sarah Lin</b></div></td><td><code>STJ-DOC-002</code></td><td>Clinical Supervisor, MD</td><td>07:00 - 15:00</td><td><span class="pill ">Triage &amp; Clearance</span></td><td class="right"><span class="pill pill-green">Consulting</span></td></tr>
+<tr><td><div class="person"><span class="ini ">BN</span><b>Bernadette Neri</b></div></td><td><code>STJ-LOG-019</code></td><td>Cold Chain Officer</td><td>15:00 - 23:00</td><td><span class="pill ">Cryo Vault &amp; Logistics</span></td><td class="right"><span class="pill ">Shift Starts 15:00</span></td></tr>
+</tbody></table></div>
+      </section>
     </div>
-  </div>
-  <div style="width: 1280px; height: 64px; padding-left: 24px; padding-right: 24px; left: 0px; top: 0px; position: absolute; background: rgba(255, 255, 255, 0.95); border-bottom: 1px #E2E8F0 solid; backdrop-filter: blur(6px); justify-content: flex-start; align-items: center; display: inline-flex">
-    <div style="flex: 1 1 0; max-width: 1280px; justify-content: flex-start; align-items: center; gap: 137.70px; display: flex">
-      <div style="justify-content: flex-start; align-items: center; gap: 16px; display: flex">
-        <div style="padding: 6px; border-radius: 8px; justify-content: center; align-items: center; display: flex">
-          <div style="flex-direction: column; justify-content: flex-start; align-items: center; display: inline-flex">
-            <div style="width: 18px; height: 12px; background: #334155"></div>
-          </div>
-        </div>
-        <div style="justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-          <div style="width: 2px; height: 16px; background: #E53935; border-radius: 9999px"></div>
-          <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="justify-content: center; display: flex; flex-direction: column"><span style="color: #64748B; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 20px; word-wrap: break-word">Staff Portal / </span><span style="color: #0F172A; font-size: 14px; font-family: Inter; font-weight: 400; line-height: 20px; word-wrap: break-word">Facility Profile</span></div>
-          </div>
-        </div>
-      </div>
-      <div style="flex: 1 1 0; max-width: 480px; padding-left: 16px; padding-right: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-        <div style="align-self: stretch; position: relative; justify-content: flex-start; align-items: center; display: inline-flex">
-          <div style="flex: 1 1 0; height: 40px; padding-top: 11.50px; padding-bottom: 11.50px; padding-left: 36px; padding-right: 16px; background: rgba(241, 245, 249, 0.80); overflow: hidden; border-radius: 8px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="align-self: stretch; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-              <div style="align-self: stretch; justify-content: center; display: flex; flex-direction: column; color: #64748B; font-size: 14px; font-family: Inter; font-weight: 400; word-wrap: break-word">Search donation slots...</div>
-            </div>
-          </div>
-          <div style="width: 12.60px; height: 12.60px; left: 14.70px; top: 13.70px; position: absolute; background: #94A3B8"></div>
-        </div>
-      </div>
-      <div style="justify-content: flex-start; align-items: center; gap: 16px; display: flex">
-        <div style="padding-top: 8px; padding-bottom: 14px; padding-left: 8px; padding-right: 8px; position: relative; border-radius: 8px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-          <div style="justify-content: center; align-items: flex-start; display: inline-flex">
-            <div style="width: 13.93px; height: 17.97px; background: #334155"></div>
-          </div>
-          <div style="width: 8px; height: 8px; left: 16px; top: 6px; position: absolute; background: #E53935; border-radius: 9999px"></div>
-        </div>
-        <div style="height: 40px; padding-left: 12px; padding-right: 12px; background: white; border-radius: 9999px; outline: 1px #E2E8F0 solid; outline-offset: -1px; justify-content: flex-start; align-items: center; gap: 12px; display: flex">
-          <div style="width: 32px; height: 32px; background: #E53935; border-radius: 9999px; justify-content: center; align-items: center; display: flex">
-            <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-              <div style="width: 10.80px; height: 10.80px; background: white"></div>
-            </div>
-          </div>
-          <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-            <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #0F172A; font-size: 12px; font-family: Inter; font-weight: 700; line-height: 15px; word-wrap: break-word">Dr. Aris Catadman</div>
-            </div>
-            <div style="align-self: stretch; padding-bottom: 0.75px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-              <div style="justify-content: center; display: flex; flex-direction: column; color: #047857; font-size: 11px; font-family: Inter; font-weight: 600; line-height: 13.75px; word-wrap: break-word">Chief Pathologist</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Lifeline Universal Sidebar & Hamburger Menu -->
-<link rel="stylesheet" href="../../components/sidebar.css">
-<script src="../../components/sidebar.js"></script>
-</main>
+  </main>
+
+  <script>
+    // Sidebar open / close
+    const body = document.body;
+    const menuBtn = document.getElementById('menuBtn');
+
+    function setSidebar(open) {
+      body.classList.toggle('sidebar-open', open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+    }
+
+    menuBtn.addEventListener('click', () => setSidebar(!body.classList.contains('sidebar-open')));
+    document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
+    document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
+  </script>
+
 </body>
+</html>

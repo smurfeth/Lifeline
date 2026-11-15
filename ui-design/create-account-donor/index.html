@@ -2,172 +2,168 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Donor Account - Lifeline</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create Your Account – Lifeline Donor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="auth-page-wrapper">
-    <div class="auth-ambient-glow" aria-hidden="true"></div>
 
-    <div class="auth-card-container">
-      <main class="auth-card">
-        <!-- Brand Identity Header -->
-        <header class="brand-header">
-          <div class="brand-logo-wrapper">
-            <img class="brand-logo" src="assets/lifeline-logo.jpg" alt="Lifeline Brand Logo" onerror="this.onerror=null; this.src='https://placehold.co/80x80?text=LIFE+LINE';">
+  <main class="page">
+    <div class="card">
+      <a class="back-home-link" href="../landing/index.html" aria-label="Back to the landing page">← Back to Home</a>
+
+      <!-- Brand header -->
+      <header class="card-head">
+        <img class="logo" src="../assets/Lifeline%20Logo.png" alt="Lifeline logo">
+        <div class="wordmark">LIFE<span>LINE</span></div>
+        <p class="tagline">— Your Blood. <span>Their Hope</span> —</p>
+        <h1>Create Your Account</h1>
+        <p class="subtitle">Join the coordinated blood transfusion network</p>
+      </header>
+
+      <!-- Role switch -->
+      <nav class="role-switch" aria-label="Account type">
+        <a class="role active" href="#" aria-current="page">
+          <span class="material-symbols-outlined">volunteer_activism</span>
+          Voluntary Donor
+        </a>
+        <a class="role" href="../create-account-staff/index.html">
+          <span class="material-symbols-outlined">medical_services</span>
+          Clinical Staff
+        </a>
+      </nav>
+
+      <form class="form" action="#" method="post" novalidate>
+
+        <!-- 1. Personal identification -->
+        <fieldset class="section">
+          <legend><span class="step">1</span> Personal Identification</legend>
+
+          <div class="field">
+            <label for="fullName">Full Legal Name <span class="req">*</span></label>
+            <input class="control" type="text" id="fullName" name="fullName" placeholder="e.g. Maria Clara Santos" required>
+            <p class="hint">Matches your national ID or passport for verification</p>
           </div>
 
-          <div class="brand-title">
-            <span class="brand-title-life">LIFE</span><span class="brand-title-line">LINE</span>
+          <div class="field">
+            <label for="dob">Date of Birth <span class="req">*</span></label>
+            <input class="control" type="date" id="dob" name="dob" required>
           </div>
 
-          <div class="brand-tagline">
-            <span class="tagline-dash">—</span>
-            <span class="tagline-blood">YOUR BLOOD.</span>
-            <span class="tagline-hope">THEIR HOPE —</span>
+          <div class="field">
+            <label for="sex">Biological Sex <span class="req">*</span></label>
+            <div class="select-wrap">
+              <select class="control" id="sex" name="sex" required>
+                <option value="" selected disabled>Select assigned at birth</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+              </select>
+              <span class="material-symbols-outlined select-arrow">expand_more</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 2. Contact and residence -->
+        <fieldset class="section">
+          <legend><span class="step">2</span> Contact &amp; Residential Details</legend>
+
+          <div class="field">
+            <label for="email">Email Address <span class="req">*</span></label>
+            <input class="control" type="email" id="email" name="email" placeholder="maria.santos@email.com" required>
           </div>
 
-          <h1 class="auth-title">Create Your Account</h1>
-          <p class="auth-subtitle">Join the coordinated blood transfusion network</p>
-        </header>
-
-        <!-- Connected Role Switcher Tabs -->
-        <nav class="role-tabs-container" aria-label="Account type selector">
-          <a href="../create-account-donor/index.html" class="role-tab active" aria-current="page">
-            <span class="role-tab-icon">
-              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zm2 1.5a5.5 5.5 0 01-4 0C2.9 10 1 11.8 1 14v1h14v-1c0-2.2-1.9-4-5-4.5z"/></svg>
-            </span>
-            <span>Voluntary Donor</span>
-          </a>
-          <a href="../create-account-staff/index.html" class="role-tab">
-            <span class="role-tab-icon">
-              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H4zm3 3h2v2h2v2H9v2H7V9H5V7h2V5z"/></svg>
-            </span>
-            <span>Hospital Staff</span>
-          </a>
-        </nav>
-
-        <!-- Registration Form -->
-        <form class="registration-form" id="donorRegisterForm">
-          <!-- Full Name -->
-          <div class="form-group">
-            <label class="form-label" for="fullName">
-              Full Legal Name <span class="required-star">*</span>
-            </label>
-            <div class="input-field-wrapper">
-              <input type="text" id="fullName" name="fullName" class="form-input" placeholder="e.g. Marcus Vance" required>
+          <div class="field">
+            <label for="mobile">Mobile Contact <span class="req">*</span></label>
+            <div class="prefix-wrap">
+              <span class="prefix">+63</span>
+              <input class="control has-prefix" type="tel" id="mobile" name="mobile" placeholder="917 000 0000" required>
             </div>
           </div>
 
-          <!-- Email Address -->
-          <div class="form-group">
-            <label class="form-label" for="email">
-              Email Address <span class="required-star">*</span>
-            </label>
-            <div class="input-field-wrapper">
-              <input type="email" id="email" name="email" class="form-input" placeholder="e.g. donor@lifeline.org" required>
+          <div class="field">
+            <label for="city">Residential City / Municipality <span class="req">*</span></label>
+            <div class="select-wrap">
+              <select class="control" id="city" name="city" required>
+                <option value="" selected disabled>Select locality for dispatch &amp; donation alerts</option>
+                <option>Cebu City</option>
+                <option>Mandaue City</option>
+                <option>Lapu-Lapu City</option>
+                <option>Talisay City</option>
+                <option>Consolacion</option>
+              </select>
+              <span class="material-symbols-outlined select-arrow">expand_more</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 3. Blood type -->
+        <fieldset class="section">
+          <legend class="legend-split">
+            <span><span class="step">3</span> Blood Type Specification</span>
+            <small>Verified upon phlebotomy</small>
+          </legend>
+
+          <div class="blood-box">
+            <div class="blood-grid">
+              <label class="blood"><input type="radio" name="bloodType" value="O+"><span>O+</span></label>
+              <label class="blood"><input type="radio" name="bloodType" value="O-"><span>O-</span></label>
+              <label class="blood"><input type="radio" name="bloodType" value="A+"><span>A+</span></label>
+              <label class="blood"><input type="radio" name="bloodType" value="A-"><span>A-</span></label>
+              <label class="blood"><input type="radio" name="bloodType" value="B+"><span>B+</span></label>
+              <label class="blood"><input type="radio" name="bloodType" value="B-"><span>B-</span></label>
+              <label class="blood"><input type="radio" name="bloodType" value="AB+"><span>AB+</span></label>
+              <label class="blood"><input type="radio" name="bloodType" value="AB-"><span>AB-</span></label>
+              <label class="blood unknown"><input type="radio" name="bloodType" value="unknown" checked><span>Don't Know Yet</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 4. Account security -->
+        <fieldset class="section last">
+          <legend><span class="step">4</span> Account Security</legend>
+
+          <div class="row">
+            <div class="field">
+              <label for="password">Password <span class="req">*</span></label>
+              <input class="control" type="password" id="password" name="password" placeholder="Minimum 8 characters" required>
+            </div>
+            <div class="field">
+              <label for="confirmPassword">Confirm Password <span class="req">*</span></label>
+              <input class="control" type="password" id="confirmPassword" name="confirmPassword" placeholder="Repeat password" required>
             </div>
           </div>
 
-          <!-- Blood Type & Mobile -->
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="bloodType">
-                Blood Group / Rh <span class="required-star">*</span>
-              </label>
-              <div class="input-field-wrapper">
-                <select id="bloodType" name="bloodType" class="form-select" required>
-                  <option value="" disabled selected>Select Group</option>
-                  <option value="O+">O Positive (O+)</option>
-                  <option value="O-">O Negative (O-)</option>
-                  <option value="A+">A Positive (A+)</option>
-                  <option value="A-">A Negative (A-)</option>
-                  <option value="B+">B Positive (B+)</option>
-                  <option value="B-">B Negative (B-)</option>
-                  <option value="AB+">AB Positive (AB+)</option>
-                  <option value="AB-">AB Negative (AB-)</option>
-                  <option value="Unknown">Not Sure / Test at Center</option>
-                </select>
-              </div>
-            </div>
+          <ul class="rules">
+            <li>8+ characters</li>
+            <li>1 uppercase letter</li>
+            <li>1 number &amp; symbol</li>
+          </ul>
+        </fieldset>
 
-            <div class="form-group">
-              <label class="form-label" for="phone">
-                Contact Phone <span class="required-star">*</span>
-              </label>
-              <div class="input-field-wrapper">
-                <input type="tel" id="phone" name="phone" class="form-input" placeholder="+63 912 345 6789" required>
-              </div>
-            </div>
-          </div>
+        <label class="terms">
+          <input type="checkbox" name="terms" required>
+          <span>
+            I have read and agree to the <a href="#">Lifeline Terms and Conditions</a>
+            and understand that my donation information will be reviewed by authorized staff.
+          </span>
+        </label>
 
-          <!-- Password & Confirmation -->
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="password">
-                Create Password <span class="required-star">*</span>
-              </label>
-              <div class="input-field-wrapper">
-                <input type="password" id="password" name="password" class="form-input" placeholder="••••••••••••" required>
-              </div>
-            </div>
+        <button class="submit" type="submit">
+          <span class="material-symbols-outlined">mark_email_read</span>
+          Submit and Verify Email
+        </button>
 
-            <div class="form-group">
-              <label class="form-label" for="confirmPassword">
-                Confirm Password <span class="required-star">*</span>
-              </label>
-              <div class="input-field-wrapper">
-                <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="••••••••••••" required>
-              </div>
-            </div>
-          </div>
+      </form>
 
-          <!-- Agreement Checkbox -->
-          <div class="terms-row">
-            <label class="checkbox-container" style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
-              <input type="checkbox" id="termsCheck" name="terms" class="checkbox-native" required checked>
-              <span class="checkbox-custom" aria-hidden="true">
-                <svg viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 4L3.8 6.8L9 1.2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <span class="terms-text">
-                I have read and agree to the <a href="#" class="terms-link">Lifeline Terms and Conditions</a> and consent to record management for authorized healthcare centers.
-              </span>
-            </label>
-          </div>
+      <footer class="card-foot">
+        Already registered with Lifeline? <a href="../login/index.html">Sign In to Portal</a>
+      </footer>
 
-          <!-- Submit Button -->
-          <button type="submit" id="submitBtn" class="btn-submit">
-            <span>Submit and Verify Email</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 01.5-.5h11.793l-3.147-3.146a.5.5 0 01.708-.708l4 4a.5.5 0 010 .708l-4 4a.5.5 0 01-.708-.708L13.293 8.5H1.5A.5.5 0 011 8z"/></svg>
-          </button>
-        </form>
-
-        <!-- Footer Navigation to Login -->
-        <footer class="auth-footer">
-          <span>Already registered with Lifeline?</span>
-          <a class="login-redirect-link" href="../login/index.html">Sign In to Portal</a>
-        </footer>
-      </main>
     </div>
-  </div>
+  </main>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('donorRegisterForm');
-      if (form) {
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          // Simulate account creation and dispatch to verification code page
-          window.location.href = '../verification-code/index.html';
-        });
-      }
-    });
-  </script>
 </body>
 </html>
