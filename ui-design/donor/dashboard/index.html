@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -20,9 +20,7 @@
           <div class="sidebar-name">LIFE<span>LINE</span></div>
           <div class="sidebar-tag">— Your Blood. <span>Their Hope</span> —</div>
         </div>
-        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
-          <span class="material-symbols-outlined">close</span>
-        </button>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
 
       <nav class="sidebar-nav">
@@ -54,9 +52,7 @@
 
   <!-- ===== Top bar ===== -->
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
-      <span class="material-symbols-outlined">menu</span>
-    </button>
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
 
     <div class="crumbs">
       <span class="crumb-bar"></span>
@@ -77,8 +73,8 @@
     <a class="user-pill" href="../profile/index.html">
       <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
       <span>
-        <span class="user-name">Marcus Vance</span>
-        <span class="user-type">Blood Type O+</span>
+        <span class="user-name">Loading...</span>
+        <span class="user-type">Donor</span>
       </span>
     </a>
   </header>
@@ -91,15 +87,18 @@
         <div>
           <div class="welcome-meta">
             <span class="pill-green"><span class="dot"></span> Verified Donor</span>
-            <span class="welcome-id">• ID #DN-99420</span>
+            <span class="welcome-id">• ID #DN-58715</span>
           </div>
-          <h1>Welcome back, <span class="red">Marcus!</span></h1>
-          <p>You are eligible to donate again in <span class="red">14 days</span>. Your commitment<br>sustains real lives.</p>
+          <h1>Welcome back, <span class="red user-first-name">Apollo!</span></h1>
+          <p id="welcomeEligibilityText">You are eligible to donate today! Your commitment sustains real lives.</p>
         </div>
         <div class="welcome-actions">
           <a class="btn btn-primary" href="../submit-donation/index.html">
             <span class="material-symbols-outlined">add_circle</span> Submit Donation Record
           </a>
+          <button class="btn btn-light" type="button" id="btnSimulateDone" title="Test 56-day cycle: Record a completed donation today">
+            <span class="material-symbols-outlined red">check_circle</span> Mark Donation Done (56-Day Reset)
+          </button>
           <a class="btn btn-light" href="../donation-history/index.html">
             <span class="material-symbols-outlined">workspace_premium</span> History &amp; Certificates
           </a>
@@ -126,13 +125,13 @@
           <div class="stat-head">
             <div>
               <span class="label">Lifetime Volume</span>
-              <div class="stat-big"><b>6</b><small>completed</small></div>
+              <div class="stat-big"><b id="statVolCount">0</b><small>completed</small></div>
             </div>
             <span class="circle c-blue"><span class="material-symbols-outlined">volunteer_activism</span></span>
           </div>
           <div class="stat-foot">
-            <span class="pending"><span class="dot amber"></span> +1 pending review</span>
-            <span class="tag">2,700 mL Total</span>
+            <span class="pending" id="statPendingCount"><span class="dot amber"></span> 0 pending review</span>
+            <span class="tag" id="statVolMl">0 mL Total</span>
           </div>
         </article>
 
@@ -157,12 +156,12 @@
           <div class="stat-head">
             <div>
               <span class="label">Next Eligible Date</span>
-              <div class="stat-mid">Nov 28, 2024</div>
+              <div class="stat-mid" id="statNextDate">Eligible Today</div>
             </div>
             <span class="circle c-red-soft"><span class="material-symbols-outlined">event</span></span>
           </div>
           <div class="stat-foot">
-            <span class="red days"><span class="material-symbols-outlined">schedule</span> 14 Days Remaining</span>
+            <span class="red days" id="statNextDays"><span class="material-symbols-outlined green" style="color:#059669;">check_circle</span> Immediate Clearance</span>
             <a class="underline-link" href="../donation-drives/index.html">Reserve Spot</a>
           </div>
         </article>
@@ -361,6 +360,7 @@
     </div>
   </main>
 
+  <script src="../../supabaseClient.js"></script>
   <script>
     // Sidebar open / close
     const body = document.body;
@@ -375,6 +375,104 @@
     document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
+
+    // Load Real User Data from Supabase if logged in
+    document.addEventListener('DOMContentLoaded', async () => {
+      const profile = await populateDonorUI();
+      if (!profile) return;
+
+      // Welcome subtitle (56-Day Medical Countdown)
+      const welcomeP = document.getElementById('welcomeEligibilityText') || document.querySelector('.welcome p');
+      if (welcomeP) {
+        if (profile.isEligibleToday) {
+          welcomeP.innerHTML = 'You are eligible to donate today! Your commitment sustains real lives.';
+        } else {
+          welcomeP.innerHTML = `You are eligible to donate again in <span class="red">${profile.daysRemaining} days</span> (${profile.nextEligibleDate}). Your commitment sustains real lives.`;
+        }
+      }
+
+      // Stats cards
+      const statCards = document.querySelectorAll('.stats .card.stat');
+      if (statCards.length >= 4) {
+        // Card 2: Lifetime volume
+        const volB = document.getElementById('statVolCount') || statCards[1].querySelector('.stat-big b');
+        if (volB) volB.textContent = profile.totalDonations;
+        const volTag = document.getElementById('statVolMl') || statCards[1].querySelector('.stat-foot .tag');
+        if (volTag) volTag.textContent = `${profile.totalMl} mL Total`;
+
+        // Card 4: Next Eligible Date
+        const nextDateDiv = document.getElementById('statNextDate') || statCards[3].querySelector('.stat-mid');
+        if (nextDateDiv) nextDateDiv.textContent = profile.nextEligibleDate;
+        const daysSpan = document.getElementById('statNextDays') || statCards[3].querySelector('.days');
+        if (daysSpan) {
+          if (profile.isEligibleToday) {
+            daysSpan.innerHTML = `<span class="material-symbols-outlined" style="color:#059669;">check_circle</span> Immediate Clearance`;
+          } else {
+            daysSpan.innerHTML = `<span class="material-symbols-outlined">schedule</span> ${profile.daysRemaining} Days Remaining`;
+          }
+        }
+      }
+
+      // Milestone card
+      const milestoneH2 = document.querySelector('.milestone h2');
+      if (milestoneH2) milestoneH2.textContent = profile.tier;
+      const milestoneP = document.querySelector('.milestone p');
+      if (milestoneP) milestoneP.innerHTML = `${profile.tierSub}. <span class="red">Your Blood. Their Hope.</span>`;
+      const milestoneTextStrong = document.querySelector('.milestone-text strong');
+      if (milestoneTextStrong) milestoneTextStrong.textContent = `${profile.totalDonations} / ${profile.totalDonations >= 5 ? '10' : '5'}`;
+
+      // Wire test "Mark Donation Done (56-Day Reset)" button
+      const btnSimulateDone = document.getElementById('btnSimulateDone');
+      if (btnSimulateDone) {
+        btnSimulateDone.addEventListener('click', async () => {
+          const confirmDone = confirm("Confirm that you have completed a whole blood donation today?\n\nThis will apply the official 56-day (8-week) recovery interval and start your 56-day countdown.");
+          if (!confirmDone) return;
+
+          const todayStr = new Date().toISOString().split('T')[0];
+          const newRecord = {
+            record_code: 'LL-' + Math.floor(1000 + Math.random() * 9000),
+            donor_id: profile.id,
+            blood_type: profile.bloodType || 'O+',
+            facility_name: "Cebu Doctors' University Hospital",
+            scheduled_date: todayStr,
+            slot_time: '10:00 AM',
+            notes: 'Completed phlebotomy donation',
+            status: 'Completed'
+          };
+
+          // Save to local storage
+          const localRecords = JSON.parse(localStorage.getItem('lifeline_donations') || '[]');
+          localRecords.unshift(newRecord);
+          localStorage.setItem('lifeline_donations', JSON.stringify(localRecords));
+
+          // Save to Supabase database
+          const token = localStorage.getItem('lifeline_token');
+          if (token && profile.id) {
+            try {
+              await fetch(`${SUPABASE_URL}/rest/v1/donation_records`, {
+                method: 'POST',
+                headers: getHeaders(token),
+                body: JSON.stringify(newRecord)
+              });
+            } catch (err) {
+              console.warn('DB donation record error:', err);
+            }
+          }
+
+          alert("Donation marked COMPLETED! The 56-day eligibility countdown is now active.");
+          window.location.reload();
+        });
+      }
+
+      // Wire logout button
+      const logoutBtn = document.querySelector('.nav-item.logout');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          signOutUser();
+        });
+      }
+    });
   </script>
 
 </body>
