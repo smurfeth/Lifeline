@@ -96,12 +96,9 @@
         });
       });
 
-      // Quick autofill demo with 882190
+      // Focus first input on load
       if (inputs.length > 0) {
-        const demoCode = "882190";
-        inputs.forEach((input, i) => {
-          input.value = demoCode[i] || "";
-        });
+        inputs[0].focus();
       }
 
       // Handle submission

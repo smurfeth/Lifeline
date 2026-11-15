@@ -35,7 +35,6 @@
 
           <h1 class="auth-title">Sign In to Your Account</h1>
           <p class="auth-subtitle">Access your blood donation portal or staff station</p>
-          <p class="auth-demo-hint">🔑 Demo: username <strong>Donor</strong>, <strong>Staff</strong>, or <strong>Admin</strong> — password <strong>123456</strong></p>
         </header>
 
         <!-- Feedback Alert -->
@@ -43,23 +42,23 @@
 
         <!-- Credentials Form -->
         <form class="auth-form" id="signInForm" novalidate>
-          <!-- Username -->
+          <!-- Email / Username -->
           <div class="form-group">
             <label class="form-label" for="identifier">
-              Username <span class="required-star">*</span>
+              Email Address <span class="required-star">*</span>
             </label>
             <div class="input-field-wrapper">
               <span class="input-icon-lead" aria-hidden="true">
                 <img src="assets/icon.svg" alt="" width="16" height="16">
               </span>
               <input
-                type="text"
+                type="email"
                 id="identifier"
                 name="identifier"
                 class="form-input"
-                placeholder="Donor, Staff, or Admin"
+                placeholder="e.g. maria.santos@email.com"
                 required
-                autocomplete="username"
+                autocomplete="email"
                 autocapitalize="none"
                 spellcheck="false"
               >
@@ -132,6 +131,7 @@
     </div>
   </div>
 
+  <script src="../supabaseClient.js"></script>
   <script>
     // Client-side interactions
     document.addEventListener('DOMContentLoaded', () => {
@@ -179,7 +179,7 @@
 
       // Form validation & submission
       if (form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
           e.preventDefault();
           clearAlert();
 
@@ -187,7 +187,7 @@
           const password = document.getElementById('password').value;
 
           if (!identifier) {
-            showAlert('Please enter your username.');
+            showAlert('Please enter your email address.');
             document.getElementById('identifier').focus();
             return;
           }
@@ -198,27 +198,37 @@
             return;
           }
 
-          // Dummy credential check
-          // Valid accounts: Donor / Staff / Admin  — all with password: 123456
-          const dummyAccounts = {
+          const portalRoutes = {
             'donor': '../donor/dashboard/index.html',
             'staff': '../staff/dashboard/index.html',
             'admin': '../admin/dashboard/index.html'
           };
 
-          const idLower = identifier.toLowerCase().trim();
-          const destination = dummyAccounts[idLower];
+          // Authenticate with Supabase Database
+          showAlert('Authenticating with database...', 'is-success');
 
-          if (!destination || password !== '123456') {
-            showAlert('Invalid username or password. Try: Donor, Staff, or Admin with password 123456.');
-            return;
+          try {
+            const { data, error } = await signInUser(identifier, password);
+
+            if (error) {
+              showAlert(error.message || 'Invalid email or password.');
+              return;
+            }
+
+            // Successfully authenticated with Supabase!
+            const role = (data?.user?.user_metadata?.role || localStorage.getItem('lifeline_role') || 'donor').toLowerCase();
+            const targetPortal = portalRoutes[role] || '../donor/dashboard/index.html';
+
+            showAlert(`Welcome, ${data.user.email}! Redirecting...`, 'is-success');
+            setTimeout(() => {
+              window.location.href = targetPortal;
+            }, 600);
+
+          } catch (err) {
+            console.error('Database auth error:', err);
+            const detail = err && err.message ? err.message : String(err);
+            showAlert(`Connection to database failed (${detail}). Please verify your Supabase project status and keys.`);
           }
-
-          const roleNames = { donor: 'Donor Portal', staff: 'Staff Station', admin: 'Admin Command Center' };
-          showAlert(`Signing in to ${roleNames[idLower]}...`, 'is-success');
-          setTimeout(() => {
-            window.location.href = destination;
-          }, 600);
         });
       }
     });

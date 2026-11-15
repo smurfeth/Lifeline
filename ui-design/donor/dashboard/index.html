@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -20,9 +20,7 @@
           <div class="sidebar-name">LIFE<span>LINE</span></div>
           <div class="sidebar-tag">— Your Blood. <span>Their Hope</span> —</div>
         </div>
-        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
-          <span class="material-symbols-outlined">close</span>
-        </button>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
 
       <nav class="sidebar-nav">
@@ -54,9 +52,7 @@
 
   <!-- ===== Top bar ===== -->
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
-      <span class="material-symbols-outlined">menu</span>
-    </button>
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
 
     <div class="crumbs">
       <span class="crumb-bar"></span>
@@ -361,6 +357,7 @@
     </div>
   </main>
 
+  <script src="../../supabaseClient.js"></script>
   <script>
     // Sidebar open / close
     const body = document.body;
@@ -375,6 +372,55 @@
     document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
+
+    // Load Real User Data from Supabase if logged in
+    document.addEventListener('DOMContentLoaded', async () => {
+      const profile = await populateDonorUI();
+      if (!profile) return;
+
+      // Welcome subtitle
+      const welcomeP = document.querySelector('.welcome p');
+      if (welcomeP) {
+        if (profile.totalDonations === 0) {
+          welcomeP.innerHTML = 'You are currently eligible to schedule a blood donation. Your commitment sustains real lives.';
+        } else {
+          welcomeP.innerHTML = `You have completed <span class="red">${profile.totalDonations} donations</span> (${profile.totalMl} mL). Your commitment sustains real lives.`;
+        }
+      }
+
+      // Stats cards
+      const statCards = document.querySelectorAll('.stats .card.stat');
+      if (statCards.length >= 4) {
+        // Card 2: Lifetime volume
+        const volB = statCards[1].querySelector('.stat-big b');
+        if (volB) volB.textContent = profile.totalDonations;
+        const volTag = statCards[1].querySelector('.stat-foot .tag');
+        if (volTag) volTag.textContent = `${profile.totalMl} mL Total`;
+
+        // Card 4: Next Eligible Date
+        const nextDateDiv = statCards[3].querySelector('.stat-mid');
+        if (nextDateDiv) nextDateDiv.textContent = profile.nextEligibleDate;
+        const daysSpan = statCards[3].querySelector('.days');
+        if (daysSpan) daysSpan.innerHTML = `<span class="material-symbols-outlined">schedule</span> ${profile.nextEligibleSub}`;
+      }
+
+      // Milestone card
+      const milestoneH2 = document.querySelector('.milestone h2');
+      if (milestoneH2) milestoneH2.textContent = profile.tier;
+      const milestoneP = document.querySelector('.milestone p');
+      if (milestoneP) milestoneP.innerHTML = `${profile.tierSub}. <span class="red">Your Blood. Their Hope.</span>`;
+      const milestoneTextStrong = document.querySelector('.milestone-text strong');
+      if (milestoneTextStrong) milestoneTextStrong.textContent = `${profile.totalDonations} / ${profile.totalDonations >= 5 ? '10' : '5'}`;
+
+      // Wire logout button
+      const logoutBtn = document.querySelector('.nav-item.logout');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          signOutUser();
+        });
+      }
+    });
   </script>
 
 </body>

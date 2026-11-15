@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -20,9 +20,7 @@
           <div class="sidebar-name">LIFE<span>LINE</span></div>
           <div class="sidebar-tag">— Your Blood. <span>Their Hope</span> —</div>
         </div>
-        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
-          <span class="material-symbols-outlined">close</span>
-        </button>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
 
       <nav class="sidebar-nav">
@@ -55,9 +53,7 @@
 
   <!-- ===== Top bar ===== -->
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
-      <span class="material-symbols-outlined">menu</span>
-    </button>
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
 
     <div class="crumbs">
       <span class="crumb-bar"></span>
@@ -106,7 +102,7 @@
         </div>
       </div>
       <div class="actions">
-        <button class="btn btn-light"><span class="material-symbols-outlined">edit</span>Edit Profile</button>
+        <button class="btn btn-light" id="editProfileBtn"><span class="material-symbols-outlined">edit</span>Edit Profile</button>
         <button class="btn btn-light"><span class="material-symbols-outlined">qr_code_2</span>QR Pass</button>
         <button class="btn btn-red"><span class="material-symbols-outlined">download</span>Download Card</button>
       </div>
@@ -116,23 +112,23 @@
     <section class="stats">
       <div class="card stat">
         <div class="stat-label">Total Donations <img class="ico" src="../../assets/Icon%20Collected.png" alt=""></div>
-        <div class="stat-value">6 Completed</div>
-        <div class="stat-sub">2,700 mL certified volume</div>
+        <div class="stat-value" id="statDonations">0 Completed</div>
+        <div class="stat-sub" id="statVolume">0 mL certified volume</div>
       </div>
       <div class="card stat">
         <div class="stat-label">Lives Impacted <img class="ico" src="../../assets/Icon%20heart.png" alt=""></div>
-        <div class="stat-value green">~18 Lives</div>
+        <div class="stat-value green" id="statLives">~0 Lives</div>
         <div class="stat-sub">Direct regional transfusions</div>
       </div>
       <div class="card stat">
         <div class="stat-label">Current Tier <span class="material-symbols-outlined amber">workspace_premium</span></div>
-        <div class="stat-value">Silver Shield</div>
-        <div class="stat-sub">6/8 units toward Gold Master</div>
+        <div class="stat-value" id="statTier">New Voluntary Donor</div>
+        <div class="stat-sub" id="statTierSub">0/1 units to Bronze Badge</div>
       </div>
       <div class="card stat">
         <div class="stat-label">Next Eligible Date <img class="ico" src="../../assets/Icon%20Timer.png" alt=""></div>
-        <div class="stat-value red">Nov 28, 2024</div>
-        <div class="stat-sub">14 days until cycle reset</div>
+        <div class="stat-value red" id="statNextEligible">Eligible Today</div>
+        <div class="stat-sub" id="statNextEligibleSub">Immediate Clearance</div>
       </div>
     </section>
 
@@ -142,28 +138,28 @@
         <section class="card">
           <div class="card-head">
             <h2><span class="material-symbols-outlined red">badge</span>Personal &amp; Contact Information</h2>
-            <span class="pill pill-green"><i class="dot-green"></i>ID Verified</span>
+            <span class="pill pill-green"><i class="dot-green"></i>Editable by Donor</span>
           </div>
           <dl class="fields">
-            <div><dt>Full Legal Name</dt><dd>Marcus Anthony Vance</dd></div>
-            <div><dt>Date of Birth &amp; Age</dt><dd>August 14, 1990 (34 years)</dd></div>
-            <div><dt>Biological Gender &amp; Weight</dt><dd>Male • 82.5 kg (182 lbs)</dd></div>
-            <div><dt>Primary Mobile Phone</dt><dd class="with-ico"><img class="ico" src="../../assets/Icon%20Calll.png" alt="">+1 (555) 382-9012</dd></div>
-            <div><dt>Registered Email</dt><dd>marcus.vance@lifeline-connect.org</dd></div>
-            <div><dt>National Donor ID</dt><dd class="mono">US-ISBT-4902-8841-MV</dd></div>
-            <div class="full"><dt>Residential Address</dt><dd class="with-ico"><img class="ico" src="../../assets/Icon%20Location.png" alt="">742 Evergreen Terrace, Suite 4B, Springfield, OR 97477</dd></div>
+            <div><dt>Full Legal Name</dt><dd id="profLegalName">Loading...</dd></div>
+            <div><dt>Date of Birth &amp; Age</dt><dd id="profDobAge">Loading...</dd></div>
+            <div><dt>Biological Gender &amp; Weight</dt><dd id="profGenderWeight">Loading...</dd></div>
+            <div><dt>Primary Mobile Phone</dt><dd class="with-ico" id="profPhone"><img class="ico" src="../../assets/Icon%20Calll.png" alt="">Loading...</dd></div>
+            <div><dt>Registered Email</dt><dd id="profEmail">Loading...</dd></div>
+            <div><dt>National Donor ID</dt><dd class="mono" id="profDonorId">Loading...</dd></div>
+            <div class="full"><dt>Residential Address</dt><dd class="with-ico" id="profAddress"><img class="ico" src="../../assets/Icon%20Location.png" alt="">Loading...</dd></div>
           </dl>
         </section>
 
         <section class="card">
           <div class="card-head">
             <h2><span class="material-symbols-outlined red">contact_emergency</span>Emergency Contact</h2>
-            <button class="link-btn"><span class="material-symbols-outlined">edit</span>Edit</button>
+            <button class="link-btn" id="editEmergencyBtn"><span class="material-symbols-outlined">edit</span>Edit</button>
           </div>
           <dl class="fields three">
-            <div><dt>Designated Individual</dt><dd>Sarah Vance</dd></div>
-            <div><dt>Relationship</dt><dd>Spouse</dd></div>
-            <div><dt>Contact Number</dt><dd class="with-ico"><img class="ico" src="../../assets/Icon%20Calll.png" alt="">+1 (555) 901-4432</dd></div>
+            <div><dt>Designated Individual</dt><dd id="profEmerName">Not yet designated</dd></div>
+            <div><dt>Relationship</dt><dd id="profEmerRel">None</dd></div>
+            <div><dt>Contact Number</dt><dd class="with-ico" id="profEmerPhone"><img class="ico" src="../../assets/Icon%20Calll.png" alt="">None provided</dd></div>
           </dl>
           <p class="note">Authorized to receive notifications and medical updates during emergency donations or adverse events.</p>
         </section>
@@ -214,15 +210,15 @@
         <section class="card">
           <div class="card-head">
             <h2><span class="material-symbols-outlined red">monitor_heart</span>Clinical Baseline</h2>
-            <span class="small-muted">Phlebotomy Validated</span>
+            <span class="small-muted" style="background:#F1F5F9;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:600;"><span class="material-symbols-outlined" style="font-size:13px;vertical-align:middle;">lock</span> Staff Only (Clinical Validated)</span>
           </div>
           <div class="vitals">
-            <div class="vital"><small>Hemoglobin</small><b>15.4 <span>g/dL</span></b><em class="ok">Optimal (13.0 - 17.5)</em></div>
-            <div class="vital"><small>Blood Pressure</small><b>118/76 <span>mmHg</span></b><em class="ok">Normotensive</em></div>
-            <div class="vital"><small>Resting Pulse</small><b>68 <span>bpm</span></b><em>Sinus rhythm</em></div>
-            <div class="vital"><small>Deferral Status</small><b class="ok">Cleared</b><em>0 Active flags</em></div>
+            <div class="vital"><small>Hemoglobin</small><b id="clinHemoglobin">15.4 <span>g/dL</span></b><em class="ok">Staff Recorded</em></div>
+            <div class="vital"><small>Blood Pressure</small><b id="clinBp">120/80 <span>mmHg</span></b><em class="ok">Staff Recorded</em></div>
+            <div class="vital"><small>Resting Pulse</small><b id="clinPulse">72 <span>bpm</span></b><em>Sinus rhythm</em></div>
+            <div class="vital"><small>Deferral Status</small><b class="ok" id="clinDeferral">Cleared</b><em>0 Active flags</em></div>
           </div>
-          <p class="note"><b>Phlebotomy Note:</b> Prefers right median cubital vein. Rapid recovery, zero vasovagal symptoms observed across all visits.</p>
+          <p class="note" id="clinNote"><b>Phlebotomy Note:</b> Clinical vitals and deferral status are entered and certified by attending Clinical Staff upon physical blood screening.</p>
         </section>
 
         <section class="card">
@@ -230,18 +226,112 @@
             <h2><span class="material-symbols-outlined red">lock</span>Security &amp; Privacy</h2>
           </div>
           <div class="toggles">
-            <div class="toggle"><span><b>Two-Factor Authentication</b><small>Authenticator App (TOTP) active</small></span><button class="btn-sm">Manage</button></div>
-            <div class="toggle"><span><b>Account Password</b><small>Changed 42 days ago</small></span><button class="btn-sm">Change</button></div>
+            <div class="toggle">
+              <span><b>Two-Factor Authentication</b><small id="sub2FA">SMS / Authenticator app enabled</small></span>
+              <button class="btn-sm" type="button" id="btnManage2FA">Manage</button>
+            </div>
+            <div class="toggle">
+              <span><b>Account Password</b><small id="subPassword">Protected with encryption</small></span>
+              <button class="btn-sm" type="button" id="btnChangePassword">Change</button>
+            </div>
           </div>
           <div class="card-foot">
             <span class="small-muted"><span class="material-symbols-outlined">shield</span>Protected under HIPAA privacy regulations</span>
-            <a href="#" class="link-btn">Privacy Policy</a>
+            <a href="#" class="link-btn" id="btnPrivacyPolicy">Privacy Policy</a>
           </div>
         </section>
       </div>
     </div>
   </main>
 
+  <!-- ===== Modal: Edit Personal Information ===== -->
+  <div class="modal-overlay" id="editProfileModal" style="display:none;position:fixed;inset:0;background:rgba(20,24,26,0.6);backdrop-filter:blur(4px);z-index:400;align-items:center;justify-content:center;padding:16px;">
+    <div class="modal-card" style="background:#fff;border-radius:16px;max-width:520px;width:100%;box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);overflow:hidden;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid #F1F5F9;">
+        <h2 style="font-size:18px;font-weight:700;color:#1E293B;">Edit Personal &amp; Contact Information</h2>
+        <button type="button" id="closeProfileModal" style="background:none;border:none;font-size:22px;cursor:pointer;color:#64748B;">&times;</button>
+      </div>
+      <form id="editProfileForm" style="padding:24px;display:flex;flex-direction:column;gap:16px;">
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#475569;margin-bottom:6px;">Full Legal Name</label>
+          <input type="text" id="editFullName" style="width:100%;padding:10px 14px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;" required>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#475569;margin-bottom:6px;">Primary Mobile Phone</label>
+            <input type="tel" id="editPhone" style="width:100%;padding:10px 14px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;" required>
+          </div>
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#475569;margin-bottom:6px;">Date of Birth</label>
+            <input type="date" id="editDob" style="width:100%;padding:10px 14px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;">
+          </div>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#475569;margin-bottom:6px;">Residential City / Address</label>
+          <input type="text" id="editAddress" style="width:100%;padding:10px 14px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;" required>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#475569;margin-bottom:6px;">Blood Group</label>
+            <select id="editBloodGroup" style="width:100%;padding:10px 14px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;background:#fff;">
+              <option value="O+">O+ (Rh Positive)</option>
+              <option value="O-">O- (Rh Negative)</option>
+              <option value="A+">A+ (Rh Positive)</option>
+              <option value="A-">A- (Rh Negative)</option>
+              <option value="B+">B+ (Rh Positive)</option>
+              <option value="B-">B- (Rh Negative)</option>
+              <option value="AB+">AB+ (Rh Positive)</option>
+              <option value="AB-">AB- (Rh Negative)</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#475569;margin-bottom:6px;">Biological Gender</label>
+            <select id="editSex" style="width:100%;padding:10px 14px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;background:#fff;">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+        </div>
+        <p style="font-size:11.5px;color:#64748B;background:#F8FAFC;padding:10px;border-radius:8px;line-height:1.4;">
+          <strong style="color:#B7131A;">Note:</strong> Blood category and phlebotomy clearance can only be validated and certified by attending Clinical Staff upon physical donation.
+        </p>
+        <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:8px;">
+          <button type="button" id="cancelProfileModal" class="btn btn-light" style="padding:8px 18px;border-radius:8px;border:1px solid #CBD5E1;cursor:pointer;">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="padding:8px 22px;border-radius:8px;background:#B7131A;color:#fff;border:none;cursor:pointer;font-weight:600;">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Modal: Edit Emergency Contact ===== -->
+  <div class="modal-overlay" id="editEmergencyModal" style="display:none;position:fixed;inset:0;background:rgba(20,24,26,0.6);backdrop-filter:blur(4px);z-index:400;align-items:center;justify-content:center;padding:16px;">
+    <div class="modal-card" style="background:#fff;border-radius:16px;max-width:480px;width:100%;box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);overflow:hidden;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid #F1F5F9;">
+        <h2 style="font-size:18px;font-weight:700;color:#1E293B;">Edit Emergency Contact</h2>
+        <button type="button" id="closeEmergencyModal" style="background:none;border:none;font-size:22px;cursor:pointer;color:#64748B;">&times;</button>
+      </div>
+      <form id="editEmergencyForm" style="padding:24px;display:flex;flex-direction:column;gap:16px;">
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#475569;margin-bottom:6px;">Designated Individual Name</label>
+          <input type="text" id="editEmerName" placeholder="e.g. Maria Santos" style="width:100%;padding:10px 14px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;" required>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#475569;margin-bottom:6px;">Relationship</label>
+          <input type="text" id="editEmerRel" placeholder="e.g. Spouse, Parent, Sibling" style="width:100%;padding:10px 14px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;" required>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#475569;margin-bottom:6px;">Emergency Phone Number</label>
+          <input type="tel" id="editEmerPhone" placeholder="+63 900 000 0000" style="width:100%;padding:10px 14px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;" required>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:8px;">
+          <button type="button" id="cancelEmergencyModal" class="btn btn-light" style="padding:8px 18px;border-radius:8px;border:1px solid #CBD5E1;cursor:pointer;">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="padding:8px 22px;border-radius:8px;background:#B7131A;color:#fff;border:none;cursor:pointer;font-weight:600;">Save Contact</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../../supabaseClient.js"></script>
   <script>
     // Sidebar open / close
     const body = document.body;
@@ -256,6 +346,195 @@
     document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
+
+    let currentProfile = null;
+
+    async function loadProfileData() {
+      currentProfile = await getDonorProfile();
+      if (!currentProfile) return;
+
+      // 1. Header
+      const headH1 = document.querySelector('.name-row h1');
+      if (headH1) headH1.textContent = currentProfile.fullName;
+
+      const bloodPill = document.querySelector('.name-row .pill');
+      if (bloodPill) bloodPill.textContent = `${currentProfile.bloodType} Rh ${currentProfile.bloodType.includes('-') ? 'Negative' : 'Positive'}`;
+
+      const donorIdEl = document.querySelector('.meta b');
+      if (donorIdEl) donorIdEl.textContent = `#${currentProfile.donorId}`;
+
+      // 2. Stats
+      const statDonations = document.getElementById('statDonations');
+      if (statDonations) statDonations.textContent = `${currentProfile.totalDonations} Completed`;
+
+      const statVolume = document.getElementById('statVolume');
+      if (statVolume) statVolume.textContent = `${currentProfile.totalMl} mL certified volume`;
+
+      const statLives = document.getElementById('statLives');
+      if (statLives) statLives.textContent = `~${currentProfile.livesImpacted} Lives`;
+
+      const statTier = document.getElementById('statTier');
+      if (statTier) statTier.textContent = currentProfile.tier;
+
+      const statTierSub = document.getElementById('statTierSub');
+      if (statTierSub) statTierSub.textContent = currentProfile.tierSub;
+
+      const statNextEligible = document.getElementById('statNextEligible');
+      if (statNextEligible) statNextEligible.textContent = currentProfile.nextEligibleDate;
+
+      const statNextEligibleSub = document.getElementById('statNextEligibleSub');
+      if (statNextEligibleSub) statNextEligibleSub.textContent = currentProfile.nextEligibleSub;
+
+      // 3. Personal & Contact info
+      const profLegalName = document.getElementById('profLegalName');
+      if (profLegalName) profLegalName.textContent = currentProfile.fullName;
+
+      const profDobAge = document.getElementById('profDobAge');
+      if (profDobAge) profDobAge.textContent = currentProfile.dobAge;
+
+      const profGenderWeight = document.getElementById('profGenderWeight');
+      if (profGenderWeight) profGenderWeight.textContent = `${currentProfile.sex} • ${currentProfile.weight}`;
+
+      const profPhone = document.getElementById('profPhone');
+      if (profPhone) profPhone.innerHTML = `<img class="ico" src="../../assets/Icon%20Calll.png" alt="">${currentProfile.phone}`;
+
+      const profEmail = document.getElementById('profEmail');
+      if (profEmail) profEmail.textContent = currentProfile.email;
+
+      const profDonorId = document.getElementById('profDonorId');
+      if (profDonorId) profDonorId.textContent = `US-ISBT-${currentProfile.donorId}-PH`;
+
+      const profAddress = document.getElementById('profAddress');
+      if (profAddress) profAddress.innerHTML = `<img class="ico" src="../../assets/Icon%20Location.png" alt="">${currentProfile.address}`;
+
+      // 4. Emergency Contact
+      const profEmerName = document.getElementById('profEmerName');
+      if (profEmerName) profEmerName.textContent = currentProfile.emergencyName;
+
+      const profEmerRel = document.getElementById('profEmerRel');
+      if (profEmerRel) profEmerRel.textContent = currentProfile.emergencyRel;
+
+      const profEmerPhone = document.getElementById('profEmerPhone');
+      if (profEmerPhone) profEmerPhone.innerHTML = `<img class="ico" src="../../assets/Icon%20Calll.png" alt="">${currentProfile.emergencyPhone}`;
+
+      // 5. Digital donor card
+      const dcName = document.querySelector('.dc-name');
+      if (dcName) dcName.textContent = currentProfile.fullName.toUpperCase();
+
+      const dcId = document.querySelector('.dc-mid .mono');
+      if (dcId) dcId.textContent = `ID: ${currentProfile.donorId}`;
+
+      const dcTypeB = document.querySelector('.dc-type b');
+      if (dcTypeB) dcTypeB.textContent = currentProfile.bloodType;
+
+      const dcTypeSmall = document.querySelector('.dc-type small');
+      if (dcTypeSmall) dcTypeSmall.textContent = currentProfile.bloodType.includes('-') ? 'RH-' : 'RH+';
+
+      // 6. Topbar pill
+      document.querySelectorAll('.user-name').forEach(el => el.textContent = currentProfile.fullName);
+      document.querySelectorAll('.user-type').forEach(el => el.textContent = `Blood Type ${currentProfile.bloodType}`);
+    }
+
+    // Modal helpers
+    function toggleModal(modalId, show) {
+      const modal = document.getElementById(modalId);
+      if (modal) modal.style.display = show ? 'flex' : 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadProfileData();
+
+      // Edit Profile modal wire
+      const editProfileBtn = document.getElementById('editProfileBtn');
+      if (editProfileBtn) {
+        editProfileBtn.addEventListener('click', () => {
+          if (!currentProfile) return;
+          document.getElementById('editFullName').value = currentProfile.fullName;
+          document.getElementById('editPhone').value = currentProfile.phone;
+          document.getElementById('editAddress').value = currentProfile.address;
+          document.getElementById('editDob').value = currentProfile.dob !== 'Not provided' ? currentProfile.dob : '';
+          document.getElementById('editBloodGroup').value = currentProfile.bloodType || 'O+';
+          document.getElementById('editSex').value = currentProfile.sex || 'Male';
+          toggleModal('editProfileModal', true);
+        });
+      }
+
+      document.getElementById('closeProfileModal')?.addEventListener('click', () => toggleModal('editProfileModal', false));
+      document.getElementById('cancelProfileModal')?.addEventListener('click', () => toggleModal('editProfileModal', false));
+
+      document.getElementById('editProfileForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fullName = document.getElementById('editFullName').value.trim();
+        const phone = document.getElementById('editPhone').value.trim();
+        const address = document.getElementById('editAddress').value.trim();
+        const dob = document.getElementById('editDob').value;
+        const blood_group = document.getElementById('editBloodGroup').value;
+        const biological_sex = document.getElementById('editSex').value;
+
+        const nameParts = fullName.split(' ');
+        const firstName = nameParts[0] || fullName;
+        const lastName = nameParts.slice(1).join(' ') || '';
+
+        await updateDonorProfile({
+          first_name: firstName,
+          last_name: lastName,
+          full_name: fullName,
+          contact_number: phone,
+          phone,
+          address,
+          dob,
+          blood_group,
+          blood_type: blood_group,
+          biological_sex,
+          sex: biological_sex
+        });
+
+        toggleModal('editProfileModal', false);
+        await loadProfileData();
+        alert('Personal information and blood group updated successfully in Supabase!');
+      });
+
+      // Edit Emergency Contact modal wire
+      const editEmergencyBtn = document.getElementById('editEmergencyBtn');
+      if (editEmergencyBtn) {
+        editEmergencyBtn.addEventListener('click', () => {
+          if (!currentProfile) return;
+          document.getElementById('editEmerName').value = currentProfile.emergencyName !== 'Not yet designated' ? currentProfile.emergencyName : '';
+          document.getElementById('editEmerRel').value = currentProfile.emergencyRel !== 'None' ? currentProfile.emergencyRel : '';
+          document.getElementById('editEmerPhone').value = currentProfile.emergencyPhone !== 'None provided' ? currentProfile.emergencyPhone : '';
+          toggleModal('editEmergencyModal', true);
+        });
+      }
+
+      document.getElementById('closeEmergencyModal')?.addEventListener('click', () => toggleModal('editEmergencyModal', false));
+      document.getElementById('cancelEmergencyModal')?.addEventListener('click', () => toggleModal('editEmergencyModal', false));
+
+      document.getElementById('editEmergencyForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const emergency_name = document.getElementById('editEmerName').value.trim();
+        const emergency_rel = document.getElementById('editEmerRel').value.trim();
+        const emergency_phone = document.getElementById('editEmerPhone').value.trim();
+
+        await updateDonorProfile({
+          emergency_name,
+          emergency_rel,
+          emergency_phone
+        });
+
+        toggleModal('editEmergencyModal', false);
+        await loadProfileData();
+        alert('Emergency contact updated successfully in Supabase!');
+      });
+
+      // Wire Logout
+      const logoutBtn = document.querySelector('.nav-item.logout');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          signOutUser();
+        });
+      }
+    });
   </script>
 
 </body>
