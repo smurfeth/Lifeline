@@ -37,7 +37,7 @@
 
         <div>
           <h1 class="auth-title">Verify Your Email Address</h1>
-          <p class="auth-subtitle">
+          <p class="auth-subtitle" id="verifySubtitle">
             We've sent a 6-digit confirmation code to your email. Enter the code below to complete registration.
           </p>
         </div>
@@ -76,6 +76,15 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Display pending registration email if available
+      const pendingEmail = sessionStorage.getItem('pending_verification_email');
+      if (pendingEmail) {
+        const sub = document.getElementById('verifySubtitle');
+        if (sub) {
+          sub.innerHTML = `We've sent a 6-digit confirmation code to <b>${pendingEmail}</b>. Enter the code below to complete registration.`;
+        }
+      }
+
       const inputs = document.querySelectorAll('.code-box');
       const form = document.getElementById('verifyForm');
       const alertBox = document.getElementById('verifyAlert');

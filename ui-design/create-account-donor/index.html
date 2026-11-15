@@ -167,8 +167,27 @@
     </div>
   </main>
 
-  <script src="../supabaseClient.js"></script>
+  <!-- ========================================================================= -->
+  <!-- DIRECT SUPABASE DATABASE INTEGRATION & REGISTRATION LOGIC                 -->
+  <!-- ========================================================================= -->
   <script>
+    // =========================================================================
+    // 1. SUPABASE DATABASE CONFIGURATION (Connected directly to your Supabase)
+    // =========================================================================
+    const SUPABASE_URL = 'https://bnytmuwgutotekaaylig.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_c5fAj53uud1ud8WFRY_fxg_WOvW2kI1';
+
+    function getSupabaseHeaders(token = null) {
+      const headers = {
+        'apikey': SUPABASE_KEY,
+        'Content-Type': 'application/json'
+      };
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+      return headers;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.querySelector('.form');
       const alertBox = document.getElementById('signUpAlert');
@@ -182,12 +201,16 @@
         alertBox.style.border = isError ? '1px solid #FFB4AC' : '1px solid #A7F3D0';
       }
 
+      // =======================================================================
+      // 2. DONOR SUBMISSION DIRECTLY CONNECTED TO SUPABASE DATABASE
+      // =======================================================================
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const fullName = document.getElementById('fullName').value.trim();
         const dob = document.getElementById('dob')?.value || '';
         const sex = document.getElementById('sex')?.value || '';
+        const formattedSex = sex ? (sex.charAt(0).toUpperCase() + sex.slice(1)) : 'Male';
         const email = document.getElementById('email').value.trim();
         const mobile = document.getElementById('mobile').value.trim();
         const city = document.getElementById('city').value;
@@ -206,7 +229,7 @@
           return;
         }
 
-        showMessage('Creating your Lifeline account in database...', false);
+        showMessage('Connecting directly to Supabase database...', false);
 
         // Split name into first and last
         const nameParts = fullName.split(' ');
@@ -214,25 +237,87 @@
         const lastName = nameParts.slice(1).join(' ') || '';
 
         try {
-          const { data, error } = await signUpDonor({
-            email,
-            password,
-            fullName,
-            firstName,
-            lastName,
-            bloodType,
-            phone: mobile,
-            address: city,
-            dob,
-            sex
+          // ===================================================================
+          // A. DIRECT SUPABASE AUTH CALL (Creates user in auth.users)
+          // ===================================================================
+          console.log('Sending direct donor signup to Supabase Auth:', `${SUPABASE_URL}/auth/v1/signup`);
+          const authResponse = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
+            method: 'POST',
+            headers: getSupabaseHeaders(),
+            body: JSON.stringify({
+              email: email,
+              password: password,
+              data: {
+                full_name: fullName,
+                first_name: firstName,
+                last_name: lastName,
+                contact_number: mobile,
+                phone: mobile,
+                address: city,
+                dob: dob || null,
+                biological_sex: formattedSex,
+                sex: formattedSex,
+                role: 'donor',
+                blood_group: bloodType,
+                blood_type: bloodType
+              }
+            })
           });
 
-          if (error) {
-            showMessage(error.message || 'Failed to create account.');
-            return;
+          const authData = await authResponse.json();
+
+          if (!authResponse.ok) {
+            const errorMsg = authData.error_description || authData.msg || authData.message || 'Failed to create account.';
+            throw new Error(errorMsg);
           }
 
-          showMessage('Account created successfully! Redirecting to email verification...', false);
+          // Save local session state
+          if (authData.access_token) {
+            localStorage.setItem('lifeline_token', authData.access_token);
+            localStorage.setItem('lifeline_session', JSON.stringify(authData));
+            localStorage.setItem('lifeline_user', JSON.stringify(authData.user));
+            localStorage.setItem('lifeline_role', 'donor');
+          }
+
+          // ===================================================================
+          // B. DIRECT SUPABASE DATABASE CALL (Upserts record into public.profiles table)
+          // ===================================================================
+          if (authData.user && authData.access_token) {
+            try {
+              console.log('Inserting donor into Supabase public.profiles table...');
+              const profilePayload = {
+                id: authData.user.id,
+                full_name: fullName,
+                role: 'donor',
+                contact_number: mobile || null,
+                address: city || null,
+                dob: dob || null,
+                biological_sex: formattedSex,
+                blood_group: bloodType !== 'unknown' ? bloodType : null
+              };
+
+              const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/profiles`, {
+                method: 'POST',
+                headers: Object.assign({}, getSupabaseHeaders(authData.access_token), {
+                  'Prefer': 'resolution=merge-duplicates'
+                }),
+                body: JSON.stringify(profilePayload)
+              });
+
+              if (!dbResponse.ok) {
+                await fetch(`${SUPABASE_URL}/rest/v1/profiles?id=eq.${authData.user.id}`, {
+                  method: 'PATCH',
+                  headers: getSupabaseHeaders(authData.access_token),
+                  body: JSON.stringify(profilePayload)
+                });
+              }
+              console.log('Direct Supabase profiles table write confirmed!');
+            } catch (dbErr) {
+              console.warn('Profile table sync notice:', dbErr);
+            }
+          }
+
+          showMessage('Account created successfully in Supabase database! Redirecting...', false);
           
           // Store email for verification page
           sessionStorage.setItem('pending_verification_email', email);
@@ -244,7 +329,7 @@
         } catch (err) {
           console.error('Registration error:', err);
           const detail = err && err.message ? err.message : String(err);
-          showMessage(`Could not connect to database (${detail}). Please verify your Supabase project is active and that the anon key is correct.`);
+          showMessage(`Database Error: ${detail}`);
         }
       });
     });

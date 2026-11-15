@@ -91,12 +91,12 @@
         </div>
         <div>
           <div class="name-row">
-            <h1>Marcus Vance</h1>
-            <span class="pill pill-red">O+ Rh Positive</span>
+            <h1 id="profHeaderName">Loading...</h1>
+            <span class="pill pill-red" id="profHeaderBlood">Loading...</span>
           </div>
           <div class="meta">
-            <span>Donor ID: <b>#D-10948</b></span><i class="sep"></i>
-            <span>Active Donor Since 2022</span>
+            <span>Donor ID: <b id="profHeaderId">Loading...</b></span><i class="sep"></i>
+            <span>Verified Voluntary Donor</span>
           </div>
           <div class="clearance"><img class="ico" src="../../assets/Icon%20Verified.png" alt="">Clinical Clearance Active</div>
         </div>
@@ -430,7 +430,16 @@
       const dcTypeSmall = document.querySelector('.dc-type small');
       if (dcTypeSmall) dcTypeSmall.textContent = currentProfile.bloodType.includes('-') ? 'RH-' : 'RH+';
 
-      // 6. Topbar pill
+      // 6. Topbar & Header
+      const profHeaderName = document.getElementById('profHeaderName');
+      if (profHeaderName) profHeaderName.textContent = currentProfile.fullName;
+
+      const profHeaderBlood = document.getElementById('profHeaderBlood');
+      if (profHeaderBlood) profHeaderBlood.textContent = `${currentProfile.bloodType} Rh ${currentProfile.bloodType.includes('-') ? 'Negative' : 'Positive'}`;
+
+      const profHeaderId = document.getElementById('profHeaderId');
+      if (profHeaderId) profHeaderId.textContent = `#${currentProfile.donorId}`;
+
       document.querySelectorAll('.user-name').forEach(el => el.textContent = currentProfile.fullName);
       document.querySelectorAll('.user-type').forEach(el => el.textContent = `Blood Type ${currentProfile.bloodType}`);
     }

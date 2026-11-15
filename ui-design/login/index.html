@@ -131,8 +131,27 @@
     </div>
   </div>
 
-  <script src="../supabaseClient.js"></script>
+  <!-- ========================================================================= -->
+  <!-- DIRECT SUPABASE DATABASE AUTHENTICATION                                   -->
+  <!-- ========================================================================= -->
   <script>
+    // =========================================================================
+    // SUPABASE DATABASE CONFIGURATION (Connected directly to project)
+    // =========================================================================
+    const SUPABASE_URL = 'https://bnytmuwgutotekaaylig.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_c5fAj53uud1ud8WFRY_fxg_WOvW2kI1';
+
+    function getSupabaseHeaders(token = null) {
+      const headers = {
+        'apikey': SUPABASE_KEY,
+        'Content-Type': 'application/json'
+      };
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+      return headers;
+    }
+
     // Client-side interactions
     document.addEventListener('DOMContentLoaded', () => {
       const togglePasswordBtn = document.getElementById('togglePasswordBtn');
@@ -177,7 +196,9 @@
         authAlert.style.display = 'none';
       }
 
-      // Form validation & submission
+      // =======================================================================
+      // DIRECT SUPABASE DATABASE LOGIN SUBMISSION
+      // =======================================================================
       if (form) {
         form.addEventListener('submit', async (e) => {
           e.preventDefault();
@@ -204,15 +225,36 @@
             'admin': '../admin/dashboard/index.html'
           };
 
-          // Authenticate with Supabase Database
-          showAlert('Authenticating with database...', 'is-success');
+          // Authenticate directly with Supabase Database
+          showAlert('Authenticating with Supabase database...', 'is-success');
 
           try {
-            const { data, error } = await signInUser(identifier, password);
+            console.log('Sending direct signin request to Supabase Auth:', `${SUPABASE_URL}/auth/v1/token`);
+            const response = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+              method: 'POST',
+              headers: getSupabaseHeaders(),
+              body: JSON.stringify({
+                email: identifier,
+                password: password
+              })
+            });
 
-            if (error) {
-              showAlert(error.message || 'Invalid email or password.');
+            const data = await response.json();
+
+            if (!response.ok) {
+              const errorMsg = data.error_description || data.msg || data.message || 'Invalid email or password.';
+              showAlert(errorMsg);
               return;
+            }
+
+            // Save session to localStorage
+            if (data.access_token) {
+              localStorage.setItem('lifeline_token', data.access_token);
+              localStorage.setItem('lifeline_session', JSON.stringify(data));
+              localStorage.setItem('lifeline_user', JSON.stringify(data.user));
+              
+              const role = data.user?.user_metadata?.role || 'donor';
+              localStorage.setItem('lifeline_role', role);
             }
 
             // Successfully authenticated with Supabase!

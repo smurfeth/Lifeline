@@ -68,8 +68,8 @@
     <a class="user-pill" href="../facility-profile/index.html">
       <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
       <span>
-        <span class="user-name">Dr. Aris Catadman</span>
-        <span class="user-type">Chief Pathologist</span>
+        <span class="user-name">Loading...</span>
+        <span class="user-type">Clinical Staff</span>
       </span>
     </a>
   </header>
@@ -80,9 +80,9 @@
       <!-- Welcome -->
       <section class="card hero">
         <div>
-          <div class="chips"><span class="pill ">St. Jude Regional Blood Bank • Transfusion Medicine Ward</span><span class="pill "><span class="dot"></span> Operational Active</span></div>
+          <div class="chips"><span class="pill ">Healthcare Facility • Transfusion Medicine Ward</span><span class="pill "><span class="dot"></span> Operational Active</span></div>
           <h1>Clinical Operations &amp; Donor Triage</h1>
-          <p>Logged in as: <b>Dr. Aris Catadman</b> (Staff Medical Officer) • Shift: 08:00 – 16:00 (Room 3B)</p>
+          <p>Logged in as: <b>Staff Medical Officer</b> • Shift: 08:00 – 16:00</p>
         </div>
         <div class="actions">
           <button class="btn btn-primary" type="button"><span class="material-symbols-outlined">add</span> Log Walk-In Donation</button>
@@ -169,8 +169,13 @@
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
 
-    // Wire logout
+    // Wire logout and populate staff details
     document.addEventListener('DOMContentLoaded', () => {
+      // Load logged-in staff profile
+      if (typeof populateStaffUI === 'function') {
+        populateStaffUI();
+      }
+
       const logoutBtn = document.querySelector('.nav-item.logout');
       if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {

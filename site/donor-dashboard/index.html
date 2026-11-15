@@ -25,14 +25,14 @@
                     <p class="text-1">VERIFIED DONOR</p>
                   </div>
                   <div class="container-5">
-                    <p class="text-2">• ID #DN-99420</p>
+                    <p class="text-2" id="dashDonorId">• ID #DN-58715</p>
                   </div>
                 </div>
                 <div class="heading-1">
-                  <p class="text-3">Welcome back, <span class="text-3-span-1">Marcus!</span></p>
+                  <p class="text-3">Welcome back, <span class="text-3-span-1" id="dashDonorFirstName">Apollo!</span></p>
                 </div>
                 <div class="container-6">
-                  <p class="text-4">You are eligible to donate again in <span class="text-4-span-1">14 days</span>. Your commitment<br>sustains real lives.</p>
+                  <p class="text-4" id="dashEligibilityText">You are eligible to donate today! Your commitment sustains real lives.</p>
                 </div>
               </div>
               <div class="callout-action-buttons">
@@ -141,7 +141,7 @@
                   <div class="container-2">
                     <div class="container-32">
                       <img class="container-7" src="assets/container-4.svg" alt="Container">
-                      <p class="text-10">14 Days<br>Remaining</p>
+                      <p class="text-10" id="dashNextDays">Immediate<br>Clearance</p>
                     </div>
                     <a class="container-21" href="#">
                       <span class="text-23">Reserve<br>Spot</span>
@@ -685,7 +685,7 @@
           <img class="background-22" src="assets/background-8.svg" alt="Background">
           <div class="container-5">
             <div class="container-6">
-              <p class="text-112">Marcus Vance</p>
+              <p class="text-112" id="dashUserPillName">Apollo Anthonio</p>
             </div>
             <div class="container-6">
               <p class="text-19">Blood Type O+</p>
@@ -758,5 +758,28 @@
       </div>
     </aside>
   </div>
+
+  <script src="../../ui-design/supabaseClient.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (typeof populateDonorUI === 'function') {
+        const profile = await populateDonorUI();
+        if (profile) {
+          const nameEl = document.getElementById('dashDonorFirstName');
+          if (nameEl) nameEl.textContent = profile.firstName + '!';
+          const idEl = document.getElementById('dashDonorId');
+          if (idEl) idEl.textContent = `• ID #${profile.donorId}`;
+          const eligEl = document.getElementById('dashEligibilityText');
+          if (eligEl) {
+            if (profile.isEligibleToday) {
+              eligEl.innerHTML = 'You are eligible to donate today! Your commitment sustains real lives.';
+            } else {
+              eligEl.innerHTML = `You are eligible to donate again in <span style="color:#DC2626;font-weight:700;">${profile.daysRemaining} days</span> (${profile.nextEligibleDate}). Your commitment sustains real lives.`;
+            }
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
