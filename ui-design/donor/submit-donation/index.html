@@ -20,9 +20,13 @@
           <div class="sidebar-name">LIFE<span>LINE</span></div>
           <div class="sidebar-tag">— Your Blood. <span>Their Hope</span> —</div>
         </div>
-        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
       </div>
-
       <nav class="sidebar-nav">
         <a class="nav-item" href="../dashboard/index.html">
           <span class="material-symbols-outlined">dashboard</span> Dashboard
@@ -41,9 +45,8 @@
         </a>
       </nav>
     </div>
-
     <div class="sidebar-bottom">
-      <a class="nav-item logout" href="../../login/index.html">
+      <a class="nav-item logout" id="logoutBtn" href="../../login/index.html">
         <span class="material-symbols-outlined">logout</span> Log Out
       </a>
     </div>
@@ -52,36 +55,37 @@
 
   <!-- ===== Top bar ===== -->
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
     <div class="crumbs">
       <span class="crumb-bar"></span>
       <span>Donor Portal /</span>
       <strong>Submit Donation</strong>
     </div>
-
     <label class="search">
       <span class="material-symbols-outlined">search</span>
       <input type="search" placeholder="Search donation slots...">
     </label>
-
     <button class="icon-btn bell" type="button" aria-label="Notifications">
       <span class="material-symbols-outlined">notifications</span>
       <span class="bell-dot"></span>
     </button>
-
     <a class="user-pill" href="../profile/index.html">
       <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
       <span>
-        <span class="user-name">Marcus Vance</span>
-        <span class="user-type">Blood Type O+</span>
+        <span class="user-name" id="nav-donor-name">Loading...</span>
+        <span class="user-type" id="nav-blood-type">Blood Type —</span>
       </span>
     </a>
   </header>
 
   <main class="page">
     <div class="container">
-
       <!-- ===== Page heading ===== -->
       <section class="intro">
         <div class="intro-text">
@@ -115,8 +119,7 @@
         </li>
       </ol>
 
-      <form class="form" action="#" method="post" novalidate>
-
+      <form class="form" id="booking-form" action="#" method="post" novalidate>
         <!-- ===== Card 1: Verified profile ===== -->
         <section class="card pad profile-card">
           <header class="card-top">
@@ -129,38 +132,36 @@
             </div>
             <span class="pill-verified"><span class="dot"></span> VERIFIED IDENTITY</span>
           </header>
-
           <div class="info-grid">
             <div class="info">
               <small>Full Legal Name</small>
-              <strong>Marcus Vance</strong>
+              <strong id="summary-full-name">Loading...</strong>
               <span class="green">Matched with State Registry</span>
             </div>
             <div class="info">
               <small>Donor Registration ID</small>
-              <strong class="reg-id">#D-10948 <span class="material-symbols-outlined green">verified</span></strong>
-              <span class="slate">Lifeline Gold Tier</span>
+              <strong class="reg-id" id="summary-donor-id">#D-00000 <span class="material-symbols-outlined green">verified</span></strong>
+              <span class="slate">Lifeline Verified Donor</span>
             </div>
             <div class="info info-row">
               <div>
                 <small>Registered Blood Type</small>
-                <strong class="plain">Rh Positive</strong>
+                <strong class="plain" id="summary-rh-label">Rh Positive</strong>
               </div>
-              <span class="type-badge">O+</span>
+              <span class="type-badge" id="summary-blood-type">O+</span>
             </div>
             <div class="info">
               <small>Contact Number</small>
-              <strong>+1 (555) 382-9012</strong>
+              <strong id="summary-contact">Not provided</strong>
               <span class="slate">SMS Notification Enabled</span>
             </div>
           </div>
-
           <div class="emergency">
             <div class="emergency-text">
               <span class="material-symbols-outlined">contact_phone</span>
-              <span><b>Designated Emergency Contact:</b> Sarah Vance (+1 555-901-4432, Spouse)</span>
+              <span><b>Account Email:</b> <span id="summary-email">—</span></span>
             </div>
-            <span class="updated">Last updated 14 days ago</span>
+            <span class="updated">Verified Session</span>
           </div>
         </section>
 
@@ -175,12 +176,11 @@
           </header>
 
           <div class="stack">
-
             <div class="field">
               <label for="bloodGroup">Confirm Donation Blood Group <span class="req">*</span></label>
               <div class="select-wrap">
                 <select class="control" id="bloodGroup" name="bloodGroup" required>
-                  <option value="O+" selected>O+ (Pre-selected based on profile)</option>
+                  <option value="O+" selected>O+</option>
                   <option value="O-">O-</option>
                   <option value="A+">A+</option>
                   <option value="A-">A-</option>
@@ -198,22 +198,22 @@
               <legend>Select Donation Modality <span class="req">*</span></legend>
               <div class="modalities">
                 <label class="modality">
-                  <input type="radio" name="modality" value="whole-blood" checked>
+                  <input type="radio" name="modality" value="Whole Blood" checked>
                   <span class="radio-dot"></span>
                   <span><strong>Whole Blood (Standard)</strong><small>Approx. 450ml • 10-15 min extraction</small></span>
                 </label>
                 <label class="modality">
-                  <input type="radio" name="modality" value="platelets">
+                  <input type="radio" name="modality" value="Platelets">
                   <span class="radio-dot"></span>
                   <span><strong>Platelets (Apheresis)</strong><small>Crucial for oncology • 70-90 min</small></span>
                 </label>
                 <label class="modality">
-                  <input type="radio" name="modality" value="plasma">
+                  <input type="radio" name="modality" value="Plasma">
                   <span class="radio-dot"></span>
                   <span><strong>Plasma</strong><small>Trauma &amp; burn units • 45 min</small></span>
                 </label>
                 <label class="modality">
-                  <input type="radio" name="modality" value="double-red">
+                  <input type="radio" name="modality" value="Double Red Cells">
                   <span class="radio-dot"></span>
                   <span><strong>Double Red Cells</strong><small>High yield RBC collection • 40 min</small></span>
                 </label>
@@ -223,15 +223,15 @@
             <div class="row">
               <div class="field">
                 <label for="prefDate">Preferred Date <span class="req">*</span></label>
-                <input class="control" type="date" id="prefDate" name="prefDate" value="2024-11-28" required>
+                <input class="control" type="date" id="prefDate" name="prefDate" required>
               </div>
               <div class="field">
                 <label for="timeWindow">Time Window <span class="req">*</span></label>
                 <div class="select-wrap">
                   <select class="control" id="timeWindow" name="timeWindow" required>
-                    <option selected>Morning (08:00 - 11:30 AM)</option>
-                    <option>Afternoon (12:30 - 04:00 PM)</option>
-                    <option>Evening (04:30 - 07:00 PM)</option>
+                    <option value="Morning (08:00 - 11:30 AM)" selected>Morning (08:00 - 11:30 AM)</option>
+                    <option value="Afternoon (12:30 - 04:00 PM)">Afternoon (12:30 - 04:00 PM)</option>
+                    <option value="Evening (04:30 - 07:00 PM)">Evening (04:30 - 07:00 PM)</option>
                   </select>
                   <span class="material-symbols-outlined select-arrow">expand_more</span>
                 </div>
@@ -242,9 +242,7 @@
               <label for="facility">Accredited Clinical Facility / Blood Bank <span class="req">*</span></label>
               <div class="select-wrap">
                 <select class="control" id="facility" name="facility" required>
-                  <option selected>St. Jude Regional Blood Bank (Primary Central Hub)</option>
-                  <option>City General Hospital Blood Bank</option>
-                  <option>Philippine Red Cross – Cebu Chapter</option>
+                  <option value="" disabled selected>Loading accredited facilities...</option>
                 </select>
                 <span class="material-symbols-outlined select-arrow">expand_more</span>
               </div>
@@ -253,13 +251,11 @@
             <div class="field">
               <div class="label-row">
                 <label for="drive">Or Associated Community Drive (Optional)</label>
-                <span class="pill-green">2 Active Drives</span>
+                <span class="pill-green" id="active-drives-badge">Active Drives</span>
               </div>
               <div class="select-wrap">
                 <select class="control" id="drive" name="drive">
-                  <option selected>None (Proceed directly to hospital/bank)</option>
-                  <option>Metro University Blood Crusade – Nov 25</option>
-                  <option>Civic Center Holiday Drive – Dec 02</option>
+                  <option value="none" selected>None (Proceed directly to hospital/bank)</option>
                 </select>
                 <span class="material-symbols-outlined select-arrow">expand_more</span>
               </div>
@@ -267,10 +263,10 @@
 
             <article class="facility">
               <div class="facility-img">
-                <img src="https://placehold.co/567x176" alt="St. Jude Regional Blood Bank">
+                <img src="https://placehold.co/567x176" alt="Selected Facility">
                 <div class="facility-shade">
-                  <h3><span class="material-symbols-outlined red">location_on</span> St. Jude Regional Blood Bank</h3>
-                  <p>4280 Meridian Avenue, Medical District Suite 400</p>
+                  <h3 id="facility-preview-name"><span class="material-symbols-outlined red">location_on</span> Select a Facility Above</h3>
+                  <p id="facility-preview-address">Address details will appear once selected</p>
                 </div>
               </div>
               <div class="facility-foot">
@@ -278,7 +274,6 @@
                 <span class="parking">Free Donor Parking #P4</span>
               </div>
             </article>
-
           </div>
         </section>
 
@@ -294,21 +289,21 @@
 
           <div class="checklist">
             <label class="check">
-              <input type="checkbox" name="weight" required>
+              <input type="checkbox" id="check-weight" name="weight" required>
               <span>
                 <strong>I weigh at least 110 lbs (50 kg)</strong>
                 <small>Sufficient blood volume threshold required for donor cardiovascular safety during extraction.</small>
               </span>
             </label>
             <label class="check">
-              <input type="checkbox" name="tattoo" required>
+              <input type="checkbox" id="check-tattoo" name="tattoo" required>
               <span>
                 <strong>I have not had a tattoo or body piercing in the past 3 months</strong>
                 <small>Excludes procedures done in state-regulated facilities with single-use needles within compliance.</small>
               </span>
             </label>
             <label class="check">
-              <input type="checkbox" name="health" required>
+              <input type="checkbox" id="check-health" name="health" required>
               <span>
                 <strong>I feel in good health today with no flu or cold symptoms</strong>
                 <small>No acute fever, productive cough, respiratory distress, or active antibiotic treatments within 48 hours.</small>
@@ -327,12 +322,11 @@
           <span class="secure"><span class="material-symbols-outlined">lock</span> Submissions protected by HIPAA &amp; Lifeline Cryptographic Trust Registry</span>
           <div class="action-btns">
             <a class="btn btn-ghost" href="../dashboard/index.html">Cancel</a>
-            <button class="btn btn-primary" type="submit">
+            <button class="btn btn-primary" id="submit-donation-btn" type="submit">
               <span class="material-symbols-outlined">send</span> Submit Donation Record
             </button>
           </div>
         </div>
-
       </form>
 
       <!-- ===== Closing banner ===== -->
@@ -346,94 +340,25 @@
           <p>Every standard donation saves up to three clinical lives. Our transport logistics team routes packed RBC units immediately to neonatal intensive care and emergency trauma suites.</p>
         </div>
       </section>
-
     </div>
   </main>
 
-  <script src="../../supabaseClient.js"></script>
+  <!-- Sidebar toggle script -->
   <script>
-    // Sidebar open / close
     const body = document.body;
     const menuBtn = document.getElementById('menuBtn');
-
     function setSidebar(open) {
       body.classList.toggle('sidebar-open', open);
       menuBtn.setAttribute('aria-expanded', String(open));
     }
-
     menuBtn.addEventListener('click', () => setSidebar(!body.classList.contains('sidebar-open')));
     document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
-
-    // Populate user profile & wire donation submission
-    document.addEventListener('DOMContentLoaded', async () => {
-      const profile = await populateDonorUI();
-      if (profile) {
-        // Card 1 verified profile summary
-        const infoGridStrong = document.querySelectorAll('.info-grid .info strong');
-        if (infoGridStrong.length >= 4) {
-          infoGridStrong[0].textContent = profile.fullName;
-          infoGridStrong[1].innerHTML = `#${profile.donorId} <span class="material-symbols-outlined green">verified</span>`;
-          infoGridStrong[2].textContent = `Rh ${profile.bloodType.includes('-') ? 'Negative' : 'Positive'}`;
-          infoGridStrong[3].textContent = profile.phone;
-        }
-
-        const typeBadge = document.querySelector('.type-badge');
-        if (typeBadge) typeBadge.textContent = profile.bloodType;
-      }
-
-      // Handle donation form submission
-      const form = document.querySelector('.form');
-      if (form) {
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-
-          const facilitySelect = document.getElementById('facility');
-          const facilityName = facilitySelect ? facilitySelect.options[facilitySelect.selectedIndex]?.text : 'St. Jude Regional Blood Bank';
-          const donationDate = document.getElementById('donationDate')?.value || new Date().toISOString().split('T')[0];
-          const slotTimeEl = document.querySelector('input[name="slot"]:checked');
-          const slotTime = slotTimeEl ? slotTimeEl.value : '10:00 AM';
-          const notes = document.getElementById('notes')?.value || '';
-
-          const submitBtn = form.querySelector('button[type="submit"]');
-          if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting to database...';
-          }
-
-          try {
-            await submitDonationRecord({
-              facilityName,
-              scheduledDate: donationDate,
-              slotTime,
-              notes,
-              bloodType: profile?.bloodType || 'O+'
-            });
-
-            alert('Donation record successfully submitted! Redirecting to your donation history...');
-            window.location.href = '../donation-history/index.html';
-          } catch (err) {
-            console.error('Submission error:', err);
-            alert('Failed to submit record. Please check your connection.');
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.textContent = 'Submit Donation Record';
-            }
-          }
-        });
-      }
-
-      // Wire Logout
-      const logoutBtn = document.querySelector('.nav-item.logout');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          signOutUser();
-        });
-      }
-    });
   </script>
 
+  <!-- Supabase SDK & Donor Booking Logic -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module" src="../../../js/donorBooking.js"></script>
 </body>
 </html>
