@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lifeline - Staff Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Staff Dashboard</h1>
+    <button id="logout-btn">Log Out</button>
+  </header>
+
+  <main>
+    <div id="stats-container">
+      <p>Loading summary metrics...</p>
+    </div>
+  </main>
+
+  <script type="module">
+    import { supabase } from './supabaseClient.js';
+
+    // Route Guard (RBAC)
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      window.location.href = 'login.html';
+    } else {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', session.user.id)
+        .single();
+
+      if (!profile || (profile.role !== 'staff' && profile.role !== 'admin')) {
+        alert('Access denied: Staff only.');
+        window.location.href = 'index.html';
+      }
+    }
+
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
