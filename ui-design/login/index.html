@@ -225,6 +225,15 @@
               return;
             }
 
+            // Save session keys expected by ui-design/supabaseClient.js
+            if (data?.session) {
+              localStorage.setItem('lifeline_token', data.session.access_token);
+              localStorage.setItem('lifeline_session', JSON.stringify(data.session));
+            }
+            if (data?.user) {
+              localStorage.setItem('lifeline_user', JSON.stringify(data.user));
+            }
+
             // 2. Fetch role from public.profiles (fallback to user_metadata)
             const { data: profile } = await supabase
               .from('profiles')
