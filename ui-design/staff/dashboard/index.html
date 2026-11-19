@@ -8,6 +8,113 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .lifeline-modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(2px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .lifeline-modal-backdrop.open {
+      display: flex;
+    }
+    .lifeline-modal {
+      background: #ffffff;
+      width: 100%;
+      max-width: 430px;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+      font-family: 'Inter', sans-serif;
+    }
+    .lifeline-modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .lifeline-modal-head h3 {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #111827;
+    }
+    .lifeline-modal-meta {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #475569;
+      margin-bottom: 16px;
+      line-height: 1.45;
+    }
+    .lifeline-field {
+      margin-bottom: 14px;
+    }
+    .lifeline-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+    .lifeline-field select,
+    .lifeline-field input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #0f172a;
+      background: #fff;
+    }
+    .lifeline-field select:focus,
+    .lifeline-field input:focus {
+      outline: none;
+      border-color: #b91c1c;
+      box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
+    }
+    .lifeline-modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .pill-green {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .pill-blue {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+    #dbStatusBanner {
+      display: none;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    #dbStatusBanner a {
+      color: #991b1b;
+      font-weight: 700;
+      text-decoration: underline;
+      margin-left: 6px;
+    }
+  </style>
 </head>
 <body>
 
@@ -59,13 +166,13 @@
     </div>
     <label class="search top">
       <span class="material-symbols-outlined">search</span>
-      <input type="search" placeholder="Search donation slots...">
+      <input type="search" id="tableSearchInput" placeholder="Search donor, code, or blood type...">
     </label>
     <button class="icon-btn bell" type="button" aria-label="Notifications">
       <span class="material-symbols-outlined">notifications</span>
       <span class="bell-dot"></span>
     </button>
-    <a class="user-pill" href="../facility-profile/index.html">
+    <a class="user-pill" id="topUserPill" href="../facility-profile/index.html">
       <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
       <span>
         <span class="user-name">Loading...</span>
@@ -77,6 +184,8 @@
   <main class="page">
     <div class="container">
 
+      <div id="dbStatusBanner"></div>
+
       <!-- Welcome -->
       <section class="card hero">
         <div>
@@ -86,42 +195,82 @@
         </div>
         <div class="actions">
           <button class="btn btn-primary" type="button"><span class="material-symbols-outlined">add</span> Log Walk-In Donation</button>
-          <a class="btn btn-light" href="../pending-reviews/index.html"><span class="material-symbols-outlined red">pending_actions</span> Review Pending Queue <span class="count">12</span></a>
+          <a class="btn btn-light" href="../pending-reviews/index.html"><span class="material-symbols-outlined red">pending_actions</span> Review Pending Queue <span class="count" id="heroPendingCount">0</span></a>
         </div>
       </section>
 
       <!-- KPI cards -->
       <section class="stats">
-        <article class="kpi"><span class="label">Total Facility Records</span><strong>1,842</strong><p class="green">+8.4% <span class="muted">vs previous 30 days</span></p></article>
-        <article class="kpi red"><span class="label">Pending Verification</span><strong class="danger-text">12 <span class="pill pill-red">Action Required</span></strong><p>Oldest waiting: 3h 40m &nbsp; <a class="link-red" href="../pending-reviews/index.html">Batch review →</a></p></article>
-        <article class="kpi green"><span class="label">Approved Collections</span><strong class="green">28</strong><p>Scheduled for this week</p></article>
-        <article class="kpi brand"><span class="label">Completed (This Month)</span><strong>340 <small>Units</small></strong><p>Vol: 153,000 mL processed &nbsp; <b class="green">94% Quota</b></p></article>
+        <article class="kpi">
+          <span class="label">Total Facility Records</span>
+          <strong id="totalDonations">–</strong>
+          <p class="green">Live database <span class="muted">donation_records</span></p>
+        </article>
+        <article class="kpi red">
+          <span class="label">Pending Verification</span>
+          <strong class="danger-text"><span id="pendingDonations">–</span> <span class="pill pill-red">Action Required</span></strong>
+          <p>Awaiting review &nbsp; <a class="link-red" href="../pending-reviews/index.html">Batch review →</a></p>
+        </article>
+        <article class="kpi green">
+          <span class="label">Approved Collections</span>
+          <strong class="green" id="approvedDonations">–</strong>
+          <p>Cleared for collection</p>
+        </article>
+        <article class="kpi brand">
+          <span class="label">Completed (Units)</span>
+          <strong><span id="completedDonations">–</span> <small>Units</small></strong>
+          <p>Vol: <span id="completedVolume">0</span> mL processed</p>
+        </article>
       </section>
 
       <!-- Verification queue -->
       <section class="card flush">
         <div class="card-head">
-          <div><h2>Submissions Requiring Immediate Clinical Verification</h2><p>Cross-check donor deferral screening and vitals prior to phlebotomy authorization.</p></div>
-          <div class="tabs"><button class="tab active" type="button">All</button><button class="tab" type="button">Pending (3)</button><button class="tab" type="button">Urgent Call</button></div>
+          <div>
+            <h2>Submissions Requiring Immediate Clinical Verification</h2>
+            <p>Cross-check donor deferral screening and vitals prior to phlebotomy authorization.</p>
+          </div>
+          <div class="tabs" id="recordFilterTabs">
+            <button class="tab active" data-filter="all" type="button">All</button>
+            <button class="tab" data-filter="pending" type="button">Pending (<span id="tabPendingCount">0</span>)</button>
+            <button class="tab" data-filter="approved" type="button">Approved</button>
+            <button class="tab" data-filter="completed" type="button">Completed</button>
+          </div>
         </div>
-        <div class="table-wrap"><table class="table"><thead><tr><th>Record ID &amp; Donor</th><th>Blood Group</th><th>Schedule Window</th><th>Review Status</th><th class=right>Clinical Action</th></tr></thead><tbody>
-<tr><td><div class="person"><span class="ini red">MV</span><div><b>Marcus Vance</b><small>Record #LL-8821 • Regular Donor</small></div></div></td><td><span class="bloodtype ">O+</span></td><td><b>Nov 30, 2024</b><small>10:00 AM (Bed A-02)</small></td><td><span class="pill pill-amber">PENDING REVIEW</span></td><td class="right"><a class="btn btn-primary btn-sm" href="../pending-reviews/index.html">Review &amp; Verify</a></td></tr>
-<tr><td><div class="person"><span class="ini ">EG</span><div><b>Elena Gomez</b><small>Record #LL-8824 • First Time</small></div></div></td><td><span class="bloodtype ">A-</span></td><td><b>Nov 29, 2024</b><small>11:30 AM (Bed B-01)</small></td><td><span class="pill pill-amber">PENDING REVIEW</span></td><td class="right"><a class="btn btn-primary btn-sm" href="../pending-reviews/index.html">Review &amp; Verify</a></td></tr>
-<tr><td><div class="person"><span class="ini ">DC</span><div><b>David Chen</b><small>Record #LL-8830 • Apheresis Unit</small></div></div></td><td><span class="bloodtype ">B+</span></td><td><b>Dec 01, 2024</b><small>02:00 PM (Apheresis 1)</small></td><td><span class="pill pill-amber">PENDING REVIEW</span></td><td class="right"><a class="btn btn-primary btn-sm" href="../pending-reviews/index.html">Review &amp; Verify</a></td></tr>
-</tbody></table></div>
-        <div class="table-foot"><span>Showing 3 of 12 clinical submissions needing protocol review</span><a class="link-red" href="../donation-records/index.html">Access Comprehensive Donation Records ›</a></div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Record ID &amp; Donor</th>
+                <th>Blood Group</th>
+                <th>Schedule Window</th>
+                <th>Review Status</th>
+                <th class="right">Clinical Action</th>
+              </tr>
+            </thead>
+            <tbody id="recordsTableBody">
+              <tr>
+                <td colspan="5" style="text-align:center; padding: 24px; color: #64748b;">Loading donation records...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-foot">
+          <span id="tableFooterCount">Loading records...</span>
+          <a class="link-red" href="../donation-records/index.html">Access Comprehensive Donation Records ›</a>
+        </div>
       </section>
 
       <!-- Floor stations -->
       <section class="card flush">
         <div class="card-head"><div><h2>Floor Stations &amp; Phlebotomy Chairs</h2><p>Real-time status of St. Jude blood collection suites.</p></div><span class="pill ">4 of 6 Suites In Use</span></div>
         <div class="suites">
-      <div class="suite busy">A-01<b>Occupied</b>320 mL (Whole)</div>
-      <div class="suite busy">A-02<b>Occupied</b>410 mL (Whole)</div>
-      <div class="suite">A-03<b>Available</b>Sanitized</div>
-      <div class="suite">B-01<b>Prepping</b>Nurse Elena</div>
-      <div class="suite">Apheresis 1<b>Active</b>Platelets Run</div>
-      <div class="suite">Apheresis 2<b>Available</b>Ready for Cal</div>
+          <div class="suite busy">A-01<b>Occupied</b>320 mL (Whole)</div>
+          <div class="suite busy">A-02<b>Occupied</b>410 mL (Whole)</div>
+          <div class="suite">A-03<b>Available</b>Sanitized</div>
+          <div class="suite">B-01<b>Prepping</b>Nurse Elena</div>
+          <div class="suite">Apheresis 1<b>Active</b>Platelets Run</div>
+          <div class="suite">Apheresis 2<b>Available</b>Ready for Cal</div>
         </div>
       </section>
 
@@ -134,28 +283,72 @@
       <div class="grid-2">
         <section class="card flush">
           <div class="card-head"><h2 class="with-icon"><span class="material-symbols-outlined red">inventory_2</span> Storage Reserves</h2><span class="small muted">Freezer Vault #4</span></div>
-      <div class="reserve"><div class="reserve-row"><div class="person"><span class="bloodtype fill">O-</span><div><b>Universal Donor (O-)</b><small class="danger-text">Critical Shortage (14 Units)</small></div></div><span class="pill pill-red">Request Call</span></div><div class="bar crit"><span style="width: 20%"></span></div></div>
-      <div class="reserve"><div class="reserve-row"><div class="person"><span class="bloodtype ">O+</span><div><b>Positive Universal (O+)</b><small class="">Adequate (84 Units)</small></div></div><small class="muted">Optimal</small></div><div class="bar green"><span style="width: 70%"></span></div></div>
-      <div class="reserve"><div class="reserve-row"><div class="person"><span class="bloodtype ">A+</span><div><b>Type A Positive</b><small class="">Normal (62 Units)</small></div></div><small class="muted">Steady</small></div><div class="bar "><span style="width: 56%"></span></div></div>
-      <div class="reserve"><div class="reserve-row"><div class="person"><span class="bloodtype fill">PLT</span><div><b>Platelet Concentrates</b><small class="danger-text">Urgent Call (6 Units left)</small></div></div><span class="pill pill-red">Alert On-Call</span></div><div class="bar crit"><span style="width: 16%"></span></div></div>
+          <div class="reserve"><div class="reserve-row"><div class="person"><span class="bloodtype fill">O-</span><div><b>Universal Donor (O-)</b><small class="danger-text">Critical Shortage (14 Units)</small></div></div><span class="pill pill-red">Request Call</span></div><div class="bar crit"><span style="width: 20%"></span></div></div>
+          <div class="reserve"><div class="reserve-row"><div class="person"><span class="bloodtype ">O+</span><div><b>Positive Universal (O+)</b><small class="">Adequate (84 Units)</small></div></div><small class="muted">Optimal</small></div><div class="bar green"><span style="width: 70%"></span></div></div>
+          <div class="reserve"><div class="reserve-row"><div class="person"><span class="bloodtype ">A+</span><div><b>Type A Positive</b><small class="">Normal (62 Units)</small></div></div><small class="muted">Steady</small></div><div class="bar "><span style="width: 56%"></span></div></div>
+          <div class="reserve"><div class="reserve-row"><div class="person"><span class="bloodtype fill">PLT</span><div><b>Platelet Concentrates</b><small class="danger-text">Urgent Call (6 Units left)</small></div></div><span class="pill pill-red">Alert On-Call</span></div><div class="bar crit"><span style="width: 16%"></span></div></div>
           <div class="callout"><span>Next Courier Pickup</span><b class="red">14:30 PM (Dispatch #D-12)</b></div>
         </section>
         <section class="card flush">
           <div class="card-head"><h2 class="with-icon"><span class="material-symbols-outlined red">history</span> Recent Activity Feed</h2><span class="live"><span class="dot"></span> Live</span></div>
           <div class="feed-list">
-      <div class="feed-item"><span class="feed-icon"><span class="material-symbols-outlined">check</span></span><div>Nurse Elena verified Record <span class="red">#LL-7940</span> (450 mL whole blood).<small>6 minutes ago • Transfusion Lab</small></div></div>
-      <div class="feed-item"><span class="feed-icon"><span class="material-symbols-outlined">mail</span></span><div>System sent confirmation email &amp; donor QR passport to Marcus Vance.<small>19 minutes ago • Automated Queue</small></div></div>
-      <div class="feed-item"><span class="feed-icon"><span class="material-symbols-outlined">biotech</span></span><div>Batch #BT-402 passed serology and pathogen clearance checks.<small>42 minutes ago • Dr. Rostova</small></div></div>
-      <div class="feed-item"><span class="feed-icon"><span class="material-symbols-outlined">event</span></span><div>New volunteer intake booked for <b>Dec 02 Drive</b> (48 donors registered).<small>1 hour ago • Portal intake</small></div></div>
+            <div class="feed-item"><span class="feed-icon"><span class="material-symbols-outlined">check</span></span><div>Nurse Elena verified Record <span class="red">#LL-7940</span> (450 mL whole blood).<small>6 minutes ago • Transfusion Lab</small></div></div>
+            <div class="feed-item"><span class="feed-icon"><span class="material-symbols-outlined">mail</span></span><div>System sent confirmation email &amp; donor QR passport to Marcus Vance.<small>19 minutes ago • Automated Queue</small></div></div>
+            <div class="feed-item"><span class="feed-icon"><span class="material-symbols-outlined">biotech</span></span><div>Batch #BT-402 passed serology and pathogen clearance checks.<small>42 minutes ago • Dr. Rostova</small></div></div>
+            <div class="feed-item"><span class="feed-icon"><span class="material-symbols-outlined">event</span></span><div>New volunteer intake booked for <b>Dec 02 Drive</b> (48 donors registered).<small>1 hour ago • Portal intake</small></div></div>
           </div>
         </section>
       </div>
     </div>
   </main>
 
+  <!-- ===== Review & Verify Modal ===== -->
+  <div class="lifeline-modal-backdrop" id="editModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="lifeline-modal">
+      <div class="lifeline-modal-head">
+        <h3 id="modalTitle">Review &amp; Verify Donation</h3>
+        <button type="button" class="icon-btn" onclick="closeEditModal()" aria-label="Close modal">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="lifeline-modal-meta" id="editRecordMeta">
+        Record: —
+      </div>
+
+      <input type="hidden" id="editRecordId">
+
+      <div class="lifeline-field">
+        <label for="editStatus">Clinical Review Status</label>
+        <select id="editStatus">
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+
+      <div class="lifeline-field" id="volumeFieldGroup">
+        <label for="editVolume">Collected Volume (mL)</label>
+        <input type="number" id="editVolume" min="0" step="10" placeholder="450">
+      </div>
+
+      <div class="lifeline-field" id="notesFieldGroup">
+        <label for="editNotes">Clinical / Screening Notes</label>
+        <input type="text" id="editNotes" placeholder="e.g. Vitals cleared, 450 mL whole blood collected">
+      </div>
+
+      <div class="lifeline-modal-actions">
+        <button type="button" class="btn btn-light" onclick="closeEditModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" id="saveRecordBtn" onclick="saveRecordUpdate()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Uses SUPABASE_URL, SUPABASE_KEY, getHeaders(), populateStaffUI(), signOutUser() -->
   <script src="../../supabaseClient.js"></script>
   <script>
-    // Sidebar open / close
+    // 1. Sidebar open / close
     const body = document.body;
     const menuBtn = document.getElementById('menuBtn');
 
@@ -167,22 +360,386 @@
     menuBtn.addEventListener('click', () => setSidebar(!body.classList.contains('sidebar-open')));
     document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        setSidebar(false);
+        closeEditModal();
+      }
+    });
 
-    // Wire logout and populate staff details
-    document.addEventListener('DOMContentLoaded', () => {
-      // Load logged-in staff profile
-      if (typeof populateStaffUI === 'function') {
-        populateStaffUI();
+    // 2. Dashboard State
+    let allRecords = [];
+    let donorNamesById = {};
+    let hasVolumeColumn = false;
+    let hasNotesColumn = false;
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function showBanner(msg, includeLoginLink = false) {
+      const banner = document.getElementById('dbStatusBanner');
+      if (!msg) {
+        banner.style.display = 'none';
+        banner.innerHTML = '';
+        return;
+      }
+      banner.style.display = 'block';
+      banner.textContent = msg;
+      if (includeLoginLink) {
+        const link = document.createElement('a');
+        link.href = '../../login/index.html';
+        link.textContent = 'Sign in to Staff Portal →';
+        banner.appendChild(link);
+      }
+    }
+
+    function normalizeCategory(status) {
+      const s = (status || 'pending').toLowerCase();
+      if (s === 'completed' || s === 'done') return 'completed';
+      if (s.includes('approved')) return 'approved';
+      if (s.includes('cancel') || s.includes('reject')) return 'cancelled';
+      return 'pending';
+    }
+
+    function getStatusPill(status) {
+      const cat = normalizeCategory(status);
+      if (cat === 'completed') return '<span class="pill pill-green">COMPLETED</span>';
+      if (cat === 'approved') return '<span class="pill pill-blue">APPROVED</span>';
+      if (cat === 'cancelled') return '<span class="pill pill-red">CANCELLED</span>';
+      return '<span class="pill pill-amber">PENDING REVIEW</span>';
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return 'No date scheduled';
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
+      return d.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+    }
+
+    function getInitials(name, fallback) {
+      if (!name) return fallback;
+      const parts = name.trim().split(/\s+/);
+      if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+      return name.substring(0, 2).toUpperCase();
+    }
+
+    // 3. Helper: fetch with automatic Supabase JWT refresh on 401
+    async function authFetch(url, options = {}) {
+      let token = localStorage.getItem('lifeline_token');
+      const buildHeaders = (t) => Object.assign({}, getHeaders(t), options.headers || {});
+
+      let res = await fetch(url, Object.assign({}, options, { headers: buildHeaders(token) }));
+
+      if (res.status === 401) {
+        try {
+          const rawSession = localStorage.getItem('lifeline_session');
+          const session = rawSession ? JSON.parse(rawSession) : null;
+          if (session && session.refresh_token) {
+            const refreshRes = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=refresh_token`, {
+              method: 'POST',
+              headers: getHeaders(),
+              body: JSON.stringify({ refresh_token: session.refresh_token })
+            });
+            if (refreshRes.ok) {
+              const newSession = await refreshRes.json();
+              localStorage.setItem('lifeline_token', newSession.access_token);
+              localStorage.setItem('lifeline_session', JSON.stringify(newSession));
+              res = await fetch(url, Object.assign({}, options, { headers: buildHeaders(newSession.access_token) }));
+              return res;
+            }
+          }
+        } catch (e) {
+          console.warn('Token refresh failed:', e);
+        }
+
+        // Fallback to anon key if session cannot be refreshed
+        res = await fetch(url, Object.assign({}, options, { headers: buildHeaders(null) }));
+      }
+
+      return res;
+    }
+
+    // 4. Render rows into Verification Queue table
+    function renderRecordsTable() {
+      const tbody = document.getElementById('recordsTableBody');
+      const footerEl = document.getElementById('tableFooterCount');
+
+      const filtered = allRecords.filter((r) => {
+        const cat = normalizeCategory(r.status);
+        const statusMatch = currentFilter === 'all' || cat === currentFilter;
+        const term = searchQuery.trim().toLowerCase();
+        const donorName = (donorNamesById[r.donor_id] || '').toLowerCase();
+        const code = (r.record_code || String(r.id || '')).toLowerCase();
+        const blood = (r.blood_type || '').toLowerCase();
+        const facility = (r.facility_name || '').toLowerCase();
+        const searchMatch = !term ||
+          donorName.includes(term) ||
+          code.includes(term) ||
+          blood.includes(term) ||
+          facility.includes(term);
+        return statusMatch && searchMatch;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center; padding: 24px; color: #64748b;">
+              No donation records match the current filter.
+            </td>
+          </tr>
+        `;
+        footerEl.textContent = `Showing 0 of ${allRecords.length} clinical submissions`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map((r) => {
+        const cat = normalizeCategory(r.status);
+        const codeLabel = r.record_code || ('LL-' + String(r.id || '').substring(0, 6).toUpperCase());
+        const donorName = donorNamesById[r.donor_id] || (r.donor_id ? `Donor #${String(r.donor_id).substring(0, 8)}` : 'Walk-In Donor');
+        const blood = r.blood_type || '—';
+        const initials = getInitials(donorNamesById[r.donor_id], blood.replace(/[^A-Za-z0-9]/g, '').substring(0, 2).toUpperCase() || 'DR');
+        const dateLabel = formatDate(r.preferred_date || r.scheduled_date || r.donation_date || r.created_at);
+        const subSchedule = r.slot_time
+          ? `${r.slot_time}${r.facility_name ? ' • ' + r.facility_name : ''}`
+          : (hasVolumeColumn ? `Volume: ${r.volume_ml ?? 0} mL` : (r.facility_name || 'Standard Whole Blood (450 mL)'));
+
+        return `
+          <tr>
+            <td>
+              <div class="person">
+                <span class="ini ${cat === 'pending' ? 'red' : ''}">${initials}</span>
+                <div>
+                  <b>${donorName}</b>
+                  <small>Record #${codeLabel}</small>
+                </div>
+              </div>
+            </td>
+            <td><span class="bloodtype">${blood}</span></td>
+            <td>
+              <b>${dateLabel}</b>
+              <small>${subSchedule}</small>
+            </td>
+            <td>${getStatusPill(r.status)}</td>
+            <td class="right">
+              <button
+                class="btn btn-primary btn-sm"
+                type="button"
+                onclick="openEditModal('${r.id}')"
+              >Review &amp; Verify</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      footerEl.textContent = `Showing ${filtered.length} of ${allRecords.length} clinical submissions`;
+    }
+
+    // 5. Fetch donation_records & donor names via REST API
+    async function loadDashboardData() {
+      const hasToken = Boolean(localStorage.getItem('lifeline_token'));
+
+      try {
+        const [recordsRes, profilesRes] = await Promise.all([
+          authFetch(`${SUPABASE_URL}/rest/v1/donation_records?select=*`),
+          authFetch(`${SUPABASE_URL}/rest/v1/profiles?select=id,full_name`).catch(() => null)
+        ]);
+
+        if (!recordsRes.ok) {
+          const errText = await recordsRes.text();
+          console.error('Supabase REST error:', recordsRes.status, errText);
+          showBanner(`Could not load donation_records (HTTP ${recordsRes.status}). Please sign in with a Staff account.`, true);
+          document.getElementById('recordsTableBody').innerHTML =
+            `<tr><td colspan="5" style="text-align:center; padding:24px; color:#b91c1c;">Unable to load records from database.</td></tr>`;
+          return;
+        }
+
+        const records = await recordsRes.json();
+        if (profilesRes && profilesRes.ok) {
+          const profiles = await profilesRes.json();
+          donorNamesById = {};
+          (profiles || []).forEach(p => {
+            if (p.id && p.full_name) donorNamesById[p.id] = p.full_name;
+          });
+        }
+
+        allRecords = Array.isArray(records) ? records : [];
+
+        if (!hasToken && allRecords.length === 0) {
+          showBanner('You are not signed in on this browser port. Log in to load and manage donation records.', true);
+        } else {
+          showBanner('');
+        }
+
+        allRecords.sort((a, b) => {
+          const dA = new Date(a.preferred_date || a.created_at || a.scheduled_date || 0).getTime();
+          const dB = new Date(b.preferred_date || b.created_at || b.scheduled_date || 0).getTime();
+          return dB - dA;
+        });
+
+        hasVolumeColumn = allRecords.length > 0 && Object.prototype.hasOwnProperty.call(allRecords[0], 'volume_ml');
+        hasNotesColumn = allRecords.length > 0 && Object.prototype.hasOwnProperty.call(allRecords[0], 'notes');
+
+        const totalCount = allRecords.length;
+        const pendingCount = allRecords.filter(r => normalizeCategory(r.status) === 'pending').length;
+        const approvedCount = allRecords.filter(r => normalizeCategory(r.status) === 'approved').length;
+        const completedRecords = allRecords.filter(r => normalizeCategory(r.status) === 'completed');
+        const completedCount = completedRecords.length;
+        const completedVol = hasVolumeColumn
+          ? completedRecords.reduce((sum, r) => sum + (Number(r.volume_ml) || 0), 0)
+          : completedCount * 450;
+
+        document.getElementById('totalDonations').textContent = totalCount;
+        document.getElementById('pendingDonations').textContent = pendingCount;
+        document.getElementById('approvedDonations').textContent = approvedCount;
+        document.getElementById('completedDonations').textContent = completedCount;
+        document.getElementById('completedVolume').textContent = completedVol.toLocaleString();
+        document.getElementById('heroPendingCount').textContent = pendingCount;
+        document.getElementById('tabPendingCount').textContent = pendingCount;
+
+        renderRecordsTable();
+      } catch (err) {
+        console.error('Unexpected fetch error:', err);
+        showBanner('Network error connecting to Lifeline database: ' + err.message);
+      }
+    }
+
+    // 6. Modal handlers
+    function openEditModal(id) {
+      const record = allRecords.find(r => String(r.id) === String(id));
+      if (!record) return;
+
+      document.getElementById('editRecordId').value = record.id;
+
+      const cat = normalizeCategory(record.status);
+      const selectEl = document.getElementById('editStatus');
+      selectEl.value = ['pending', 'approved', 'completed', 'cancelled'].includes(cat) ? cat : 'pending';
+
+      document.getElementById('volumeFieldGroup').style.display = hasVolumeColumn ? 'block' : 'none';
+      document.getElementById('editVolume').value = record.volume_ml ?? 450;
+
+      document.getElementById('notesFieldGroup').style.display = hasNotesColumn ? 'block' : 'none';
+      document.getElementById('editNotes').value = record.notes || '';
+
+      const codeLabel = record.record_code || ('LL-' + String(record.id).substring(0, 6).toUpperCase());
+      const donorName = donorNamesById[record.donor_id] || 'Donor';
+      document.getElementById('editRecordMeta').innerHTML =
+        `<b>${donorName}</b> • Record #${codeLabel}<br>Blood Group: <b>${record.blood_type || '—'}</b> • Current Status: <b>${record.status || 'pending'}</b>`;
+
+      document.getElementById('editModal').classList.add('open');
+    }
+
+    function closeEditModal() {
+      document.getElementById('editModal').classList.remove('open');
+    }
+
+    async function saveRecordUpdate() {
+      const id = document.getElementById('editRecordId').value;
+      const newStatus = document.getElementById('editStatus').value;
+      const saveBtn = document.getElementById('saveRecordBtn');
+
+      const payload = { status: newStatus };
+      if (hasVolumeColumn) {
+        payload.volume_ml = parseInt(document.getElementById('editVolume').value, 10) || 0;
+      }
+      if (hasNotesColumn) {
+        payload.notes = document.getElementById('editNotes').value.trim();
+      }
+
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving...';
+
+      try {
+        const res = await authFetch(`${SUPABASE_URL}/rest/v1/donation_records?id=eq.${encodeURIComponent(id)}`, {
+          method: 'PATCH',
+          headers: { 'Prefer': 'return=representation' },
+          body: JSON.stringify(payload)
+        });
+
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Changes';
+
+        if (!res.ok) {
+          const errText = await res.text();
+          alert(`Update failed (HTTP ${res.status}): ${errText}`);
+          return;
+        }
+
+        const updatedRows = await res.json();
+        if (!Array.isArray(updatedRows) || updatedRows.length === 0) {
+          alert('Update blocked by Supabase RLS permissions. Make sure you are logged in as a Staff account or have an UPDATE policy on donation_records.');
+          return;
+        }
+
+        closeEditModal();
+        await loadDashboardData();
+      } catch (err) {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Changes';
+        alert('Network error saving record: ' + err.message);
+      }
+    }
+
+    document.getElementById('editModal').addEventListener('click', (e) => {
+      if (e.target.id === 'editModal') closeEditModal();
+    });
+
+    // 7. Initialize UI, tabs, search, and load data
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Sync official Supabase SDK session if lifeline_token / lifeline_user aren't set yet
+      if (!localStorage.getItem('lifeline_token') || !localStorage.getItem('lifeline_user')) {
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          if (k && k.startsWith('sb-') && k.endsWith('-auth-token')) {
+            try {
+              const sdkSession = JSON.parse(localStorage.getItem(k) || 'null');
+              const sessionObj = sdkSession?.currentSession || sdkSession;
+              if (sessionObj?.access_token && sessionObj?.user) {
+                localStorage.setItem('lifeline_token', sessionObj.access_token);
+                localStorage.setItem('lifeline_session', JSON.stringify(sessionObj));
+                localStorage.setItem('lifeline_user', JSON.stringify(sessionObj.user));
+                break;
+              }
+            } catch (e) {
+              console.warn('Could not sync SDK session:', e);
+            }
+          }
+        }
+      }
+      const currentUser = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+      if (currentUser && typeof populateStaffUI === 'function') {
+        await populateStaffUI();
+      } else {
+        document.querySelectorAll('.user-name').forEach(el => el.textContent = 'Not Signed In');
+        document.querySelectorAll('.user-type').forEach(el => el.textContent = 'Click to Log In');
+        const userPill = document.getElementById('topUserPill');
+        if (userPill) userPill.href = '../../login/index.html';
       }
 
       const logoutBtn = document.querySelector('.nav-item.logout');
       if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
           e.preventDefault();
-          signOutUser();
+          if (typeof signOutUser === 'function') signOutUser();
         });
       }
+
+      document.querySelectorAll('#recordFilterTabs .tab').forEach((tab) => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('#recordFilterTabs .tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentFilter = tab.dataset.filter;
+          renderRecordsTable();
+        });
+      });
+
+      const searchInput = document.getElementById('tableSearchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          searchQuery = e.target.value;
+          renderRecordsTable();
+        });
+      }
+
+      loadDashboardData();
     });
   </script>
 
