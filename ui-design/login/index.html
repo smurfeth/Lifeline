@@ -42,7 +42,7 @@
 
         <!-- Credentials Form -->
         <form class="auth-form" id="signInForm" novalidate>
-          <!-- Email / Username -->
+          <!-- Email Address -->
           <div class="form-group">
             <label class="form-label" for="identifier">
               Email Address <span class="required-star">*</span>
@@ -131,28 +131,11 @@
     </div>
   </div>
 
-  <!-- ========================================================================= -->
-  <!-- DIRECT SUPABASE DATABASE AUTHENTICATION                                   -->
-  <!-- ========================================================================= -->
-  <script>
-    // =========================================================================
-    // SUPABASE DATABASE CONFIGURATION (Connected directly to project)
-    // =========================================================================
-    const SUPABASE_URL = 'https://bnytmuwgutotekaaylig.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_c5fAj53uud1ud8WFRY_fxg_WOvW2kI1';
+  <!-- Official Supabase SDK & Authentication Logic -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module">
+    import { supabase } from '../../js/supabaseClient.js';
 
-    function getSupabaseHeaders(token = null) {
-      const headers = {
-        'apikey': SUPABASE_KEY,
-        'Content-Type': 'application/json'
-      };
-      if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
-      }
-      return headers;
-    }
-
-    // Client-side interactions
     document.addEventListener('DOMContentLoaded', () => {
       const togglePasswordBtn = document.getElementById('togglePasswordBtn');
       const passwordInput = document.getElementById('password');
@@ -160,6 +143,7 @@
       const form = document.getElementById('signInForm');
       const authAlert = document.getElementById('authAlert');
       const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+      const submitBtn = document.getElementById('submitBtn');
 
       // Toggle password visibility
       if (togglePasswordBtn && passwordInput && togglePasswordIcon) {
@@ -169,7 +153,9 @@
           passwordInput.type = isVisible ? 'text' : 'password';
           togglePasswordBtn.setAttribute('aria-label', isVisible ? 'Hide password' : 'Show password');
           togglePasswordBtn.setAttribute('title', isVisible ? 'Hide password' : 'Show password');
-          togglePasswordIcon.src = isVisible ? 'assets/eye-slash.svg' : 'assets/button-toggle-password-visibility.svg';
+          togglePasswordIcon.src = isVisible
+            ? 'assets/eye-slash.svg'
+            : 'assets/button-toggle-password-visibility.svg';
         });
       }
 
@@ -196,18 +182,22 @@
         authAlert.style.display = 'none';
       }
 
-      // =======================================================================
-      // DIRECT SUPABASE DATABASE LOGIN SUBMISSION
-      // =======================================================================
+      const portalRoutes = {
+        donor: '../donor/dashboard/index.html',
+        staff: '../staff/dashboard/index.html',
+        admin: '../admin/dashboard/index.html'
+      };
+
+      // Form validation & Supabase Auth submission
       if (form) {
         form.addEventListener('submit', async (e) => {
           e.preventDefault();
           clearAlert();
 
-          const identifier = document.getElementById('identifier').value.trim();
-          const password = document.getElementById('password').value;
+          const email = document.getElementById('identifier').value.trim();
+          const password = passwordInput.value;
 
-          if (!identifier) {
+          if (!email) {
             showAlert('Please enter your email address.');
             document.getElementById('identifier').focus();
             return;
@@ -215,61 +205,56 @@
 
           if (!password) {
             showAlert('Please enter your password.');
-            document.getElementById('password').focus();
+            passwordInput.focus();
             return;
           }
 
-          const portalRoutes = {
-            'donor': '../donor/dashboard/index.html',
-            'staff': '../staff/dashboard/index.html',
-            'admin': '../admin/dashboard/index.html'
-          };
-
-          // Authenticate directly with Supabase Database
+          submitBtn.disabled = true;
           showAlert('Authenticating with Supabase database...', 'is-success');
 
           try {
-            console.log('Sending direct signin request to Supabase Auth:', `${SUPABASE_URL}/auth/v1/token`);
-            const response = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
-              method: 'POST',
-              headers: getSupabaseHeaders(),
-              body: JSON.stringify({
-                email: identifier,
-                password: password
-              })
+            // 1. Authenticate using official Supabase SDK
+            const { data, error } = await supabase.auth.signInWithPassword({
+              email,
+              password
             });
 
-            const data = await response.json();
-
-            if (!response.ok) {
-              const errorMsg = data.error_description || data.msg || data.message || 'Invalid email or password.';
-              showAlert(errorMsg);
+            if (error) {
+              showAlert(error.message || 'Invalid email or password.');
+              submitBtn.disabled = false;
               return;
             }
 
-            // Save session to localStorage
-            if (data.access_token) {
-              localStorage.setItem('lifeline_token', data.access_token);
-              localStorage.setItem('lifeline_session', JSON.stringify(data));
+            // Save session keys expected by ui-design/supabaseClient.js
+            if (data?.session) {
+              localStorage.setItem('lifeline_token', data.session.access_token);
+              localStorage.setItem('lifeline_session', JSON.stringify(data.session));
+            }
+            if (data?.user) {
               localStorage.setItem('lifeline_user', JSON.stringify(data.user));
-              
-              const role = data.user?.user_metadata?.role || 'donor';
-              localStorage.setItem('lifeline_role', role);
             }
 
-            // Successfully authenticated with Supabase!
-            const role = (data?.user?.user_metadata?.role || localStorage.getItem('lifeline_role') || 'donor').toLowerCase();
+            // 2. Fetch role from public.profiles (fallback to user_metadata)
+            const { data: profile } = await supabase
+              .from('profiles')
+              .select('role')
+              .eq('id', data.user.id)
+              .single();
+
+            const role = (profile?.role || data.user?.user_metadata?.role || 'donor').toLowerCase();
+            localStorage.setItem('lifeline_role', role);
+
             const targetPortal = portalRoutes[role] || '../donor/dashboard/index.html';
 
             showAlert(`Welcome, ${data.user.email}! Redirecting...`, 'is-success');
             setTimeout(() => {
               window.location.href = targetPortal;
             }, 600);
-
           } catch (err) {
             console.error('Database auth error:', err);
             const detail = err && err.message ? err.message : String(err);
             showAlert(`Connection to database failed (${detail}). Please verify your Supabase project status and keys.`);
+            submitBtn.disabled = false;
           }
         });
       }
