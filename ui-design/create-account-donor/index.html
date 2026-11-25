@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <main class="page">
     <div class="card">
       <a class="back-home-link" href="../landing/index.html" aria-label="Back to the landing page">← Back to Home</a>
@@ -35,7 +36,8 @@
         </a>
       </nav>
 
-      <form class="form" id="register-form" action="#" method="post" novalidate>
+      <form class="form" action="#" method="post" novalidate>
+
         <!-- 1. Personal identification -->
         <fieldset class="section">
           <legend><span class="step">1</span> Personal Identification</legend>
@@ -132,12 +134,8 @@
 
         <!-- 5. Account Security -->
         <fieldset class="section last">
-<<<<<<< HEAD
           <legend><span class="step">5</span> Account Security</legend>
 
-=======
-          <legend><span class="step">4</span> Account Security</legend>
->>>>>>> origin/main
           <div class="row">
             <div class="field">
               <label for="password">Password <span class="req">*</span></label>
@@ -148,6 +146,7 @@
               <input class="control" type="password" id="confirmPassword" name="confirmPassword" placeholder="Repeat password" required>
             </div>
           </div>
+
           <ul class="rules">
             <li>8+ characters</li>
             <li>1 uppercase letter</li>
@@ -169,15 +168,16 @@
           <span class="material-symbols-outlined">mark_email_read</span>
           Submit and Verify Email
         </button>
+
       </form>
 
       <footer class="card-foot">
         Already registered with Lifeline? <a href="../login/index.html">Sign In to Portal</a>
       </footer>
+
     </div>
   </main>
 
-<<<<<<< HEAD
   <!-- ========================================================================= -->
   <!-- DIRECT SUPABASE DATABASE INTEGRATION & REGISTRATION LOGIC                 -->
   <!-- ========================================================================= -->
@@ -383,11 +383,5 @@
       });
     });
   </script>
-=======
-  <!-- Supabase & EmailJS SDKs -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="module" src="../../js/register.js"></script>
->>>>>>> origin/main
 </body>
 </html>
