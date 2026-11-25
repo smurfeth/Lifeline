@@ -121,9 +121,20 @@
           </div>
         </fieldset>
 
-        <!-- 4. Account security -->
+        <!-- 4. Donation History -->
+        <fieldset class="section">
+          <legend><span class="step">4</span> Donation History</legend>
+
+          <div class="field">
+            <label for="lastDonationDate">Last Blood Donation Date <small style="font-weight:400;color:#6B7280;">(if applicable)</small></label>
+            <input class="control" type="date" id="lastDonationDate" name="lastDonationDate">
+            <p class="hint">If you've donated blood before, enter the date of your most recent donation. This helps us track your 56-day eligibility cycle. Leave blank if this is your first time.</p>
+          </div>
+        </fieldset>
+
+        <!-- 5. Account Security -->
         <fieldset class="section last">
-          <legend><span class="step">4</span> Account Security</legend>
+          <legend><span class="step">5</span> Account Security</legend>
 
           <div class="row">
             <div class="field">
@@ -216,6 +227,7 @@
         const city = document.getElementById('city').value;
         const bloodTypeEl = document.querySelector('input[name="bloodType"]:checked');
         const bloodType = bloodTypeEl ? bloodTypeEl.value : 'unknown';
+        const lastDonationDate = document.getElementById('lastDonationDate')?.value || '';
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
 
@@ -259,7 +271,8 @@
                 sex: formattedSex,
                 role: 'donor',
                 blood_group: bloodType,
-                blood_type: bloodType
+                blood_type: bloodType,
+                last_donation_date: lastDonationDate || null
               }
             })
           });
@@ -314,6 +327,42 @@
               console.log('Direct Supabase profiles table write confirmed!');
             } catch (dbErr) {
               console.warn('Profile table sync notice:', dbErr);
+            }
+
+            // =================================================================
+            // C. IF LAST DONATION DATE PROVIDED → Create a "Completed" record
+            //    so the 56-day eligibility countdown starts automatically
+            // =================================================================
+            if (lastDonationDate) {
+              try {
+                const donationPayload = {
+                  record_code: 'LL-INIT-' + Math.floor(1000 + Math.random() * 9000),
+                  donor_id: authData.user.id,
+                  blood_type: bloodType !== 'unknown' ? bloodType : 'O+',
+                  facility_name: 'Previous Donation (Self-Reported)',
+                  scheduled_date: lastDonationDate,
+                  slot_time: 'N/A',
+                  notes: 'Self-reported last donation date during registration',
+                  status: 'Completed'
+                };
+
+                await fetch(`${SUPABASE_URL}/rest/v1/donation_records`, {
+                  method: 'POST',
+                  headers: Object.assign({}, getSupabaseHeaders(authData.access_token), {
+                    'Prefer': 'resolution=merge-duplicates'
+                  }),
+                  body: JSON.stringify(donationPayload)
+                });
+
+                // Also save locally for immediate dashboard use
+                const localRecords = JSON.parse(localStorage.getItem('lifeline_donations') || '[]');
+                localRecords.unshift(donationPayload);
+                localStorage.setItem('lifeline_donations', JSON.stringify(localRecords));
+
+                console.log('Last donation date record saved — 56-day countdown will activate on dashboard.');
+              } catch (donErr) {
+                console.warn('Could not save last donation record:', donErr);
+              }
             }
           }
 

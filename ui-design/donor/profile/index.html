@@ -66,15 +66,26 @@
       <input type="search" placeholder="Search donation slots...">
     </label>
 
-    <button class="icon-btn bell" type="button" aria-label="Notifications">
+    <button class="icon-btn bell" type="button" aria-label="Notifications" id="notifBtn">
       <span class="material-symbols-outlined">notifications</span>
-      <span class="bell-dot"></span>
+      <span class="bell-dot" id="bellDot"></span>
     </button>
+
+    <!-- Notification Dropdown Panel -->
+    <div class="notif-panel" id="notifPanel" style="display:none;">
+      <div class="notif-header">
+        <h3>Notifications</h3>
+        <button type="button" id="markAllRead" class="notif-clear">Mark all read</button>
+      </div>
+      <div class="notif-list" id="notifList">
+        <p class="notif-empty">Loading notifications...</p>
+      </div>
+    </div>
 
     <a class="user-pill" href="index.html">
       <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
       <span>
-        <span class="user-name">Marcus Vance</span>
+        <span class="user-name">Loading...</span>
         <span class="user-type">Blood Type O+</span>
       </span>
     </a>
@@ -86,7 +97,7 @@
     <section class="card profile-head">
       <div class="profile-id">
         <div class="photo">
-          <img src="https://placehold.co/80x80" alt="Marcus Vance">
+          <img src="https://placehold.co/80x80" alt="Donor photo">
           <span class="photo-check"><span class="material-symbols-outlined">check</span></span>
         </div>
         <div>
@@ -191,7 +202,7 @@
             <div class="dc-mid">
               <div>
                 <div class="dc-label">DONOR NAME</div>
-                <div class="dc-name">MARCUS VANCE</div>
+                <div class="dc-name" id="dcCardName">LOADING...</div>
                 <div class="mono">ID: D-10948</div>
               </div>
               <div class="dc-type"><b>O+</b><small>RH+</small></div>
@@ -541,6 +552,70 @@
         logoutBtn.addEventListener('click', (e) => {
           e.preventDefault();
           signOutUser();
+        });
+      }
+
+      // ===================================================================
+      // NOTIFICATION SYSTEM — Bell icon dropdown (same as dashboard)
+      // ===================================================================
+      const notifBtn = document.getElementById('notifBtn');
+      const notifPanel = document.getElementById('notifPanel');
+      const bellDot = document.getElementById('bellDot');
+      const notifList = document.getElementById('notifList');
+      const markAllReadBtn = document.getElementById('markAllRead');
+
+      if (notifBtn && notifPanel) {
+        notifBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = notifPanel.style.display !== 'none';
+          notifPanel.style.display = isOpen ? 'none' : 'block';
+        });
+        document.addEventListener('click', (e) => {
+          if (!notifPanel.contains(e.target) && !notifBtn.contains(e.target)) {
+            notifPanel.style.display = 'none';
+          }
+        });
+      }
+
+      function buildNotifications(profile) {
+        const notifications = [];
+        if (profile.isEligibleToday) {
+          notifications.push({ icon: 'check_circle', color: 'green', title: 'You are eligible to donate!', desc: 'Your 56-day recovery period is complete. Schedule a new blood donation.', time: 'Now', unread: true });
+        } else if (profile.daysRemaining > 0) {
+          notifications.push({ icon: profile.daysRemaining <= 7 ? 'event_available' : 'schedule', color: profile.daysRemaining <= 7 ? 'amber' : 'blue', title: `${profile.daysRemaining} day${profile.daysRemaining > 1 ? 's' : ''} until eligible`, desc: `Next donation window opens on ${profile.nextEligibleDate}.`, time: 'Countdown', unread: profile.daysRemaining <= 7 });
+        }
+        if (profile.totalDonations === 0) {
+          notifications.push({ icon: 'waving_hand', color: 'red', title: 'Welcome to Lifeline!', desc: 'Your first donation can save up to 3 lives.', time: 'Registration', unread: true });
+        }
+        notifications.push({ icon: 'favorite', color: 'green', title: 'Pre-donation reminder', desc: 'Drink extra water, eat iron-rich meals, and bring your ID.', time: 'Health tip', unread: false });
+        return notifications;
+      }
+
+      function renderNotifications(profile) {
+        if (!notifList) return;
+        const notifications = buildNotifications(profile);
+        const readSet = JSON.parse(localStorage.getItem('lifeline_notif_read') || '[]');
+        let unreadCount = notifications.filter((n, i) => n.unread && !readSet.includes(i)).length;
+        if (bellDot) bellDot.style.display = unreadCount > 0 ? 'block' : 'none';
+        notifList.innerHTML = notifications.map((n, i) => `
+          <div class="notif-item ${n.unread && !readSet.includes(i) ? 'unread' : ''}">
+            <div class="notif-icon ${n.color}"><span class="material-symbols-outlined">${n.icon}</span></div>
+            <div class="notif-body">
+              <div class="notif-title">${n.title}</div>
+              <div class="notif-desc">${n.desc}</div>
+              <div class="notif-time">${n.time}</div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      if (currentProfile) renderNotifications(currentProfile);
+      if (markAllReadBtn) {
+        markAllReadBtn.addEventListener('click', () => {
+          if (!currentProfile) return;
+          const allIndices = buildNotifications(currentProfile).map((_, i) => i);
+          localStorage.setItem('lifeline_notif_read', JSON.stringify(allIndices));
+          renderNotifications(currentProfile);
         });
       }
     });

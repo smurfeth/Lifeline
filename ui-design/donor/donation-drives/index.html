@@ -192,6 +192,9 @@
         </div>
       </section>
 
+      <!-- ===== Published Staff Donation Drives (Dynamic) ===== -->
+      <section class="drives" id="publishedDrivesContainer" style="margin-bottom: 24px;"></section>
+
       <!-- ===== Drive cards ===== -->
       <section class="drives">
 
@@ -350,6 +353,45 @@
     </div>
   </main>
 
+  <!-- ===== Donor Drive Application Modal ===== -->
+  <div id="applyDriveModal" style="display:none;position:fixed;inset:0;background:rgba(20,24,26,0.6);backdrop-filter:blur(4px);z-index:400;align-items:center;justify-content:center;padding:16px;">
+    <div style="background:#fff;border-radius:16px;max-width:500px;width:100%;box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);overflow:hidden;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid #EFE6E3;background:#FBF2EE;">
+        <div>
+          <h2 id="applyModalTitle" style="font-size:17px;font-weight:700;color:#1E1B19;">Apply for Donation Drive</h2>
+          <p id="applyModalSub" style="font-size:12px;color:#5B403D;margin-top:2px;"></p>
+        </div>
+        <button type="button" id="closeApplyModal" style="background:none;border:none;font-size:22px;cursor:pointer;color:#5B403D;">&times;</button>
+      </div>
+      <form id="applyDriveForm" style="padding:22px;display:flex;flex-direction:column;gap:14px;">
+        <input type="hidden" id="applyDriveId">
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:#546067;margin-bottom:5px;">Donor Full Name</label>
+          <input type="text" id="applyDonorName" required style="width:100%;padding:10px 12px;border:1px solid #D6CFCB;border-radius:8px;font-size:14px;">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;color:#546067;margin-bottom:5px;">Email</label>
+            <input type="email" id="applyDonorEmail" required style="width:100%;padding:10px 12px;border:1px solid #D6CFCB;border-radius:8px;font-size:14px;">
+          </div>
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;color:#546067;margin-bottom:5px;">Blood Type</label>
+            <input type="text" id="applyDonorBlood" readonly style="width:100%;padding:10px 12px;border:1px solid #D6CFCB;border-radius:8px;font-size:14px;background:#F8FAFC;">
+          </div>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:#546067;margin-bottom:5px;">Preferred Time Slot</label>
+          <select id="applyTimeSlot" required style="width:100%;padding:10px 12px;border:1px solid #D6CFCB;border-radius:8px;font-size:14px;background:#fff;"></select>
+        </div>
+        <p id="applyInstructionsNote" style="font-size:12px;color:#5B403D;background:#FBF2EE;padding:10px;border-radius:8px;line-height:1.4;"></p>
+        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:4px;">
+          <button type="button" id="cancelApplyModal" class="btn btn-soft">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="background:#B7131A;color:#fff;padding:10px 18px;border-radius:8px;border:none;font-weight:600;cursor:pointer;">Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script src="../../supabaseClient.js"></script>
   <script>
     // Sidebar open / close
@@ -366,13 +408,130 @@
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
 
+    let donorProfileCache = null;
+
+    function renderPublishedStaffDrives() {
+      const container = document.getElementById('publishedDrivesContainer');
+      if (!container) return;
+      const allDrives = JSON.parse(localStorage.getItem('lifeline_drives') || '[]');
+      const published = allDrives.filter(d => d.status === 'Published' || d.status === 'Ongoing');
+      const apps = JSON.parse(localStorage.getItem('lifeline_drive_applications') || '[]');
+
+      if (published.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+
+      container.innerHTML = published.map(drive => {
+        const driveApps = apps.filter(a => a.driveId === drive.id);
+        const approvedCount = driveApps.filter(a => a.status === 'Approved').length;
+        const remaining = Math.max(0, (drive.maxCapacity || 100) - approvedCount);
+        const dateObj = drive.eventDate ? new Date(drive.eventDate + 'T00:00:00') : null;
+        const dateTag = dateObj ? dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'TBD';
+        const bts = drive.bloodTypes && drive.bloodTypes.length ? drive.bloodTypes.join(', ') : 'All Blood Types';
+        const myApp = donorProfileCache ? driveApps.find(a => a.donorId === donorProfileCache.id || a.email === donorProfileCache.email) : null;
+        const posterSrc = drive.posterDataUrl || 'https://placehold.co/591x192?text=Lifeline+Blood+Drive';
+
+        return `
+          <article class="drive">
+            <div class="drive-img">
+              <img src="${posterSrc}" alt="${drive.title}">
+              <div class="shade"></div>
+              <div class="badges">
+                <span class="badge urgent">${bts}</span>
+                <span class="badge dist">${drive.status}</span>
+              </div>
+              <div class="img-foot">
+                <h3>${drive.title}</h3>
+                <span class="date-tag">${dateTag}</span>
+              </div>
+            </div>
+            <div class="drive-body" style="padding:18px 20px;display:flex;flex-direction:column;gap:10px;">
+              <p style="font-size:13px;color:#5B403D;">${drive.description || ''}</p>
+              <div style="font-size:12px;color:#546067;display:flex;flex-direction:column;gap:4px;">
+                <span><b>Facility:</b> ${drive.facility}</span>
+                <span><b>Venue:</b> ${drive.venue} &bull; ${drive.address}</span>
+                <span><b>Capacity:</b> ${remaining} slots remaining (Target: ${drive.targetDonors} / Max: ${drive.maxCapacity})</span>
+                <span><b>Requirements:</b> Min age ${drive.minAge || 18} &bull; ${drive.requiredDocs || 'Valid ID'}</span>
+              </div>
+              <div style="margin-top:6px;">
+                ${myApp
+                  ? `<span class="pill-mint solid" style="display:inline-flex;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;">Application: ${myApp.status} (${myApp.timeSlot})</span>`
+                  : `<button type="button" class="btn btn-primary" style="width:100%;background:#B7131A;color:#fff;padding:10px;border-radius:10px;border:none;font-weight:600;cursor:pointer;" onclick="openApplyModal('${drive.id}')">Apply for This Drive</button>`
+                }
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    window.openApplyModal = function(driveId) {
+      const drives = JSON.parse(localStorage.getItem('lifeline_drives') || '[]');
+      const drive = drives.find(d => d.id === driveId);
+      if (!drive) return;
+
+      document.getElementById('applyDriveId').value = drive.id;
+      document.getElementById('applyModalTitle').textContent = drive.title;
+      document.getElementById('applyModalSub').textContent = `${drive.facility} • ${drive.venue}`;
+      document.getElementById('applyDonorName').value = donorProfileCache ? donorProfileCache.fullName : '';
+      document.getElementById('applyDonorEmail').value = donorProfileCache ? donorProfileCache.email : '';
+      document.getElementById('applyDonorBlood').value = donorProfileCache ? donorProfileCache.bloodType : 'O+';
+
+      const slots = (drive.timeSlots || '08:00 AM - 10:00 AM, 10:00 AM - 12:00 PM, 01:00 PM - 03:00 PM')
+        .split(',').map(s => s.trim()).filter(Boolean);
+      document.getElementById('applyTimeSlot').innerHTML = slots.map(s => `<option value="${s}">${s}</option>`).join('');
+
+      document.getElementById('applyInstructionsNote').textContent =
+        drive.appInstructions || drive.specialInstructions || 'Final medical eligibility is determined on-site by the attending medical team. Please bring a valid ID.';
+
+      document.getElementById('applyDriveModal').style.display = 'flex';
+    };
+
+    document.getElementById('closeApplyModal')?.addEventListener('click', () => {
+      document.getElementById('applyDriveModal').style.display = 'none';
+    });
+    document.getElementById('cancelApplyModal')?.addEventListener('click', () => {
+      document.getElementById('applyDriveModal').style.display = 'none';
+    });
+
+    document.getElementById('applyDriveForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const driveId = document.getElementById('applyDriveId').value;
+      const drives = JSON.parse(localStorage.getItem('lifeline_drives') || '[]');
+      const drive = drives.find(d => d.id === driveId);
+      const apps = JSON.parse(localStorage.getItem('lifeline_drive_applications') || '[]');
+
+      const initialStatus = (drive && drive.approvalMethod === 'auto_approve') ? 'Approved' : 'Pending';
+      apps.unshift({
+        id: 'app-' + Date.now(),
+        driveId,
+        donorId: donorProfileCache ? donorProfileCache.id : 'guest',
+        donorName: document.getElementById('applyDonorName').value.trim(),
+        email: document.getElementById('applyDonorEmail').value.trim(),
+        bloodType: document.getElementById('applyDonorBlood').value,
+        timeSlot: document.getElementById('applyTimeSlot').value,
+        status: initialStatus,
+        appliedAt: new Date().toISOString()
+      });
+
+      localStorage.setItem('lifeline_drive_applications', JSON.stringify(apps));
+      document.getElementById('applyDriveModal').style.display = 'none';
+      alert(initialStatus === 'Approved'
+        ? 'Application confirmed! Your appointment details are saved.'
+        : 'Application submitted! Staff will review and confirm your participation.');
+      renderPublishedStaffDrives();
+    });
+
     // Populate user profile from Supabase
     document.addEventListener('DOMContentLoaded', async () => {
-      const profile = await populateDonorUI();
-      if (profile) {
+      donorProfileCache = await populateDonorUI();
+      if (donorProfileCache) {
         const heroRed = document.querySelector('.hero-text p .red');
-        if (heroRed) heroRed.textContent = profile.bloodType;
+        if (heroRed) heroRed.textContent = donorProfileCache.bloodType;
       }
+
+      renderPublishedStaffDrives();
 
       // Wire Logout
       const logoutBtn = document.querySelector('.nav-item.logout');

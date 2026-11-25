@@ -54,6 +54,77 @@ function getCurrentUser() {
 }
 
 /**
+ * Compute official Lifeline Donor Badge tier & analytics from successful donations count
+ */
+function getDonorBadgeInfo(count) {
+  const n = Number(count) || 0;
+  if (n >= 26) {
+    return {
+      tier: 'Diamond Donor',
+      tierSub: `${n} successful donations completed (Highest Tier)`,
+      nextTarget: n,
+      progressLabel: `${n} / 26+`,
+      percent: 100,
+      badgeBg: '#EDE9FE',
+      badgeColor: '#6D28D9'
+    };
+  }
+  if (n >= 13) {
+    return {
+      tier: 'Platinum Donor',
+      tierSub: `${n}/26 successful donations toward Diamond Donor`,
+      nextTarget: 26,
+      progressLabel: `${n} / 26`,
+      percent: Math.round((n / 26) * 100),
+      badgeBg: '#E0F2FE',
+      badgeColor: '#0369A1'
+    };
+  }
+  if (n >= 7) {
+    return {
+      tier: 'Gold Donor',
+      tierSub: `${n}/13 successful donations toward Platinum Donor`,
+      nextTarget: 13,
+      progressLabel: `${n} / 13`,
+      percent: Math.round((n / 13) * 100),
+      badgeBg: '#FEF3C7',
+      badgeColor: '#B45309'
+    };
+  }
+  if (n >= 4) {
+    return {
+      tier: 'Silver Donor',
+      tierSub: `${n}/7 successful donations toward Gold Donor`,
+      nextTarget: 7,
+      progressLabel: `${n} / 7`,
+      percent: Math.round((n / 7) * 100),
+      badgeBg: '#F1F5F9',
+      badgeColor: '#475569'
+    };
+  }
+  if (n >= 1) {
+    return {
+      tier: 'Bronze Donor',
+      tierSub: `${n}/4 successful donations toward Silver Donor`,
+      nextTarget: 4,
+      progressLabel: `${n} / 4`,
+      percent: Math.round((n / 4) * 100),
+      badgeBg: '#FFEDD5',
+      badgeColor: '#9A3412'
+    };
+  }
+  return {
+    tier: 'New Voluntary Donor',
+    tierSub: '0/1 successful donations toward Bronze Donor',
+    nextTarget: 1,
+    progressLabel: '0 / 1',
+    percent: 0,
+    badgeBg: '#F3F4F6',
+    badgeColor: '#6B7280'
+  };
+}
+
+/**
  * Get full donor profile directly from Supabase database
  */
 async function getDonorProfile() {
@@ -71,8 +142,9 @@ async function getDonorProfile() {
     ageString = `${metadata.dob} (${age} years)`;
   }
 
-  // 1. Fetch user's donation history from Supabase database & local records
-  let allDonations = JSON.parse(localStorage.getItem('lifeline_donations') || '[]');
+  // 1. Fetch user's donation history from Supabase database & local records (strictly scoped to this user.id)
+  const rawLocalDonations = JSON.parse(localStorage.getItem('lifeline_donations') || '[]');
+  let allDonations = rawLocalDonations.filter(d => d.donor_id && d.donor_id === user.id);
   const token = localStorage.getItem('lifeline_token');
 
   if (token && user.id) {
@@ -82,13 +154,11 @@ async function getDonorProfile() {
       });
       if (dRes.ok) {
         const dbRecords = await dRes.json();
-        if (Array.isArray(dbRecords) && dbRecords.length > 0) {
-          const seen = new Set(allDonations.map(d => d.record_code || d.id));
-          dbRecords.forEach(r => {
-            if (!seen.has(r.record_code || r.id)) {
-              allDonations.push(r);
-            }
-          });
+        if (Array.isArray(dbRecords)) {
+          // Prefer authoritative Supabase records and merge any unsynced local records for this user
+          const seen = new Set(dbRecords.map(r => r.record_code || r.id));
+          const unsyncedLocal = allDonations.filter(d => !seen.has(d.record_code || d.id));
+          allDonations = [...dbRecords, ...unsyncedLocal];
         }
       }
     } catch (e) {
@@ -96,13 +166,23 @@ async function getDonorProfile() {
     }
   }
 
-  // Filter completed donations (done donating)
+  // Filter completed donations (done donating) and pending reviews
   const completedDonations = allDonations.filter(d => 
     d.status && (d.status.toLowerCase() === 'completed' || d.status.toLowerCase() === 'done')
   );
+  const pendingDonations = allDonations.filter(d =>
+    d.status && d.status.toLowerCase().includes('pending')
+  );
 
   const totalDonationsCount = completedDonations.length;
-  const totalMl = totalDonationsCount * 450;
+  const pendingDonationsCount = pendingDonations.length;
+  const totalMl = completedDonations.reduce((sum, d) => {
+    if (d.blood_collected_ml !== undefined && d.blood_collected_ml !== null) {
+      return sum + (Number(d.blood_collected_ml) || 0);
+    }
+    const match = (d.notes || '').match(/Collected:\s*(\d+)\s*mL/i);
+    return sum + (match ? parseInt(match[1], 10) : 450);
+  }, 0);
   const livesImpacted = totalDonationsCount * 3;
 
   // 2. Calculate Medical Donation Eligibility (56 days / 8 weeks FDA & Red Cross interval)
@@ -146,15 +226,9 @@ async function getDonorProfile() {
     }
   }
 
-  let tier = totalDonationsCount === 0 ? 'New Voluntary Donor' : 'Bronze Benefactor';
-  let tierSub = totalDonationsCount === 0 ? '0/1 units to Bronze Badge' : `${totalDonationsCount}/5 units toward Silver`;
-  if (totalDonationsCount >= 10) {
-    tier = 'Gold Life Saver';
-    tierSub = '10+ units completed';
-  } else if (totalDonationsCount >= 5) {
-    tier = 'Silver Shield';
-    tierSub = `${totalDonationsCount}/10 units toward Gold`;
-  }
+  const badgeInfo = getDonorBadgeInfo(totalDonationsCount);
+  const tier = badgeInfo.tier;
+  const tierSub = badgeInfo.tierSub;
 
   // Determine full name and first name cleanly
   const rawFullName = metadata.full_name || `${metadata.first_name || ''} ${metadata.last_name || ''}`.trim() || user.email || 'Donor';
@@ -179,10 +253,15 @@ async function getDonorProfile() {
     emergencyRel: metadata.emergency_rel || '—',
     emergencyPhone: metadata.emergency_phone || '—',
     totalDonations: totalDonationsCount,
+    pendingDonations: pendingDonationsCount,
     totalMl: totalMl,
     livesImpacted: livesImpacted,
     tier: tier,
     tierSub: tierSub,
+    tierProgressLabel: badgeInfo.progressLabel,
+    tierPercent: badgeInfo.percent,
+    badgeBg: badgeInfo.badgeBg,
+    badgeColor: badgeInfo.badgeColor,
     nextEligibleDate: nextEligibleDate,
     nextEligibleSub: nextEligibleSub,
     daysRemaining: daysRemaining,
@@ -472,3 +551,155 @@ async function populateStaffUI() {
   return { fullName, roleTitle, facility };
 }
 
+
+/**
+ * Universal Notification Bell initializer for Donor, Staff, and Admin pages.
+ * Automatically activates on any page with .icon-btn.bell that doesn't already have #notifPanel or [data-feed].
+ */
+async function initUniversalNotifications() {
+  const bellBtn = document.querySelector('.icon-btn.bell');
+  if (!bellBtn) return;
+  if (document.getElementById('notifPanel')) return;
+  if (bellBtn.hasAttribute('data-feed')) return;
+
+  // Inject styles once
+  if (!document.getElementById('lifeline-notif-styles')) {
+    const style = document.createElement('style');
+    style.id = 'lifeline-notif-styles';
+    style.textContent = `
+      .notif-panel {
+        position: absolute; top: calc(var(--topbar-h, 64px) - 4px); right: 60px;
+        width: 380px; max-height: 480px; background: #fff; border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.05);
+        border: 1px solid #EFE6E3; z-index: 250; overflow: hidden;
+        animation: notifSlideIn 0.2s ease-out;
+      }
+      @keyframes notifSlideIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+      .notif-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px 12px; border-bottom:1px solid #EFE6E3; }
+      .notif-header h3 { font-family:'Montserrat',sans-serif; font-size:16px; font-weight:700; color:#1E1B19; margin:0; }
+      .notif-clear { background:none; border:none; font-size:12px; font-weight:600; color:#B7131A; cursor:pointer; }
+      .notif-clear:hover { text-decoration:underline; }
+      .notif-list { max-height:400px; overflow-y:auto; padding:8px 0; }
+      .notif-item { display:flex; align-items:flex-start; gap:12px; padding:14px 20px; border-bottom:1px solid rgba(239,230,227,0.5); position:relative; cursor:pointer; }
+      .notif-item:last-child { border-bottom:none; }
+      .notif-item:hover { background:#FBF2EE; }
+      .notif-item.unread { background:rgba(183,19,26,0.03); }
+      .notif-item.unread::before { content:''; position:absolute; left:8px; top:50%; transform:translateY(-50%); width:6px; height:6px; border-radius:50%; background:#B7131A; }
+      .notif-icon { flex-shrink:0; width:36px; height:36px; display:flex; align-items:center; justify-content:center; border-radius:10px; }
+      .notif-icon.green { background:#D1FAE5; color:#059669; }
+      .notif-icon.red   { background:#FFDAD6; color:#B7131A; }
+      .notif-icon.amber { background:#FEF3C7; color:#F59E0B; }
+      .notif-icon.blue  { background:#DBEAFE; color:#2563EB; }
+      .notif-body { flex:1; min-width:0; }
+      .notif-title { font-size:13px; font-weight:600; color:#1E1B19; line-height:1.3; }
+      .notif-desc { font-size:12px; color:#5B403D; line-height:1.4; margin-top:2px; }
+      .notif-time { font-size:11px; color:#9CA3AF; margin-top:4px; font-weight:500; }
+      @media (max-width:600px) { .notif-panel { right:8px; left:8px; width:auto; } }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Detect portal role from path
+  const path = window.location.pathname.toLowerCase();
+  const portal = path.includes('/admin/') ? 'admin' : path.includes('/staff/') ? 'staff' : 'donor';
+  const readKey = `lifeline_${portal}_notif_read`;
+
+  // Inject dropdown DOM
+  const panel = document.createElement('div');
+  panel.className = 'notif-panel';
+  panel.id = 'notifPanel';
+  panel.style.display = 'none';
+  const headerTitle = portal === 'admin' ? 'Admin Notifications' : portal === 'staff' ? 'Staff Notifications' : 'Notifications';
+  panel.innerHTML = `
+    <div class="notif-header">
+      <h3>${headerTitle}</h3>
+      <button type="button" id="markAllRead" class="notif-clear">Mark all read</button>
+    </div>
+    <div class="notif-list" id="notifList"></div>
+  `;
+  bellBtn.insertAdjacentElement('afterend', panel);
+
+  const bellDot = bellBtn.querySelector('.bell-dot');
+  const notifList = panel.querySelector('#notifList');
+  const markAllReadBtn = panel.querySelector('#markAllRead');
+
+  bellBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    panel.style.display = panel.style.display !== 'none' ? 'none' : 'block';
+  });
+  document.addEventListener('click', (e) => {
+    if (!panel.contains(e.target) && !bellBtn.contains(e.target)) {
+      panel.style.display = 'none';
+    }
+  });
+
+  async function buildNotifications() {
+    const items = [];
+    if (portal === 'donor') {
+      const profile = await getDonorProfile();
+      if (profile) {
+        if (profile.isEligibleToday) {
+          items.push({ icon: 'check_circle', color: 'green', title: 'You are eligible to donate!', desc: 'Your 56-day recovery period is complete. You can schedule a donation.', time: 'Eligibility', href: '../submit-donation/index.html', unread: true });
+        } else {
+          items.push({ icon: 'schedule', color: 'blue', title: `${profile.daysRemaining} days until next eligible date`, desc: `Next donation window opens on ${profile.nextEligibleDate}.`, time: '56-Day Cycle', href: '../dashboard/index.html', unread: profile.daysRemaining <= 7 });
+        }
+        items.push({ icon: 'military_tech', color: 'amber', title: `Badge: ${profile.tier}`, desc: profile.tierSub, time: 'Milestone', href: '../profile/index.html', unread: false });
+      }
+      const drives = JSON.parse(localStorage.getItem('lifeline_drives') || '[]').filter(d => d.status === 'Published' || d.status === 'Ongoing');
+      if (drives.length > 0) {
+        items.push({ icon: 'event_available', color: 'red', title: `${drives.length} Active Donation Drive${drives.length > 1 ? 's' : ''}`, desc: `Latest: ${drives[0].title} at ${drives[0].venue || drives[0].facility}.`, time: 'Open for Application', href: '../donation-drives/index.html', unread: true });
+      }
+      items.push({ icon: 'favorite', color: 'green', title: 'Pre-donation reminder', desc: 'Drink extra water, eat iron-rich meals, and bring a valid photo ID.', time: 'Health Tip', unread: false });
+    } else if (portal === 'staff') {
+      const reviews = JSON.parse(localStorage.getItem('lifeline_staff_reviews') || '[]').filter(r => r.status === 'Pending Review');
+      const apps = JSON.parse(localStorage.getItem('lifeline_drive_applications') || '[]').filter(a => a.status === 'Pending');
+      items.push({ icon: 'pending_actions', color: 'amber', title: `${reviews.length} Pending Donor Review${reviews.length === 1 ? '' : 's'}`, desc: 'Donor intake submissions awaiting clinical screening and volume logging.', time: 'Review Queue', href: '../pending-reviews/index.html', unread: reviews.length > 0 });
+      items.push({ icon: 'event_available', color: 'blue', title: `${apps.length} Pending Drive Application${apps.length === 1 ? '' : 's'}`, desc: 'Review and approve donor applications for published drives.', time: 'Donation Drives', href: '../donation-drives/index.html', unread: apps.length > 0 });
+      items.push({ icon: 'warning', color: 'red', title: 'Critical Shortage: O- & Platelets', desc: 'O- Universal Donor and Platelet reserves require urgent replenishment.', time: 'Freezer Vault #4', href: '../dashboard/index.html', unread: true });
+    } else {
+      // Admin portal
+      const drives = JSON.parse(localStorage.getItem('lifeline_drives') || '[]');
+      const published = drives.filter(d => d.status === 'Published' || d.status === 'Ongoing').length;
+      const apps = JSON.parse(localStorage.getItem('lifeline_drive_applications') || '[]').length;
+      items.push({ icon: 'campaign', color: 'blue', title: `${published} Active Donation Drive${published === 1 ? '' : 's'} Network-Wide`, desc: `${apps} total donor applications tracked across regional drives.`, time: 'Network Drives', href: '../donation-drives/index.html', unread: true });
+      items.push({ icon: 'local_hospital', color: 'amber', title: 'Partner Facility Compliance', desc: 'Monitor hospital & blood bank accreditation and cold-chain status.', time: 'Facilities', href: '../hospitals-blood-banks/index.html', unread: true });
+      items.push({ icon: 'warning', color: 'red', title: 'Regional O- Reserve Alert', desc: 'O- supply below target threshold at regional trauma centers.', time: 'System Alert', href: '../dashboard/index.html', unread: false });
+    }
+    return items;
+  }
+
+  let cachedItems = [];
+  async function render() {
+    cachedItems = await buildNotifications();
+    const readSet = JSON.parse(localStorage.getItem(readKey) || '[]');
+    const unreadCount = cachedItems.filter((n, i) => n.unread && !readSet.includes(i)).length;
+    if (bellDot) bellDot.style.display = unreadCount > 0 ? 'block' : 'none';
+
+    notifList.innerHTML = cachedItems.map((n, i) => `
+      <div class="notif-item ${n.unread && !readSet.includes(i) ? 'unread' : ''}" data-href="${n.href || ''}">
+        <div class="notif-icon ${n.color}"><span class="material-symbols-outlined">${n.icon}</span></div>
+        <div class="notif-body">
+          <div class="notif-title">${n.title}</div>
+          <div class="notif-desc">${n.desc}</div>
+          <div class="notif-time">${n.time}</div>
+        </div>
+      </div>
+    `).join('');
+
+    notifList.querySelectorAll('.notif-item[data-href]').forEach(el => {
+      const href = el.getAttribute('data-href');
+      if (href) el.addEventListener('click', () => { window.location.href = href; });
+    });
+  }
+
+  markAllReadBtn.addEventListener('click', () => {
+    localStorage.setItem(readKey, JSON.stringify(cachedItems.map((_, i) => i)));
+    render();
+  });
+
+  await render();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initUniversalNotifications();
+});
