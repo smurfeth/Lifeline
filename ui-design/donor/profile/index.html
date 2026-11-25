@@ -74,8 +74,8 @@
     <a class="user-pill" href="index.html">
       <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
       <span>
-        <span class="user-name">Marcus Vance</span>
-        <span class="user-type">Blood Type O+</span>
+        <span class="user-name">Loading...</span>
+        <span class="user-type">Donor Portal</span>
       </span>
     </a>
   </header>
@@ -191,8 +191,8 @@
             <div class="dc-mid">
               <div>
                 <div class="dc-label">DONOR NAME</div>
-                <div class="dc-name">MARCUS VANCE</div>
-                <div class="mono">ID: D-10948</div>
+                <div class="dc-name">LOADING...</div>
+                <div class="mono">ID: -</div>
               </div>
               <div class="dc-type"><b>O+</b><small>RH+</small></div>
             </div>
@@ -253,9 +253,9 @@
       </div>
       <form id="editProfileForm" style="padding:24px;display:flex;flex-direction:column;gap:16px;">
         <div>
-          <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#475569;margin-bottom:6px;">Full Legal Name</label>
-          <input type="text" id="editFullName" style="width:100%;padding:10px 14px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;" required>
-        </div>
+       <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#475569;margin-bottom:6px;">Body Weight (e.g. 65 kg)</label>
+       <input type="text" id="editWeight" placeholder="e.g. 65 kg" style="width:100%;padding:10px 14px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;box-sizing:border-box;">
+     </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
           <div>
             <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#475569;margin-bottom:6px;">Primary Mobile Phone</label>
@@ -442,7 +442,31 @@
 
       document.querySelectorAll('.user-name').forEach(el => el.textContent = currentProfile.fullName);
       document.querySelectorAll('.user-type').forEach(el => el.textContent = `Blood Type ${currentProfile.bloodType}`);
+      document.querySelectorAll('.user-name').forEach(el => el.textContent = currentProfile.fullName);
+      document.querySelectorAll('.user-type').forEach(el => el.textContent = `Blood Type ${currentProfile.bloodType}`);
+
+      // 7. Clinical Baseline (from database instead of dummy numbers)
+      const clinHemo = document.getElementById('clinHemoglobin');
+      if (clinHemo) clinHemo.innerHTML = currentProfile.hemoglobin ? `${currentProfile.hemoglobin} <span>g/dL</span>` : `Pending <span>screening</span>`;
+
+      const clinBp = document.getElementById('clinBp');
+      if (clinBp) clinBp.innerHTML = currentProfile.bp ? `${currentProfile.bp} <span>mmHg</span>` : `Pending <span>intake</span>`;
+
+      const clinPulse = document.getElementById('clinPulse');
+      if (clinPulse) clinPulse.innerHTML = currentProfile.pulse ? `${currentProfile.pulse} <span>bpm</span>` : `Pending <span>intake</span>`;
+
+      const clinDeferral = document.getElementById('clinDeferral');
+      if (clinDeferral) clinDeferral.textContent = currentProfile.deferral || 'Cleared';
+
+      // 8. Notification Preference Checkboxes
+      const notifBoxes = document.querySelectorAll('.toggles input[type="checkbox"]');
+      if (notifBoxes.length >= 3) {
+        notifBoxes[0].checked = currentProfile.notifyShortage;
+        notifBoxes[1].checked = currentProfile.notifyEligibility;
+        notifBoxes[2].checked = currentProfile.notifyDrives;
+      }
     }
+    
 
     // Modal helpers
     function toggleModal(modalId, show) {
@@ -464,6 +488,7 @@
           document.getElementById('editDob').value = currentProfile.dob !== 'Not provided' ? currentProfile.dob : '';
           document.getElementById('editBloodGroup').value = currentProfile.bloodType || 'O+';
           document.getElementById('editSex').value = currentProfile.sex || 'Male';
+          document.getElementById('editWeight').value = currentProfile.weight !== 'Not recorded' ? currentProfile.weight : '';
           toggleModal('editProfileModal', true);
         });
       }
@@ -479,6 +504,7 @@
         const dob = document.getElementById('editDob').value;
         const blood_group = document.getElementById('editBloodGroup').value;
         const biological_sex = document.getElementById('editSex').value;
+        const weight = document.getElementById('editWeight').value.trim();
 
         const nameParts = fullName.split(' ');
         const firstName = nameParts[0] || fullName;
@@ -495,7 +521,8 @@
           blood_group,
           blood_type: blood_group,
           biological_sex,
-          sex: biological_sex
+          sex: biological_sex,
+          weight
         });
 
         toggleModal('editProfileModal', false);
