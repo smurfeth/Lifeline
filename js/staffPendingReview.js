@@ -1,4 +1,4 @@
-// js/staffPendingReviews.js — Live Staff Clinical Intake, Status Verification & EmailJS Alerts
+// js/staffPendingReview.js — Live Staff Clinical Intake, Status Verification & EmailJS Alerts
 import { supabase } from './supabaseClient.js';
 import { showToast } from './toast.js';
 
@@ -7,7 +7,6 @@ const EMAILJS_SERVICE_ID = 'service_ptlq86i';
 const EMAILJS_STATUS_TEMPLATE_ID = 'YOUR_NEW_STATUS_TEMPLATE_ID'; // Replace with your EmailJS status template ID
 
 document.addEventListener('DOMContentLoaded', async () => {
-  // Initialize EmailJS if SDK is loaded
   if (window.emailjs) {
     emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
   }
