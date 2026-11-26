@@ -67,20 +67,23 @@
         </div>
 
         <footer class="auth-footer">
-          <a class="login-redirect-link" href="../login/index.html">← Back to Log In</a>
+          <a class="login-redirect-link" href="../login/index.html">&larr; Back to Log In</a>
         </footer>
       </main>
     </div>
   </div>
 
+  <!-- Custom Centered Toast Notifications -->
+  <script type="module" src="../../js/toast.js"></script>
+
   <!-- EmailJS SDK & Verification Logic -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    const EMAILJS_PUBLIC_KEY = 'PASTE_YOUR_PUBLIC_KEY_HERE'; // Same Public Key from EmailJS -> Account
+    const EMAILJS_PUBLIC_KEY = 'FIcsnHNaV5za5PTKt';
     const EMAILJS_SERVICE_ID = 'service_ptlq86i';
-    const EMAILJS_TEMPLATE_ID = 'template_ucr92ve';
+    const EMAILJS_TEMPLATE_ID = 'template_4dttrr4';
 
-    if (window.emailjs && EMAILJS_PUBLIC_KEY !== 'PASTE_YOUR_PUBLIC_KEY_HERE') {
+    if (window.emailjs) {
       emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
     }
 
