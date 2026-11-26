@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <!-- ===== Sidebar (opens with the menu button) ===== -->
   <aside class="sidebar" id="sidebar" aria-label="Main menu">
     <div class="sidebar-top">
@@ -20,31 +19,40 @@
           <div class="sidebar-name">LIFE<span>LINE</span></div>
           <div class="sidebar-tag">— Your Blood. <span>Their Hope</span> —</div>
         </div>
-        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
       </div>
-
       <nav class="sidebar-nav">
         <a class="nav-item" href="../dashboard/index.html">
-          <span class="material-symbols-outlined">dashboard</span> Dashboard
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
         </a>
         <a class="nav-item" href="../submit-donation/index.html">
-          <span class="material-symbols-outlined">add_circle</span> Submit Donation
+          <span class="material-symbols-outlined">add_circle</span>
+          Submit Donation
         </a>
         <a class="nav-item active" href="index.html">
-          <span class="material-symbols-outlined">history</span> Donation History
+          <span class="material-symbols-outlined">history</span>
+          Donation History
         </a>
         <a class="nav-item" href="../donation-drives/index.html">
-          <span class="material-symbols-outlined">event_available</span> Donation Drives
+          <span class="material-symbols-outlined">event_available</span>
+          Donation Drives
         </a>
         <a class="nav-item" href="../profile/index.html">
-          <span class="material-symbols-outlined">person</span> Profile
+          <span class="material-symbols-outlined">person</span>
+          Profile
         </a>
       </nav>
     </div>
-
     <div class="sidebar-bottom">
-      <a class="nav-item logout" href="../../login/index.html">
-        <span class="material-symbols-outlined">logout</span> Log Out
+      <a class="nav-item logout" id="logoutBtn" href="../../login/index.html">
+        <span class="material-symbols-outlined">logout</span>
+        Log Out
       </a>
     </div>
   </aside>
@@ -52,221 +60,113 @@
 
   <!-- ===== Top bar ===== -->
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
     <div class="crumbs">
       <span class="crumb-bar"></span>
       <span>Donor Portal /</span>
       <strong>Donation History</strong>
     </div>
-
     <label class="search">
       <span class="material-symbols-outlined">search</span>
-      <input type="search" placeholder="Search donation slots...">
+      <input type="search" id="historySearchInput" placeholder="Search records or facility...">
     </label>
-
     <button class="icon-btn bell" type="button" aria-label="Notifications">
       <span class="material-symbols-outlined">notifications</span>
       <span class="bell-dot"></span>
     </button>
-
     <a class="user-pill" href="../profile/index.html">
       <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
       <span>
-        <span class="user-name">Marcus Vance</span>
-        <span class="user-type">Blood Type O+</span>
+        <span class="user-name" id="navDonorName">Loading...</span>
+        <span class="user-type" id="navDonorType">Donor</span>
       </span>
     </a>
   </header>
 
   <main class="page">
     <div class="container history">
-
       <!-- ===== Hero ===== -->
       <section class="card pad hero">
         <span class="material-symbols-outlined hero-drop" aria-hidden="true">water_drop</span>
         <div class="hero-text">
           <h1>My Donation History &amp; Records</h1>
-          <p>Track your past and in-review donation records. You can inspect verification details, download certified credentials, or cancel pending submissions before staff review.</p>
+          <p>Track your past and in-review donation records. You can inspect verification details or cancel pending submissions before staff review.</p>
         </div>
         <div class="hero-stats">
-          <div class="hstat"><b class="red">1,400</b><span>Total mL</span></div>
-          <div class="hstat white"><b class="green">4</b><span>Donations</span></div>
-          <div class="hstat"><b>12</b><span>Lives saved</span></div>
+          <div class="hstat"><b class="red" id="heroTotalMl">0</b><span>Total mL</span></div>
+          <div class="hstat white"><b class="green" id="heroDonationsCount">0</b><span>Donations</span></div>
+          <div class="hstat"><b id="heroLivesSaved">0</b><span>Lives saved</span></div>
         </div>
       </section>
 
-      <!-- ===== Filters (kept after the records in the HTML so the counter works; CSS order shows it above) ===== -->
+      <!-- ===== Filters ===== -->
       <section class="card toolbar">
         <div class="filters">
           <div class="group" role="radiogroup" aria-label="Filter by status">
-            <input type="radio" name="st" id="st-all" class="sr" checked><label for="st-all" class="chip">All Statuses</label>
-            <input type="radio" name="st" id="st-pending" class="sr"><label for="st-pending" class="chip">Pending Review</label>
-            <input type="radio" name="st" id="st-completed" class="sr"><label for="st-completed" class="chip">Completed</label>
-            <input type="radio" name="st" id="st-cancelled" class="sr"><label for="st-cancelled" class="chip">Cancelled</label>
+            <input type="radio" name="st" id="st-all" value="all" class="sr" checked>
+            <label for="st-all" class="chip">All Statuses</label>
+
+            <input type="radio" name="st" id="st-pending" value="pending" class="sr">
+            <label for="st-pending" class="chip">Pending Review</label>
+
+            <input type="radio" name="st" id="st-completed" value="completed" class="sr">
+            <label for="st-completed" class="chip">Completed</label>
+
+            <input type="radio" name="st" id="st-cancelled" value="cancelled" class="sr">
+            <label for="st-cancelled" class="chip">Cancelled</label>
           </div>
-          <div class="group" role="radiogroup" aria-label="Filter by year">
-            <input type="radio" name="yr" id="yr-2024" class="sr" checked><label for="yr-2024" class="chip">Year 2024</label>
-            <input type="radio" name="yr" id="yr-2023" class="sr"><label for="yr-2023" class="chip">Year 2023</label>
-            <input type="radio" name="yr" id="yr-all" class="sr"><label for="yr-all" class="chip">All Years</label>
+          <div class="group" id="yearFilterGroup" role="radiogroup" aria-label="Filter by year">
+            <input type="radio" name="yr" id="yr-all" value="all" class="sr" checked>
+            <label for="yr-all" class="chip">All Years</label>
           </div>
         </div>
-        <div class="showing">Showing <b></b> of 4 clinical logs</div>
+        <div class="showing">Showing <b id="showingCount">0</b> of <span id="totalLogsCount">0</span> clinical logs</div>
       </section>
 
-      <!-- ===== Records ===== -->
-      <section class="logs">
-        <article class="card pad log pending y2024">
-          <input type="checkbox" class="sr cb" id="c-8821"><input type="checkbox" class="sr ab" id="a-8821"><input type="checkbox" class="sr vb" id="v-8821">
-          <div class="log-top">
-            <div class="log-main">
-              <div class="type"><b>O+</b><small>Type</small></div>
-              <div class="log-info">
-                <div class="log-title"><h2>Record #LL-8821</h2><span class="pill-amber"><span class="material-symbols-outlined">pending_actions</span>Pending Review</span><span class="pill-cancelled"><span class="material-symbols-outlined">cancel</span>Cancelled</span></div>
-                <p class="log-line"><span class="material-symbols-outlined">calendar_today</span><b>Nov 30, 2024</b><i>(Scheduled 10:00 AM)</i><s>•</s><span class="material-symbols-outlined">local_hospital</span><span>St. Jude Regional Blood Bank</span></p>
-                <p class="log-line sub not-cancelled"><span class="material-symbols-outlined">water_drop</span> Volume: <i>Pending Staff Verification upon reception</i></p><p class="log-line sub only-cancelled">Submission withdrawn by donor before staff review.</p>
-              </div>
-            </div>
-            <div class="log-actions"><label class="btn btn-sm btn-light" for="v-8821"><span class="material-symbols-outlined">visibility</span><span class="lbl-show">View Details</span><span class="lbl-hide">Hide Details</span></label><label class="btn btn-sm btn-light danger ask-btn" for="a-8821"><span class="material-symbols-outlined">block</span>Cancel Submission</label></div>
-          </div>
-      <div class="log-ask"><span>Withdraw this submission before staff review? This can't be undone.</span>
-        <label class="btn btn-sm btn-light" for="a-8821">Keep record</label>
-        <label class="btn btn-sm btn-light danger" for="c-8821">Yes, cancel submission</label></div>
-          <dl class="log-extra"><div><dt>Status</dt><dd>Pending review</dd></div><div><dt>Donation type</dt><dd>Whole Blood</dd></div><div><dt>Blood type</dt><dd>O+</dd></div><div><dt>Date</dt><dd>Nov 30, 2024 (Scheduled 10:00 AM)</dd></div><div><dt>Facility</dt><dd>St. Jude Regional Blood Bank</dd></div><div><dt>Volume</dt><dd>Pending staff verification</dd></div></dl>
-        </article>
-        <article class="card pad log completed y2024">
-          <input type="checkbox" class="sr vb" id="v-7940">
-          <div class="log-top">
-            <div class="log-main">
-              <div class="type"><b>O+</b><small>Whole</small></div>
-              <div class="log-info">
-                <div class="log-title"><h2>Record #LL-7940</h2><span class="pill-green-soft"><span class="material-symbols-outlined">check_circle</span>Completed</span></div>
-                <p class="log-line"><span class="material-symbols-outlined">calendar_today</span><b>Oct 14, 2024</b><s>•</s><span class="material-symbols-outlined">airport_shuttle</span><span>Metro Red Cross Mobile Unit (Civic Plaza)</span></p>
-                <p class="log-line sub not-cancelled">Volume: <b class="green">450 mL</b> <s>•</s> <span class="material-symbols-outlined green">verified_user</span> Verified by Nurse Elena Rostova, RN (Badge #H-4412)</p>
-              </div>
-            </div>
-            <div class="log-actions"><a class="btn btn-sm btn-light" href="certificate-LL-7940.html" target="_blank" rel="noopener"><span class="material-symbols-outlined">workspace_premium</span>Download Certificate</a><label class="btn btn-sm btn-primary" for="v-7940"><span class="material-symbols-outlined">description</span><span class="lbl-show">View Record</span><span class="lbl-hide">Hide Record</span></label></div>
-          </div>
-          <dl class="log-extra"><div><dt>Status</dt><dd>Completed</dd></div><div><dt>Donation type</dt><dd>Whole Blood</dd></div><div><dt>Date</dt><dd>Oct 14, 2024</dd></div><div><dt>Facility</dt><dd>Metro Red Cross Mobile Unit (Civic Plaza)</dd></div><div><dt>Volume</dt><dd>450 mL</dd></div><div><dt>Verified by</dt><dd>Nurse Elena Rostova, RN (Badge #H-4412)</dd></div></dl>
-        </article>
-        <article class="card pad log completed y2024">
-          <input type="checkbox" class="sr vb" id="v-6211">
-          <div class="log-top">
-            <div class="log-main">
-              <div class="type"><b>O+</b><small>Whole</small></div>
-              <div class="log-info">
-                <div class="log-title"><h2>Record #LL-6211</h2><span class="pill-green-soft"><span class="material-symbols-outlined">check_circle</span>Completed</span></div>
-                <p class="log-line"><span class="material-symbols-outlined">calendar_today</span><b>Jul 10, 2024</b><s>•</s><span class="material-symbols-outlined">local_hospital</span><span>City General Hospital • Transfusion Suite</span></p>
-                <p class="log-line sub not-cancelled">Volume: <b class="green">450 mL</b> <s>•</s> <span class="material-symbols-outlined green">verified_user</span> Verified by Dr. Aris Catadman (Badge #S-1029)</p>
-              </div>
-            </div>
-            <div class="log-actions"><label class="btn btn-sm btn-primary" for="v-6211"><span class="material-symbols-outlined">description</span><span class="lbl-show">View Record</span><span class="lbl-hide">Hide Record</span></label></div>
-          </div>
-          <dl class="log-extra"><div><dt>Status</dt><dd>Completed</dd></div><div><dt>Donation type</dt><dd>Whole Blood</dd></div><div><dt>Date</dt><dd>Jul 10, 2024</dd></div><div><dt>Facility</dt><dd>City General Hospital • Transfusion Suite</dd></div><div><dt>Volume</dt><dd>450 mL</dd></div><div><dt>Verified by</dt><dd>Dr. Aris Catadman (Badge #S-1029)</dd></div></dl>
-        </article>
-        <article class="card pad log completed y2024">
-          <input type="checkbox" class="sr vb" id="v-5109">
-          <div class="log-top">
-            <div class="log-main">
-              <div class="type"><b>O+</b><small>Power Red</small></div>
-              <div class="log-info">
-                <div class="log-title"><h2>Record #LL-5109</h2><span class="pill-green-soft"><span class="material-symbols-outlined">check_circle</span>Completed • 500 mL</span></div>
-                <p class="log-line"><span class="material-symbols-outlined">calendar_today</span><b>Mar 02, 2024</b><s>•</s><span class="material-symbols-outlined">local_hospital</span><span>St. Jude Regional Blood Bank</span></p>
-                <p class="log-line sub not-cancelled"><b>Hemoglobin Checked: 14.8 g/dL</b> <s>•</s> <b class="green">Standard Clearance Granted</b></p>
-              </div>
-            </div>
-            <div class="log-actions"><label class="btn btn-sm btn-primary" for="v-5109"><span class="material-symbols-outlined">description</span><span class="lbl-show">View Record</span><span class="lbl-hide">Hide Record</span></label></div>
-          </div>
-          <dl class="log-extra"><div><dt>Status</dt><dd>Completed</dd></div><div><dt>Donation type</dt><dd>Power Red</dd></div><div><dt>Date</dt><dd>Mar 02, 2024</dd></div><div><dt>Facility</dt><dd>St. Jude Regional Blood Bank</dd></div><div><dt>Volume</dt><dd>500 mL</dd></div><div><dt>Hemoglobin</dt><dd>14.8 g/dL – standard clearance granted</dd></div></dl>
-        </article>
-        <div class="empty card pad"><span class="material-symbols-outlined">search_off</span><strong>No records match your filters</strong><span>Try a different status or year.</span></div>
+      <!-- ===== Live Records Container ===== -->
+      <section class="logs" id="logsContainer">
+        <div class="card pad">
+          <p class="muted">Loading your donation records...</p>
+        </div>
       </section>
 
-      <!-- ===== Deferral banner ===== -->
+      <!-- ===== Deferral Banner ===== -->
       <section class="card pad banner">
         <div class="banner-left">
           <span class="circle banner-icon"><span class="material-symbols-outlined">hourglass_top</span></span>
           <div>
-            <h2>56-Day Deferral Tracking Active</h2>
-            <p class="muted">Your clinical recuperation period is strictly maintained for safe red-cell replenishment.</p>
+            <h2 id="deferralBannerTitle">56-Day Deferral Tracking</h2>
+            <p class="muted" id="deferralBannerDesc">Checking your clinical recovery eligibility...</p>
           </div>
         </div>
-        <span class="pill-green banner-pill">Next Safe Whole Blood: Dec 10, 2024</span>
+        <span class="pill-green banner-pill" id="deferralBannerPill">Checking...</span>
       </section>
-
     </div>
   </main>
 
-  <script src="../../supabaseClient.js"></script>
+  <!-- Sidebar toggle -->
   <script>
-    // Sidebar open / close
     const body = document.body;
     const menuBtn = document.getElementById('menuBtn');
-
     function setSidebar(open) {
       body.classList.toggle('sidebar-open', open);
       menuBtn.setAttribute('aria-expanded', String(open));
     }
-
     menuBtn.addEventListener('click', () => setSidebar(!body.classList.contains('sidebar-open')));
     document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
-
-    // Populate user profile and dynamic donation records
-    document.addEventListener('DOMContentLoaded', async () => {
-      const profile = await populateDonorUI();
-
-      if (profile) {
-        // Update blood type badges in all history cards to match logged in user
-        document.querySelectorAll('.type b').forEach(el => el.textContent = profile.bloodType);
-      }
-
-      // Check for user-submitted records
-      const localRecords = JSON.parse(localStorage.getItem('lifeline_donations') || '[]');
-      if (localRecords.length > 0) {
-        const logsContainer = document.querySelector('.logs');
-        if (logsContainer) {
-          localRecords.forEach((rec) => {
-            const article = document.createElement('article');
-            article.className = 'card pad log pending y2024';
-            article.innerHTML = `
-              <div class="log-top">
-                <div class="log-main">
-                  <div class="type"><b>${rec.blood_type || profile?.bloodType || 'O+'}</b><small>Type</small></div>
-                  <div class="log-info">
-                    <div class="log-title">
-                      <h2>Record #${rec.record_code}</h2>
-                      <span class="pill-amber"><span class="material-symbols-outlined">pending_actions</span>Pending Review</span>
-                    </div>
-                    <p class="log-line">
-                      <span class="material-symbols-outlined">calendar_today</span>
-                      <b>${rec.scheduled_date}</b><i>(Scheduled ${rec.slot_time || '10:00 AM'})</i><s>•</s>
-                      <span class="material-symbols-outlined">local_hospital</span>
-                      <span>${rec.facility_name}</span>
-                    </p>
-                    <p class="log-line sub not-cancelled">
-                      <span class="material-symbols-outlined">water_drop</span> Volume: <i>Pending Staff Verification upon reception</i>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            `;
-            logsContainer.prepend(article);
-          });
-        }
-      }
-
-      // Wire Logout
-      const logoutBtn = document.querySelector('.nav-item.logout');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          signOutUser();
-        });
-      }
-    });
   </script>
 
+  <!-- Official Supabase SDK, Custom Toasts & Live Donation History Module -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module" src="../../../js/toast.js"></script>
+  <script type="module" src="../../../js/donationHistory.js"></script>
 </body>
 </html>
