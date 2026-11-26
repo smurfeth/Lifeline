@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Account Approvals – Lifeline Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Sidebar (opens with the menu button) ===== -->
+  <aside class="sidebar" id="sidebar" aria-label="Main menu">
+    <div class="sidebar-top">
+      <div class="sidebar-brand">
+        <img class="sidebar-logo" src="../../assets/Lifeline%20Logo.png" alt="Lifeline logo">
+        <div>
+          <div class="sidebar-name">LIFE<span>LINE</span></div>
+          <div class="sidebar-tag">— Your Blood. <span>Their Hope</span> —</div>
+        </div>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="sidebar-label">Admin Operations</div>
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="../dashboard/index.html">
+          <span class="material-symbols-outlined">dashboard</span> Dashboard
+        </a>
+        <a class="nav-item active" href="../account-approvals/index.html">
+          <span class="material-symbols-outlined">how_to_reg</span> Account Approvals
+        </a>
+        <a class="nav-item" href="../hospitals-blood-banks/index.html">
+          <span class="material-symbols-outlined">local_hospital</span> Hospitals &amp; Blood Banks
+        </a>
+        <a class="nav-item" href="../donation-drives/index.html">
+          <span class="material-symbols-outlined">event_available</span> Donation Drives
+        </a>
+      </nav>
+    </div>
+    <div class="sidebar-bottom">
+      <a class="nav-item logout" href="../../login/index.html">
+        <span class="material-symbols-outlined">logout</span> Log Out
+      </a>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ===== Top bar ===== -->
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <div class="crumbs">
+      <span class="crumb-bar"></span>
+      <span>Admin Portal /</span>
+      <strong>Account Approvals</strong>
+    </div>
+    <label class="search top">
+      <span class="material-symbols-outlined">search</span>
+      <input type="search" placeholder="Search facilities, drives, administrators...">
+    </label>
+    <button class="icon-btn bell" type="button" aria-label="Notifications">
+      <span class="material-symbols-outlined">notifications</span>
+      <span class="bell-dot"></span>
+    </button>
+    <a class="user-pill" href="#">
+      <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
+      <span>
+        <span class="user-name">System Administrator</span>
+        <span class="user-type">Root Ops</span>
+      </span>
+    </a>
+  </header>
+
+  <main class="page">
+    <div class="container">
+
+      <div class="page-head">
+        <div><h1 style="color:#22313A;font-size:30px;line-height:44px;font-weight:700">Account Approvals</h1><p>Review professional licenses, verify hospital or blood center employment credentials, and grant verified staff status under national blood safety regulations.</p></div>
+        <div class="actions"><button class="btn btn-light" type="button"><span class="material-symbols-outlined">download</span> Export Audit Log (CSV)</button><button class="btn btn-red" type="button"><span class="material-symbols-outlined">done_all</span> Batch Approve</button></div>
+      </div>
+
+      <section class="stats three">
+        <article class="kpi plain"><div class="kpi-top"><span class="label">Total Pending Approvals</span><span class="kpi-icon red"><span class="material-symbols-outlined">pending_actions</span></span></div><div class="kpi-value"><b>14</b><span class="pill pill-red">+4 today</span></div></article>
+        <article class="kpi plain"><div class="kpi-top"><span class="label">Verified This Month</span><span class="kpi-icon "><span class="material-symbols-outlined">verified_user</span></span></div><div class="kpi-value"><b>342</b><span class="pill">98.2% rate</span></div></article>
+        <article class="kpi plain"><div class="kpi-top"><span class="label">Flagged / Re-upload Req.</span><span class="kpi-icon red"><span class="material-symbols-outlined">flag</span></span></div><div class="kpi-value"><b class="red">5</b><span class="pill">Needs action</span></div></article>
+      </section>
+
+      <section class="card flush">
+        <div class="filter-bar" style="background:#FFFDFD;padding:20px">
+          <div class="filter-row"><div class="tabs dark"><button class="tab active" type="button">All Pending (14)</button><button class="tab" type="button"><span class="dot"></span>Urgent / Rare (5)</button><button class="tab" type="button">Flagged ID (3)</button><button class="tab" type="button">Recently Approved (48)</button></div></div>
+          <div class="filter-row" style="border:0;padding:0">
+            <label class="search" style="background:var(--white);outline:1px solid #E3E8EC;border-radius:7px"><span class="material-symbols-outlined">search</span><input type="search" placeholder="Search by account name, ID, email, PhilSys #..."></label>
+            <select class="select" aria-label="Role" style="background:#fff;outline:1px solid #E3E8EC"><option>Professional Role: All</option><option>Physician</option><option>Nurse</option><option>Medical Technologist</option><option>Phlebotomist</option><option>Blood Bank Administrator</option></select>
+            <select class="select" aria-label="Eligibility" style="background:#fff;outline:1px solid #E3E8EC"><option>Eligibility: All Tiers</option></select>
+            <select class="select" aria-label="Date range" style="background:#fff;outline:1px solid #E3E8EC"><option>Past 7 Days</option><option>Past 30 Days</option><option>All Time</option></select>
+          </div>
+        </div>
+        <div class="table-wrap"><table class="table approvals"><thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Staffs Identification</th><th>Hospital / Facility Affiliation</th><th>PRC License / Hospital Employee ID</th><th>PRC License Number</th><th>Submission Date</th><th>Approval Actions</th></tr></thead><tbody>
+<tr><td><input type="checkbox" aria-label="Select Dr. Carlos Reyes"></td><td><div class="acct"><span class="ini">CR</span><div><b>Dr. Carlos Reyes</b><small>• carlos.reyes.md@pgc.edu.ph</small><small>+63 (917) 112-9840 • Physician</small></div></div></td><td><span class="fac">Chong Hua Hospital</span></td><td><div class="doc"><span class="doc-thumb"><span class="material-symbols-outlined">badge</span></span><div><b>PRC Physician ID</b><span class="ocr"><span class="material-symbols-outlined">verified</span> OCR Match 100%</span><a href="#">Inspect</a></div></div></td><td><span class="lic"><i></i>0918472</span><small>Valid Until: 05/2028</small></td><td><b style="font-size:11px;font-weight:500">Nov 23, 2024</b><small>04:10 PM (18h ago)</small></td><td><div class="btn-row"><button class="btn btn-red" type="button">Approve &amp; Issue ID</button><button class="btn btn-icon" type="button" aria-label="View documents"><span class="material-symbols-outlined">visibility</span></button><button class="btn btn-icon" type="button" aria-label="Reject"><span class="material-symbols-outlined">close</span></button></div></td></tr>
+<tr><td><input type="checkbox" aria-label="Select Dr. Carlos Reyes"></td><td><div class="acct"><span class="ini">CR</span><div><b>Dr. Carlos Reyes</b><small>• carlos.reyes.md@pgc.edu.ph</small><small>+63 (917) 112-9840 • Medical Technologist</small></div></div></td><td><span class="fac">Philippine Red Cross – Cebu Chapter</span></td><td><div class="doc"><span class="doc-thumb"><span class="material-symbols-outlined">badge</span></span><div><b>PRC Physician ID</b><span class="ocr"><span class="material-symbols-outlined">verified</span> OCR Match 100%</span><a href="#">Inspect</a></div></div></td><td><span class="lic"><i></i>123655</span><small>Valid Until: 10/2028</small></td><td><b style="font-size:11px;font-weight:500">Nov 23, 2024</b><small>04:10 PM (18h ago)</small></td><td><div class="btn-row"><button class="btn btn-red" type="button">Approve &amp; Issue ID</button><button class="btn btn-icon" type="button" aria-label="View documents"><span class="material-symbols-outlined">visibility</span></button><button class="btn btn-icon" type="button" aria-label="Reject"><span class="material-symbols-outlined">close</span></button></div></td></tr>
+<tr><td><input type="checkbox" aria-label="Select Elena Gomez"></td><td><div class="acct"><span class="ini">EG</span><div><b>Elena Gomez</b><small>• e.gomez@manilahealth.gov</small><small>+63 (922) 890-1288 • Nurse</small></div></div></td><td><span class="fac">Cebu Doctors' University Hospital</span></td><td><div class="doc"><span class="doc-thumb"><span class="material-symbols-outlined">badge</span></span><div><b>PRC Medical ID</b><span class="ocr"><span class="material-symbols-outlined">verified</span> OCR Match 99.8%</span><a href="#">Inspect</a></div></div></td><td><span class="lic"><i></i>5119867</span><small>Valid Until: 12/2027</small></td><td><b style="font-size:11px;font-weight:500">Nov 24, 2024</b><small>07:15 AM (5h ago)</small></td><td><div class="btn-row"><button class="btn btn-red" type="button">Approve &amp; Issue ID</button><button class="btn btn-icon" type="button" aria-label="View documents"><span class="material-symbols-outlined">visibility</span></button><button class="btn btn-icon" type="button" aria-label="Reject"><span class="material-symbols-outlined">close</span></button></div></td></tr>
+<tr class="flagged"><td><input type="checkbox" aria-label="Select David Chen"></td><td><div class="acct"><span class="ini red">DC</span><div><b>David Chen</b><small>• david.chen@techglobal.com</small><small>+63 (919) 441-2900 • Phlebotomist</small></div></div></td><td><span class="fac">Perpetual Succour Hospital</span></td><td><div class="doc bad"><span class="doc-thumb"><span class="material-symbols-outlined">broken_image</span></span><div><b>DFA Passport</b><span class="ocr bad"><span class="material-symbols-outlined">error</span> Blurry Photo</span><a href="#">Re-Apply</a></div></div></td><td><span class="lic bad"><i></i>2364695</span><small>Valid Until: 05/2029</small></td><td><b style="font-size:11px;font-weight:500">Nov 23, 2024</b><small>06:22 PM (16h ago)</small></td><td><div class="btn-row"><button class="btn btn-light" type="button" style="color:#AD4936">Request Re-upload</button><button class="btn btn-light" type="button" style="color:#AD4936">Inspect</button></div></td></tr>
+<tr><td><input type="checkbox" aria-label="Select Dr. Carlos Reyes"></td><td><div class="acct"><span class="ini">CR</span><div><b>Dr. Carlos Reyes</b><small>• carlos.reyes.md@pgc.edu.ph</small><small>+63 (917) 112-9840 • Blood Bank Administrator</small></div></div></td><td><span class="fac">Vicente Sotto Memorial Medical Center</span></td><td><div class="doc"><span class="doc-thumb"><span class="material-symbols-outlined">badge</span></span><div><b>PRC Physician ID</b><span class="ocr"><span class="material-symbols-outlined">verified</span> OCR Match 100%</span><a href="#">Inspect</a></div></div></td><td><span class="lic"><i></i>0916172</span><small>Valid Until: 05/2030</small></td><td><b style="font-size:11px;font-weight:500">Nov 23, 2024</b><small>04:10 PM (18h ago)</small></td><td><div class="btn-row"><button class="btn btn-red" type="button">Approve &amp; Issue ID</button><button class="btn btn-icon" type="button" aria-label="View documents"><span class="material-symbols-outlined">visibility</span></button><button class="btn btn-icon" type="button" aria-label="Reject"><span class="material-symbols-outlined">close</span></button></div></td></tr>
+</tbody></table></div>
+        <div class="table-foot" style="background:#fff"><span>Showing <b>1 to 5</b> of <b>14</b> pending account approvals</span>
+          <div class="pager"><a class="page-btn" href="#" aria-label="Previous"><span class="material-symbols-outlined">chevron_left</span></a><a class="page-btn active" href="#">1</a><a class="page-btn" href="#">2</a><a class="page-btn" href="#">3</a><a class="page-btn" href="#" aria-label="Next"><span class="material-symbols-outlined">chevron_right</span></a></div></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Sidebar open / close
+    const body = document.body;
+    const menuBtn = document.getElementById('menuBtn');
+
+    function setSidebar(open) {
+      body.classList.toggle('sidebar-open', open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+    }
+
+    menuBtn.addEventListener('click', () => setSidebar(!body.classList.contains('sidebar-open')));
+    document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
+    document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
+  </script>
+
+</body>
+</html>
