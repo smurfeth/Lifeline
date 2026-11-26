@@ -10,8 +10,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- ===== Sidebar (opens with the menu button) ===== -->
+  <!-- ===== Sidebar ===== -->
   <aside class="sidebar" id="sidebar" aria-label="Main menu">
     <div class="sidebar-top">
       <div class="sidebar-brand">
@@ -20,30 +19,41 @@
           <div class="sidebar-name">LIFE<span>LINE</span></div>
           <div class="sidebar-tag">— Your Blood. <span>Their Hope</span> —</div>
         </div>
-        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
       </div>
       <div class="sidebar-label">Staff Operations</div>
       <nav class="sidebar-nav">
         <a class="nav-item active" href="../dashboard/index.html">
-          <span class="material-symbols-outlined">dashboard</span> Dashboard
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
         </a>
         <a class="nav-item" href="../donation-records/index.html">
-          <span class="material-symbols-outlined">description</span> Donation Records
+          <span class="material-symbols-outlined">description</span>
+          Donation Records
         </a>
         <a class="nav-item" href="../pending-reviews/index.html">
-          <span class="material-symbols-outlined">pending_actions</span> Pending Reviews
+          <span class="material-symbols-outlined">pending_actions</span>
+          Pending Reviews
         </a>
         <a class="nav-item" href="../donation-drives/index.html">
-          <span class="material-symbols-outlined">event_available</span> Donation Drives
+          <span class="material-symbols-outlined">event_available</span>
+          Donation Drives
         </a>
         <a class="nav-item" href="../facility-profile/index.html">
-          <span class="material-symbols-outlined">apartment</span> Facility Profile
+          <span class="material-symbols-outlined">apartment</span>
+          Facility Profile
         </a>
       </nav>
     </div>
     <div class="sidebar-bottom">
-      <a class="nav-item logout" href="../../login/index.html">
-        <span class="material-symbols-outlined">logout</span> Log Out
+      <a class="nav-item logout" id="logoutBtn" href="../../login/index.html">
+        <span class="material-symbols-outlined">logout</span>
+        Log Out
       </a>
     </div>
   </aside>
@@ -51,7 +61,13 @@
 
   <!-- ===== Top bar ===== -->
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
     <div class="crumbs">
       <span class="crumb-bar"></span>
       <span>Staff Portal /</span>
@@ -76,10 +92,11 @@
         <p class="notif-empty">Loading notifications...</p>
       </div>
     </div>
+
     <a class="user-pill" href="../facility-profile/index.html">
       <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
       <span>
-        <span class="user-name">Loading...</span>
+        <span class="user-name" id="navStaffName">Loading...</span>
         <span class="user-type">Clinical Staff</span>
       </span>
     </a>
@@ -87,237 +104,116 @@
 
   <main class="page">
     <div class="container">
-
       <!-- Welcome -->
       <section class="card hero">
         <div>
-          <div class="chips"><span class="pill ">Healthcare Facility • Transfusion Medicine Ward</span><span class="pill "><span class="dot"></span> Operational Active</span></div>
+          <div class="chips">
+            <span class="pill">Healthcare Facility &bull; Transfusion Medicine Ward</span>
+            <span class="pill"><span class="dot"></span> Operational Active</span>
+          </div>
           <h1>Clinical Operations &amp; Donor Triage</h1>
-          <p>Logged in as: <b>Staff Medical Officer</b> • Shift: 08:00 – 16:00</p>
+          <p>Logged in as: <b id="heroStaffName">Clinical Staff</b> &bull; Live Supabase Registry</p>
         </div>
         <div class="actions">
-          <button class="btn btn-primary" type="button"><span class="material-symbols-outlined">add</span> Log Walk-In Donation</button>
-          <a class="btn btn-light" href="../pending-reviews/index.html"><span class="material-symbols-outlined red">pending_actions</span> Review Pending Queue <span class="count">12</span></a>
+          <a class="btn btn-light" href="../pending-reviews/index.html">
+            <span class="material-symbols-outlined red">pending_actions</span>
+            Review Pending Queue
+            <span class="count" id="heroPendingCount">0</span>
+          </a>
         </div>
       </section>
 
-      <!-- KPI cards -->
+      <!-- Live KPI cards -->
       <section class="stats">
-        <article class="kpi"><span class="label">Total Facility Records</span><strong>1,842</strong><p class="green">+8.4% <span class="muted">vs previous 30 days</span></p></article>
-        <article class="kpi red"><span class="label">Pending Verification</span><strong class="danger-text">12 <span class="pill pill-red">Action Required</span></strong><p>Oldest waiting: 3h 40m &nbsp; <a class="link-red" href="../pending-reviews/index.html">Batch review →</a></p></article>
-        <article class="kpi green"><span class="label">Approved Collections</span><strong class="green">28</strong><p>Scheduled for this week</p></article>
-        <article class="kpi brand"><span class="label">Completed (This Month)</span><strong>340 <small>Units</small></strong><p>Vol: 153,000 mL processed &nbsp; <b class="green">94% Quota</b></p></article>
+        <article class="kpi">
+          <span class="label">Total Facility Records</span>
+          <strong id="kpiTotalRecords">0</strong>
+          <p class="green" id="kpiActiveDrives">0 active donation drives</p>
+        </article>
+        <article class="kpi red">
+          <span class="label">Pending Verification</span>
+          <strong class="danger-text"><span id="kpiPendingCount">0</span> <span class="pill pill-red">Action Required</span></strong>
+          <p>Awaiting clinical screening &nbsp; <a class="link-red" href="../pending-reviews/index.html">Review queue &rarr;</a></p>
+        </article>
+        <article class="kpi green">
+          <span class="label">Approved Collections</span>
+          <strong class="green" id="kpiApprovedCount">0</strong>
+          <p>Cleared for phlebotomy</p>
+        </article>
+        <article class="kpi brand">
+          <span class="label">Completed Donations</span>
+          <strong><span id="kpiCompletedCount">0</span> <small>Units</small></strong>
+          <p id="kpiCompletedMl">0 mL processed</p>
+        </article>
       </section>
 
-      <!-- Verification queue -->
+      <!-- Live Verification Queue -->
       <section class="card flush">
         <div class="card-head">
-          <div><h2>Submissions Requiring Immediate Clinical Verification</h2><p>Cross-check donor deferral screening and vitals prior to phlebotomy authorization.</p></div>
-          <div class="tabs"><button class="tab active" type="button">All</button><button class="tab" type="button">Pending (3)</button><button class="tab" type="button">Urgent Call</button></div>
+          <div>
+            <h2>Submissions Requiring Immediate Clinical Verification</h2>
+            <p>Cross-check donor deferral screening and vitals prior to phlebotomy authorization.</p>
+          </div>
+          <div class="tabs">
+            <button class="tab active" type="button" data-queue-filter="all" id="tabQueueAll">All (0)</button>
+            <button class="tab" type="button" data-queue-filter="pending" id="tabQueuePending">Pending (0)</button>
+            <button class="tab" type="button" data-queue-filter="urgent" id="tabQueueUrgent">Urgent / Rare (0)</button>
+          </div>
         </div>
-        <div class="table-wrap"><table class="table"><thead><tr><th>Record ID &amp; Donor</th><th>Blood Group</th><th>Schedule Window</th><th>Review Status</th><th class=right>Clinical Action</th></tr></thead><tbody>
-<tr><td><div class="person"><span class="ini red">MV</span><div><b>Marcus Vance</b><small>Record #LL-8821 • Regular Donor</small></div></div></td><td><span class="bloodtype ">O+</span></td><td><b>Nov 30, 2024</b><small>10:00 AM (Bed A-02)</small></td><td><span class="pill pill-amber">PENDING REVIEW</span></td><td class="right"><a class="btn btn-primary btn-sm" href="../pending-reviews/index.html">Review &amp; Verify</a></td></tr>
-<tr><td><div class="person"><span class="ini ">EG</span><div><b>Elena Gomez</b><small>Record #LL-8824 • First Time</small></div></div></td><td><span class="bloodtype ">A-</span></td><td><b>Nov 29, 2024</b><small>11:30 AM (Bed B-01)</small></td><td><span class="pill pill-amber">PENDING REVIEW</span></td><td class="right"><a class="btn btn-primary btn-sm" href="../pending-reviews/index.html">Review &amp; Verify</a></td></tr>
-<tr><td><div class="person"><span class="ini ">DC</span><div><b>David Chen</b><small>Record #LL-8830 • Apheresis Unit</small></div></div></td><td><span class="bloodtype ">B+</span></td><td><b>Dec 01, 2024</b><small>02:00 PM (Apheresis 1)</small></td><td><span class="pill pill-amber">PENDING REVIEW</span></td><td class="right"><a class="btn btn-primary btn-sm" href="../pending-reviews/index.html">Review &amp; Verify</a></td></tr>
-</tbody></table></div>
-        <div class="table-foot"><span>Showing 3 of 12 clinical submissions needing protocol review</span><a class="link-red" href="../donation-records/index.html">Access Comprehensive Donation Records ›</a></div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Record ID &amp; Donor</th>
+                <th>Blood Group</th>
+                <th>Schedule Window</th>
+                <th>Review Status</th>
+                <th class="right">Clinical Action</th>
+              </tr>
+            </thead>
+            <tbody id="verificationTableBody">
+              <tr>
+                <td colspan="5" style="text-align:center; padding: 24px; color: #64748B;">
+                  Loading active clinical queue...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-foot">
+          <span id="tableFootSummary">Loading summary...</span>
+          <a class="link-red" href="../donation-records/index.html">Access Comprehensive Donation Records &gt;</a>
+        </div>
       </section>
 
+      <!-- Live Storage Reserves -->
       <section class="card flush">
-        <div class="card-head"><h2 class="with-icon"><span class="material-symbols-outlined red">inventory_2</span> Storage Reserves</h2><span class="small muted">Freezer Vault #4</span></div>
-        <div class="reserve"><div class="reserve-row"><div class="person"><span class="bloodtype fill">O-</span><div><b>Universal Donor (O-)</b><small class="danger-text">Critical Shortage (14 Units)</small></div></div><span class="pill pill-red">Request Call</span></div><div class="bar crit"><span style="width: 20%"></span></div></div>
-        <div class="reserve"><div class="reserve-row"><div class="person"><span class="bloodtype ">O+</span><div><b>Positive Universal (O+)</b><small class="">Adequate (84 Units)</small></div></div><small class="muted">Optimal</small></div><div class="bar green"><span style="width: 70%"></span></div></div>
-        <div class="reserve"><div class="reserve-row"><div class="person"><span class="bloodtype ">A+</span><div><b>Type A Positive</b><small class="">Normal (62 Units)</small></div></div><small class="muted">Steady</small></div><div class="bar "><span style="width: 56%"></span></div></div>
-        <div class="reserve"><div class="reserve-row"><div class="person"><span class="bloodtype fill">PLT</span><div><b>Platelet Concentrates</b><small class="danger-text">Urgent Call (6 Units left)</small></div></div><span class="pill pill-red">Alert On-Call</span></div><div class="bar crit"><span style="width: 16%"></span></div></div>
-        <div class="callout"><span>Next Courier Pickup</span><b class="red">14:30 PM (Dispatch #D-12)</b></div>
+        <div class="card-head">
+          <h2 class="with-icon"><span class="material-symbols-outlined red">inventory_2</span> Storage Reserves</h2>
+          <span class="small muted">Calculated from Completed Units</span>
+        </div>
+        <div id="storageReservesList">
+          <p class="small muted" style="padding: 16px;">Calculating blood unit inventory...</p>
+        </div>
       </section>
     </div>
   </main>
 
-  <script src="../../supabaseClient.js"></script>
   <script>
-    // Sidebar open / close
     const body = document.body;
     const menuBtn = document.getElementById('menuBtn');
-
     function setSidebar(open) {
       body.classList.toggle('sidebar-open', open);
       menuBtn.setAttribute('aria-expanded', String(open));
     }
-
     menuBtn.addEventListener('click', () => setSidebar(!body.classList.contains('sidebar-open')));
     document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
-
-    // Wire logout and populate staff details
-    document.addEventListener('DOMContentLoaded', async () => {
-      // Load logged-in staff profile
-      let staffInfo = null;
-      if (typeof populateStaffUI === 'function') {
-        staffInfo = await populateStaffUI();
-      }
-
-      const logoutBtn = document.querySelector('.nav-item.logout');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          signOutUser();
-        });
-      }
-
-      // ===================================================================
-      // STAFF NOTIFICATION SYSTEM — Bell icon dropdown
-      // ===================================================================
-      const notifBtn = document.getElementById('notifBtn');
-      const notifPanel = document.getElementById('notifPanel');
-      const bellDot = document.getElementById('bellDot');
-      const notifList = document.getElementById('notifList');
-      const markAllReadBtn = document.getElementById('markAllRead');
-
-      if (notifBtn && notifPanel) {
-        notifBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const isOpen = notifPanel.style.display !== 'none';
-          notifPanel.style.display = isOpen ? 'none' : 'block';
-        });
-
-        document.addEventListener('click', (e) => {
-          if (!notifPanel.contains(e.target) && !notifBtn.contains(e.target)) {
-            notifPanel.style.display = 'none';
-          }
-        });
-      }
-
-      async function buildStaffNotifications() {
-        const notifications = [];
-
-        // 1. Check Supabase for pending donation records
-        let pendingCount = 0;
-        let latestPending = null;
-        const token = localStorage.getItem('lifeline_token');
-        if (token && typeof SUPABASE_URL !== 'undefined') {
-          try {
-            const res = await fetch(`${SUPABASE_URL}/rest/v1/donation_records?status=eq.Pending%20Review&order=created_at.desc`, {
-              headers: getHeaders(token)
-            });
-            if (res.ok) {
-              const rows = await res.json();
-              if (Array.isArray(rows)) {
-                pendingCount = rows.length;
-                latestPending = rows[0] || null;
-              }
-            }
-          } catch (err) {
-            console.warn('Could not fetch pending reviews for notifications:', err);
-          }
-        }
-
-        if (pendingCount > 0) {
-          notifications.push({
-            icon: 'pending_actions',
-            color: 'amber',
-            title: `${pendingCount} Pending Donor Verification${pendingCount > 1 ? 's' : ''}`,
-            desc: latestPending
-              ? `Latest: Record #${latestPending.record_code || 'New'} (${latestPending.blood_type || 'O+'}) awaiting clinical screening.`
-              : 'Donor intake submissions are waiting in the verification queue.',
-            time: 'Action Required',
-            href: '../pending-reviews/index.html',
-            unread: true
-          });
-        } else {
-          notifications.push({
-            icon: 'pending_actions',
-            color: 'amber',
-            title: 'Pending Verification Queue',
-            desc: 'Review donor deferral screening and vitals prior to phlebotomy authorization.',
-            time: 'Triage Queue',
-            href: '../pending-reviews/index.html',
-            unread: true
-          });
-        }
-
-        // 2. Critical Blood Reserve Alerts
-        notifications.push({
-          icon: 'warning',
-          color: 'red',
-          title: 'Critical Shortage: O- & Platelets',
-          desc: 'O- Universal Donor (14 Units) and Platelet Concentrates (6 Units) need urgent replenishment.',
-          time: 'Freezer Vault #4',
-          href: '../donation-drives/index.html',
-          unread: true
-        });
-
-        // 3. Courier / Dispatch Schedule
-        notifications.push({
-          icon: 'local_shipping',
-          color: 'blue',
-          title: 'Next Courier Pickup at 14:30 PM',
-          desc: 'Dispatch #D-12 scheduled. Ensure approved units are labeled and ready.',
-          time: 'Scheduled Dispatch',
-          href: '../donation-records/index.html',
-          unread: false
-        });
-
-        // 4. Staff Shift / Facility Welcome
-        const facilityName = staffInfo?.facility || 'St. Jude Regional Blood Bank';
-        notifications.push({
-          icon: 'verified_user',
-          color: 'green',
-          title: 'Clinical Shift Active',
-          desc: `Connected to ${facilityName}. All phlebotomy stations operational.`,
-          time: '08:00 – 16:00 Shift',
-          href: '../facility-profile/index.html',
-          unread: false
-        });
-
-        return notifications;
-      }
-
-      let cachedStaffNotifs = [];
-
-      async function renderStaffNotifications() {
-        if (!notifList) return;
-        cachedStaffNotifs = await buildStaffNotifications();
-        const readSet = JSON.parse(localStorage.getItem('lifeline_staff_notif_read') || '[]');
-
-        const unreadCount = cachedStaffNotifs.filter((n, i) => n.unread && !readSet.includes(i)).length;
-        if (bellDot) {
-          bellDot.style.display = unreadCount > 0 ? 'block' : 'none';
-        }
-
-        notifList.innerHTML = cachedStaffNotifs.map((n, i) => `
-          <div class="notif-item ${n.unread && !readSet.includes(i) ? 'unread' : ''}" data-href="${n.href || ''}">
-            <div class="notif-icon ${n.color}">
-              <span class="material-symbols-outlined">${n.icon}</span>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">${n.title}</div>
-              <div class="notif-desc">${n.desc}</div>
-              <div class="notif-time">${n.time}</div>
-            </div>
-          </div>
-        `).join('');
-
-        notifList.querySelectorAll('.notif-item[data-href]').forEach(item => {
-          item.addEventListener('click', () => {
-            const href = item.getAttribute('data-href');
-            if (href) window.location.href = href;
-          });
-        });
-      }
-
-      await renderStaffNotifications();
-
-      if (markAllReadBtn) {
-        markAllReadBtn.addEventListener('click', () => {
-          const allIndices = cachedStaffNotifs.map((_, i) => i);
-          localStorage.setItem('lifeline_staff_notif_read', JSON.stringify(allIndices));
-          renderStaffNotifications();
-        });
-      }
-    });
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module" src="../../../js/toast.js"></script>
+  <script type="module" src="../../../js/staffDashboard.js"></script>
 </body>
 </html>
