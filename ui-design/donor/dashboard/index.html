@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <!-- ===== Sidebar (opens with the menu button) ===== -->
   <aside class="sidebar" id="sidebar" aria-label="Main menu">
     <div class="sidebar-top">
@@ -19,13 +20,9 @@
           <div class="sidebar-name">LIFE<span>LINE</span></div>
           <div class="sidebar-tag">— Your Blood. <span>Their Hope</span> —</div>
         </div>
-        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <line x1="18" y1="6" x2="6" y2="18"/>
-            <line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
+
       <nav class="sidebar-nav">
         <a class="nav-item active" href="index.html">
           <span class="material-symbols-outlined">dashboard</span> Dashboard
@@ -44,8 +41,9 @@
         </a>
       </nav>
     </div>
+
     <div class="sidebar-bottom">
-      <a class="nav-item logout" id="logoutBtn" href="../../login/index.html">
+      <a class="nav-item logout" href="../../login/index.html">
         <span class="material-symbols-outlined">logout</span> Log Out
       </a>
     </div>
@@ -54,45 +52,55 @@
 
   <!-- ===== Top bar ===== -->
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-        <line x1="3" y1="6" x2="21" y2="6"/>
-        <line x1="3" y1="12" x2="21" y2="12"/>
-        <line x1="3" y1="18" x2="21" y2="18"/>
-      </svg>
-    </button>
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+
     <div class="crumbs">
       <span class="crumb-bar"></span>
       <span>Donor Portal /</span>
       <strong>Overview</strong>
     </div>
+
     <label class="search">
       <span class="material-symbols-outlined">search</span>
       <input type="search" placeholder="Search donation slots...">
     </label>
-    <button class="icon-btn bell" type="button" aria-label="Notifications">
+
+    <button class="icon-btn bell" type="button" aria-label="Notifications" id="notifBtn">
       <span class="material-symbols-outlined">notifications</span>
-      <span class="bell-dot"></span>
+      <span class="bell-dot" id="bellDot"></span>
     </button>
+
+    <!-- Notification Dropdown Panel -->
+    <div class="notif-panel" id="notifPanel" style="display:none;">
+      <div class="notif-header">
+        <h3>Notifications</h3>
+        <button type="button" id="markAllRead" class="notif-clear">Mark all read</button>
+      </div>
+      <div class="notif-list" id="notifList">
+        <p class="notif-empty">Loading notifications...</p>
+      </div>
+    </div>
+
     <a class="user-pill" href="../profile/index.html">
       <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
       <span>
-        <span class="user-name" id="nav-donor-name">Loading...</span>
-        <span class="user-type" id="nav-blood-type">Donor</span>
+        <span class="user-name">Loading...</span>
+        <span class="user-type">Donor</span>
       </span>
     </a>
   </header>
 
   <main class="page">
     <div class="container">
+
       <!-- ===== Welcome ===== -->
       <section class="welcome">
         <div>
           <div class="welcome-meta">
             <span class="pill-green"><span class="dot"></span> Verified Donor</span>
-            <span class="welcome-id" id="welcome-donor-id">ID #DN-00000</span>
+            <span class="welcome-id">• ID #...</span>
           </div>
-          <h1>Welcome back, <span class="red user-first-name" id="welcome-first-name">Donor!</span></h1>
+          <h1>Welcome back, <span class="red user-first-name">Donor!</span></h1>
           <p id="welcomeEligibilityText">You are eligible to donate today! Your commitment sustains real lives.</p>
         </div>
         <div class="welcome-actions">
@@ -111,13 +119,13 @@
           <div class="stat-head">
             <div>
               <span class="label">Blood Category</span>
-              <div class="stat-big red"><b id="stat-blood-type">—</b><small id="stat-blood-rh">Pending</small></div>
+              <div class="stat-big red"><b>O+</b><small>Positive</small></div>
             </div>
             <span class="circle c-red"><span class="material-symbols-outlined">water_drop</span></span>
           </div>
           <div class="stat-note">
-            <div class="note-title red"><span class="material-symbols-outlined">verified</span> Verified Donor Registry</div>
-            <p id="stat-blood-note">Crossmatched upon clinical phlebotomy screening.</p>
+            <div class="note-title red"><span class="material-symbols-outlined">verified</span> Universal Red Cell Benefactor</div>
+            <p>Compatible with O+, A+, B+, and AB+ recipients.</p>
           </div>
         </article>
 
@@ -145,10 +153,10 @@
           </div>
           <div class="stat-foot col">
             <div class="row-between">
-              <span class="muted">Account Status</span>
-              <span class="green">Verified Active</span>
+              <span class="muted">Iron / Hemoglobin</span>
+              <span class="green">15.4 g/dL (Optimal)</span>
             </div>
-            <div class="bar"><span style="width: 100%"></span></div>
+            <div class="bar"><span style="width: 75%"></span></div>
           </div>
         </article>
 
@@ -161,44 +169,44 @@
             <span class="circle c-red-soft"><span class="material-symbols-outlined">event</span></span>
           </div>
           <div class="stat-foot">
-            <span class="red days" id="statNextDays">
-              <span class="material-symbols-outlined green" style="color:#059669;">check_circle</span> Immediate Clearance
-            </span>
-            <a class="underline-link" href="../submit-donation/index.html">Reserve Spot</a>
+            <span class="red days" id="statNextDays"><span class="material-symbols-outlined green" style="color:#059669;">check_circle</span> Immediate Clearance</span>
+            <a class="underline-link" href="../donation-drives/index.html">Reserve Spot</a>
           </div>
         </article>
       </section>
 
       <!-- ===== Main + aside ===== -->
       <div class="layout">
+
         <div class="col-main">
+
           <!-- Pipeline -->
-          <section class="card pad" id="pipelineSection">
+          <section class="card pad">
             <div class="card-head">
               <div>
-                <h2>Active Donation Pipeline <span class="pill-amber" id="pipelineBadge">No Active Request</span></h2>
-                <p class="muted" id="pipelineSubtitle">Submit a blood donation request to start tracking your appointment pipeline.</p>
+                <h2>Active Donation Pipeline <span class="pill-amber">Record #LL-8821</span></h2>
+                <p class="muted">Tracking unit scheduled at St. Jude Regional Blood Bank for Nov 30, 2024.</p>
               </div>
-              <a class="link-red" href="../submit-donation/index.html">New Request</a>
+              <a class="link-red" href="#">View Details</a>
             </div>
 
             <ol class="timeline">
-              <li class="step" id="step-1">
+              <li class="step done">
                 <span class="step-dot"><span class="material-symbols-outlined">check</span></span>
                 <strong>1. Submitted</strong>
-                <small id="step-1-sub">Awaiting booking</small>
+                <small>Nov 14 • Online portal</small>
               </li>
-              <li class="step" id="step-2">
+              <li class="step active">
                 <span class="step-dot"><span class="material-symbols-outlined">hourglass_top</span></span>
                 <strong>2. Staff Screening</strong>
-                <small id="step-2-sub">In verification queue</small>
+                <small>In verification queue</small>
               </li>
-              <li class="step" id="step-3">
+              <li class="step">
                 <span class="step-dot"><span class="material-symbols-outlined">water_drop</span></span>
                 <strong>3. Collection</strong>
                 <small>Estimated 450 mL</small>
               </li>
-              <li class="step" id="step-4">
+              <li class="step">
                 <span class="step-dot"><span class="material-symbols-outlined">local_hospital</span></span>
                 <strong>4. Patient Match</strong>
                 <small>Clinical Dispatch</small>
@@ -208,8 +216,9 @@
             <div class="callout">
               <span class="callout-text">
                 <span class="material-symbols-outlined amber-icon">info</span>
-                Please bring a valid government-issued photo ID on your scheduled donation date.
+                Your pre-screening health intake form is approved. Please bring your photo ID.
               </span>
+              <a class="link-danger" href="#">Cancel Slot</a>
             </div>
           </section>
 
@@ -218,11 +227,65 @@
             <div class="card-head">
               <div>
                 <h2>Donation Submissions &amp; History</h2>
-                <p class="muted">Authenticated blood records &amp; appointment requests.</p>
+                <p class="muted">Authenticated blood records &amp; clinical laboratory receipts.</p>
+              </div>
+              <div class="chips">
+                <button class="chip-btn" type="button">Filter Records</button>
+                <button class="chip-btn" type="button">Export CSV</button>
               </div>
             </div>
-            <div class="records" id="recordsContainer">
-              <p class="muted" style="padding: 12px 0;">Loading your donation records...</p>
+
+            <div class="records">
+              <article class="record">
+                <span class="rec-icon amber"><span class="material-symbols-outlined">pending_actions</span></span>
+                <div class="rec-body">
+                  <div class="rec-title">Record #LL-8821 <span class="pill-amber">Pending Review</span></div>
+                  <div class="rec-meta">St. Jude Blood Bank <i>•</i> Target Date: Nov 30, 2024 <i>•</i> <b class="red">Whole Blood</b></div>
+                </div>
+                <div class="rec-actions">
+                  <a class="btn btn-sm btn-light" href="#">View Intake</a>
+                  <a class="btn btn-sm btn-light danger" href="#">Cancel</a>
+                </div>
+              </article>
+
+              <article class="record">
+                <span class="rec-icon green"><span class="material-symbols-outlined">check_circle</span></span>
+                <div class="rec-body">
+                  <div class="rec-title">Record #LL-7940 <span class="pill-green-soft">Completed • 450 mL</span></div>
+                  <div class="rec-meta">Red Cross Mobile Drive <i>•</i> Completed: Oct 14, 2024 <i>•</i> Unit #RC-00923</div>
+                </div>
+                <div class="rec-actions">
+                  <a class="btn btn-sm btn-primary" href="#">
+                    <span class="material-symbols-outlined">workspace_premium</span> Certificate
+                  </a>
+                </div>
+              </article>
+
+              <article class="record">
+                <span class="rec-icon green"><span class="material-symbols-outlined">check_circle</span></span>
+                <div class="rec-body">
+                  <div class="rec-title">Record #LL-6211 <span class="pill-green-soft">Completed • 450 mL</span></div>
+                  <div class="rec-meta">City Health Center <i>•</i> Completed: Jul 10, 2024 <i>•</i> Unit #CH-88419</div>
+                </div>
+                <div class="rec-actions">
+                  <a class="btn btn-sm btn-light" href="#">
+                    <span class="material-symbols-outlined">description</span> Lab Report
+                  </a>
+                </div>
+              </article>
+
+              <article class="record">
+                <span class="rec-icon green"><span class="material-symbols-outlined">check_circle</span></span>
+                <div class="rec-body">
+                  <div class="rec-title">Record #LL-5102 <span class="pill-green-soft">Completed • 450 mL</span></div>
+                  <div class="rec-meta">St. Jude Regional Blood Bank <i>•</i> Completed: Mar 22, 2024</div>
+                </div>
+                <div class="rec-actions">
+                  <a class="btn btn-sm btn-light" href="#">
+                    <span class="material-symbols-outlined">workspace_premium</span> Certificate
+                  </a>
+                </div>
+              </article>
             </div>
           </section>
 
@@ -232,211 +295,328 @@
               <span class="circle c-red-soft big"><span class="material-symbols-outlined">military_tech</span></span>
               <div>
                 <span class="eyebrow">Donor Milestone Badge</span>
-                <h2 id="milestoneTitle">New Lifesaver</h2>
-                <p class="muted" id="milestoneDesc">Complete your first donation to earn the Bronze Lifesaver badge. <span class="red">Your Blood. Their Hope.</span></p>
+                <h2>Loading badge...</h2>
+                <p class="muted">Calculating your milestone progress... <span class="red">Your Blood. Their Hope.</span></p>
               </div>
             </div>
             <div class="milestone-right">
               <div class="milestone-text">
-                <strong id="milestoneProgress">0 / 1</strong>
+                <strong>0 / 1</strong>
                 <small>Milestone target</small>
               </div>
-              <span class="ring" aria-hidden="true"></span>
+              <span class="ring" aria-hidden="true" style="background: conic-gradient(var(--red) 0%, var(--chip) 0);"></span>
             </div>
           </section>
         </div>
 
         <aside class="col-side">
+
           <!-- Checklist -->
           <section class="card pad">
             <h2 class="with-icon"><span class="material-symbols-outlined green">checklist</span> Donation Readiness Checklist</h2>
             <p class="small muted">Pre-donation guidelines — <span class="red">Your Blood. Their Hope.</span></p>
             <ul class="checks">
               <li><span class="material-symbols-outlined green">check_circle</span> Drink extra 16 oz. of water before arrival</li>
-              <li><span class="material-symbols-outlined green">check_circle</span> Eat an iron-rich meal 2–3 hours prior</li>
+              <li><span class="material-symbols-outlined green">check_circle</span> Eat an iron-rich meal 2-3 hours prior</li>
               <li><span class="material-symbols-outlined green">check_circle</span> Bring Government-issued Photo ID</li>
-              <li><span class="material-symbols-outlined green">check_circle</span> Avoid strenuous exercise 4 hours post-donation</li>
+              <li><span class="material-symbols-outlined green">check_circle</span> Avoid strenuous exercise 4 hours post donation</li>
             </ul>
           </section>
 
           <!-- Drives -->
           <section class="card pad">
             <div class="card-head center">
-              <h2 class="with-icon"><span class="material-symbols-outlined red">location_on</span> Accredited Facilities</h2>
-              <a class="link-red" href="../submit-donation/index.html">Book Now</a>
+              <h2 class="with-icon"><span class="material-symbols-outlined red">location_on</span> Drives Near You</h2>
+              <a class="link-red" href="../donation-drives/index.html">View All</a>
             </div>
-            <div id="facilitiesList">
-              <p class="small muted">Loading accredited facilities...</p>
+
+            <article class="drive">
+              <div class="drive-top">
+                <div>
+                  <strong>Metro University Blood Crusade</strong>
+                  <p class="small muted">Partner: City General Hospital</p>
+                </div>
+                <span class="tag urgent">Urgent O+</span>
+              </div>
+              <p class="drive-line"><span class="material-symbols-outlined">calendar_today</span> Nov 25, 2024 • 9:00 AM - 4:00 PM</p>
+              <p class="drive-line"><span class="material-symbols-outlined">location_on</span> University Student Gym, Hall B</p>
+              <a class="btn btn-block btn-white" href="#">Book Slot</a>
+            </article>
+
+            <article class="drive">
+              <div class="drive-top">
+                <div>
+                  <strong>Civic Center Holiday Drive</strong>
+                  <p class="small muted">Partner: St. Jude Regional</p>
+                </div>
+                <span class="tag open">Open</span>
+              </div>
+              <p class="drive-line"><span class="material-symbols-outlined">calendar_today</span> Dec 02, 2024 • 8:00 AM - 3:00 PM</p>
+              <p class="drive-line"><span class="material-symbols-outlined">location_on</span> Downtown Plaza Grand Ballroom</p>
+              <a class="btn btn-block btn-white" href="#">Book Slot</a>
+            </article>
+
+            <div class="map">
+              <span class="material-symbols-outlined red">location_on</span>
+              <strong>Interactive Drive Locator</strong>
+              <span class="small">Explore 14 mobile centers within 10 miles</span>
             </div>
           </section>
         </aside>
+
       </div>
     </div>
   </main>
 
-  <!-- Sidebar script -->
+  <script src="../../supabaseClient.js"></script>
   <script>
+    // Sidebar open / close
     const body = document.body;
     const menuBtn = document.getElementById('menuBtn');
+
     function setSidebar(open) {
       body.classList.toggle('sidebar-open', open);
       menuBtn.setAttribute('aria-expanded', String(open));
     }
+
     menuBtn.addEventListener('click', () => setSidebar(!body.classList.contains('sidebar-open')));
     document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
-  </script>
 
-  <!-- Official Supabase SDK & Live Dashboard Data -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script type="module">
-    import { supabase } from '../../../js/supabaseClient.js';
-
+    // Load Real User Data from Supabase if logged in
     document.addEventListener('DOMContentLoaded', async () => {
-      // 1. Verify active Supabase Auth session
-      const { data: { user }, error: authError } = await supabase.auth.getUser();
-      if (authError || !user) {
-        window.location.href = '../../login/index.html';
-        return;
-      }
+      const profile = await populateDonorUI();
+      if (!profile) return;
 
-      // 2. Fetch logged-in user's profile from public.profiles
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
-      const fullName = profile?.full_name || user.user_metadata?.full_name || user.email.split('@')[0];
-      const firstName = fullName.split(' ')[0];
-      const bloodType = profile?.blood_type || user.user_metadata?.blood_type || null;
-      const shortId = `#DN-${user.id.slice(0, 5).toUpperCase()}`;
-
-      // Update Header & Welcome Banner
-      document.getElementById('nav-donor-name').textContent = fullName;
-      document.getElementById('nav-blood-type').textContent = bloodType ? `Blood Type ${bloodType}` : 'Donor';
-      document.getElementById('welcome-donor-id').textContent = `ID ${shortId}`;
-      document.getElementById('welcome-first-name').textContent = `${firstName}!`;
-
-      // Update Stat Card 1: Blood Type
-      if (bloodType) {
-        document.getElementById('stat-blood-type').textContent = bloodType;
-        document.getElementById('stat-blood-rh').textContent = bloodType.includes('-') ? 'Negative' : 'Positive';
-        document.getElementById('stat-blood-note').textContent = `Registered blood type (${bloodType}) verified on profile.`;
-      } else {
-        document.getElementById('stat-blood-type').textContent = 'TBD';
-        document.getElementById('stat-blood-rh').textContent = 'Unscreened';
-      }
-
-      // 3. Fetch hospitals map so we can show hospital names on donation records
-      const { data: hospitals } = await supabase.from('hospitals').select('*');
-      const hospitalMap = {};
-      if (hospitals) {
-        hospitals.forEach((h) => { hospitalMap[h.id] = h; });
-
-        // Populate sidebar Accredited Facilities list
-        const facilitiesList = document.getElementById('facilitiesList');
-        if (facilitiesList && hospitals.length > 0) {
-          facilitiesList.innerHTML = hospitals.slice(0, 2).map((h) => `
-            <article class="drive">
-              <div class="drive-top">
-                <div>
-                  <strong>${h.name}</strong>
-                  <p class="small muted">${h.location || h.city || 'Accredited Blood Bank'}</p>
-                </div>
-                <span class="tag open">Open</span>
-              </div>
-              <a class="btn btn-block btn-white" href="../submit-donation/index.html">Book Slot</a>
-            </article>
-          `).join('');
+      // Welcome subtitle (56-Day Medical Countdown)
+      const welcomeP = document.getElementById('welcomeEligibilityText') || document.querySelector('.welcome p');
+      if (welcomeP) {
+        if (profile.isEligibleToday) {
+          welcomeP.innerHTML = 'You are eligible to donate today! Your commitment sustains real lives.';
+        } else {
+          welcomeP.innerHTML = `You are eligible to donate again in <span class="red">${profile.daysRemaining} days</span> (${profile.nextEligibleDate}). Your commitment sustains real lives.`;
         }
       }
 
-      // 4. Fetch this donor's real records from public.donation_records
-      const { data: records } = await supabase
-        .from('donation_records')
-        .select('*')
-        .eq('donor_id', user.id)
-        .order('created_at', { ascending: false });
+      // Stats cards
+      const statCards = document.querySelectorAll('.stats .card.stat');
+      if (statCards.length >= 4) {
+        // Card 2: Lifetime volume & pending count
+        const volB = document.getElementById('statVolCount') || statCards[1].querySelector('.stat-big b');
+        if (volB) volB.textContent = profile.totalDonations;
+        const pendingSpan = document.getElementById('statPendingCount');
+        if (pendingSpan) pendingSpan.innerHTML = `<span class="dot amber"></span> ${profile.pendingDonations || 0} pending review`;
+        const volTag = document.getElementById('statVolMl') || statCards[1].querySelector('.stat-foot .tag');
+        if (volTag) volTag.textContent = `${profile.totalMl} mL Total`;
 
-      const allRecords = records || [];
-      const completed = allRecords.filter((r) => (r.status || '').toLowerCase() === 'completed');
-      const pending = allRecords.filter((r) => (r.status || '').toLowerCase() === 'pending');
-
-      // Update Stat Card 2: Lifetime Volume
-      document.getElementById('statVolCount').textContent = completed.length;
-      document.getElementById('statPendingCount').innerHTML = `<span class="dot amber"></span> ${pending.length} pending review`;
-      document.getElementById('statVolMl').textContent = `${completed.length * 450} mL Total`;
-
-      // Update Milestone Card
-      if (completed.length >= 5) {
-        document.getElementById('milestoneTitle').textContent = 'Life Guardian — Gold Tier';
-        document.getElementById('milestoneProgress').textContent = `${completed.length} / 10`;
-      } else if (completed.length >= 1) {
-        document.getElementById('milestoneTitle').textContent = 'Lifesaver — Bronze Shield';
-        document.getElementById('milestoneProgress').textContent = `${completed.length} / 5`;
-      }
-
-      // Update Active Donation Pipeline with latest pending/active record
-      const activeRec = pending[0] || allRecords[0];
-      if (activeRec) {
-        const hospName = hospitalMap[activeRec.hospital_id]?.name || 'Accredited Blood Bank';
-        const recCode = `#LL-${activeRec.id.slice(0, 4).toUpperCase()}`;
-        const status = (activeRec.status || 'pending').toLowerCase();
-
-        document.getElementById('pipelineBadge').textContent = `Record ${recCode}`;
-        document.getElementById('pipelineSubtitle').textContent = `Tracking unit scheduled at ${hospName} for ${activeRec.preferred_date}.`;
-
-        document.getElementById('step-1').classList.add('done');
-        document.getElementById('step-1-sub').textContent = activeRec.preferred_date;
-
-        if (status === 'pending') {
-          document.getElementById('step-2').classList.add('active');
-        } else if (status === 'completed') {
-          document.getElementById('step-2').classList.add('done');
-          document.getElementById('step-3').classList.add('done');
-          document.getElementById('step-4').classList.add('done');
+        // Card 4: Next Eligible Date
+        const nextDateDiv = document.getElementById('statNextDate') || statCards[3].querySelector('.stat-mid');
+        if (nextDateDiv) nextDateDiv.textContent = profile.nextEligibleDate;
+        const daysSpan = document.getElementById('statNextDays') || statCards[3].querySelector('.days');
+        if (daysSpan) {
+          if (profile.isEligibleToday) {
+            daysSpan.innerHTML = `<span class="material-symbols-outlined" style="color:#059669;">check_circle</span> Immediate Clearance`;
+          } else {
+            daysSpan.innerHTML = `<span class="material-symbols-outlined">schedule</span> ${profile.daysRemaining} Days Remaining`;
+          }
         }
       }
 
-      // Render Donation Submissions & History list
-      const recordsContainer = document.getElementById('recordsContainer');
-      if (allRecords.length === 0) {
-        recordsContainer.innerHTML = `<p class="muted" style="padding: 12px 0;">No donation records yet. Click <b>Submit Donation Record</b> above to schedule your first donation.</p>`;
-      } else {
-        recordsContainer.innerHTML = allRecords.map((r) => {
-          const hospName = hospitalMap[r.hospital_id]?.name || 'Accredited Blood Bank';
-          const recCode = `#LL-${r.id.slice(0, 4).toUpperCase()}`;
-          const isCompleted = (r.status || '').toLowerCase() === 'completed';
-
-          return `
-            <article class="record">
-              <span class="rec-icon ${isCompleted ? 'green' : 'amber'}">
-                <span class="material-symbols-outlined">${isCompleted ? 'check_circle' : 'pending_actions'}</span>
-              </span>
-              <div class="rec-body">
-                <div class="rec-title">
-                  Record ${recCode}
-                  <span class="${isCompleted ? 'pill-green-soft' : 'pill-amber'}">${isCompleted ? 'Completed 450 mL' : 'Pending Review'}</span>
-                </div>
-                <div class="rec-meta">${hospName} • Target Date: ${r.preferred_date} • <b class="red">${r.blood_type || bloodType || 'Whole Blood'}</b></div>
-              </div>
-            </article>
-          `;
-        }).join('');
+      // Milestone card & functional analytics ring
+      const milestoneH2 = document.querySelector('.milestone h2');
+      if (milestoneH2) milestoneH2.textContent = profile.tier;
+      const milestoneP = document.querySelector('.milestone p');
+      if (milestoneP) milestoneP.innerHTML = `${profile.tierSub}. <span class="red">Your Blood. Their Hope.</span>`;
+      const milestoneTextStrong = document.querySelector('.milestone-text strong');
+      if (milestoneTextStrong) milestoneTextStrong.textContent = profile.tierProgressLabel || `${profile.totalDonations} / 4`;
+      const milestoneRing = document.querySelector('.milestone .ring');
+      if (milestoneRing) {
+        const pct = Math.min(100, Math.max(0, profile.tierPercent || 0));
+        milestoneRing.style.background = `conic-gradient(var(--red) ${pct}%, var(--chip) 0)`;
       }
 
-      // 5. Wire Logout Button
-      const logoutBtn = document.getElementById('logoutBtn');
+      // Wire logout button
+      const logoutBtn = document.querySelector('.nav-item.logout');
       if (logoutBtn) {
-        logoutBtn.addEventListener('click', async (e) => {
+        logoutBtn.addEventListener('click', (e) => {
           e.preventDefault();
-          await supabase.auth.signOut();
-          window.location.href = '../../login/index.html';
+          signOutUser();
+        });
+      }
+
+      // ===================================================================
+      // NOTIFICATION SYSTEM — Bell icon dropdown with real notifications
+      // ===================================================================
+      const notifBtn = document.getElementById('notifBtn');
+      const notifPanel = document.getElementById('notifPanel');
+      const bellDot = document.getElementById('bellDot');
+      const notifList = document.getElementById('notifList');
+      const markAllReadBtn = document.getElementById('markAllRead');
+
+      // Toggle notification panel on bell click
+      if (notifBtn && notifPanel) {
+        notifBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = notifPanel.style.display !== 'none';
+          notifPanel.style.display = isOpen ? 'none' : 'block';
+        });
+
+        // Close panel when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!notifPanel.contains(e.target) && !notifBtn.contains(e.target)) {
+            notifPanel.style.display = 'none';
+          }
+        });
+      }
+
+      // Build notifications from real profile data
+      function buildNotifications(profile) {
+        const notifications = [];
+        const now = new Date();
+
+        // 1. Eligibility notification
+        if (profile.isEligibleToday) {
+          notifications.push({
+            icon: 'check_circle',
+            color: 'green',
+            title: 'You are eligible to donate!',
+            desc: 'Your 56-day recovery period is complete. You can now schedule a new blood donation.',
+            time: 'Now',
+            unread: true
+          });
+        } else if (profile.daysRemaining > 0) {
+          if (profile.daysRemaining <= 7) {
+            notifications.push({
+              icon: 'event_available',
+              color: 'amber',
+              title: `Almost eligible — ${profile.daysRemaining} day${profile.daysRemaining > 1 ? 's' : ''} left!`,
+              desc: `You'll be cleared to donate on ${profile.nextEligibleDate}. Start planning your next visit.`,
+              time: 'Eligibility reminder',
+              unread: true
+            });
+          } else {
+            notifications.push({
+              icon: 'schedule',
+              color: 'blue',
+              title: `${profile.daysRemaining} days until next eligible date`,
+              desc: `Your next donation window opens on ${profile.nextEligibleDate}. The 56-day interval protects your health.`,
+              time: 'Countdown active',
+              unread: false
+            });
+          }
+        }
+
+        // 2. Donation milestone notification
+        if (profile.totalDonations > 0 && profile.totalDonations < 26) {
+          const nextMilestone = profile.totalDonations < 4 ? 4 : profile.totalDonations < 7 ? 7 : profile.totalDonations < 13 ? 13 : 26;
+          const nextBadgeName = nextMilestone === 4 ? 'Silver Donor' : nextMilestone === 7 ? 'Gold Donor' : nextMilestone === 13 ? 'Platinum Donor' : 'Diamond Donor';
+          const remaining = nextMilestone - profile.totalDonations;
+          if (remaining <= 2) {
+            notifications.push({
+              icon: 'military_tech',
+              color: 'amber',
+              title: `${remaining} donation${remaining > 1 ? 's' : ''} to ${nextBadgeName}!`,
+              desc: `You're close to reaching the ${nextBadgeName} (${nextMilestone} donations) badge. Keep going, hero!`,
+              time: 'Milestone tracker',
+              unread: true
+            });
+          }
+        }
+
+        // 3. Welcome notification for new donors
+        if (profile.totalDonations === 0) {
+          notifications.push({
+            icon: 'waving_hand',
+            color: 'red',
+            title: 'Welcome to Lifeline!',
+            desc: 'Thank you for registering as a voluntary blood donor. Your first donation can save up to 3 lives.',
+            time: 'Registration complete',
+            unread: true
+          });
+        }
+
+        // 4. Blood type compatibility info
+        if (profile.bloodType && profile.bloodType !== 'unknown') {
+          const compatMap = {
+            'O+': 'O+, A+, B+, AB+',
+            'O-': 'All blood types (universal donor)',
+            'A+': 'A+, AB+',
+            'A-': 'A+, A-, AB+, AB-',
+            'B+': 'B+, AB+',
+            'B-': 'B+, B-, AB+, AB-',
+            'AB+': 'AB+ only',
+            'AB-': 'AB+, AB-'
+          };
+          notifications.push({
+            icon: 'water_drop',
+            color: 'red',
+            title: `Your blood type: ${profile.bloodType}`,
+            desc: `Compatible with: ${compatMap[profile.bloodType] || 'Pending verification'}. Your blood is needed!`,
+            time: 'Blood info',
+            unread: false
+          });
+        }
+
+        // 5. Health tip
+        notifications.push({
+          icon: 'favorite',
+          color: 'green',
+          title: 'Pre-donation reminder',
+          desc: 'Drink extra water, eat iron-rich meals, and bring your government-issued ID to your next visit.',
+          time: 'Health tip',
+          unread: false
+        });
+
+        return notifications;
+      }
+
+      function renderNotifications(profile) {
+        if (!notifList) return;
+
+        const notifications = buildNotifications(profile);
+        const readSet = JSON.parse(localStorage.getItem('lifeline_notif_read') || '[]');
+
+        // Check for unread count
+        let unreadCount = 0;
+        notifications.forEach((n, i) => {
+          if (n.unread && !readSet.includes(i)) unreadCount++;
+        });
+
+        // Show/hide bell dot
+        if (bellDot) {
+          bellDot.style.display = unreadCount > 0 ? 'block' : 'none';
+        }
+
+        // Render items
+        notifList.innerHTML = notifications.map((n, i) => `
+          <div class="notif-item ${n.unread && !readSet.includes(i) ? 'unread' : ''}">
+            <div class="notif-icon ${n.color}">
+              <span class="material-symbols-outlined">${n.icon}</span>
+            </div>
+            <div class="notif-body">
+              <div class="notif-title">${n.title}</div>
+              <div class="notif-desc">${n.desc}</div>
+              <div class="notif-time">${n.time}</div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Render notifications with the loaded profile
+      renderNotifications(profile);
+
+      // Mark all as read
+      if (markAllReadBtn) {
+        markAllReadBtn.addEventListener('click', () => {
+          const notifications = buildNotifications(profile);
+          const allIndices = notifications.map((_, i) => i);
+          localStorage.setItem('lifeline_notif_read', JSON.stringify(allIndices));
+          renderNotifications(profile);
         });
       }
     });
   </script>
+
 </body>
 </html>

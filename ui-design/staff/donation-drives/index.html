@@ -59,17 +59,29 @@
     </div>
     <label class="search top">
       <span class="material-symbols-outlined">search</span>
-      <input type="search" placeholder="Search donation slots...">
+      <input type="search" id="driveSearchInput" placeholder="Search drives by title, facility, or venue...">
     </label>
-    <button class="icon-btn bell" type="button" aria-label="Notifications">
+    <button class="icon-btn bell" type="button" aria-label="Notifications" id="notifBtn">
       <span class="material-symbols-outlined">notifications</span>
-      <span class="bell-dot"></span>
+      <span class="bell-dot" id="bellDot"></span>
     </button>
+
+    <!-- Staff Notification Dropdown Panel -->
+    <div class="notif-panel" id="notifPanel" style="display:none;">
+      <div class="notif-header">
+        <h3>Staff Notifications</h3>
+        <button type="button" id="markAllRead" class="notif-clear">Mark all read</button>
+      </div>
+      <div class="notif-list" id="notifList">
+        <p class="notif-empty">Loading notifications...</p>
+      </div>
+    </div>
+
     <a class="user-pill" href="../facility-profile/index.html">
       <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
       <span>
-        <span class="user-name">Dr. Aris Catadman</span>
-        <span class="user-type">Chief Pathologist</span>
+        <span class="user-name">Loading...</span>
+        <span class="user-type">Clinical Staff</span>
       </span>
     </a>
   </header>
@@ -77,71 +89,998 @@
   <main class="page">
     <div class="container">
 
+      <!-- Page Header -->
       <div class="page-head">
-        <div><div class="chips" style="margin-bottom:6px"><span class="label" style="align-self:center">Node:</span><span class="pill "><span class="dot"></span> St. Jude Regional Blood Bank • Mobile Operations Wing</span></div><h1>Blood Donation Drives &amp; Field Operations</h1><p>Live mobile drive management, walk-in triage desk, field collection quotas, and cold-chain transport telemetry.</p></div>
-        <div class="actions"><button class="btn btn-gray" type="button"><span class="material-symbols-outlined">download</span> Export Manifest</button><button class="btn btn-primary" style="background:#DB322F" type="button"><span class="material-symbols-outlined">person_add</span> Register Walk-In Donor</button></div>
-      </div>
-
-      <section class="stats">
-        <article class="kpi brand"><span class="label">Active Field Drives</span><strong>3 <small class="green">Active Teams</small></strong><p>• SM Seaside Bloodmobile (Bus A)<br>• USC Campus Gymnasium (Drive 2)<br><b class="red">• Cebu IT Park Quad (Team Alpha)</b></p></article>
-        <article class="kpi blue"><span class="label">Walk-Ins Triaged</span><strong>86 <small>Donors</small></strong><p><span class="pill pill-red">+14 queued triage</span> Avg. wait: 8m</p></article>
-        <article class="kpi brand"><span class="label">Units Collected</span><strong>124 <small>/ 200 Units Target</small></strong><div class="bar" style="margin:6px 0"><span style="width: 62%"></span></div><p>62% Daily Quota Achieved • <b class="red">+18 vs Yesterday</b></p></article>
-        <article class="kpi green"><span class="label">Cold-Chain Status</span><strong class="green">Nominal <small>All 8 Units</small></strong><p><span class="pill ">Safe Window: 2.0°C – 6.0°C</span></p></article>
-      </section>
-
-      <section class="card flush">
-        <div class="tabs" style="border-radius:0;padding:16px 16px 0;width:100%"><button class="tab active" type="button">Today's Active Drives (3)</button><button class="tab" type="button">Upcoming Deployment (5)</button><button class="tab" type="button">Completed Drives</button></div>
-        <div class="drive-head">
-          <div class="drive-title"><span class="drive-icon"><span class="material-symbols-outlined">bloodtype</span></span><div><h2>Cebu IT Park Blood Donation Fair - Mobile Team Alpha <span class="pill pill-red">LIVE • Intake In Progress</span></h2><div class="drive-meta"><span>Venue: Tower 2 Concourse, Central Garden</span><span>Team Lead: Maria Elena Ramos RN</span><span>Beds: 6 Active (4 Occupied, 2 Ready)</span></div></div></div>
-          <div class="drive-totals"><div><b class="red">54</b><small>Collected</small></div><div><b>18</b><small>In Queues</small></div><div><b class="green">0</b><small>Adverse Events</small></div></div>
-        </div>
-        <div class="table-wrap"><table class="table"><thead><tr><th>Queue #</th><th>Donor Name</th><th>Blood Group</th><th>Intake Type</th><th>Vitals &amp; Screening</th><th>Bed Assignment</th><th class=right>Operational Action</th></tr></thead><tbody>
-<tr><td><b>#D-101</b></td><td><b>Alan Christopher Tan</b><small class="">ID: CCB-88392 • Regular Donor</small></td><td><span class="bloodtype ">O+</span></td><td><span class="pill pill-gray">Walk-In</span></td><td><span class="green"><b><span class="material-symbols-outlined">check_circle</span> Vitals Passed</b></span><small>BP 120/80 • Hb 14.2 g/dL • 68 bpm</small></td><td>Bed 02 (Ready)</td><td class="right"><button class="btn btn-primary btn-sm" type="button">Admit to Bed</button></td></tr>
-<tr><td><b>#D-102</b></td><td><b>Bea Patricia Cruz</b><small class="">App Booking: 09:30 Slot • First-Time</small></td><td><span class="bloodtype ">A+</span></td><td><span class="pill pill-green">Pre-registered App</span></td><td><span class="muted"><b><span class="material-symbols-outlined">hourglass_top</span> Triage In Progress</b></span><small>Screening booth #1 with Nurse Jerry</small></td><td>Pending Vitals</td><td class="right"><button class="btn btn-gray btn-sm" type="button">Resume Screening</button></td></tr>
-<tr><td><b>#D-103</b></td><td><b>Roberto Mendoza</b><small class="">National ID: PH-4491-002</small></td><td><span class="bloodtype ">B+</span></td><td><span class="pill pill-gray">Walk-In</span></td><td><span class="muted"><b><span class="material-symbols-outlined">schedule</span> Screening Pending</b></span><small>Queued at Triage Bench</small></td><td>Waiting</td><td class="right"><button class="btn btn-gray btn-sm" type="button">Triage Screen</button></td></tr>
-<tr><td><b>#D-104</b></td><td><b>Karen Joy Santos</b><small class="red">Rare Group Flag • 3 Previous Donations</small></td><td><span class="bloodtype fill">AB-</span></td><td><span class="pill pill-gray">Walk-In</span></td><td><span class="green"><b><span class="material-symbols-outlined">check_circle</span> Vitals Passed</b></span><small>BP 118/74 • Hb 13.0 g/dL • Normal Temp</small></td><td>Bed 05 (Ready)</td><td class="right"><button class="btn btn-primary btn-sm" type="button">Admit to Bed</button></td></tr>
-</tbody></table></div>
-        <div class="table-foot"><span>Showing 4 active queue entries of 18 field check-ins</span><div class="pager"><a class="page-btn" href="#">Previous</a><a class="page-btn active" href="#">1</a><a class="page-btn" href="#">2</a><a class="page-btn" href="#">Next</a></div></div>
-      </section>
-
-      <div class="grid-2">
-        <section class="card flush">
-          <div class="card-head"><div><h2 class="with-icon"><span class="dot" style="background:var(--red-bright)"></span> Cold-Chain Field Telemetry</h2><p>Active Mobile Cryo Coolers &amp; Central Transport</p></div><span class="pill pill-dark">4G LIVE SENSOR</span></div>
-          <div class="cooler"><div class="cooler-top"><div><b>Cooler Unit A-01</b> <span class="pill ">Whole Blood</span></div><strong>4.2°C</strong></div><div class="cooler-stats"><span>94% (Li-ion)</span><span>Hermetic OK</span><span>18 / 24 Units</span></div><div class="bar"><span style="width: 75%;background:var(--sidebar-bg)"></span></div></div>
-          <div class="cooler"><div class="cooler-top"><div><b>Cooler Unit A-02</b> <span class="pill ">Platelet Buffer</span></div><strong>3.8°C</strong></div><div class="cooler-stats"><span>88% (Li-ion)</span><span>Hermetic OK</span><span>12 / 24 Units</span></div><div class="bar"><span style="width: 50%;background:var(--sidebar-bg)"></span></div></div>
-          <div class="cooler"><div class="cooler-top"><div><b>Cryo Pack 03</b> <span class="pill ">Plasma Reserve</span></div><strong class="red">-18.4°C</strong></div><div class="cooler-stats"><span>Dry ice depth: 92%</span><span>Thermal lock: Secured</span><span>Target bank: St. Jude Main</span></div><div class="bar"><span style="width: 92%;background:var(--sidebar-bg)"></span></div></div>
-          <div class="note-bar" style="margin-top:12px"><span><b>Scheduled Courier Runner (Trip 1)</b><br>Arriving in 34 mins • Vehicle #VAN-04</span><button class="btn btn-light btn-sm red" type="button">Dispatch Early</button></div>
-        </section>
-        <section class="card flush">
-          <div class="card-head"><div><h2>On-Site Phlebotomy Bed Stations</h2><p>Mobile Van 2 + Field Tent Alpha (6 Bed Capacity)</p></div><span class="small muted">Bleeding (3) • Ready (2) • Recovery (1)</span></div>
-          <div class="beds">
-        <div class="bed"><div class="bed-top"><b>Bed 01</b><span class="pill pill-red">Bleeding</span></div><b>Gerard Vance (O-)</b><span>Phleb: Nurse Clara</span><span class=vol>380 / 450 mL</span><div class="bar"><span style="width: 84%"></span></div><div class="bed-foot"><span>Elapsed: 07:12</span><button class="btn btn-sm btn-light" type="button">Monitor</button></div></div>
-        <div class="bed ready"><div class="bed-top"><b>Bed 02</b><span class="pill pill-dark">Ready for Donor</span></div><b>Sanitized &amp; Primed</b><span>Next in queue: Alan C. Tan</span><div class="bar"><span style="width: 0%"></span></div><div class="bed-foot"><span>Cleaned: 2m ago</span><button class="btn btn-sm btn-dark" type="button">Seat Alan</button></div></div>
-        <div class="bed"><div class="bed-top"><b>Bed 03</b><span class="pill pill-red">Bleeding</span></div><b>Mariano Diaz (A+)</b><span>Phleb: MedTech Jason</span><span class=vol>210 / 450 mL</span><div class="bar"><span style="width: 47%"></span></div><div class="bed-foot"><span>Elapsed: 04:30</span><button class="btn btn-sm btn-light" type="button">Monitor</button></div></div>
-        <div class="bed"><div class="bed-top"><b>Bed 04</b><span class="pill pill-gray">Recovery Rest</span></div><b>Joylyn Perez (B-)</b><span>Donation Completed (450 mL)</span><div class="bar"><span style="width: 100%"></span></div><div class="bed-foot"><span>Rest: 08 / 10 min</span><button class="btn btn-sm btn-light" type="button">Discharge</button></div></div>
-        <div class="bed ready"><div class="bed-top"><b>Bed 05</b><span class="pill pill-dark">Ready for Donor</span></div><b>Sanitized &amp; Primed</b><span>Reserved: Karen Santos (AB-)</span><div class="bar"><span style="width: 0%"></span></div><div class="bed-foot"><span>Cleaned: 4m ago</span><button class="btn btn-sm btn-dark" type="button">Seat Karen</button></div></div>
-        <div class="bed"><div class="bed-top"><b>Bed 06</b><span class="pill pill-red">Bleeding</span></div><b>Francis Yap (O+)</b><span>Phleb: MedTech Leo</span><span class=vol>440 / 450 mL</span><div class="bar"><span style="width: 98%"></span></div><div class="bed-foot"><span>Near Finish</span><button class="btn btn-sm btn-light" type="button">Prep Bandage</button></div></div>
+        <div>
+          <div class="chips" style="margin-bottom:6px">
+            <span class="pill"><span class="dot"></span> Staff Drive Management</span>
           </div>
-          <div class="note-bar"><span>Station Kit Inventory: 140 Blood Bags remaining, 16 Vacutainers</span><button class="btn btn-dark btn-sm" type="button">Request Mobile Restock</button></div>
-        </section>
+          <h1>Donation Drives Management</h1>
+          <p>Create, configure, and publish blood donation drives for donors to view and apply, and review incoming donor applications.</p>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" type="button" id="btnCreateDrive">
+            <span class="material-symbols-outlined">add_circle</span> Create Donation Drive
+          </button>
+        </div>
       </div>
+
+      <!-- KPI Cards -->
+      <section class="stats">
+        <article class="kpi brand">
+          <span class="label">Total Drives</span>
+          <strong id="kpiTotalDrives">0</strong>
+          <p class="muted">All configured events</p>
+        </article>
+        <article class="kpi green">
+          <span class="label">Published &amp; Ongoing</span>
+          <strong class="green" id="kpiPublishedDrives">0</strong>
+          <p>Visible to donors for application</p>
+        </article>
+        <article class="kpi blue">
+          <span class="label">Draft Drives</span>
+          <strong id="kpiDraftDrives">0</strong>
+          <p>Saved for staff review before publishing</p>
+        </article>
+        <article class="kpi red">
+          <span class="label">Pending Applications</span>
+          <strong class="danger-text" id="kpiPendingApps">0</strong>
+          <p>Donor applications awaiting staff approval</p>
+        </article>
+      </section>
+
+      <!-- Drives Table -->
+      <section class="card flush">
+        <div class="card-head">
+          <div>
+            <h2>Configured Donation Drives</h2>
+            <p>Manage drive lifecycle: Draft → Published → Ongoing → Completed / Cancelled</p>
+          </div>
+          <div class="tabs" id="statusTabs">
+            <button class="tab active" type="button" data-status="all">All</button>
+            <button class="tab" type="button" data-status="Published">Published</button>
+            <button class="tab" type="button" data-status="Draft">Draft</button>
+            <button class="tab" type="button" data-status="Ongoing">Ongoing</button>
+            <button class="tab" type="button" data-status="Completed">Completed</button>
+            <button class="tab" type="button" data-status="Cancelled">Cancelled</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Drive &amp; Facility</th>
+                <th>Schedule &amp; Venue</th>
+                <th>Capacity (Target / Max)</th>
+                <th>Applications</th>
+                <th>Status</th>
+                <th class="right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="drivesTableBody">
+              <tr><td colspan="6" style="text-align:center;padding:32px;color:#546067;">Loading donation drives...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-foot">
+          <span id="drivesCountText">Showing 0 drives</span>
+          <span class="muted">Published drives appear immediately on the Donor Portal.</span>
+        </div>
+      </section>
+
     </div>
   </main>
 
+  <!-- ========================================================================= -->
+  <!-- MODAL 1: CREATE / EDIT DONATION DRIVE (5-Section Stepper Form)            -->
+  <!-- ========================================================================= -->
+  <div class="modal-backdrop" id="driveModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="driveModalTitle">
+    <div class="drive-modal">
+      <div class="drive-modal-head">
+        <div>
+          <h2 id="driveModalTitle">Create Donation Drive</h2>
+          <div class="drive-modal-sub">Staff Dashboard &middot; Configure event details, capacity, and donor application rules</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="pill pill-draft" id="modalStatusBadge">Draft</span>
+          <button type="button" class="modal-close" id="closeDriveModal" aria-label="Close">&times;</button>
+        </div>
+      </div>
+
+      <!-- Stepper Navigation -->
+      <div class="stepper" id="formStepper">
+        <button type="button" class="step-tab active" data-step="1"><span class="num">1</span> Drive Info</button>
+        <button type="button" class="step-tab" data-step="2"><span class="num">2</span> Schedule &amp; Location</button>
+        <button type="button" class="step-tab" data-step="3"><span class="num">3</span> Capacity &amp; Requirements</button>
+        <button type="button" class="step-tab" data-step="4"><span class="num">4</span> Application Settings</button>
+        <button type="button" class="step-tab" data-step="5"><span class="num">5</span> Additional Info</button>
+      </div>
+
+      <form id="driveForm" class="drive-modal-body" novalidate>
+        <input type="hidden" id="editingDriveId">
+
+        <!-- SECTION 1: Donation Drive Information -->
+        <div class="form-step active" data-step="1">
+          <div class="step-intro">
+            <strong>1. Donation Drive Information</strong>
+            Basic details displayed on the donor's Donation Drives page.
+          </div>
+          <div class="form-grid">
+            <div class="form-field full">
+              <label for="driveTitle">Donation Drive Title <span class="req">*</span></label>
+              <input type="text" id="driveTitle" placeholder="e.g., Blood Donation Drive 2026" required>
+            </div>
+            <div class="form-field full">
+              <label for="driveDesc">Description / Purpose <span class="req">*</span></label>
+              <textarea id="driveDesc" placeholder="Explain the purpose of the drive, who will benefit, and why the blood donation is needed..." required></textarea>
+            </div>
+            <div class="form-field">
+              <label for="driveFacility">Organizing Facility <span class="req">*</span></label>
+              <select id="driveFacility" required>
+                <option value="" disabled selected>Select registered facility</option>
+                <option value="St. Jude Regional Blood Bank">St. Jude Regional Blood Bank</option>
+                <option value="Cebu Doctors' University Hospital">Cebu Doctors' University Hospital</option>
+                <option value="Vicente Sotto Memorial Medical Center">Vicente Sotto Memorial Medical Center</option>
+                <option value="Philippine Red Cross – Cebu Chapter">Philippine Red Cross – Cebu Chapter</option>
+                <option value="Chong Hua Hospital Blood Center">Chong Hua Hospital Blood Center</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="driveContact">Contact Person <span class="req">*</span></label>
+              <input type="text" id="driveContact" placeholder="e.g., Nurse Elena Ramos • +63 917 555 0142" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: Schedule and Location -->
+        <div class="form-step" data-step="2">
+          <div class="step-intro">
+            <strong>2. Schedule and Location</strong>
+            Specify when and where the donation drive will take place.
+          </div>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="driveDate">Event Date <span class="req">*</span></label>
+              <input type="date" id="driveDate" required>
+            </div>
+            <div class="form-field" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <div>
+                <label for="driveStartTime">Start Time <span class="req">*</span></label>
+                <input type="time" id="driveStartTime" value="08:00" required>
+              </div>
+              <div>
+                <label for="driveEndTime">End Time <span class="req">*</span></label>
+                <input type="time" id="driveEndTime" value="16:00" required>
+              </div>
+            </div>
+            <div class="form-field full">
+              <label for="driveVenue">Venue <span class="req">*</span></label>
+              <input type="text" id="driveVenue" placeholder="Name of the venue or donation center (e.g., USC Main Gymnasium)" required>
+            </div>
+            <div class="form-field full">
+              <label for="driveAddress">Complete Address <span class="req">*</span></label>
+              <input type="text" id="driveAddress" placeholder="Street, Barangay, City, and Province" required>
+            </div>
+            <div class="form-field full">
+              <label for="driveMapUrl">Location Map Link <small style="font-weight:400">(Optional)</small></label>
+              <input type="url" id="driveMapUrl" placeholder="https://maps.google.com/...">
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: Donation Capacity and Requirements -->
+        <div class="form-step" data-step="3">
+          <div class="step-intro">
+            <strong>3. Donation Capacity and Requirements</strong>
+            Set your target goal and maximum application limit. Final medical eligibility is always determined on-site by the medical team.
+          </div>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="driveTargetDonors">Target Number of Donors <span class="req">*</span></label>
+              <input type="number" id="driveTargetDonors" min="1" placeholder="e.g., 100" value="100" required>
+              <span class="form-hint">Goal number of donors the drive aims to accommodate.</span>
+            </div>
+            <div class="form-field">
+              <label for="driveMaxCapacity">Maximum Donor Capacity <span class="req">*</span></label>
+              <input type="number" id="driveMaxCapacity" min="1" placeholder="e.g., 120" value="120" required>
+              <span class="form-hint">Hard limit for accepted/registered donor applications.</span>
+            </div>
+            <div class="form-field full">
+              <label>Eligible / Prioritized Blood Types <small style="font-weight:400">(Optional)</small></label>
+              <div class="bt-chips" id="bloodTypeChips">
+                <label class="bt-chip"><input type="checkbox" value="All" checked><span>All Blood Types</span></label>
+                <label class="bt-chip"><input type="checkbox" value="O+"><span>O+</span></label>
+                <label class="bt-chip"><input type="checkbox" value="O-"><span>O-</span></label>
+                <label class="bt-chip"><input type="checkbox" value="A+"><span>A+</span></label>
+                <label class="bt-chip"><input type="checkbox" value="A-"><span>A-</span></label>
+                <label class="bt-chip"><input type="checkbox" value="B+"><span>B+</span></label>
+                <label class="bt-chip"><input type="checkbox" value="B-"><span>B-</span></label>
+                <label class="bt-chip"><input type="checkbox" value="AB+"><span>AB+</span></label>
+                <label class="bt-chip"><input type="checkbox" value="AB-"><span>AB-</span></label>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="driveMinAge">Minimum Age</label>
+              <input type="number" id="driveMinAge" min="16" max="65" value="18">
+            </div>
+            <div class="form-field">
+              <label for="driveReqDocs">Required Documents</label>
+              <input type="text" id="driveReqDocs" value="Valid Government-Issued Photo ID" placeholder="e.g., Valid ID, Lifeline Donor QR">
+            </div>
+            <div class="form-field full">
+              <label for="driveRequirements">Donation Requirements &amp; Reminders</label>
+              <textarea id="driveRequirements" placeholder="General eligibility reminders (e.g., Weigh at least 50 kg, good general health, 56-day interval since last donation). Final medical clearance is assessed on-site by attending clinicians."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: Donor Application Settings -->
+        <div class="form-step" data-step="4">
+          <div class="step-intro">
+            <strong>4. Donor Application Settings</strong>
+            Configure when and how donors apply. Donors submit their own details when applying; staff review and approve applications.
+          </div>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="driveAppOpen">Application Opening Date</label>
+              <input type="date" id="driveAppOpen">
+            </div>
+            <div class="form-field">
+              <label for="driveAppClose">Application Closing Date (Deadline) <span class="req">*</span></label>
+              <input type="date" id="driveAppClose" required>
+            </div>
+            <div class="form-field">
+              <label for="driveAppLimit">Application Limit</label>
+              <input type="number" id="driveAppLimit" min="1" placeholder="Defaults to Maximum Capacity">
+            </div>
+            <div class="form-field">
+              <label for="driveApprovalMethod">Application Approval <span class="req">*</span></label>
+              <select id="driveApprovalMethod" required>
+                <option value="staff_approval" selected>Staff Approval Required (Recommended)</option>
+                <option value="auto_approve">Auto-Approve Within Capacity</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label for="driveTimeSlots">Available Time Slots <small style="font-weight:400">(Comma-separated, optional)</small></label>
+              <input type="text" id="driveTimeSlots" value="08:00 AM - 10:00 AM, 10:00 AM - 12:00 PM, 01:00 PM - 03:00 PM" placeholder="e.g., 08:00 AM - 10:00 AM, 10:00 AM - 12:00 PM">
+            </div>
+            <div class="form-field full">
+              <label for="driveAppInstructions">Application Instructions</label>
+              <textarea id="driveAppInstructions" placeholder="Instructions shown to donors when applying (e.g., Arrive 15 minutes before your selected slot)."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 5: Additional Information -->
+        <div class="form-step" data-step="5">
+          <div class="step-intro">
+            <strong>5. Additional Information</strong>
+            Optional poster, preparation notes, emergency contact, and initial drive status.
+          </div>
+          <div class="form-grid">
+            <div class="form-field full">
+              <label>Donation Drive Poster or Banner</label>
+              <div class="poster-drop" id="posterDrop">
+                <span class="material-symbols-outlined red" style="font-size:28px;">add_photo_alternate</span>
+                <div style="font-size:13px;font-weight:600;margin-top:4px;">Click to upload a poster or banner image</div>
+                <div class="form-hint">Displayed on the donor-facing Donation Drives page (PNG, JPG)</div>
+                <input type="file" id="posterFileInput" accept="image/*" style="display:none;">
+              </div>
+              <div class="poster-preview" id="posterPreviewBox">
+                <img id="posterPreviewImg" src="" alt="Drive Poster Preview">
+                <button type="button" class="poster-remove" id="removePosterBtn">Remove Poster</button>
+              </div>
+            </div>
+            <div class="form-field full">
+              <label for="driveSpecialInst">Special Instructions <small style="font-weight:400">(Donor preparation)</small></label>
+              <textarea id="driveSpecialInst" placeholder="e.g., Drink 16 oz of water, eat an iron-rich meal 2–3 hours prior, no alcohol 24 hours before donation."></textarea>
+            </div>
+            <div class="form-field full">
+              <label for="driveOrgNotes">Organizer Notes <small style="font-weight:400">(Internal — visible only to staff)</small></label>
+              <textarea id="driveOrgNotes" placeholder="Internal logistics, equipment checklist, or coordination notes for staff only..."></textarea>
+            </div>
+            <div class="form-field">
+              <label for="driveEmergencyContact">Emergency Contact</label>
+              <input type="text" id="driveEmergencyContact" placeholder="e.g., Dr. Lin • +63 917 888 9900">
+            </div>
+            <div class="form-field">
+              <label for="driveStatusSelect">Drive Status</label>
+              <select id="driveStatusSelect">
+                <option value="Draft">Draft</option>
+                <option value="Published">Published</option>
+                <option value="Ongoing">Ongoing</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="formAlert" style="display:none;margin-top:14px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:600;"></div>
+      </form>
+
+      <div class="drive-modal-foot">
+        <div class="foot-left">
+          <button type="button" class="btn btn-light" id="prevStepBtn" style="display:none;">← Previous</button>
+          <button type="button" class="btn btn-gray" id="nextStepBtn">Next Section →</button>
+        </div>
+        <div class="foot-right">
+          <button type="button" class="btn btn-light" id="saveDraftBtn">Save as Draft</button>
+          <button type="button" class="btn btn-primary" id="publishDriveBtn">
+            <span class="material-symbols-outlined">publish</span> Publish Drive
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL 2: REVIEW DONOR APPLICATIONS                                        -->
+  <!-- ========================================================================= -->
+  <div class="modal-backdrop" id="appsModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="appsModalTitle">
+    <div class="drive-modal" style="max-width:680px;">
+      <div class="drive-modal-head">
+        <div>
+          <h2 id="appsModalTitle">Donor Applications</h2>
+          <div class="drive-modal-sub" id="appsModalSub">Review and approve or reject donor applications</div>
+        </div>
+        <button type="button" class="modal-close" id="closeAppsModal" aria-label="Close">&times;</button>
+      </div>
+      <div class="drive-modal-body">
+        <div class="app-list" id="appsListContainer">
+          <p class="muted" style="text-align:center;padding:24px;">No applications yet.</p>
+        </div>
+      </div>
+      <div class="drive-modal-foot">
+        <span class="small muted">Approved donors receive their confirmation and appointment details.</span>
+        <button type="button" class="btn btn-light" id="doneAppsModal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../supabaseClient.js"></script>
   <script>
     // Sidebar open / close
     const body = document.body;
     const menuBtn = document.getElementById('menuBtn');
-
     function setSidebar(open) {
       body.classList.toggle('sidebar-open', open);
       menuBtn.setAttribute('aria-expanded', String(open));
     }
-
     menuBtn.addEventListener('click', () => setSidebar(!body.classList.contains('sidebar-open')));
     document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        setSidebar(false);
+        closeDriveModal();
+        closeAppsModal();
+      }
+    });
+
+    // =========================================================================
+    // DATA LAYER (localStorage + optional Supabase sync)
+    // =========================================================================
+    const DRIVES_KEY = 'lifeline_drives';
+    const APPS_KEY = 'lifeline_drive_applications';
+
+    const DEFAULT_DRIVES = [
+      {
+        id: 'drv-2026-01',
+        title: 'Metro University Blood Crusade 2026',
+        description: 'Campus-wide voluntary blood donation drive supporting pediatric trauma and emergency surgical reserves.',
+        facility: 'St. Jude Regional Blood Bank',
+        contactPerson: 'Nurse Elena Ramos • +63 917 555 0142',
+        eventDate: '2026-12-05',
+        startTime: '08:00',
+        endTime: '16:00',
+        venue: 'University Student Gym, Hall B',
+        address: 'Gov. M. Cuenco Ave, Cebu City, Cebu',
+        mapUrl: '',
+        targetDonors: 100,
+        maxCapacity: 120,
+        bloodTypes: ['All'],
+        minAge: 18,
+        requirements: 'Weight at least 50 kg, in good health, and at least 56 days since last whole blood donation. Final medical clearance is assessed on-site.',
+        requiredDocs: 'Valid Government-Issued Photo ID',
+        appOpenDate: '2026-11-20',
+        appCloseDate: '2026-12-04',
+        appLimit: 120,
+        approvalMethod: 'staff_approval',
+        timeSlots: '08:00 AM - 10:00 AM, 10:00 AM - 12:00 PM, 01:00 PM - 03:00 PM',
+        appInstructions: 'Arrive 15 minutes early with your valid ID.',
+        posterDataUrl: '',
+        specialInstructions: 'Drink 16 oz of water and eat an iron-rich meal 2–3 hours prior.',
+        organizerNotes: 'Coordinate 6 phlebotomy beds and 2 cryo coolers.',
+        emergencyContact: 'Dr. Sarah Lin • +63 917 888 9900',
+        status: 'Published',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: 'drv-2026-02',
+        title: 'Cebu IT Park Holiday Blood Drive',
+        description: 'Corporate and community blood drive to replenish O- and platelet reserves before the holiday season.',
+        facility: "Cebu Doctors' University Hospital",
+        contactPerson: 'Dr. Aris Catadman • +63 917 334 1190',
+        eventDate: '2026-12-12',
+        startTime: '09:00',
+        endTime: '15:00',
+        venue: 'Tower 2 Concourse, Central Garden',
+        address: 'Jose Maria del Mar St, Apas, Cebu City',
+        mapUrl: '',
+        targetDonors: 80,
+        maxCapacity: 100,
+        bloodTypes: ['O+', 'O-', 'A+'],
+        minAge: 18,
+        requirements: 'Minimum weight 50 kg, normal blood pressure and hemoglobin.',
+        requiredDocs: 'Valid Photo ID or Company ID',
+        appOpenDate: '2026-11-25',
+        appCloseDate: '2026-12-10',
+        appLimit: 100,
+        approvalMethod: 'staff_approval',
+        timeSlots: '09:00 AM - 11:00 AM, 11:00 AM - 01:00 PM, 01:00 PM - 03:00 PM',
+        appInstructions: 'Select your preferred 2-hour window.',
+        posterDataUrl: '',
+        specialInstructions: 'Avoid fatty foods and alcohol 24 hours before donation.',
+        organizerNotes: 'Draft pending venue security clearance.',
+        emergencyContact: 'Nurse Clara • +63 917 222 4500',
+        status: 'Draft',
+        createdAt: new Date().toISOString()
+      }
+    ];
+
+    function getDrives() {
+      const raw = localStorage.getItem(DRIVES_KEY);
+      if (!raw) {
+        localStorage.setItem(DRIVES_KEY, JSON.stringify(DEFAULT_DRIVES));
+        return DEFAULT_DRIVES;
+      }
+      return JSON.parse(raw);
+    }
+
+    function saveDrives(drives) {
+      localStorage.setItem(DRIVES_KEY, JSON.stringify(drives));
+    }
+
+    function getApplications() {
+      return JSON.parse(localStorage.getItem(APPS_KEY) || '[]');
+    }
+
+    function saveApplications(apps) {
+      localStorage.setItem(APPS_KEY, JSON.stringify(apps));
+    }
+
+    async function syncDriveToSupabase(drive) {
+      const token = localStorage.getItem('lifeline_token');
+      if (!token || typeof SUPABASE_URL === 'undefined') return;
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/donation_drives`, {
+          method: 'POST',
+          headers: Object.assign({}, getHeaders(token), { 'Prefer': 'resolution=merge-duplicates' }),
+          body: JSON.stringify({
+            id: drive.id,
+            title: drive.title,
+            description: drive.description,
+            facility_name: drive.facility,
+            event_date: drive.eventDate,
+            start_time: drive.startTime,
+            end_time: drive.endTime,
+            venue: drive.venue,
+            address: drive.address,
+            target_donors: drive.targetDonors,
+            max_capacity: drive.maxCapacity,
+            status: drive.status
+          })
+        });
+      } catch (e) {
+        // Gracefully ignore if table isn't provisioned yet; localStorage remains authoritative
+      }
+    }
+
+    // =========================================================================
+    // STATE & RENDERING
+    // =========================================================================
+    let currentFilterStatus = 'all';
+    let currentSearchQuery = '';
+    let currentStep = 1;
+    let currentPosterDataUrl = '';
+    let currentAppsDriveId = null;
+
+    function formatTime12(time24) {
+      if (!time24) return '';
+      const [hStr, mStr] = time24.split(':');
+      let h = parseInt(hStr, 10);
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      return `${h}:${mStr} ${ampm}`;
+    }
+
+    function getStatusPillClass(status) {
+      switch (status) {
+        case 'Published': return 'pill-green';
+        case 'Ongoing': return 'pill-blue';
+        case 'Completed': return 'pill-dark';
+        case 'Cancelled': return 'pill-cancel';
+        default: return 'pill-draft';
+      }
+    }
+
+    function renderKPIs(drives, apps) {
+      document.getElementById('kpiTotalDrives').textContent = drives.length;
+      document.getElementById('kpiPublishedDrives').textContent = drives.filter(d => d.status === 'Published' || d.status === 'Ongoing').length;
+      document.getElementById('kpiDraftDrives').textContent = drives.filter(d => d.status === 'Draft').length;
+      document.getElementById('kpiPendingApps').textContent = apps.filter(a => a.status === 'Pending').length;
+    }
+
+    function renderDrivesTable() {
+      const drives = getDrives();
+      const apps = getApplications();
+      renderKPIs(drives, apps);
+
+      const filtered = drives.filter(d => {
+        const matchesStatus = currentFilterStatus === 'all' || d.status === currentFilterStatus;
+        const q = currentSearchQuery.trim().toLowerCase();
+        const matchesSearch = !q ||
+          (d.title || '').toLowerCase().includes(q) ||
+          (d.facility || '').toLowerCase().includes(q) ||
+          (d.venue || '').toLowerCase().includes(q);
+        return matchesStatus && matchesSearch;
+      });
+
+      const tbody = document.getElementById('drivesTableBody');
+      document.getElementById('drivesCountText').textContent = `Showing ${filtered.length} of ${drives.length} drives`;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:36px;color:#546067;">No donation drives match this filter. Click <b>Create Donation Drive</b> to add one.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(drive => {
+        const driveApps = apps.filter(a => a.driveId === drive.id);
+        const approvedCount = driveApps.filter(a => a.status === 'Approved').length;
+        const pendingCount = driveApps.filter(a => a.status === 'Pending').length;
+        const dateLabel = drive.eventDate ? new Date(drive.eventDate + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'TBD';
+
+        return `
+          <tr>
+            <td>
+              <b>${drive.title}</b>
+              <small>${drive.facility}</small>
+            </td>
+            <td>
+              <b>${dateLabel} &middot; ${formatTime12(drive.startTime)} – ${formatTime12(drive.endTime)}</b>
+              <small>${drive.venue} &bull; ${drive.address}</small>
+            </td>
+            <td>
+              <b>${approvedCount} / ${drive.targetDonors} Target</b>
+              <small>Max Capacity: ${drive.maxCapacity} donors</small>
+            </td>
+            <td>
+              <b>${driveApps.length} Total</b>
+              <small>${pendingCount > 0 ? `<span class="red">${pendingCount} pending review</span>` : 'No pending'}</small>
+            </td>
+            <td>
+              <span class="pill ${getStatusPillClass(drive.status)}">${drive.status}</span>
+            </td>
+            <td class="right">
+              <div class="btn-row">
+                ${drive.status === 'Draft' ? `<button class="btn btn-primary btn-sm" type="button" onclick="quickPublish('${drive.id}')">Publish</button>` : ''}
+                <button class="btn btn-light btn-sm" type="button" onclick="openAppsModal('${drive.id}')">Applications (${driveApps.length})</button>
+                <button class="btn btn-gray btn-sm" type="button" onclick="editDrive('${drive.id}')">Edit</button>
+                <button class="btn btn-danger btn-sm" type="button" onclick="deleteDrive('${drive.id}')">Delete</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // STEPPER & CREATE/EDIT MODAL LOGIC
+    // =========================================================================
+    const driveModalBackdrop = document.getElementById('driveModalBackdrop');
+
+    function setFormStep(step) {
+      currentStep = step;
+      document.querySelectorAll('.step-tab').forEach(t => t.classList.toggle('active', Number(t.dataset.step) === step));
+      document.querySelectorAll('.form-step').forEach(s => s.classList.toggle('active', Number(s.dataset.step) === step));
+      document.getElementById('prevStepBtn').style.display = step > 1 ? 'inline-flex' : 'none';
+      document.getElementById('nextStepBtn').style.display = step < 5 ? 'inline-flex' : 'none';
+    }
+
+    document.querySelectorAll('.step-tab').forEach(tab => {
+      tab.addEventListener('click', () => setFormStep(Number(tab.dataset.step)));
+    });
+    document.getElementById('prevStepBtn').addEventListener('click', () => { if (currentStep > 1) setFormStep(currentStep - 1); });
+    document.getElementById('nextStepBtn').addEventListener('click', () => { if (currentStep < 5) setFormStep(currentStep + 1); });
+
+    // Blood type "All" checkbox behavior
+    const btInputs = document.querySelectorAll('#bloodTypeChips input[type="checkbox"]');
+    btInputs.forEach(cb => {
+      cb.addEventListener('change', () => {
+        if (cb.value === 'All' && cb.checked) {
+          btInputs.forEach(other => { if (other.value !== 'All') other.checked = false; });
+        } else if (cb.value !== 'All' && cb.checked) {
+          const allCb = document.querySelector('#bloodTypeChips input[value="All"]');
+          if (allCb) allCb.checked = false;
+        }
+      });
+    });
+
+    // Poster upload preview
+    const posterDrop = document.getElementById('posterDrop');
+    const posterFileInput = document.getElementById('posterFileInput');
+    const posterPreviewBox = document.getElementById('posterPreviewBox');
+    const posterPreviewImg = document.getElementById('posterPreviewImg');
+
+    posterDrop.addEventListener('click', () => posterFileInput.click());
+    posterFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        currentPosterDataUrl = ev.target.result;
+        posterPreviewImg.src = currentPosterDataUrl;
+        posterPreviewBox.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    });
+    document.getElementById('removePosterBtn').addEventListener('click', () => {
+      currentPosterDataUrl = '';
+      posterFileInput.value = '';
+      posterPreviewImg.src = '';
+      posterPreviewBox.style.display = 'none';
+    });
+
+    function showFormAlert(msg, isError = true) {
+      const el = document.getElementById('formAlert');
+      el.textContent = msg;
+      el.style.display = 'block';
+      el.style.background = isError ? '#FFDAD6' : '#D1FAE5';
+      el.style.color = isError ? '#BA1A1A' : '#065F46';
+    }
+
+    function openCreateModal() {
+      document.getElementById('driveForm').reset();
+      document.getElementById('editingDriveId').value = '';
+      document.getElementById('driveModalTitle').textContent = 'Create Donation Drive';
+      document.getElementById('modalStatusBadge').textContent = 'Draft';
+      document.getElementById('modalStatusBadge').className = 'pill pill-draft';
+      document.getElementById('driveStatusSelect').value = 'Draft';
+      document.getElementById('driveApprovalMethod').value = 'staff_approval';
+      document.getElementById('driveTargetDonors').value = 100;
+      document.getElementById('driveMaxCapacity').value = 120;
+      document.getElementById('driveMinAge').value = 18;
+      document.getElementById('formAlert').style.display = 'none';
+      currentPosterDataUrl = '';
+      posterPreviewBox.style.display = 'none';
+      setFormStep(1);
+      driveModalBackdrop.classList.add('open');
+    }
+
+    function closeDriveModal() {
+      driveModalBackdrop.classList.remove('open');
+    }
+
+    window.editDrive = function(id) {
+      const drive = getDrives().find(d => d.id === id);
+      if (!drive) return;
+      document.getElementById('editingDriveId').value = drive.id;
+      document.getElementById('driveModalTitle').textContent = 'Edit Donation Drive';
+      document.getElementById('modalStatusBadge').textContent = drive.status;
+      document.getElementById('modalStatusBadge').className = `pill ${getStatusPillClass(drive.status)}`;
+
+      document.getElementById('driveTitle').value = drive.title || '';
+      document.getElementById('driveDesc').value = drive.description || '';
+      document.getElementById('driveFacility').value = drive.facility || '';
+      document.getElementById('driveContact').value = drive.contactPerson || '';
+      document.getElementById('driveDate').value = drive.eventDate || '';
+      document.getElementById('driveStartTime').value = drive.startTime || '08:00';
+      document.getElementById('driveEndTime').value = drive.endTime || '16:00';
+      document.getElementById('driveVenue').value = drive.venue || '';
+      document.getElementById('driveAddress').value = drive.address || '';
+      document.getElementById('driveMapUrl').value = drive.mapUrl || '';
+      document.getElementById('driveTargetDonors').value = drive.targetDonors || 100;
+      document.getElementById('driveMaxCapacity').value = drive.maxCapacity || 120;
+      document.getElementById('driveMinAge').value = drive.minAge || 18;
+      document.getElementById('driveReqDocs').value = drive.requiredDocs || '';
+      document.getElementById('driveRequirements').value = drive.requirements || '';
+      document.getElementById('driveAppOpen').value = drive.appOpenDate || '';
+      document.getElementById('driveAppClose').value = drive.appCloseDate || '';
+      document.getElementById('driveAppLimit').value = drive.appLimit || '';
+      document.getElementById('driveApprovalMethod').value = drive.approvalMethod || 'staff_approval';
+      document.getElementById('driveTimeSlots').value = drive.timeSlots || '';
+      document.getElementById('driveAppInstructions').value = drive.appInstructions || '';
+      document.getElementById('driveSpecialInst').value = drive.specialInstructions || '';
+      document.getElementById('driveOrgNotes').value = drive.organizerNotes || '';
+      document.getElementById('driveEmergencyContact').value = drive.emergencyContact || '';
+      document.getElementById('driveStatusSelect').value = drive.status || 'Draft';
+
+      const selectedBts = drive.bloodTypes && drive.bloodTypes.length ? drive.bloodTypes : ['All'];
+      btInputs.forEach(cb => { cb.checked = selectedBts.includes(cb.value); });
+
+      currentPosterDataUrl = drive.posterDataUrl || '';
+      if (currentPosterDataUrl) {
+        posterPreviewImg.src = currentPosterDataUrl;
+        posterPreviewBox.style.display = 'block';
+      } else {
+        posterPreviewBox.style.display = 'none';
+      }
+
+      document.getElementById('formAlert').style.display = 'none';
+      setFormStep(1);
+      driveModalBackdrop.classList.add('open');
+    };
+
+    function collectAndSaveDrive(forcedStatus) {
+      const title = document.getElementById('driveTitle').value.trim();
+      const description = document.getElementById('driveDesc').value.trim();
+      const facility = document.getElementById('driveFacility').value;
+      const contactPerson = document.getElementById('driveContact').value.trim();
+      const eventDate = document.getElementById('driveDate').value;
+      const startTime = document.getElementById('driveStartTime').value;
+      const endTime = document.getElementById('driveEndTime').value;
+      const venue = document.getElementById('driveVenue').value.trim();
+      const address = document.getElementById('driveAddress').value.trim();
+      const targetDonors = parseInt(document.getElementById('driveTargetDonors').value, 10) || 100;
+      const maxCapacity = parseInt(document.getElementById('driveMaxCapacity').value, 10) || 120;
+      const appCloseDate = document.getElementById('driveAppClose').value;
+
+      // Required field validation when publishing
+      if (forcedStatus === 'Published') {
+        if (!title || !description || !facility || !contactPerson) {
+          setFormStep(1);
+          showFormAlert('Please complete all required fields in Section 1 (Drive Information).');
+          return;
+        }
+        if (!eventDate || !startTime || !endTime || !venue || !address) {
+          setFormStep(2);
+          showFormAlert('Please complete all required fields in Section 2 (Schedule and Location).');
+          return;
+        }
+        if (maxCapacity < targetDonors) {
+          setFormStep(3);
+          showFormAlert('Maximum Donor Capacity should be greater than or equal to Target Number of Donors.');
+          return;
+        }
+        if (!appCloseDate) {
+          setFormStep(4);
+          showFormAlert('Please set an Application Closing Date (Deadline) in Section 4.');
+          return;
+        }
+      } else if (!title) {
+        setFormStep(1);
+        showFormAlert('Please enter at least a Donation Drive Title before saving a draft.');
+        return;
+      }
+
+      const selectedBts = Array.from(btInputs).filter(cb => cb.checked).map(cb => cb.value);
+      const editingId = document.getElementById('editingDriveId').value;
+      const status = forcedStatus || document.getElementById('driveStatusSelect').value || 'Draft';
+
+      const driveObj = {
+        id: editingId || ('drv-' + Date.now()),
+        title,
+        description,
+        facility: facility || 'St. Jude Regional Blood Bank',
+        contactPerson,
+        eventDate,
+        startTime,
+        endTime,
+        venue,
+        address,
+        mapUrl: document.getElementById('driveMapUrl').value.trim(),
+        targetDonors,
+        maxCapacity,
+        bloodTypes: selectedBts.length ? selectedBts : ['All'],
+        minAge: parseInt(document.getElementById('driveMinAge').value, 10) || 18,
+        requiredDocs: document.getElementById('driveReqDocs').value.trim(),
+        requirements: document.getElementById('driveRequirements').value.trim(),
+        appOpenDate: document.getElementById('driveAppOpen').value,
+        appCloseDate,
+        appLimit: parseInt(document.getElementById('driveAppLimit').value, 10) || maxCapacity,
+        approvalMethod: document.getElementById('driveApprovalMethod').value,
+        timeSlots: document.getElementById('driveTimeSlots').value.trim(),
+        appInstructions: document.getElementById('driveAppInstructions').value.trim(),
+        posterDataUrl: currentPosterDataUrl,
+        specialInstructions: document.getElementById('driveSpecialInst').value.trim(),
+        organizerNotes: document.getElementById('driveOrgNotes').value.trim(),
+        emergencyContact: document.getElementById('driveEmergencyContact').value.trim(),
+        status,
+        createdAt: new Date().toISOString()
+      };
+
+      const drives = getDrives();
+      const idx = drives.findIndex(d => d.id === driveObj.id);
+      if (idx >= 0) drives[idx] = driveObj;
+      else drives.unshift(driveObj);
+
+      saveDrives(drives);
+      syncDriveToSupabase(driveObj);
+      closeDriveModal();
+      renderDrivesTable();
+    }
+
+    document.getElementById('btnCreateDrive').addEventListener('click', openCreateModal);
+    document.getElementById('closeDriveModal').addEventListener('click', closeDriveModal);
+    document.getElementById('saveDraftBtn').addEventListener('click', () => collectAndSaveDrive('Draft'));
+    document.getElementById('publishDriveBtn').addEventListener('click', () => collectAndSaveDrive('Published'));
+
+    window.quickPublish = function(id) {
+      const drives = getDrives();
+      const drive = drives.find(d => d.id === id);
+      if (!drive) return;
+      drive.status = 'Published';
+      saveDrives(drives);
+      syncDriveToSupabase(drive);
+      renderDrivesTable();
+    };
+
+    window.deleteDrive = function(id) {
+      if (!confirm('Delete this donation drive? This cannot be undone.')) return;
+      const drives = getDrives().filter(d => d.id !== id);
+      saveDrives(drives);
+      renderDrivesTable();
+    };
+
+    // =========================================================================
+    // REVIEW DONOR APPLICATIONS MODAL
+    // =========================================================================
+    const appsModalBackdrop = document.getElementById('appsModalBackdrop');
+
+    window.openAppsModal = function(driveId) {
+      currentAppsDriveId = driveId;
+      const drive = getDrives().find(d => d.id === driveId);
+      document.getElementById('appsModalTitle').textContent = `Applications: ${drive ? drive.title : 'Donation Drive'}`;
+      renderAppsList();
+      appsModalBackdrop.classList.add('open');
+    };
+
+    function closeAppsModal() {
+      appsModalBackdrop.classList.remove('open');
+    }
+
+    function renderAppsList() {
+      const container = document.getElementById('appsListContainer');
+      const apps = getApplications().filter(a => a.driveId === currentAppsDriveId);
+      if (apps.length === 0) {
+        container.innerHTML = `<p class="muted" style="text-align:center;padding:28px;">No donor applications submitted for this drive yet. When donors apply from the Donor Portal, they will appear here for staff approval.</p>`;
+        return;
+      }
+
+      container.innerHTML = apps.map(app => {
+        const pillClass = app.status === 'Approved' ? 'pill-green' : app.status === 'Rejected' ? 'pill-cancel' : 'pill-amber';
+        return `
+          <div class="app-row">
+            <div class="app-info">
+              <b>${app.donorName} <span class="pill ${pillClass}">${app.status}</span></b>
+              <div class="app-meta">
+                Blood Type: <b>${app.bloodType || 'Unknown'}</b> &bull; Preferred Slot: <b>${app.timeSlot || 'Any'}</b><br>
+                Contact: ${app.email || '—'} &bull; Applied: ${new Date(app.appliedAt).toLocaleDateString()}
+              </div>
+            </div>
+            <div class="app-actions">
+              ${app.status !== 'Approved' ? `<button class="btn btn-primary btn-sm" type="button" onclick="updateAppStatus('${app.id}', 'Approved')">Approve</button>` : ''}
+              ${app.status !== 'Rejected' ? `<button class="btn btn-danger btn-sm" type="button" onclick="updateAppStatus('${app.id}', 'Rejected')">Reject</button>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.updateAppStatus = function(appId, newStatus) {
+      const apps = getApplications();
+      const target = apps.find(a => a.id === appId);
+      if (target) {
+        target.status = newStatus;
+        target.reviewedAt = new Date().toISOString();
+        saveApplications(apps);
+        renderAppsList();
+        renderDrivesTable();
+      }
+    };
+
+    document.getElementById('closeAppsModal').addEventListener('click', closeAppsModal);
+    document.getElementById('doneAppsModal').addEventListener('click', closeAppsModal);
+
+    // Tabs & Search
+    document.querySelectorAll('#statusTabs .tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('#statusTabs .tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentFilterStatus = tab.dataset.status;
+        renderDrivesTable();
+      });
+    });
+
+    document.getElementById('driveSearchInput').addEventListener('input', (e) => {
+      currentSearchQuery = e.target.value;
+      renderDrivesTable();
+    });
+
+    // =========================================================================
+    // INIT: STAFF PROFILE, NOTIFICATIONS & DRIVES TABLE
+    // =========================================================================
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (typeof populateStaffUI === 'function') {
+        await populateStaffUI();
+      }
+
+      const logoutBtn = document.querySelector('.nav-item.logout');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          signOutUser();
+        });
+      }
+
+      // Notification bell dropdown
+      const notifBtn = document.getElementById('notifBtn');
+      const notifPanel = document.getElementById('notifPanel');
+      const bellDot = document.getElementById('bellDot');
+      const notifList = document.getElementById('notifList');
+      const markAllReadBtn = document.getElementById('markAllRead');
+
+      if (notifBtn && notifPanel) {
+        notifBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          notifPanel.style.display = notifPanel.style.display !== 'none' ? 'none' : 'block';
+        });
+        document.addEventListener('click', (e) => {
+          if (!notifPanel.contains(e.target) && !notifBtn.contains(e.target)) {
+            notifPanel.style.display = 'none';
+          }
+        });
+      }
+
+      function renderNotifs() {
+        if (!notifList) return;
+        const pendingApps = getApplications().filter(a => a.status === 'Pending').length;
+        const items = [
+          {
+            icon: 'event_available',
+            color: 'amber',
+            title: pendingApps > 0 ? `${pendingApps} Pending Drive Application${pendingApps > 1 ? 's' : ''}` : 'Drive Applications Up to Date',
+            desc: pendingApps > 0 ? 'Donors are waiting for staff approval on published drives.' : 'All donor drive applications have been reviewed.',
+            time: 'Donation Drives',
+            unread: pendingApps > 0
+          },
+          {
+            icon: 'warning',
+            color: 'red',
+            title: 'Critical Shortage: O- & Platelets',
+            desc: 'Consider publishing a targeted drive for O- and platelet donors.',
+            time: 'Inventory Alert',
+            unread: true
+          }
+        ];
+        const readSet = JSON.parse(localStorage.getItem('lifeline_staff_notif_read') || '[]');
+        const unreadCount = items.filter((n, i) => n.unread && !readSet.includes(i)).length;
+        if (bellDot) bellDot.style.display = unreadCount > 0 ? 'block' : 'none';
+
+        notifList.innerHTML = items.map((n, i) => `
+          <div class="notif-item ${n.unread && !readSet.includes(i) ? 'unread' : ''}">
+            <div class="notif-icon ${n.color}"><span class="material-symbols-outlined">${n.icon}</span></div>
+            <div class="notif-body">
+              <div class="notif-title">${n.title}</div>
+              <div class="notif-desc">${n.desc}</div>
+              <div class="notif-time">${n.time}</div>
+            </div>
+          </div>
+        `).join('');
+
+        if (markAllReadBtn) {
+          markAllReadBtn.onclick = () => {
+            localStorage.setItem('lifeline_staff_notif_read', JSON.stringify(items.map((_, i) => i)));
+            renderNotifs();
+          };
+        }
+      }
+
+      renderNotifs();
+      renderDrivesTable();
+    });
   </script>
 
 </body>
