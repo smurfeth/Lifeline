@@ -1,5 +1,4 @@
 // js/toast.js — Centered Custom Lifeline UI Toast Notification System
-
 (function initLifelineNotifications() {
   if (document.getElementById('lifeline-toast-styles')) return;
 
@@ -140,6 +139,7 @@ export function showToast(message, type = 'auto', title = '') {
 
   const cleanMsg = String(message || '')
     .replace(/\s*in Supabase!?/gi, '.')
+    .replace(/\s*to database!?/gi, '')
     .trim();
 
   let resolvedType = type;
@@ -199,8 +199,8 @@ export function showToast(message, type = 'auto', title = '') {
 
   toast.querySelector('.ll-toast-close').addEventListener('click', removeToast);
   container.appendChild(toast);
-
   setTimeout(removeToast, 3500);
 }
 
+window.showToast = showToast;
 window.alert = (msg) => showToast(msg, 'auto');
