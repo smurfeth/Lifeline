@@ -1,8 +1,16 @@
-// js/staffPendingReviews.js — Live Staff Clinical Intake & Status Verification
+// js/staffPendingReview.js — Live Staff Clinical Intake, Status Verification & EmailJS Alerts
 import { supabase } from './supabaseClient.js';
 import { showToast } from './toast.js';
 
+const EMAILJS_PUBLIC_KEY = 'FIcsnHNaV5za5PTKt';
+const EMAILJS_SERVICE_ID = 'service_ptlq86i';
+const EMAILJS_STATUS_TEMPLATE_ID = 'YOUR_NEW_STATUS_TEMPLATE_ID'; // Replace with your EmailJS status template ID
+
 document.addEventListener('DOMContentLoaded', async () => {
+  if (window.emailjs) {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+
   // 1. Verify active Supabase session
   const { data: { user }, error: authError } = await supabase.auth.getUser();
   if (authError || !user) {
@@ -12,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const { data: staffProfile } = await supabase
     .from('profiles')
-    .select('full_name')
+    .select('full_name, role, hospital_id')
     .eq('id', user.id)
     .single();
 
@@ -30,11 +38,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 2. Fetch live records, donor profiles, and hospitals from Supabase
   async function loadQueueData() {
+    let recordsQuery = supabase
+      .from('donation_records')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    // Scope to assigned hospital if logged in as staff
+    if (staffProfile?.role === 'staff' && staffProfile?.hospital_id) {
+      recordsQuery = recordsQuery.eq('hospital_id', staffProfile.hospital_id);
+    }
+
     const [recordsRes, profilesRes, hospitalsRes] = await Promise.all([
-      supabase
-        .from('donation_records')
-        .select('*')
-        .order('created_at', { ascending: false }),
+      recordsQuery,
       supabase.from('profiles').select('*'),
       supabase.from('hospitals').select('*')
     ]);
@@ -129,7 +144,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (statusFilter !== 'all' && st !== statusFilter) return false;
 
       if (query) {
-        const phone = (donor.phone || '').toLowerCase();
+        const phone = (donor.contact_number || donor.phone || '').toLowerCase();
         if (
           !donorName.includes(query) &&
           !recCode.includes(query) &&
@@ -253,13 +268,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       donorBadge.textContent = `${donorCompletedCount} Completed Donation${donorCompletedCount === 1 ? '' : 's'}`;
     }
 
-    // Read-only donor info from profiles table
-    document.getElementById('detPhone').textContent = donor.phone || 'Not provided';
-    document.getElementById('detEmail').textContent = donor.address || 'Registered Donor Account';
+    // Read-only donor info from profiles table + live Auth email lookup
+    document.getElementById('detPhone').textContent =
+      donor.contact_number || donor.phone || 'Not provided';
+    document.getElementById('detEmail').textContent = 'Loading email...';
     document.getElementById('detEmerName').textContent =
-      donor.emergency_contact_name || 'Not on file';
+      donor.emergency_contact || donor.emergency_contact_name || 'Not on file';
     document.getElementById('detEmerPhone').textContent =
-      donor.emergency_contact_phone || '—';
+      donor.address || donor.emergency_contact_phone || '—';
+
+    if (rec.donor_id) {
+      supabase.rpc('get_donor_email', { target_user_id: rec.donor_id }).then(({ data }) => {
+        const emailEl = document.getElementById('detEmail');
+        if (emailEl && selectedRecordId === rec.id) {
+          emailEl.textContent = data || 'No email on file';
+        }
+      });
+    }
 
     // Status dropdown & pill
     const statusSelect = document.getElementById('editDonationStatus');
@@ -277,7 +302,52 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // 6. Persist Status Update to public.donation_records in Supabase
+  // 6. Transactional EmailJS Alert Helper (fetches donor email from auth.users via RPC)
+  async function sendDonorStatusEmail(rec, donor, newStatus) {
+    if (!window.emailjs || !rec?.donor_id) return;
+    if (newStatus !== 'approved' && newStatus !== 'completed') return;
+    if (!EMAILJS_STATUS_TEMPLATE_ID || EMAILJS_STATUS_TEMPLATE_ID === 'YOUR_NEW_STATUS_TEMPLATE_ID') {
+      console.warn('EmailJS status template ID not configured yet.');
+      return;
+    }
+
+    const { data: donorEmail, error: emailLookupError } = await supabase.rpc(
+      'get_donor_email',
+      { target_user_id: rec.donor_id }
+    );
+
+    if (emailLookupError || !donorEmail) {
+      console.warn('Could not retrieve donor email from Auth:', emailLookupError);
+      return;
+    }
+
+    const isApproved = newStatus === 'approved';
+    const recCode = `#LL-${rec.id.slice(0, 4).toUpperCase()}`;
+    const hospName = hospitalMap[rec.hospital_id]?.name || 'Accredited Blood Bank';
+    const collectedMl = document.getElementById('editBloodVolume')?.value || '450';
+
+    const templateParams = {
+      donor_name: donor.full_name || 'Valued Donor',
+      donor_email: donorEmail,
+      record_code: recCode,
+      hospital_name: hospName,
+      blood_type: rec.blood_type || donor.blood_type || 'Not specified',
+      scheduled_date: rec.preferred_date || 'Scheduled Appointment',
+      status_label: isApproved ? 'Approved for Collection' : 'Donation Completed',
+      status_message: isApproved
+        ? 'Please arrive 15 minutes before your scheduled window and bring a valid government-issued photo ID.'
+        : `${collectedMl} mL of blood has been recorded in your clinical history. Remember to stay hydrated and rest for the next 24 hours.`
+    };
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_STATUS_TEMPLATE_ID, templateParams);
+      showToast(`Email notification sent to ${donorEmail}.`, 'info');
+    } catch (err) {
+      console.warn('EmailJS status alert failed:', err);
+    }
+  }
+
+  // 7. Persist Status Update to public.donation_records in Supabase
   async function updateRecordStatus(newStatus) {
     if (!selectedRecordId) {
       showToast('Please select a donor submission first.', 'error');
@@ -285,7 +355,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const rec = allRecords.find((r) => r.id === selectedRecordId);
-    const donorName = profileMap[rec?.donor_id]?.full_name || 'Donor';
+    const donor = profileMap[rec?.donor_id] || {};
+    const donorName = donor.full_name || 'Donor';
 
     const { error } = await supabase
       .from('donation_records')
@@ -301,7 +372,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const labelMap = {
       pending: 'Pending Review',
       approved: 'Approved for Collection',
-      completed: 'Completed (450 mL Recorded)',
+      completed: 'Completed (Unit Recorded)',
       rejected: 'Rejected / Deferred'
     };
 
@@ -309,6 +380,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       `${donorName}'s submission updated to ${labelMap[newStatus] || newStatus}.`,
       newStatus === 'rejected' ? 'info' : 'success'
     );
+
+    if (rec && (newStatus === 'approved' || newStatus === 'completed')) {
+      await sendDonorStatusEmail(rec, donor, newStatus);
+    }
 
     await loadQueueData();
   }
