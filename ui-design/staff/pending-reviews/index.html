@@ -34,6 +34,7 @@
       font-size: 11px;
       font-weight: 600;
       color: var(--slate);
+      cursor: pointer;
     }
     .vol-chip.active, .vol-chip:hover {
       background: var(--red-soft);
@@ -51,18 +52,10 @@
       padding: 3px 8px;
       border-radius: 6px;
     }
-    .status-toast {
-      display: none;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 600;
-    }
   </style>
 </head>
 <body>
-
-  <!-- ===== Sidebar (opens with the menu button) ===== -->
+  <!-- ===== Sidebar ===== -->
   <aside class="sidebar" id="sidebar" aria-label="Main menu">
     <div class="sidebar-top">
       <div class="sidebar-brand">
@@ -71,30 +64,41 @@
           <div class="sidebar-name">LIFE<span>LINE</span></div>
           <div class="sidebar-tag">— Your Blood. <span>Their Hope</span> —</div>
         </div>
-        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
       </div>
       <div class="sidebar-label">Staff Operations</div>
       <nav class="sidebar-nav">
         <a class="nav-item" href="../dashboard/index.html">
-          <span class="material-symbols-outlined">dashboard</span> Dashboard
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard
         </a>
         <a class="nav-item" href="../donation-records/index.html">
-          <span class="material-symbols-outlined">description</span> Donation Records
+          <span class="material-symbols-outlined">description</span>
+          Donation Records
         </a>
         <a class="nav-item active" href="../pending-reviews/index.html">
-          <span class="material-symbols-outlined">pending_actions</span> Pending Reviews
+          <span class="material-symbols-outlined">pending_actions</span>
+          Pending Reviews
         </a>
         <a class="nav-item" href="../donation-drives/index.html">
-          <span class="material-symbols-outlined">event_available</span> Donation Drives
+          <span class="material-symbols-outlined">event_available</span>
+          Donation Drives
         </a>
         <a class="nav-item" href="../facility-profile/index.html">
-          <span class="material-symbols-outlined">apartment</span> Facility Profile
+          <span class="material-symbols-outlined">apartment</span>
+          Facility Profile
         </a>
       </nav>
     </div>
     <div class="sidebar-bottom">
-      <a class="nav-item logout" href="../../login/index.html">
-        <span class="material-symbols-outlined">logout</span> Log Out
+      <a class="nav-item logout" id="logoutBtn" href="../../login/index.html">
+        <span class="material-symbols-outlined">logout</span>
+        Log Out
       </a>
     </div>
   </aside>
@@ -102,7 +106,13 @@
 
   <!-- ===== Top bar ===== -->
   <header class="topbar">
-    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
     <div class="crumbs">
       <span class="crumb-bar"></span>
       <span>Staff Portal /</span>
@@ -112,14 +122,10 @@
       <span class="material-symbols-outlined">search</span>
       <input type="search" id="topSearchInput" placeholder="Search donor name or ID...">
     </label>
-    <button class="icon-btn bell" type="button" aria-label="Notifications" data-feed>
-      <span class="material-symbols-outlined">notifications</span>
-      <span class="bell-dot"></span>
-    </button>
     <a class="user-pill" href="../facility-profile/index.html">
       <span class="user-avatar"><img src="../../assets/Icon%20Profile.png" alt=""></span>
       <span>
-        <span class="user-name">Loading...</span>
+        <span class="user-name" id="navStaffName">Loading...</span>
         <span class="user-type">Clinical Staff</span>
       </span>
     </a>
@@ -127,30 +133,32 @@
 
   <main class="page">
     <div class="container">
-
       <section class="alert">
         <div class="alert-left">
           <span class="alert-icon"><span class="material-symbols-outlined">emergency</span></span>
           <div>
-            <b>Emergency Trauma Alert (Code Red)</b> <span class="pill pill-red">HIGH URGENCY</span>
-            <p>Trauma ICU #4 requires 4 units of O- Negative immediately. Prioritize verified O- donors in the review queue.</p>
+            <b>Universal Donor Priority Filter</b> <span class="pill pill-red">O- RESERVE</span>
+            <p>Quickly filter incoming submissions to prioritize O- Negative universal donors.</p>
           </div>
         </div>
-        <button class="btn btn-alert" type="button" id="btnFastTrackO"><span class="material-symbols-outlined">bolt</span> Filter O- Queue</button>
+        <button class="btn btn-alert" type="button" id="btnFastTrackO">
+          <span class="material-symbols-outlined">bolt</span> Filter O- Queue
+        </button>
       </section>
 
       <div class="page-head">
         <div>
-          <div class="eyebrow">Staff Portal › Verification Queue</div>
+          <div class="eyebrow">Staff Portal &bull; Verification Queue</div>
           <h1>Clinical Intake &amp; Reviews</h1>
         </div>
         <div class="actions">
-          <button class="btn btn-light" type="button" data-feed><span class="material-symbols-outlined red">rss_feed</span> Operational Feed</button>
-          <button class="btn btn-primary" type="button" id="btnSyncRegistry"><span class="material-symbols-outlined">sync</span> Sync Central Donor Registry</button>
+          <button class="btn btn-primary" type="button" id="btnSyncRegistry">
+            <span class="material-symbols-outlined">sync</span> Sync Central Donor Registry
+          </button>
         </div>
       </div>
 
-      <!-- KPI Cards -->
+      <!-- Live KPI Cards -->
       <section class="stats">
         <article class="kpi">
           <span class="label">Total Pending Intake</span>
@@ -160,17 +168,17 @@
         <article class="kpi red">
           <span class="label danger-text">Critical Priority</span>
           <strong class="danger-text" id="kpiUrgentCount">0 <span class="pill pill-red">Urgent / O-</span></strong>
-          <p class="danger-text">Trauma target reserve</p>
+          <p class="danger-text">Universal / rare reserve</p>
+        </article>
+        <article class="kpi green">
+          <span class="label">Approved Queue</span>
+          <strong id="kpiApprovedCount">0 <small>cleared</small></strong>
+          <p>Ready for blood collection</p>
         </article>
         <article class="kpi blue">
-          <span class="label">Completed Today</span>
+          <span class="label">Completed Donations</span>
           <strong id="kpiDoneCount">0 <small>donations</small></strong>
           <p id="kpiDoneVol">0 mL collected</p>
-        </article>
-        <article class="kpi">
-          <span class="label">Deferred / Lab Re-check</span>
-          <strong id="kpiDeferredCount">0 <small>flagged</small></strong>
-          <p>Requires follow-up</p>
         </article>
       </section>
 
@@ -179,7 +187,7 @@
         <div class="filter-row">
           <label class="search">
             <span class="material-symbols-outlined">search</span>
-            <input type="search" id="queueSearch" placeholder="Search donor name, ID code (#DN-...), or contact...">
+            <input type="search" id="queueSearch" placeholder="Search donor name, record ID, or phone...">
           </label>
           <select class="select" id="bloodFilter" aria-label="Blood">
             <option value="all">Blood: All Types</option>
@@ -192,27 +200,31 @@
             <option value="AB+">AB+</option>
             <option value="AB-">AB-</option>
           </select>
-          <select class="select" id="urgencyFilter" aria-label="Urgency">
-            <option value="all">Urgency: All Urgencies</option>
-            <option value="Urgent">Urgent</option>
-            <option value="Normal">Normal</option>
+          <select class="select" id="statusFilter" aria-label="Status">
+            <option value="all">Status: All</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="completed">Completed</option>
+            <option value="rejected">Rejected</option>
           </select>
           <div class="tabs" id="donorTypeTabs">
-            <button class="tab active" type="button" data-tab="all">All Pending</button>
-            <button class="tab" type="button" data-tab="first">First-Time</button>
-            <button class="tab" type="button" data-tab="repeat">Repeat Donors</button>
+            <button class="tab active" type="button" data-tab="all">All Active</button>
+            <button class="tab" type="button" data-tab="pending">Pending</button>
+            <button class="tab" type="button" data-tab="approved">Approved</button>
             <button class="tab" type="button" data-tab="done">Completed</button>
           </div>
         </div>
       </section>
 
-      <!-- Submissions List -->
+      <!-- Live Submissions List -->
       <div>
-        <div class="page-head" style="margin-bottom:12px">
-          <h2>Submissions Awaiting Action <span class="pill" id="queueListBadge">0</span></h2>
-          <span class="small muted">Click "Review ›" to inspect &amp; update clinical eligibility</span>
+        <div class="page-head" style="margin-bottom: 12px">
+          <h2>Submissions Queue <span class="pill" id="queueListBadge">0</span></h2>
+          <span class="small muted">Click "Review &gt;" to inspect &amp; update clinical status</span>
         </div>
-        <div class="submissions" id="submissionsList"></div>
+        <div class="submissions" id="submissionsList">
+          <div class="card pad" style="text-align:center; color:#64748B;">Loading live submissions...</div>
+        </div>
       </div>
 
       <!-- Selected Donor Detail -->
@@ -225,8 +237,8 @@
               <small class="muted" id="detSubMeta">Select a submission above to review</small>
             </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <span class="pill" id="detDonorBadge" style="font-weight:700;">—</span>
+          <div style="display: flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span class="pill" id="detDonorBadge" style="font-weight:700;">0 Completed Donations</span>
             <span class="readonly-badge"><span class="material-symbols-outlined" style="font-size:14px;">lock</span> Personal Info Read-Only</span>
             <span class="pill" id="detIdBadge">ID: --</span>
           </div>
@@ -236,13 +248,13 @@
         <div class="grid-2" style="gap:8px">
           <div class="box">
             <span class="label">Contact Details (Locked)</span>
-            <b id="detPhone">—</b><br>
-            <small class="muted" id="detEmail">—</small>
+            <b id="detPhone">-</b><br>
+            <small class="muted" id="detEmail">-</small>
           </div>
           <div class="box">
             <span class="label">Emergency Contact (Locked)</span>
-            <b id="detEmerName">—</b><br>
-            <small class="muted" id="detEmerPhone">—</small>
+            <b id="detEmerName">-</b><br>
+            <small class="muted" id="detEmerPhone">-</small>
           </div>
         </div>
 
@@ -262,7 +274,7 @@
             <select class="edit-select" id="editTattoo">
               <option value="Clear">Clear</option>
               <option value="Pending">Pre-check Pending</option>
-              <option value="Recent">Recent (&lt; 6 mos - Defer)</option>
+              <option value="Recent">Recent (&lt; 6 mos — Defer)</option>
             </select>
           </div>
           <div class="box-row">
@@ -282,68 +294,56 @@
             <div><label>Blood Pressure <em>Normal &lt; 140/90</em></label><input type="text" id="editBp" value="120/80"></div>
             <div><label>Hemoglobin (g/dL) <em>Min 12.5</em></label><input type="text" id="editHb" value="13.5"></div>
             <div><label>Weight (kg) <em>Min 50</em></label><input type="text" id="editWeight" value="64"></div>
-            <div><label>Temperature (°C) <em>36.5 - 37.5</em></label><input type="text" id="editTemp" value="36.6"></div>
+            <div><label>Temperature (&deg;C) <em>36.5 – 37.5</em></label><input type="text" id="editTemp" value="36.6"></div>
           </div>
         </div>
 
-        <!-- Donation Completion & Blood Collected Volume -->
+        <!-- Donation Outcome & Status Transition -->
         <div class="box">
-          <h3>Donation Outcome &amp; Blood Collected <span class="pill pill-green" id="detStatusPill">Pending Review</span></h3>
+          <h3>Donation Outcome &amp; Workflow Status <span class="pill pill-amber" id="detStatusPill">PENDING REVIEW</span></h3>
           <div class="vitals" style="grid-template-columns: 1fr 1fr;">
             <div>
-              <label>Donation Status</label>
+              <label>Workflow Status</label>
               <select class="edit-select" id="editDonationStatus" style="width:100%;height:38px;margin-top:4px;">
-                <option value="Pending Review">Pending Review</option>
-                <option value="Completed">Done / Completed</option>
-                <option value="Lab Re-check">Lab Re-check</option>
-                <option value="Deferred">Deferred / Declined</option>
+                <option value="pending">Pending Review</option>
+                <option value="approved">Approved for Collection</option>
+                <option value="completed">Completed (Unit Collected)</option>
+                <option value="rejected">Rejected / Deferred</option>
               </select>
             </div>
             <div>
               <label>Blood Collected (mL) <em>Standard: 450 mL</em></label>
-              <input type="number" id="editBloodVolume" min="0" max="600" value="450" placeholder="e.g. 450">
+              <input type="number" id="editBloodVolume" min="0" max="600" value="450">
               <div class="vol-presets">
                 <button type="button" class="vol-chip" data-vol="350">350 mL</button>
                 <button type="button" class="vol-chip active" data-vol="450">450 mL</button>
                 <button type="button" class="vol-chip" data-vol="500">500 mL</button>
-                <button type="button" class="vol-chip" data-vol="0">0 mL</button>
               </div>
             </div>
           </div>
-          <div style="margin-top:12px;">
-            <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:rgba(84,96,103,.7);margin-bottom:4px;">Clinical / Phlebotomy Notes</label>
-            <input type="text" id="editClinicalNotes" placeholder="Optional staff notes prior to approval or after collection..." style="width:100%;height:36px;padding:0 12px;border:1px solid var(--sand);border-radius:8px;font:inherit;color:var(--slate);">
-          </div>
         </div>
 
-        <div id="reviewToast" class="status-toast"></div>
-
-        <button class="btn btn-primary btn-block" type="button" id="btnMarkDone">
-          <span class="material-symbols-outlined">check_circle</span> Mark Donation Done &amp; Record Blood Volume
-        </button>
-        <div class="two" style="grid-template-columns: 1fr 1fr 1fr;">
-          <button class="btn btn-light" type="button" id="btnSaveClinical"><span class="material-symbols-outlined">save</span> Save Clinical Edits</button>
-          <button class="btn btn-gray" type="button" id="btnLabRecheck"><span class="material-symbols-outlined">biotech</span> Lab Re-check</button>
-          <button class="btn btn-danger" type="button" id="btnDefer"><span class="material-symbols-outlined">block</span> Decline / Defer</button>
+        <div class="two" style="grid-template-columns: 1fr 1fr;">
+          <button class="btn btn-light" type="button" id="btnApproveSubmission">
+            <span class="material-symbols-outlined">verified</span> Approve for Collection
+          </button>
+          <button class="btn btn-primary" type="button" id="btnMarkDone">
+            <span class="material-symbols-outlined">check_circle</span> Mark Donation Completed
+          </button>
+        </div>
+        <div class="two" style="grid-template-columns: 1fr 1fr;">
+          <button class="btn btn-gray" type="button" id="btnSaveClinical">
+            <span class="material-symbols-outlined">save</span> Save Selected Status
+          </button>
+          <button class="btn btn-danger" type="button" id="btnDefer">
+            <span class="material-symbols-outlined">block</span> Decline / Reject
+          </button>
         </div>
       </section>
     </div>
   </main>
 
-  <!-- ===== Live event stream (slide-out) ===== -->
-  <aside class="feed" id="feed" aria-label="Live event stream">
-    <div class="feed-head"><h2 class="with-icon"><span class="material-symbols-outlined red">rss_feed</span> Live Event Stream</h2><button class="icon-btn" type="button" data-feed aria-label="Close"><span class="material-symbols-outlined">close</span></button></div>
-    <div class="feed-body" id="feedBody">
-      <div class="event"><span class="feed-icon"><span class="material-symbols-outlined">check</span></span><div><b>Donation #DON-8902 Verified</b>Cleared by RN Clarissa (450 mL).<small>2 mins ago</small></div></div>
-      <div class="event crit"><span class="feed-icon"><span class="material-symbols-outlined">warning</span></span><div><b>O- Inventory Alert</b>Critical reserve below 5 units. Please prioritize incoming O- donors.<small>6 mins ago</small></div></div>
-      <div class="event"><span class="feed-icon"><span class="material-symbols-outlined">inventory_2</span></span><div><b>Drive Batch #04 Checked In</b>24 whole blood bags received from University Mobile Camp.<small>18 mins ago</small></div></div>
-    </div>
-    <div class="feed-foot"><a class="link-red" href="#" id="clearFeedUnread">Mark all as read</a><span id="feedUnreadCount">3 unread events</span></div>
-  </aside>
-
-  <script src="../../supabaseClient.js"></script>
   <script>
-    // Sidebar open / close
     const body = document.body;
     const menuBtn = document.getElementById('menuBtn');
     function setSidebar(open) {
@@ -354,468 +354,10 @@
     document.getElementById('sidebarClose').addEventListener('click', () => setSidebar(false));
     document.getElementById('overlay').addEventListener('click', () => setSidebar(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setSidebar(false); });
-
-    // Live event stream open / close
-    const feed = document.getElementById('feed');
-    document.querySelectorAll('[data-feed]').forEach((b) => b.addEventListener('click', () => feed.classList.toggle('open')));
-
-    // =========================================================================
-    // PENDING REVIEWS DATA & STATE
-    // =========================================================================
-    const REVIEWS_STORAGE_KEY = 'lifeline_staff_reviews';
-
-    const DEFAULT_REVIEWS = [
-      {
-        id: 'DN-2024-819',
-        recordCode: 'LL-8821',
-        donorName: 'Maria Santos',
-        bloodType: 'O-',
-        bloodLabel: 'O NEGATIVE (O-)',
-        tag: 'RARE',
-        donorType: 'First-Time',
-        age: 26,
-        slot: '10:30 AM Slot',
-        phone: '+63 (917) 489-0211',
-        email: 'm.santos@region7.gov.ph',
-        emergencyName: 'Manuel Santos (Spouse)',
-        emergencyPhone: '+63 (920) 843-1992',
-        urgency: 'Urgent',
-        flagText: 'Hemoglobin Pre-check Pending',
-        travel: 'Negative',
-        tattoo: 'Clear',
-        meds: 'Pre-check Pending',
-        bp: '120/80',
-        hb: '13.5',
-        weight: '64',
-        temp: '36.6',
-        status: 'Pending Review',
-        bloodCollectedMl: 450,
-        notes: ''
-      },
-      {
-        id: 'DN-2024-774',
-        recordCode: 'LL-8824',
-        donorName: 'Roberto Lim',
-        bloodType: 'A+',
-        bloodLabel: 'A POSITIVE (A+)',
-        tag: 'WHOLE',
-        donorType: 'Repeat (4 Donations)',
-        age: 34,
-        slot: '11:15 AM Slot',
-        phone: '+63 (917) 220-4418',
-        email: 'roberto.lim@email.com',
-        emergencyName: 'Grace Lim (Sister)',
-        emergencyPhone: '+63 (918) 612-8801',
-        urgency: 'Normal',
-        flagText: 'Health Questionnaire Cleared',
-        travel: 'Negative',
-        tattoo: 'Clear',
-        meds: 'Clear',
-        bp: '118/78',
-        hb: '14.8',
-        weight: '72',
-        temp: '36.5',
-        status: 'Pending Review',
-        bloodCollectedMl: 450,
-        notes: ''
-      },
-      {
-        id: 'DN-2024-650',
-        recordCode: 'LL-8830',
-        donorName: 'Juanita Dela Cruz',
-        bloodType: 'B+',
-        bloodLabel: 'B POSITIVE (B+)',
-        tag: 'PLATELET',
-        donorType: 'Repeat (12 Donations)',
-        age: 41,
-        slot: '01:00 PM Slot',
-        phone: '+63 (919) 345-9012',
-        email: 'juanita.dc@email.com',
-        emergencyName: 'Pedro Dela Cruz (Brother)',
-        emergencyPhone: '+63 (919) 345-9000',
-        urgency: 'Urgent',
-        flagText: 'Minor antibiotic 12d ago',
-        travel: 'Negative',
-        tattoo: 'Clear',
-        meds: 'Flagged',
-        bp: '124/82',
-        hb: '12.9',
-        weight: '58',
-        temp: '36.7',
-        status: 'Pending Review',
-        bloodCollectedMl: 450,
-        notes: 'Check antibiotic completion date before phlebotomy.'
-      },
-      {
-        id: 'DN-2024-902',
-        recordCode: 'LL-8835',
-        donorName: 'Kenneth Tan',
-        bloodType: 'AB+',
-        bloodLabel: 'AB POSITIVE (AB+)',
-        tag: 'PLASMA',
-        donorType: 'Repeat (3 Donations)',
-        age: 29,
-        slot: '02:30 PM Booked',
-        phone: '+63 (917) 774-1102',
-        email: 'kenneth.tan@email.com',
-        emergencyName: 'Liza Tan (Mother)',
-        emergencyPhone: '+63 (917) 774-1100',
-        urgency: 'Normal',
-        flagText: 'RFID Registered',
-        travel: 'Negative',
-        tattoo: 'Clear',
-        meds: 'Clear',
-        bp: '120/76',
-        hb: '15.1',
-        weight: '70',
-        temp: '36.6',
-        status: 'Pending Review',
-        bloodCollectedMl: 450,
-        notes: ''
-      }
-    ];
-
-    function getReviews() {
-      const raw = localStorage.getItem(REVIEWS_STORAGE_KEY);
-      let list = raw ? JSON.parse(raw) : DEFAULT_REVIEWS;
-
-      // Also merge any locally submitted donor donations that aren't in reviews yet
-      const donorDonations = JSON.parse(localStorage.getItem('lifeline_donations') || '[]');
-      const existingCodes = new Set(list.map(r => r.recordCode));
-      donorDonations.forEach(d => {
-        if (d.record_code && !existingCodes.has(d.record_code) && d.status === 'Pending Review') {
-          list.unshift({
-            id: d.donor_id ? `DN-${String(d.donor_id).slice(0, 6)}` : d.record_code,
-            recordCode: d.record_code,
-            donorId: d.donor_id,
-            donorName: d.donor_name || 'Registered Donor',
-            bloodType: d.blood_type || 'O+',
-            bloodLabel: d.blood_type || 'O+',
-            tag: 'PORTAL',
-            donorType: 'Repeat Donor',
-            age: '—',
-            slot: `${d.scheduled_date || ''} ${d.slot_time || ''}`.trim(),
-            phone: 'On File',
-            email: 'Portal Submission',
-            emergencyName: 'On File',
-            emergencyPhone: '—',
-            urgency: d.blood_type === 'O-' ? 'Urgent' : 'Normal',
-            flagText: 'Submitted via Donor Portal',
-            travel: 'Negative',
-            tattoo: 'Clear',
-            meds: 'Clear',
-            bp: '120/80',
-            hb: '13.5',
-            weight: '60',
-            temp: '36.6',
-            status: d.status || 'Pending Review',
-            bloodCollectedMl: 450,
-            notes: d.notes || ''
-          });
-        }
-      });
-
-      if (!raw) localStorage.setItem(REVIEWS_STORAGE_KEY, JSON.stringify(list));
-      return list;
-    }
-
-    function saveReviews(list) {
-      localStorage.setItem(REVIEWS_STORAGE_KEY, JSON.stringify(list));
-    }
-
-    let selectedReviewId = null;
-    let currentTab = 'all';
-
-    function showToast(msg, isError = false) {
-      const el = document.getElementById('reviewToast');
-      el.textContent = msg;
-      el.style.display = 'block';
-      el.style.background = isError ? '#FFDAD6' : '#D1FAE5';
-      el.style.color = isError ? '#BA1A1A' : '#065F46';
-      setTimeout(() => { el.style.display = 'none'; }, 4000);
-    }
-
-    function updateKPIs(list) {
-      const pending = list.filter(r => r.status === 'Pending Review');
-      const urgent = pending.filter(r => r.urgency === 'Urgent' || r.bloodType === 'O-');
-      const done = list.filter(r => r.status === 'Completed');
-      const deferred = list.filter(r => r.status === 'Deferred' || r.status === 'Lab Re-check');
-      const totalMl = done.reduce((sum, r) => sum + (Number(r.bloodCollectedMl) || 0), 0);
-
-      document.getElementById('kpiPendingCount').innerHTML = `${pending.length} <small>donors</small>`;
-      document.getElementById('kpiUrgentCount').innerHTML = `${urgent.length} <span class="pill pill-red">Urgent / O-</span>`;
-      document.getElementById('kpiDoneCount').innerHTML = `${done.length} <small>donations</small>`;
-      document.getElementById('kpiDoneVol').textContent = `${totalMl.toLocaleString()} mL collected`;
-      document.getElementById('kpiDeferredCount').innerHTML = `${deferred.length} <small>flagged</small>`;
-    }
-
-    function renderQueue() {
-      const list = getReviews();
-      updateKPIs(list);
-
-      const q = (document.getElementById('queueSearch').value || document.getElementById('topSearchInput').value || '').trim().toLowerCase();
-      const bt = document.getElementById('bloodFilter').value;
-      const urg = document.getElementById('urgencyFilter').value;
-
-      const filtered = list.filter(r => {
-        if (currentTab === 'done') {
-          if (r.status !== 'Completed') return false;
-        } else {
-          if (r.status === 'Completed') return false;
-          if (currentTab === 'first' && !r.donorType.toLowerCase().includes('first')) return false;
-          if (currentTab === 'repeat' && !r.donorType.toLowerCase().includes('repeat')) return false;
-        }
-        if (bt !== 'all' && r.bloodType !== bt) return false;
-        if (urg !== 'all' && r.urgency !== urg) return false;
-        if (q && !(r.donorName.toLowerCase().includes(q) || r.id.toLowerCase().includes(q) || (r.phone || '').toLowerCase().includes(q))) {
-          return false;
-        }
-        return true;
-      });
-
-      document.getElementById('queueListBadge').textContent = filtered.length;
-      const container = document.getElementById('submissionsList');
-
-      if (filtered.length === 0) {
-        container.innerHTML = `<div class="card pad" style="text-align:center;color:#546067;">No submissions match the selected filters.</div>`;
-        return;
-      }
-
-      if (!selectedReviewId || !filtered.some(r => r.id === selectedReviewId)) {
-        selectedReviewId = filtered[0].id;
-      }
-
-      container.innerHTML = filtered.map(r => {
-        const isSel = r.id === selectedReviewId;
-        const statusPill = r.status === 'Completed' ? 'pill-green' : r.status === 'Deferred' ? 'pill-red' : r.urgency === 'Urgent' ? 'pill-red' : 'pill-gray';
-        return `
-          <article class="submission ${r.urgency === 'Urgent' ? 'urgent' : ''} ${isSel ? 'selected' : ''}">
-            <div class="left">
-              <div class="bgbox">${r.bloodType}<small>${r.tag}</small></div>
-              <div>
-                <b>${r.donorName}</b>
-                <span class="pill">${r.donorType}</span>
-                <span class="pill ${statusPill}">${r.status === 'Completed' ? `DONE • ${r.bloodCollectedMl} mL` : r.status.toUpperCase()}</span>
-                <div class="meta">
-                  <span>${r.slot}</span>
-                  <span>ID: ${r.id}</span>
-                  <span>${r.flagText}</span>
-                </div>
-              </div>
-            </div>
-            <button class="btn btn-sm ${isSel ? 'btn-primary' : 'btn-gray'}" type="button" onclick="selectSubmission('${r.id}')">Review ›</button>
-          </article>
-        `;
-      }).join('');
-
-      populateDetail(list.find(r => r.id === selectedReviewId));
-    }
-
-    function populateDetail(r) {
-      if (!r) return;
-      const initials = r.donorName.split(' ').map(p => p[0]).join('').slice(0, 2).toUpperCase();
-      document.getElementById('detInitials').textContent = initials;
-      document.getElementById('detName').textContent = r.donorName;
-      document.getElementById('detBlood').textContent = r.bloodLabel;
-      document.getElementById('detSubMeta').textContent = `${r.donorType} • National ID Verified • Age: ${r.age}`;
-      document.getElementById('detIdBadge').textContent = `ID: ${r.id}`;
-
-      // Donor Milestone Badge (1-3 Bronze, 4-6 Silver, 7-12 Gold, 13-25 Platinum, 26+ Diamond)
-      const matchCount = (r.donorType || '').match(/(\d+)/);
-      const baseCount = typeof r.donationsCount === 'number' ? r.donationsCount : (matchCount ? parseInt(matchCount[1], 10) : 0);
-      const effectiveCount = r.status === 'Completed' ? baseCount + 1 : baseCount;
-      if (typeof getDonorBadgeInfo === 'function') {
-        const b = getDonorBadgeInfo(effectiveCount);
-        const badgeEl = document.getElementById('detDonorBadge');
-        if (badgeEl) {
-          badgeEl.textContent = `${b.tier} (${effectiveCount})`;
-          badgeEl.style.background = b.badgeBg;
-          badgeEl.style.color = b.badgeColor;
-        }
-      }
-
-      // Read-only personal details
-      document.getElementById('detPhone').textContent = r.phone || '—';
-      document.getElementById('detEmail').textContent = r.email || '—';
-      document.getElementById('detEmerName').textContent = r.emergencyName || '—';
-      document.getElementById('detEmerPhone').textContent = r.emergencyPhone || '—';
-
-      // Editable clinical & pre-screening fields
-      document.getElementById('editTravel').value = r.travel || 'Negative';
-      document.getElementById('editTattoo').value = r.tattoo || 'Clear';
-      document.getElementById('editMeds').value = r.meds || 'Clear';
-      document.getElementById('editBp').value = r.bp || '120/80';
-      document.getElementById('editHb').value = r.hb || '13.5';
-      document.getElementById('editWeight').value = r.weight || '60';
-      document.getElementById('editTemp').value = r.temp || '36.6';
-
-      document.getElementById('editDonationStatus').value = r.status || 'Pending Review';
-      document.getElementById('editBloodVolume').value = r.bloodCollectedMl !== undefined ? r.bloodCollectedMl : 450;
-      document.getElementById('editClinicalNotes').value = r.notes || '';
-
-      const pill = document.getElementById('detStatusPill');
-      pill.textContent = r.status === 'Completed' ? `Done • ${r.bloodCollectedMl} mL` : r.status;
-      pill.className = `pill ${r.status === 'Completed' ? 'pill-green' : r.status === 'Deferred' ? 'pill-red' : 'pill-amber'}`;
-    }
-
-    window.selectSubmission = function(id) {
-      selectedReviewId = id;
-      renderQueue();
-      document.getElementById('detail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    };
-
-    async function saveCurrentReview(forcedStatus = null) {
-      const list = getReviews();
-      const idx = list.findIndex(r => r.id === selectedReviewId);
-      if (idx < 0) return;
-
-      const r = list[idx];
-      // Update ONLY editable clinical / pre-screening / outcome fields (personal info stays untouched)
-      r.travel = document.getElementById('editTravel').value;
-      r.tattoo = document.getElementById('editTattoo').value;
-      r.meds = document.getElementById('editMeds').value;
-      r.bp = document.getElementById('editBp').value.trim();
-      r.hb = document.getElementById('editHb').value.trim();
-      r.weight = document.getElementById('editWeight').value.trim();
-      r.temp = document.getElementById('editTemp').value.trim();
-      r.notes = document.getElementById('editClinicalNotes').value.trim();
-      r.bloodCollectedMl = parseInt(document.getElementById('editBloodVolume').value, 10) || 0;
-      r.status = forcedStatus || document.getElementById('editDonationStatus').value;
-
-      saveReviews(list);
-
-      // Sync to lifeline_donations & Supabase if linked to a donation record
-      const localDonations = JSON.parse(localStorage.getItem('lifeline_donations') || '[]');
-      const dIdx = localDonations.findIndex(d => d.record_code === r.recordCode);
-      if (dIdx >= 0) {
-        localDonations[dIdx].status = r.status;
-        localDonations[dIdx].blood_collected_ml = r.bloodCollectedMl;
-        localDonations[dIdx].notes = r.notes || localDonations[dIdx].notes;
-        if (r.status === 'Completed') {
-          localDonations[dIdx].scheduled_date = new Date().toISOString().split('T')[0];
-        }
-        localStorage.setItem('lifeline_donations', JSON.stringify(localDonations));
-      } else if (r.status === 'Completed') {
-        localDonations.unshift({
-          record_code: r.recordCode || r.id,
-          donor_id: r.donorId || r.id,
-          donor_name: r.donorName,
-          blood_type: r.bloodType,
-          facility_name: 'St. Jude Regional Blood Bank',
-          scheduled_date: new Date().toISOString().split('T')[0],
-          slot_time: r.slot,
-          blood_collected_ml: r.bloodCollectedMl,
-          notes: r.notes || 'Verified & collected by staff',
-          status: 'Completed'
-        });
-        localStorage.setItem('lifeline_donations', JSON.stringify(localDonations));
-      }
-
-      const token = localStorage.getItem('lifeline_token');
-      if (token && r.recordCode && typeof SUPABASE_URL !== 'undefined') {
-        try {
-          await fetch(`${SUPABASE_URL}/rest/v1/donation_records?record_code=eq.${encodeURIComponent(r.recordCode)}`, {
-            method: 'PATCH',
-            headers: getHeaders(token),
-            body: JSON.stringify({
-              status: r.status,
-              notes: `${r.notes ? r.notes + ' | ' : ''}Collected: ${r.bloodCollectedMl} mL`
-            })
-          });
-        } catch (err) {
-          console.warn('Supabase review sync notice:', err);
-        }
-      }
-
-      // Add to live feed
-      const feedBody = document.getElementById('feedBody');
-      if (feedBody) {
-        const div = document.createElement('div');
-        div.className = 'event';
-        div.innerHTML = `<span class="feed-icon"><span class="material-symbols-outlined">check</span></span><div><b>${r.donorName} (${r.id})</b>Updated to <b>${r.status}</b>${r.status === 'Completed' ? ` • ${r.bloodCollectedMl} mL collected` : ''}.<small>Just now</small></div>`;
-        feedBody.prepend(div);
-      }
-
-      renderQueue();
-      showToast(r.status === 'Completed'
-        ? `Donation marked DONE for ${r.donorName} (${r.bloodCollectedMl} mL recorded)!`
-        : `Clinical review saved for ${r.donorName} (${r.status}).`);
-    }
-
-    // Wire volume preset chips
-    document.querySelectorAll('.vol-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        document.querySelectorAll('.vol-chip').forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        document.getElementById('editBloodVolume').value = chip.dataset.vol;
-      });
-    });
-
-    // Wire action buttons
-    document.getElementById('btnMarkDone').addEventListener('click', () => saveCurrentReview('Completed'));
-    document.getElementById('btnSaveClinical').addEventListener('click', () => saveCurrentReview());
-    document.getElementById('btnLabRecheck').addEventListener('click', () => saveCurrentReview('Lab Re-check'));
-    document.getElementById('btnDefer').addEventListener('click', () => {
-      document.getElementById('editBloodVolume').value = 0;
-      saveCurrentReview('Deferred');
-    });
-
-    document.getElementById('btnAutoFillVitals').addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('editBp').value = '120/80';
-      document.getElementById('editHb').value = '14.0';
-      document.getElementById('editWeight').value = '62';
-      document.getElementById('editTemp').value = '36.6';
-      showToast('Normal clinical baseline vitals populated.');
-    });
-
-    // Wire filters & tabs
-    document.getElementById('queueSearch').addEventListener('input', renderQueue);
-    document.getElementById('topSearchInput').addEventListener('input', renderQueue);
-    document.getElementById('bloodFilter').addEventListener('change', renderQueue);
-    document.getElementById('urgencyFilter').addEventListener('change', renderQueue);
-
-    document.querySelectorAll('#donorTypeTabs .tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('#donorTypeTabs .tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        currentTab = tab.dataset.tab;
-        renderQueue();
-      });
-    });
-
-    document.getElementById('btnFastTrackO').addEventListener('click', () => {
-      document.getElementById('bloodFilter').value = 'O-';
-      renderQueue();
-    });
-
-    document.getElementById('btnSyncRegistry').addEventListener('click', () => {
-      renderQueue();
-      showToast('Synced with local & Supabase donor queue.');
-    });
-
-    document.getElementById('clearFeedUnread')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('feedUnreadCount').textContent = '0 unread events';
-      const dot = document.querySelector('.bell-dot');
-      if (dot) dot.style.display = 'none';
-    });
-
-    // Init
-    document.addEventListener('DOMContentLoaded', async () => {
-      if (typeof populateStaffUI === 'function') {
-        await populateStaffUI();
-      }
-      const logoutBtn = document.querySelector('.nav-item.logout');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          signOutUser();
-        });
-      }
-      renderQueue();
-    });
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module" src="../../../js/toast.js"></script>
+  <script type="module" src="../../../js/staffPendingReviews.js"></script>
 </body>
 </html>
