@@ -10,10 +10,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <main class="page">
     <div class="card">
-      <a class="back-home-link" href="../landing/index.html" aria-label="Back to the landing page">← Back to Home</a>
+      <a class="back-home-link" href="../landing/index.html" aria-label="Back to the landing page">&larr; Back to Home</a>
 
       <!-- Brand header -->
       <header class="card-head">
@@ -37,7 +36,6 @@
       </nav>
 
       <form class="form" id="staffSignUpForm" action="#" method="post" novalidate>
-
         <!-- Professional identification -->
         <fieldset class="group">
           <legend>Professional Identification</legend>
@@ -70,10 +68,7 @@
             <label for="facility">Affiliated Blood Bank or Hospital <span class="req">*</span></label>
             <div class="select-wrap">
               <select class="control" id="facility" name="facility" required>
-                <option value="" selected disabled>Select affiliated healthcare institution</option>
-                <option>Cebu Doctors' University Hospital</option>
-                <option>Vicente Sotto Memorial Medical Center</option>
-                <option>Philippine Red Cross – Cebu Chapter</option>
+                <option value="" selected disabled>Loading available facilities...</option>
               </select>
               <span class="material-symbols-outlined select-arrow">expand_more</span>
             </div>
@@ -114,18 +109,13 @@
           <div class="field">
             <label for="document">Upload PRC License / Hospital Employee ID (PDF or Image, max 10MB) <span class="req">*</span></label>
             <label class="dropzone" id="dropzoneLabel" for="document">
-              <!-- Default Prompt -->
               <div class="dropzone-prompt" id="dropzonePrompt">
                 <span class="drop-icon"><span class="material-symbols-outlined">upload_file</span></span>
                 <span class="drop-title">Click to select digital copy or drag &amp; drop</span>
                 <span class="drop-note">Accepted: High-res PDF, PNG, or JPG (Max 10MB)</span>
               </div>
-
-              <!-- Uploaded File Preview Card -->
               <div class="file-preview-card" id="filePreview" style="display: none;">
-                <div class="preview-media" id="previewMedia">
-                  <!-- Image thumbnail or Document Icon injected by JS -->
-                </div>
+                <div class="preview-media" id="previewMedia"></div>
                 <div class="preview-info">
                   <div class="preview-name" id="previewName">filename.jpg</div>
                   <div class="preview-meta">
@@ -137,7 +127,6 @@
                   <span class="material-symbols-outlined">delete</span>
                 </button>
               </div>
-
               <input type="file" id="document" name="document" accept=".pdf,.png,.jpg,.jpeg" required hidden>
             </label>
           </div>
@@ -151,7 +140,7 @@
               <label for="password">Password <span class="req">*</span></label>
               <div class="icon-wrap">
                 <span class="material-symbols-outlined field-icon">lock</span>
-                <input class="control has-icon has-icon-pwd" type="password" id="password" name="password" placeholder="••••••••••••" required>
+                <input class="control has-icon has-icon-pwd" type="password" id="password" name="password" placeholder="••••••••" required>
                 <button type="button" class="btn-toggle-pwd" id="togglePasswordBtn" aria-label="Toggle password visibility">
                   <span class="material-symbols-outlined" id="togglePasswordIcon">visibility</span>
                 </button>
@@ -161,7 +150,7 @@
               <label for="confirmPassword">Confirm Password <span class="req">*</span></label>
               <div class="icon-wrap">
                 <span class="material-symbols-outlined field-icon">lock_reset</span>
-                <input class="control has-icon has-icon-pwd" type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••••••" required>
+                <input class="control has-icon has-icon-pwd" type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required>
                 <button type="button" class="btn-toggle-pwd" id="toggleConfirmPasswordBtn" aria-label="Toggle confirm password visibility">
                   <span class="material-symbols-outlined" id="toggleConfirmPasswordIcon">visibility</span>
                 </button>
@@ -178,8 +167,7 @@
           <label class="terms" for="termsCheckbox">
             <input type="checkbox" id="termsCheckbox" name="terms" required>
             <span>
-              I agree to the <a href="#" id="staffTermsLink">Lifeline Staff Terms and Conditions</a> and understand my
-              responsibilities in managing and protecting donor records.
+              I agree to the <a href="#" id="staffTermsLink">Lifeline Staff Terms and Conditions</a> and understand my responsibilities in managing and protecting donor records.
             </span>
           </label>
         </fieldset>
@@ -195,9 +183,7 @@
           </button>
           <p class="signin">Already verified? <a href="../login/index.html">Sign in to Clinical Staff Portal</a></p>
         </div>
-
       </form>
-
     </div>
   </main>
 
@@ -218,7 +204,6 @@
           <span class="material-symbols-outlined">close</span>
         </button>
       </header>
-
       <div class="terms-modal-body">
         <div class="terms-section">
           <h4>1. Authorized Clinical Access &amp; Credential Verification</h4>
@@ -241,7 +226,6 @@
           <p>Staff login credentials and digital authorizations are strictly personal and non-transferable. You must never share passwords or access tokens with unauthorized individuals.</p>
         </div>
       </div>
-
       <footer class="terms-modal-footer">
         <button type="button" class="btn-modal-decline" id="declineTermsBtn">Decline</button>
         <button type="button" class="btn-modal-accept" id="acceptTermsBtn">
@@ -252,398 +236,9 @@
     </div>
   </div>
 
-  <!-- ========================================================================= -->
-  <!-- DIRECT SUPABASE DATABASE INTEGRATION & CLIENT INTERACTIONS                -->
-  <!-- ========================================================================= -->
-  <script>
-    // =========================================================================
-    // 1. SUPABASE DATABASE CONFIGURATION (Connected directly to your Supabase)
-    // =========================================================================
-    const SUPABASE_URL = 'https://bnytmuwgutotekaaylig.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_c5fAj53uud1ud8WFRY_fxg_WOvW2kI1';
-
-    // Helper to construct authorization and API key headers
-    function getSupabaseHeaders(token = null) {
-      const headers = {
-        'apikey': SUPABASE_KEY,
-        'Content-Type': 'application/json'
-      };
-      if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
-      }
-      return headers;
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      // Elements
-      const form = document.getElementById('staffSignUpForm');
-      const submitBtn = document.getElementById('submitBtn');
-      const submitIcon = document.getElementById('submitIcon');
-      const submitText = document.getElementById('submitText');
-      const alertBox = document.getElementById('signUpAlert');
-
-      // Document Dropzone elements
-      const documentInput = document.getElementById('document');
-      const dropzoneLabel = document.getElementById('dropzoneLabel');
-      const dropzonePrompt = document.getElementById('dropzonePrompt');
-      const filePreview = document.getElementById('filePreview');
-      const previewMedia = document.getElementById('previewMedia');
-      const previewName = document.getElementById('previewName');
-      const previewSize = document.getElementById('previewSize');
-      const btnRemoveFile = document.getElementById('btnRemoveFile');
-
-      // Password rule elements
-      const passwordInput = document.getElementById('password');
-      const confirmPasswordInput = document.getElementById('confirmPassword');
-      const ruleLength = document.getElementById('ruleLength');
-      const ruleUpper = document.getElementById('ruleUpper');
-      const ruleNumSym = document.getElementById('ruleNumSym');
-
-      // Password visibility toggles
-      const togglePasswordBtn = document.getElementById('togglePasswordBtn');
-      const togglePasswordIcon = document.getElementById('togglePasswordIcon');
-      const toggleConfirmPasswordBtn = document.getElementById('toggleConfirmPasswordBtn');
-      const toggleConfirmPasswordIcon = document.getElementById('toggleConfirmPasswordIcon');
-
-      // Terms modal elements
-      const staffTermsLink = document.getElementById('staffTermsLink');
-      const staffTermsModal = document.getElementById('staffTermsModal');
-      const closeTermsBtn = document.getElementById('closeTermsBtn');
-      const declineTermsBtn = document.getElementById('declineTermsBtn');
-      const acceptTermsBtn = document.getElementById('acceptTermsBtn');
-      const termsCheckbox = document.getElementById('termsCheckbox');
-
-      let uploadedFileObj = null;
-
-      // Alert helper
-      function showAlert(msg, isSuccess = false) {
-        if (!alertBox) return;
-        alertBox.textContent = msg;
-        alertBox.className = isSuccess ? 'auth-alert-message is-success' : 'auth-alert-message is-error';
-        alertBox.style.display = 'flex';
-      }
-
-      function clearAlert() {
-        if (!alertBox) return;
-        alertBox.textContent = '';
-        alertBox.style.display = 'none';
-      }
-
-      // Password visibility toggles
-      function setupPasswordToggle(button, input, icon) {
-        if (!button || !input || !icon) return;
-        let visible = false;
-        button.addEventListener('click', () => {
-          visible = !visible;
-          input.type = visible ? 'text' : 'password';
-          icon.textContent = visible ? 'visibility_off' : 'visibility';
-          button.setAttribute('aria-label', visible ? 'Hide password' : 'Show password');
-        });
-      }
-      setupPasswordToggle(togglePasswordBtn, passwordInput, togglePasswordIcon);
-      setupPasswordToggle(toggleConfirmPasswordBtn, confirmPasswordInput, toggleConfirmPasswordIcon);
-
-      // Real-time password criteria validation
-      function validatePasswordCriteria() {
-        const val = passwordInput.value;
-        const hasLength = val.length >= 8;
-        const hasUpper = /[A-Z]/.test(val);
-        const hasNumSym = /[0-9]/.test(val) && /[^A-Za-z0-9]/.test(val);
-
-        ruleLength.classList.toggle('valid', hasLength);
-        ruleUpper.classList.toggle('valid', hasUpper);
-        ruleNumSym.classList.toggle('valid', hasNumSym);
-
-        if (confirmPasswordInput.value.length > 0) {
-          if (confirmPasswordInput.value !== val) {
-            confirmPasswordInput.style.outline = '2px solid #DC2626';
-          } else {
-            confirmPasswordInput.style.outline = '2px solid #10B981';
-          }
-        } else {
-          confirmPasswordInput.style.outline = '';
-        }
-      }
-      passwordInput.addEventListener('input', validatePasswordCriteria);
-      confirmPasswordInput.addEventListener('input', validatePasswordCriteria);
-
-      // Document Upload & Visual Preview Handler
-      function handleSelectedFile(file) {
-        if (!file) return;
-
-        // Check file size (max 10MB)
-        const maxBytes = 10 * 1024 * 1024;
-        if (file.size > maxBytes) {
-          showAlert('File size exceeds the 10MB limit. Please upload a smaller document.');
-          return;
-        }
-
-        uploadedFileObj = file;
-        clearAlert();
-
-        previewName.textContent = file.name;
-        previewSize.textContent = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
-
-        // Check if image or PDF
-        if (file.type.startsWith('image/')) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            previewMedia.innerHTML = `<img src="${e.target.result}" alt="Preview" class="preview-img">`;
-          };
-          reader.readAsDataURL(file);
-        } else {
-          previewMedia.innerHTML = `<span class="material-symbols-outlined preview-doc-icon">picture_as_pdf</span>`;
-        }
-
-        dropzonePrompt.style.display = 'none';
-        filePreview.style.display = 'flex';
-        dropzoneLabel.classList.add('has-file');
-      }
-
-      documentInput.addEventListener('change', (e) => {
-        if (e.target.files && e.target.files[0]) {
-          handleSelectedFile(e.target.files[0]);
-        }
-      });
-
-      // Drag & Drop
-      ['dragenter', 'dragover'].forEach(eventName => {
-        dropzoneLabel.addEventListener(eventName, (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          dropzoneLabel.classList.add('dragover');
-        });
-      });
-
-      ['dragleave', 'drop'].forEach(eventName => {
-        dropzoneLabel.addEventListener(eventName, (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          dropzoneLabel.classList.remove('dragover');
-        });
-      });
-
-      dropzoneLabel.addEventListener('drop', (e) => {
-        const dt = e.dataTransfer;
-        if (dt && dt.files && dt.files[0]) {
-          documentInput.files = dt.files;
-          handleSelectedFile(dt.files[0]);
-        }
-      });
-
-      // Remove file button
-      btnRemoveFile.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        documentInput.value = '';
-        uploadedFileObj = null;
-        filePreview.style.display = 'none';
-        dropzonePrompt.style.display = 'flex';
-        dropzoneLabel.classList.remove('has-file');
-        previewMedia.innerHTML = '';
-      });
-
-      // Terms & Conditions Modal handlers
-      function openTermsModal(e) {
-        if (e) e.preventDefault();
-        staffTermsModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeTermsModal() {
-        staffTermsModal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      staffTermsLink.addEventListener('click', openTermsModal);
-      closeTermsBtn.addEventListener('click', closeTermsModal);
-      declineTermsBtn.addEventListener('click', () => {
-        termsCheckbox.checked = false;
-        closeTermsModal();
-      });
-
-      acceptTermsBtn.addEventListener('click', () => {
-        termsCheckbox.checked = true;
-        closeTermsModal();
-        clearAlert();
-      });
-
-      staffTermsModal.addEventListener('click', (e) => {
-        if (e.target === staffTermsModal) {
-          closeTermsModal();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && staffTermsModal.classList.contains('active')) {
-          closeTermsModal();
-        }
-      });
-
-      // =======================================================================
-      // 2. FORM SUBMISSION DIRECTLY CONNECTED TO SUPABASE DATABASE
-      // =======================================================================
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        clearAlert();
-
-        const fullName = document.getElementById('fullName').value.trim();
-        const role = document.getElementById('role').value;
-        const facility = document.getElementById('facility').value;
-        const facilityId = document.getElementById('facilityId').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const prcNo = document.getElementById('prcNo').value.trim();
-        const prcExpiry = document.getElementById('prcExpiry').value;
-        const password = passwordInput.value;
-        const confirmPassword = confirmPasswordInput.value;
-
-        // Validations
-        if (!fullName || !role || !facility || !facilityId || !email || !prcNo || !prcExpiry) {
-          showAlert('Please fill in all required professional and facility fields.');
-          return;
-        }
-
-        if (!uploadedFileObj && (!documentInput.files || documentInput.files.length === 0)) {
-          showAlert('Please upload a copy of your PRC License or Hospital Employee ID for credential verification.');
-          return;
-        }
-
-        if (password.length < 8) {
-          showAlert('Password must be at least 8 characters long.');
-          passwordInput.focus();
-          return;
-        }
-
-        if (!/[A-Z]/.test(password)) {
-          showAlert('Password must include at least 1 uppercase letter.');
-          passwordInput.focus();
-          return;
-        }
-
-        if (!(/[0-9]/.test(password) && /[^A-Za-z0-9]/.test(password))) {
-          showAlert('Password must contain at least 1 number and 1 special symbol (e.g. !@#$%).');
-          passwordInput.focus();
-          return;
-        }
-
-        if (password !== confirmPassword) {
-          showAlert('Passwords do not match. Please ensure both fields are identical.');
-          confirmPasswordInput.focus();
-          return;
-        }
-
-        if (!termsCheckbox.checked) {
-          showAlert('You must read and agree to the Lifeline Staff Terms and Conditions before proceeding.');
-          return;
-        }
-
-        // Set Loading state
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = '0.75';
-        submitBtn.style.cursor = 'not-allowed';
-        submitIcon.textContent = 'hourglass_empty';
-        submitText.textContent = 'Connecting to Supabase Database...';
-        showAlert('Registering account directly in Supabase database...', true);
-
-        const documentName = uploadedFileObj ? uploadedFileObj.name : (documentInput.files[0]?.name || 'prc_license.jpg');
-
-        try {
-          // ===================================================================
-          // A. DIRECT SUPABASE AUTH CALL (Creates user in auth.users)
-          // ===================================================================
-          console.log('Sending direct request to Supabase Auth:', `${SUPABASE_URL}/auth/v1/signup`);
-          const authResponse = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
-            method: 'POST',
-            headers: getSupabaseHeaders(),
-            body: JSON.stringify({
-              email: email,
-              password: password,
-              data: {
-                full_name: fullName,
-                role: 'staff',
-                role_title: role,
-                professional_role: role,
-                facility: facility,
-                facility_id: facilityId,
-                prc_license: prcNo,
-                prc_expiry: prcExpiry,
-                document_name: documentName
-              }
-            })
-          });
-
-          const authData = await authResponse.json();
-
-          if (!authResponse.ok) {
-            const errorMsg = authData.error_description || authData.msg || authData.message || 'Staff registration failed.';
-            throw new Error(errorMsg);
-          }
-
-          // Save local session state for the dashboard
-          if (authData.access_token) {
-            localStorage.setItem('lifeline_token', authData.access_token);
-            localStorage.setItem('lifeline_session', JSON.stringify(authData));
-            localStorage.setItem('lifeline_user', JSON.stringify(authData.user));
-            localStorage.setItem('lifeline_role', 'staff');
-          }
-
-          // ===================================================================
-          // B. DIRECT SUPABASE DATABASE CALL (Upserts record into public.profiles table)
-          // ===================================================================
-          if (authData.user && authData.access_token) {
-            try {
-              console.log('Inserting staff into Supabase public.profiles table...');
-              const profilePayload = {
-                id: authData.user.id,
-                full_name: fullName,
-                role: 'staff'
-              };
-
-              const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/profiles`, {
-                method: 'POST',
-                headers: Object.assign({}, getSupabaseHeaders(authData.access_token), {
-                  'Prefer': 'resolution=merge-duplicates'
-                }),
-                body: JSON.stringify(profilePayload)
-              });
-
-              if (!dbResponse.ok) {
-                // If row already exists, update via PATCH
-                await fetch(`${SUPABASE_URL}/rest/v1/profiles?id=eq.${authData.user.id}`, {
-                  method: 'PATCH',
-                  headers: getSupabaseHeaders(authData.access_token),
-                  body: JSON.stringify({
-                    full_name: fullName,
-                    role: 'staff'
-                  })
-                });
-              }
-              console.log('Direct Supabase profiles table write confirmed!');
-            } catch (dbErr) {
-              console.warn('Profiles table sync notice:', dbErr);
-            }
-          }
-
-          // Success notification
-          showAlert('Staff account created in Supabase database! Redirecting to email verification...', true);
-          sessionStorage.setItem('pending_verification_email', email);
-
-          setTimeout(() => {
-            window.location.href = '../verification-code/index.html';
-          }, 1200);
-
-        } catch (err) {
-          console.error('Database connection error:', err);
-          submitBtn.disabled = false;
-          submitBtn.style.opacity = '1';
-          submitBtn.style.cursor = 'pointer';
-          submitIcon.textContent = 'mark_email_read';
-          submitText.textContent = 'Submit and Verify Email';
-          const detail = err && err.message ? err.message : String(err);
-          showAlert(`Database error: ${detail}`);
-        }
-      });
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="module" src="../../js/toast.js"></script>
+  <script type="module" src="../../js/registerStaff.js"></script>
 </body>
 </html>
