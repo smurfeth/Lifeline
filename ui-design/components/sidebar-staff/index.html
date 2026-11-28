@@ -1,25 +1,24 @@
-﻿<!-- Lifeline sidebar - CSS only, no JavaScript.
-     Needs components/sidebar.css and <body data-page="..."> (used to highlight the current link). -->
+﻿<!-- Lifeline ADMIN sidebar - CSS only, no JavaScript.
+     Needs components/sidebar.css and <body data-page="..."> (used to highlight the current link).
+     data-page values: dashboard | account-approvals | hospitals-blood-banks | donation-drives
+     Paste right after <body data-page="...">. Menu button: <label for="lifelineNav" class="lifeline-menu-btn"> -->
 <input type="checkbox" id="lifelineNav" class="lifeline-nav-toggle" aria-label="Toggle navigation menu">
 <label for="lifelineNav" class="lifeline-sb-backdrop"></label>
-<aside class="lifeline-sb lifeline-sb--staff" aria-label="Main menu">
+<aside class="lifeline-sb lifeline-sb--admin" aria-label="Main menu">
   <div class="lifeline-sb-main">
-    <div class="lifeline-sb-head">
-      <a class="lifeline-sb-brand" href="../dashboard/index.html">
-        <span class="lifeline-sb-logo"><img src="../../assets/Lifeline%20Logo.png" alt="Lifeline"></span>
-        <span class="lifeline-sb-brandtext">
-          <span class="lifeline-sb-wordmark">LIFE<span>LINE</span></span>
-          <span class="lifeline-sb-tagline">— Your Blood. <span>Their Hope —</span></span>
-        </span>
-      </a>
-      <div class="lifeline-sb-section">Staff Operations</div>
-    </div>
+    <a class="lifeline-sb-brand" href="../dashboard/index.html">
+      <span class="lifeline-sb-logo"><img src="../../assets/Lifeline%20Logo.png" alt="Lifeline"></span>
+      <span class="lifeline-sb-brandtext">
+        <span class="lifeline-sb-wordmark">LIFE<span>LINE</span></span>
+        <span class="lifeline-sb-tagline">— Your Blood. <span>Their Hope —</span></span>
+      </span>
+    </a>
+    <div class="lifeline-sb-section">Admin Operations</div>
     <nav class="lifeline-sb-nav">
       <a class="lifeline-sb-link is-lead" href="../dashboard/index.html" data-link="dashboard"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></span><span>Dashboard</span></a>
-      <a class="lifeline-sb-link" href="../donation-records/index.html" data-link="donation-records"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></span><span>Donation Records</span></a>
-      <a class="lifeline-sb-link" href="../pending-reviews/index.html" data-link="pending-reviews"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></span><span>Pending Reviews</span></a>
-      <a class="lifeline-sb-link" href="../donation-drives/index.html" data-link="donation-drives"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></span><span>Donation Drives</span></a>
-      <a class="lifeline-sb-link" href="../facility-profile/index.html" data-link="facility-profile"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/></svg></span><span>Facility Profile</span></a>
+      <a class="lifeline-sb-link" href="../account-approvals/index.html" data-link="account-approvals"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 17l3-2.94c-.39-.04-.68-.06-1-.06-2.67 0-8 1.34-8 4v2h9l-3-3zm2-5c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm4.47 8.5L12 17l1.4-1.41 2.07 2.08 5.13-5.17 1.4 1.41-6.53 6.59z"/></svg></span><span>Account Approvals</span></a>
+      <a class="lifeline-sb-link" href="../hospitals-blood-banks/index.html" data-link="hospitals-blood-banks"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/></svg></span><span>Hospitals &amp; Blood Banks</span></a>
+      <a class="lifeline-sb-link" href="../donation-drives/index.html" data-link="donation-drives"><span class="lifeline-sb-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.53 11.06L15.47 10l-4.88 4.88-2.12-2.12-1.06 1.06L10.59 17l5.94-5.94zM19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg></span><span>Donation Drives</span></a>
     </nav>
   </div>
   <div class="lifeline-sb-foot">
